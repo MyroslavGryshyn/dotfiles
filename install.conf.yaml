@@ -1,3 +1,16 @@
-- clean: []
-- link: {}
-- shell: []
+- defaults:
+    link:
+      relink: true
+      create: true
+- clean: ['~']
+- shell:
+    - mkdir -p $HOME/.config/nvim
+- link:
+    ~/.zshrc: zshrc
+    ~/.tmux.conf: tmux.conf
+    ~/.tmux_airline: tmux_airline
+    ~/.bashrc: bashrc
+    ~/.bash_aliases: bash_aliases
+    ~/.config/nvim/init.vim: nvimrc
+    ~/.gitconfig: gitconfig
+    ~/.global_ignore: global_ignore
