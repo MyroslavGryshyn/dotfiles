@@ -3,7 +3,7 @@
     name = yevhen-m
 [core]
     editor = vim
-    excludesfile = /home/ymal/.global_ignore
+    excludesfile = /home/ymal/.gitignore_global
 [push]
     ; Push only the current branch to the one that git pull will pull from
     ; (check that their names match)

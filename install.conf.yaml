@@ -13,4 +13,4 @@
     ~/.bash_aliases: bash_aliases
     ~/.config/nvim/init.vim: nvimrc
     ~/.gitconfig: gitconfig
-    ~/.global_ignore: global_ignore
+    ~/.gitignore_global: gitignore_global
