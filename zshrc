@@ -85,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 alias l='ls -1F --group-directories-first --color=never'
 alias ll='ls -AFlh --color=never'
 alias la='ls -A --color=never'
+alias open='xdg-open'
 
 alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -sel clip -o'

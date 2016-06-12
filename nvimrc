@@ -216,6 +216,8 @@ cabbrev h tab help
 cabbrev e$ edit $MYVIMRC
 
 " MAPPINGS
+" Switch keymaps easily
+inoremap <c-l> <c-^>
 noremap gy "+y
 vnoremap gY "+Y
 nnoremap gY "+y$
@@ -263,7 +265,6 @@ au FileType python let delimitMate_nesting_quotes = ["'"]
 au FileType markdown let delimitMate_nesting_quotes = ["`"]
 " Put triple quotes on the separate line after cr
 au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
-imap <C-L> <Plug>delimitMateS-Tab
 " END DELIMITMATE SETTINGS
 
 " TABMAN SETTINGS
