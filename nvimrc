@@ -218,6 +218,7 @@ cabbrev e$ edit $MYVIMRC
 " MAPPINGS
 " Switch keymaps easily
 inoremap <c-l> <c-^>
+cnoremap <c-l> <c-^>
 noremap gy "+y
 vnoremap gY "+Y
 nnoremap gY "+y$
@@ -447,7 +448,7 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --ignore __pycache__ --ignore *.pyc --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag %s -l --ignore __pycache__ --ignore "*.pyc" --nocolor -g ""'
 
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
