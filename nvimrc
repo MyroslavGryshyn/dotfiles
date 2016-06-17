@@ -217,6 +217,7 @@ cabbrev e$ edit $MYVIMRC
 
 " MAPPINGS
 " Switch keymaps easily
+nnoremap <a-w> <c-w>c
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
 noremap gy "+y
@@ -283,6 +284,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_open_multiple_files = '1'
 let g:ctrlp_custom_ignore = 'env\|__pycache__'
+let g:ctrlp_switch_buffer = 'etvh'
 " END CTRLP
 
 " AIRLINE SETTINGS
