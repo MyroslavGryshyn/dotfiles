@@ -42,6 +42,7 @@ Plug 'benmills/vimux', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
+Plug 'tell-k/vim-autoflake', {'for': 'python'}
 
 " Enhance tabs
 Plug 'gcmt/taboo.vim'
@@ -112,6 +113,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
+Plug 'matze/vim-move'
+
 " Pretty looking vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -130,7 +133,6 @@ syntax on
 
 set autoread  " for vim-tmux-focus-events plugin
 set wrap
-set linebreak
 let &showbreak = '+++ '
 set background=dark
 set backspace=2
@@ -157,8 +159,7 @@ set expandtab  " <tab> inserts spaces
 set infercase
 set noacd
 set nobackup
-set noshowmatch " don't jump to the matching bracket in insert
-" set noshowmode
+set showmatch
 set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
@@ -210,7 +211,6 @@ autocmd BufWritePre * :call TrimWhitespace()
 
 " open help in a new tab
 cabbrev h tab help
-cabbr vrc $MYVIMRC
 
 " MAPPINGS
 " Switch keymaps easily
@@ -226,16 +226,16 @@ vnoremap gp "+p
 nnoremap gP "+P
 
 nnoremap \ ,
-nnoremap <silent> <leader>ec :SyntasticReset<CR>
-nnoremap <silent> <leader>ee :SyntasticCheck<CR>
-nnoremap <silent> <leader>er :Errors<CR>
+nnoremap <leader>ec :SyntasticReset<CR>
+nnoremap <leader>ee :SyntasticCheck<CR>
+nnoremap <leader>er :Errors<CR>
 inoremap <ESC> <ESC>l
 inoremap <C-[> <Esc>l
 " nnoremap <C-]> g<C-]>
 nnoremap Q @q
 nnoremap <silent> <leader><leader> :update<CR>
-nnoremap <silent> ZX :qall<CR>
-nnoremap <silent> ZV :qall!<CR>
+nnoremap ZX :qall<CR>
+nnoremap ZV :qall!<CR>
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
 nnoremap <silent> <Space> :nohlsearch<CR>
@@ -247,7 +247,9 @@ cnoremap <C-E> <End>
 inoremap <C-J> <C-O>o
 " case matters for meta key
 nnoremap <C-j> 3<C-E>3j
+vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
+vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
 nnoremap k gk
 nnoremap j gj
@@ -313,8 +315,8 @@ let g:airline#extensions#tagbar#enabled = 0
 " END AIRLINE SETTINGS
 
 " NERDTREE SETTINGS
-nnoremap <silent> <Leader>nn :NERDTreeFind<CR>
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
+nnoremap <Leader>nn :NERDTreeFind<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeQuitOnOpen = 1
@@ -331,7 +333,7 @@ let g:ctrlp_tjump_skip_tag_name = 1
 " END CTRLP-TJUMP
 
 " UNDOTREE SETTINGS
-nnoremap <silent> <leader>tu :UndotreeToggle<cr>
+nnoremap <leader>tu :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 " END UNDOTREE SETTINGS
 
@@ -360,6 +362,7 @@ highlight SyntasticErrorSign ctermbg=18 ctermfg=red
 highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_aggregate_errors = 1
+nnoremap cot :SyntasticToggleMode<CR>
 " END SYNTASTIC SETTINGS
 
 " GITGUTTER SETTINGS
@@ -370,7 +373,7 @@ let g:gitgutter_sign_column_always = 1
 nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
 nmap <leader>fw <Plug>CtrlSFCwordPath
-nnoremap <silent> <leader>fd :CtrlSFOpen<CR>
+nnoremap <leader>fd :CtrlSFOpen<CR>
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '50%'
 let g:ctrlsf_mapping = {
@@ -382,7 +385,7 @@ let g:ctrlsf_mapping = {
 " TAGBAR SETTINGS
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
-nnoremap <silent> <leader>tg :TagbarToggle<CR><C-W>=
+nnoremap <leader>tg :TagbarToggle<CR><C-W>=
 " END TAGBAR SETTINGS
 
 " JEDI SETTINGS
@@ -411,11 +414,11 @@ let test#python#runner = 'djangonose'
 let test#python#runner = 'nose'
 let test#strategy = "vimux"
 
-nnoremap <silent> <leader>tn :TestNearest<CR>
-nnoremap <silent> <leader>tf :TestFile<CR>
-nnoremap <silent> <leader>ts :TestSuite<CR>
-nnoremap <silent> <leader>tl :TestLast<CR>
-nnoremap <silent> <leader>tv :TestVisit<CR>
+nnoremap <leader>tn :TestNearest<CR>
+nnoremap <leader>tf :TestFile<CR>
+nnoremap <leader>ts :TestSuite<CR>
+nnoremap <leader>tl :TestLast<CR>
+nnoremap <leader>tv :TestVisit<CR>
 " END VIM TEST RUNNER
 
 " DEPLETE SETTINGS
@@ -489,10 +492,10 @@ let g:gutentags_ctags_executable = 'tags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
-nnoremap <silent> ,ww :Gwrite<CR>
-nnoremap <silent> ,oo :Gcommit<CR>
-nnoremap <silent> ,ss :Gstatus<CR>
-nnoremap <silent> ,pp :Gpush<CR>
+nnoremap ,ww :Gwrite<CR>
+nnoremap ,oo :Gcommit<CR>
+nnoremap ,ss :Gstatus<CR>
+nnoremap ,pp :Gpush<CR>
 " END FUGITIVE
 
 " BBYE SETTINGS
@@ -534,8 +537,22 @@ nnoremap <silent> g/ :ShowSearchIndex<cr>
 " END INDEXED SEARCH
 
 " Abbrebiations -- add when you encounter them
-iabbr teh the
-iabbr improt import
 iabbr ipmrot import
+iabbr improt import
 iabbr ipmort import
+iabbr teh the
 iabbr yuo you
+
+" AUTOFLAKE SETTINGS
+let g:autoflake_remove_all_unused_imports=1
+let g:autoflake_disable_show_diff=1
+let g:autoflake_remove_unused_variables=1
+" END AUTOFLAKE SETTINGS
+
+" VIM-MOVE PLUGIN SETTINGS
+let g:move_map_keys = 0
+vmap <C-d> <Plug>MoveBlockDown
+vmap <C-u> <Plug>MoveBlockUp
+nmap <C-d> <Plug>MoveLineDown
+nmap <C-u> <Plug>MoveLineUp
+" END VIM-MOVE
