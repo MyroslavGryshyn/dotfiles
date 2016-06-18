@@ -94,9 +94,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
 
-" Show registers content after <c-r> in insert mode
-Plug 'junegunn/vim-peekaboo'
-
 Plug 'Chiel92/vim-autoformat'
 
 Plug 'ludovicchabant/vim-gutentags'
@@ -213,7 +210,7 @@ autocmd BufWritePre * :call TrimWhitespace()
 
 " open help in a new tab
 cabbrev h tab help
-cabbrev e$ edit $MYVIMRC
+cabbr vrc $MYVIMRC
 
 " MAPPINGS
 " Switch keymaps easily
@@ -267,6 +264,7 @@ au FileType python let delimitMate_nesting_quotes = ["'"]
 au FileType markdown let delimitMate_nesting_quotes = ["`"]
 " Put triple quotes on the separate line after cr
 au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
+au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
 " END DELIMITMATE SETTINGS
 
 " TABMAN SETTINGS
@@ -280,16 +278,19 @@ nnoremap <leader>ta :CtrlPTag<CR>
 nnoremap <leader>tt :CtrlPBufTag %<CR>
 nnoremap <leader>rr :CtrlPMRU<CR>
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'wr'
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_open_multiple_files = '1'
 let g:ctrlp_custom_ignore = 'env\|__pycache__'
 let g:ctrlp_switch_buffer = 'etvh'
+let g:ctrlp_by_filename = 1
 " END CTRLP
 
 " AIRLINE SETTINGS
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#branch#displayed_head_limit = 13
+let g:airline_section_warning = ''
+let g:airline_section_error = ''
 let g:airline#extensions#branch#format = 2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0
@@ -318,6 +319,8 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeQuitOnOpen = 1
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
+" automatically remove buffer after a file was deleted with context menu
+let NERDTreeAutoDeleteBuffer = 1
 " END NERDTREE SETTINGS
 
 " CTRLP-TJUMP SETTINGS
@@ -497,10 +500,10 @@ nnoremap <Leader>bd :Bdelete<CR>
 " END BBYE SETTINGS
 
 " VIM-SESSION SETTINGS
-let g:session_autosave_periodic=5
 let g:session_autoload='no'
 let g:session_default_name='default'
 let g:session_autosave='yes'
+let g:session_autosave_periodic=5
 let g:session_command_aliases = 1
 " END VIM SESSION
 
@@ -524,8 +527,15 @@ nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 " END TMUX NAVIGATOR
-"
+
 " INDEXED SEARCH SETTGINS
 let g:indexed_search_colors=0
 nnoremap <silent> g/ :ShowSearchIndex<cr>
 " END INDEXED SEARCH
+
+" Abbrebiations -- add when you encounter them
+iabbr teh the
+iabbr improt import
+iabbr ipmrot import
+iabbr ipmort import
+iabbr yuo you
