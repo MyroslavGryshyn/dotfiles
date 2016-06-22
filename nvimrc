@@ -550,8 +550,8 @@ let g:autoflake_remove_unused_variables=1
 
 " VIM-MOVE PLUGIN SETTINGS
 let g:move_map_keys = 0
-vmap <C-d> <Plug>MoveBlockDown
-vmap <C-u> <Plug>MoveBlockUp
-nmap <C-d> <Plug>MoveLineDown
-nmap <C-u> <Plug>MoveLineUp
+vmap <C-A-j> <Plug>MoveBlockDown
+vmap <C-A-k> <Plug>MoveBlockUp
+nmap <C-A-j> <Plug>MoveLineDown
+nmap <C-A-k> <Plug>MoveLineUp
 " END VIM-MOVE
