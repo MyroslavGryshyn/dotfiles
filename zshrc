@@ -195,3 +195,10 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 unsetopt share_history
 # Fix the bug with renaming windows
 DISABLE_AUTO_TITLE=true
+
+# Fix c-u for zsh
+bindkey \^U backward-kill-line
+
+# virtualenv-wrapper
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
