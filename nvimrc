@@ -33,7 +33,6 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'idanarye/vim-merginal'
 
 " Used to run test in a separate tmux pane
 Plug 'benmills/vimux', {'for': 'python'}
