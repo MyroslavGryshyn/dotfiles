@@ -261,7 +261,7 @@ nnoremap $ g$
 let delimitMate_excluded_regions = "Comment"
 let delimitMate_jump_expansion = 1
 let delimitMate_expand_cr = 1
-au FileType python let delimitMate_nesting_quotes = ["'"]
+au FileType python let delimitMate_nesting_quotes = ["'", '"']
 au FileType markdown let delimitMate_nesting_quotes = ["`"]
 " Put triple quotes on the separate line after cr
 au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
