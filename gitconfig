@@ -55,3 +55,5 @@
 ; git checkout file-name.js to reset file to HEAD state
 [mergetool]
     prompt = false
+[clean]
+	requireForce = false
