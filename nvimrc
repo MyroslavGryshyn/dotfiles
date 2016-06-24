@@ -10,10 +10,8 @@ endfunction
 
 call plug#begin('~/.config/nvim/plugged')
 
-" CtrlP and extensions
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
-Plug 'ivalkeen/vim-ctrlp-tjump'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Syntax plugins
 Plug 'tpope/vim-markdown'
@@ -272,20 +270,27 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
 let g:tabman_number = 0
 " END TABMAN
 
-" CTRLP SETTINGS
-nnoremap <leader>cc :CtrlPCmdPalette<CR>
-nnoremap <leader>bb :CtrlPBuffer<CR>
-nnoremap <leader>ta :CtrlPTag<CR>
-nnoremap <leader>tt :CtrlPBufTag %<CR>
-nnoremap <leader>rr :CtrlPMRU<CR>
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
-let g:ctrlp_working_path_mode = 'wr'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_open_multiple_files = '1'
-let g:ctrlp_custom_ignore = 'env\|__pycache__'
-let g:ctrlp_switch_buffer = 'etvh'
-let g:ctrlp_by_filename = 1
-" END CTRLP
+" FZF PLUGIN SETTINGS
+nnoremap <C-p> :Files<CR>
+nnoremap <C-S-p> :GFiles<CR>
+nnoremap <leader>fg :Commits<CR>
+nnoremap <leader>fa :Ag<space>
+nnoremap <leader>fe :GFiles?<CR>
+nnoremap <leader>fi :Lines<CR>
+nnoremap <leader>fr :Locate<space>
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>tt :BTags<CR>
+nnoremap <leader>T :Tags<CR>
+nnoremap <leader>rr :History<CR>
+nnoremap <leader>ft :History:<CR>
+nnoremap <leader>fs :History/<CR>
+nnoremap <leader>cc :Commands<CR>
+let g:fzf_tags_command = 'tags'
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+" FZF END
 
 " AIRLINE SETTINGS
 let g:airline#extensions#whitespace#checks = []
@@ -294,7 +299,6 @@ let g:airline_section_warning = ''
 let g:airline_section_error = ''
 let g:airline#extensions#branch#format = 2
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#ctrlp#show_adjacent_modes = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_skip_empty_sections = 1
@@ -323,13 +327,6 @@ let NERDTreeIgnore=['\.pyc$', '__pycache__']
 " automatically remove buffer after a file was deleted with context menu
 let NERDTreeAutoDeleteBuffer = 1
 " END NERDTREE SETTINGS
-
-" CTRLP-TJUMP SETTINGS
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
-" let g:ctrlp_tjump_only_silent = 1
-let g:ctrlp_tjump_skip_tag_name = 1
-" END CTRLP-TJUMP
 
 " UNDOTREE SETTINGS
 nnoremap <leader>tu :UndotreeToggle<cr>
@@ -449,18 +446,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger=""
 " END ULTISNIPS
 
-" THE SILVER SEARCHER
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --ignore __pycache__ --ignore "*.pyc" --nocolor -g ""'
-
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
-
 " HIGHLIGHT NEXT SEARCH MATCH
 nnoremap <silent> n n:call HLNext(0.1)<cr>
 nnoremap <silent> N N:call HLNext(0.1)<cr>
@@ -494,7 +479,6 @@ let g:gutentags_ctags_executable = 'tags'
 nnoremap ,ww :Gwrite<CR>
 nnoremap ,oo :Gcommit<CR>
 nnoremap ,ss :Gstatus<CR>
-nnoremap ,pp :Gpush<CR>
 " END FUGITIVE
 
 " BBYE SETTINGS
@@ -550,8 +534,13 @@ let g:autoflake_remove_unused_variables=1
 
 " VIM-MOVE PLUGIN SETTINGS
 let g:move_map_keys = 0
-vmap <C-A-j> <Plug>MoveBlockDown
-vmap <C-A-k> <Plug>MoveBlockUp
-nmap <C-A-j> <Plug>MoveLineDown
-nmap <C-A-k> <Plug>MoveLineUp
+vmap <a-n> <Plug>MoveBlockDown
+vmap <a-i> <Plug>MoveBlockUp
+nmap <a-n> <Plug>MoveLineDown
+nmap <a-i> <Plug>MoveLineUp
 " END VIM-MOVE
+
+" LISTTOGGLE PLUGIN SETTINGS
+let g:lt_location_list_toggle_map = '<leader>ll'
+let g:lt_quickfix_list_toggle_map = '<leader>qq'
+" END LISTTOGGLE
