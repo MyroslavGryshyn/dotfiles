@@ -14,7 +14,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-markdown'
 Plug 'evanmiller/nginx-vim-syntax', {'for': 'nginx'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
-Plug 'tmux-plugins/vim-tmux'
 Plug 'hdima/python-syntax', { 'for': 'python' }
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -41,16 +40,11 @@ Plug 'tmhedberg/SimpylFold'
 
 " Enhance tabs
 Plug 'gcmt/taboo.vim'
-Plug 'kien/tabman.vim'
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
 Plug 'dyng/ctrlsf.vim'
-
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 " Running tests from vim (vimux plugin)
 Plug 'janko-m/vim-test', {'for': 'python'}
@@ -105,9 +99,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Smooth navigation between windows and panes
-Plug 'christoomey/vim-tmux-navigator'
-
 " Vim sessions enhancement
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -154,6 +145,7 @@ set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
 
+set noshowmode
 set expandtab  " <tab> inserts spaces
 set infercase
 set noacd
@@ -228,9 +220,8 @@ vnoremap gp "+p
 nnoremap gP "+P
 
 nnoremap \ ,
-nnoremap <leader>ec :SyntasticReset<CR>
-nnoremap <leader>ee :SyntasticCheck<CR>
-nnoremap <leader>er :Errors<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
+nnoremap <leader>sc :SyntasticCheck<CR>
 inoremap <ESC> <ESC>l
 inoremap <C-[> <Esc>l
 nnoremap <C-]> g<C-]>
@@ -248,9 +239,7 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 " case matters for meta key
 nnoremap <C-j> 3<C-E>3j
-vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
-vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
 nnoremap k gk
 nnoremap j gj
@@ -270,24 +259,20 @@ au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
 " END DELIMITMATE SETTINGS
 
-" TABMAN SETTINGS
-let g:tabman_number = 0
-" END TABMAN
-
 " FZF PLUGIN SETTINGS
-nnoremap <C-p><C-p> :Files<CR>
-nnoremap <C-p><C-j> :GFiles<CR>
-nnoremap <leader>fg :Commits<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-n> :GFiles<CR>
+nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fa :Ag<space>
-nnoremap <leader>fe :GFiles?<CR>
+nnoremap <leader>fs :GFiles?<CR>
 nnoremap <leader>fi :Lines<CR>
-nnoremap <leader>fr :Locate<space>
+nnoremap <leader>fl :Locate<space>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>tt :BTags<CR>
 nnoremap <leader>T :Tags<CR>
 nnoremap <leader>rr :History<CR>
-nnoremap <leader>ft :History:<CR>
-nnoremap <leader>fs :History/<CR>
+nnoremap <leader>f: :History:<CR>
+nnoremap <leader>f/ :History/<CR>
 nnoremap <leader>cc :Commands<CR>
 let g:fzf_tags_command = 'tags'
 " Mapping selecting mappings
@@ -333,7 +318,6 @@ let NERDTreeAutoDeleteBuffer = 1
 " END NERDTREE SETTINGS
 
 " UNDOTREE SETTINGS
-nnoremap <leader>tu :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 " END UNDOTREE SETTINGS
 
@@ -373,7 +357,7 @@ let g:gitgutter_sign_column_always = 1
 nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
 nmap <leader>fw <Plug>CtrlSFCwordPath
-nnoremap <leader>fd :CtrlSFOpen<CR>
+nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '50%'
 let g:ctrlsf_mapping = {
@@ -444,12 +428,6 @@ let g:formatters_python = ['autopep8']
 let g:taboo_tabline = 0
 " END TABOO
 
-" ULTISNIPS SETTINGS
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger=""
-" END ULTISNIPS
-
 " HIGHLIGHT NEXT SEARCH MATCH
 nnoremap <silent> n n:call HLNext(0.1)<cr>
 nnoremap <silent> N N:call HLNext(0.1)<cr>
@@ -484,7 +462,7 @@ nnoremap ,ss :Gstatus<CR>
 " END FUGITIVE
 
 " BBYE SETTINGS
-nnoremap <Leader>bd :Bdelete<CR>
+nnoremap <Leader>dd :Bdelete<CR>
 " END BBYE SETTINGS
 
 " VIM-SESSION SETTINGS
@@ -505,17 +483,6 @@ map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vi :VimuxInspectRunner<CR>
 " END VIMUX SETTINGS
 
-" TMUX NAVIGATOR SETTINGS
-let g:tmux_navigator_save_on_switch = 1
-
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
-" END TMUX NAVIGATOR
-
 " INDEXED SEARCH SETTGINS
 let g:indexed_search_colors=0
 nnoremap <silent> g/ :ShowSearchIndex<cr>
@@ -527,6 +494,7 @@ iabbr improt import
 iabbr ipmort import
 iabbr teh the
 iabbr yuo you
+iabbr ipdb import ipdb; ipdb.set_trace()
 
 " AUTOFLAKE SETTINGS
 let g:autoflake_remove_all_unused_imports=1
@@ -536,10 +504,8 @@ let g:autoflake_remove_unused_variables=1
 
 " VIM-MOVE PLUGIN SETTINGS
 let g:move_map_keys = 0
-vmap <A-n> <Plug>MoveBlockDown
-vmap <A-i> <Plug>MoveBlockUp
-nmap <A-n> <Plug>MoveLineDown
-nmap <A-i> <Plug>MoveLineUp
+vmap <C-j> <Plug>MoveBlockDown
+vmap <C-k> <Plug>MoveBlockUp
 " END VIM-MOVE
 
 " LISTTOGGLE PLUGIN SETTINGS
