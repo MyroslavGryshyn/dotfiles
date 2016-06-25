@@ -10,9 +10,6 @@ endfunction
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 " Syntax plugins
 Plug 'tpope/vim-markdown'
 Plug 'evanmiller/nginx-vim-syntax', {'for': 'nginx'}
@@ -103,6 +100,10 @@ Plug 'tpope/vim-surround'
 
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
+
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Smooth navigation between windows and panes
 Plug 'christoomey/vim-tmux-navigator'
@@ -212,13 +213,16 @@ cabbrev h tab help
 
 " MAPPINGS
 " Switch keymaps easily
-nnoremap <a-w> <c-w>c
+nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
-noremap gy "+y
+nnoremap Y y$
+" Yank to system clipboard
+nnoremap gy "+y
+vnoremap gy "+y
 vnoremap gY "+Y
 nnoremap gY "+y$
-nnoremap Y y$
+" Paste from system clipboard
 nnoremap gp "+p
 vnoremap gp "+p
 nnoremap gP "+P
@@ -229,7 +233,7 @@ nnoremap <leader>ee :SyntasticCheck<CR>
 nnoremap <leader>er :Errors<CR>
 inoremap <ESC> <ESC>l
 inoremap <C-[> <Esc>l
-" nnoremap <C-]> g<C-]>
+nnoremap <C-]> g<C-]>
 nnoremap Q @q
 nnoremap <silent> <leader><leader> :update<CR>
 nnoremap ZX :qall<CR>
@@ -271,8 +275,8 @@ let g:tabman_number = 0
 " END TABMAN
 
 " FZF PLUGIN SETTINGS
-nnoremap <C-p> :Files<CR>
-nnoremap <C-[> :GFiles<CR>
+nnoremap <C-p><C-p> :Files<CR>
+nnoremap <C-p><C-j> :GFiles<CR>
 nnoremap <leader>fg :Commits<CR>
 nnoremap <leader>fa :Ag<space>
 nnoremap <leader>fe :GFiles?<CR>
@@ -476,8 +480,6 @@ let g:gutentags_ctags_executable = 'tags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
-nnoremap ,ww :Gwrite<CR>
-nnoremap ,oo :Gcommit<CR>
 nnoremap ,ss :Gstatus<CR>
 " END FUGITIVE
 
@@ -534,10 +536,10 @@ let g:autoflake_remove_unused_variables=1
 
 " VIM-MOVE PLUGIN SETTINGS
 let g:move_map_keys = 0
-vmap <a-n> <Plug>MoveBlockDown
-vmap <a-i> <Plug>MoveBlockUp
-nmap <a-n> <Plug>MoveLineDown
-nmap <a-i> <Plug>MoveLineUp
+vmap <A-n> <Plug>MoveBlockDown
+vmap <A-i> <Plug>MoveBlockUp
+nmap <A-n> <Plug>MoveLineDown
+nmap <A-i> <Plug>MoveLineUp
 " END VIM-MOVE
 
 " LISTTOGGLE PLUGIN SETTINGS
