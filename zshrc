@@ -193,6 +193,7 @@ Z_SCRIPT="$HOME/.rupa_z/z.sh"
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 unsetopt share_history
+
 # Fix the bug with renaming windows
 DISABLE_AUTO_TITLE=true
 
@@ -203,6 +204,7 @@ bindkey \^U backward-kill-line
 export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
+# Inherit environment if its activated
 if [ -n "$VIRTUAL_ENV" ]; then
   . "$VIRTUAL_ENV/bin/activate"
 fi

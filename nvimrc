@@ -40,6 +40,7 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'tell-k/vim-autoflake', {'for': 'python'}
+Plug 'tmhedberg/SimpylFold'
 
 " Enhance tabs
 Plug 'gcmt/taboo.vim'
@@ -241,7 +242,6 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " mappings to move in cmdline mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
-inoremap <C-J> <C-O>o
 " case matters for meta key
 nnoremap <C-j> 3<C-E>3j
 vnoremap <C-j> 3<C-E>3j
@@ -272,7 +272,7 @@ let g:tabman_number = 0
 
 " FZF PLUGIN SETTINGS
 nnoremap <C-p> :Files<CR>
-nnoremap <C-S-p> :GFiles<CR>
+nnoremap <C-[> :GFiles<CR>
 nnoremap <leader>fg :Commits<CR>
 nnoremap <leader>fa :Ag<space>
 nnoremap <leader>fe :GFiles?<CR>
@@ -335,7 +335,7 @@ let g:undotree_SetFocusWhenToggle = 1
 
 " SYNTASTIC SETTINGS
 " ignore line length, whitespace around operators and bad indentation
-let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E231'
+let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E231,F403,F405,E126'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol='●'
 let g:syntastic_warning_symbol='●'
@@ -544,3 +544,9 @@ nmap <a-i> <Plug>MoveLineUp
 let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 " END LISTTOGGLE
+
+" SIMPLYFOLD PLUGIN SETTINGS
+let g:SimpylFold_docstring_preview = 1
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" END SIMPYLFOLD SETTINGS
