@@ -18,6 +18,7 @@ Plug 'hdima/python-syntax', { 'for': 'python' }
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'vim-scripts/django.vim', { 'for': ['htmldjango', 'html']}
+Plug 'tmux-plugins/vim-tmux'
 
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
