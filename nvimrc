@@ -36,7 +36,6 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'tell-k/vim-autoflake', {'for': 'python'}
-Plug 'tmhedberg/SimpylFold'
 
 " Enhance tabs
 Plug 'gcmt/taboo.vim'
@@ -512,9 +511,3 @@ vmap <C-k> <Plug>MoveBlockUp
 let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 " END LISTTOGGLE
-
-" SIMPLYFOLD PLUGIN SETTINGS
-let g:SimpylFold_docstring_preview = 1
-autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" END SIMPYLFOLD SETTINGS
