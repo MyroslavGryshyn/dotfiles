@@ -19,6 +19,7 @@ Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'vim-scripts/django.vim', { 'for': ['htmldjango', 'html']}
 Plug 'tmux-plugins/vim-tmux'
+Plug 'avakhov/vim-yaml'
 
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -262,18 +263,19 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
 " FZF PLUGIN SETTINGS
 nnoremap <C-p> :Files<CR>
 nnoremap <C-n> :GFiles<CR>
-nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>fa :Ag<space>
-nnoremap <leader>fs :GFiles?<CR>
-nnoremap <leader>fi :Lines<CR>
-nnoremap <leader>fl :Locate<space>
+nnoremap <C-_> :BLines<CR>
+nnoremap <leader>co :Commits<CR>
+nnoremap <leader>gs :GFiles?<CR>
+nnoremap <leader>ag :Ag<space>
+nnoremap <leader>li :Lines<CR>
+nnoremap <leader>lo :Locate<space>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>tt :BTags<CR>
+nnoremap <leader>cc :Commands<CR>
 nnoremap <leader>T :Tags<CR>
 nnoremap <leader>rr :History<CR>
 nnoremap <leader>f: :History:<CR>
 nnoremap <leader>f/ :History/<CR>
-nnoremap <leader>cc :Commands<CR>
 let g:fzf_tags_command = 'tags'
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
