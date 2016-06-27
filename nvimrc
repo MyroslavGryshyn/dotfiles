@@ -261,21 +261,21 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>,>:<"
 " END DELIMITMATE SETTINGS
 
 " FZF PLUGIN SETTINGS
-nnoremap <C-p> :Files<CR>
-nnoremap <C-n> :GFiles<CR>
-nnoremap <C-_> :BLines<CR>
-nnoremap <leader>co :Commits<CR>
-nnoremap <leader>gs :GFiles?<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-n> :GFiles<CR>
+nnoremap <silent> <C-_> :BLines<CR>
+nnoremap <silent> <leader>co :Commits<CR>
+nnoremap <silent> <leader>gs :GFiles?<CR>
 nnoremap <leader>ag :Ag<space>
-nnoremap <leader>li :Lines<CR>
+nnoremap <silent> <leader>li :Lines<CR>
 nnoremap <leader>lo :Locate<space>
-nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>tt :BTags<CR>
-nnoremap <leader>cc :Commands<CR>
-nnoremap <leader>T :Tags<CR>
-nnoremap <leader>rr :History<CR>
-nnoremap <leader>f: :History:<CR>
-nnoremap <leader>f/ :History/<CR>
+nnoremap <silent> <leader>bb :Buffers<CR>
+nnoremap <silent> <leader>tt :BTags<CR>
+nnoremap <silent> <leader>cc :Commands<CR>
+nnoremap <silent> <leader>T :Tags<CR>
+nnoremap <silent> <leader>rr :History<CR>
+nnoremap <silent> <leader>f: :History:<CR>
+nnoremap <silent> <leader>f/ :History/<CR>
 let g:fzf_tags_command = 'tags'
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -309,8 +309,8 @@ let g:airline#extensions#tagbar#enabled = 0
 " END AIRLINE SETTINGS
 
 " NERDTREE SETTINGS
-nnoremap <Leader>nn :NERDTreeFind<CR>
-nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>nn :NERDTreeFind<CR>
+nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeQuitOnOpen = 1
