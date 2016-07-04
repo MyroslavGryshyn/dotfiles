@@ -49,7 +49,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip pyenv python sudo zsh-syntax-highlighting)
+plugins=(git pip pyenv python sudo zsh-syntax-highlighting zsh-autosuggestions)
 
 # User configuration
 
@@ -208,3 +208,4 @@ source /usr/local/bin/virtualenvwrapper.sh
 if [ -n "$VIRTUAL_ENV" ]; then
   . "$VIRTUAL_ENV/bin/activate"
 fi
+export TERM="xterm-256color"
