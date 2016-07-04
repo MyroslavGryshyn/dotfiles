@@ -208,4 +208,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 if [ -n "$VIRTUAL_ENV" ]; then
   . "$VIRTUAL_ENV/bin/activate"
 fi
+
 export TERM="xterm-256color"
+
+[[ -s $HOME/.zshrc.local ]] && source $HOME/.zshrc.local

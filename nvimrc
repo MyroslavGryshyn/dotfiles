@@ -514,3 +514,8 @@ vmap <C-k> <Plug>MoveBlockUp
 let g:lt_location_list_toggle_map = '<leader>ll'
 let g:lt_quickfix_list_toggle_map = '<leader>qq'
 " END LISTTOGGLE
+
+" VIM-COMMENTARY SETTINGS
+autocmd FileType nginx setlocal commentstring=#\ %s
+autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
+" END VIM-COMMENTARY
