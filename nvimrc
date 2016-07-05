@@ -256,7 +256,8 @@ au FileType python let delimitMate_nesting_quotes = ["'", '"']
 au FileType markdown let delimitMate_nesting_quotes = ["`"]
 " Put triple quotes on the separate line after cr
 au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
-let delimitMate_quotes = "\" ' ` *"
+let delimitMate_quotes = "\" ' `"
+au FileType markdown let delimitMate_quotes = "\" ' ` *"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " END DELIMITMATE SETTINGS
 
