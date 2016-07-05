@@ -226,7 +226,10 @@ nnoremap <leader>sc :SyntasticCheck<CR>
 inoremap <ESC> <ESC>l
 inoremap <C-[> <Esc>l
 nnoremap <C-]> g<C-]>
-nnoremap Q @q
+" Use Q instead of q to start recording a macro
+nnoremap Q q
+" Use q only to close plugin windows
+nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
 nnoremap ZX :qall<CR>
 nnoremap ZV :qall!<CR>
