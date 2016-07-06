@@ -93,6 +93,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
+Plug 'sjl/vitality.vim'
+
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
 
@@ -523,3 +525,5 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 autocmd FileType nginx setlocal commentstring=#\ %s
 autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
