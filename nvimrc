@@ -372,6 +372,7 @@ let g:ctrlsf_mapping = {
             \ "next": "n",
             \ "prev": "N",
             \ }
+let g:ctrlsf_selected_line_hl = ''
 " END CTRLSF SETTINGS
 
 " TAGBAR SETTINGS
