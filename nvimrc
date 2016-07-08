@@ -238,7 +238,7 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " mappings to move in cmdline mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
-" case matters for meta key
+" Smart scrolling
 nnoremap <C-j> 3<C-E>3j
 vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
@@ -269,8 +269,8 @@ nnoremap <silent> <C-n> :GFiles<CR>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <leader>co :Commits<CR>
 nnoremap <silent> <leader>gs :GFiles?<CR>
-nnoremap <leader>ag :Ag<space>
 nnoremap <silent> <leader>li :Lines<CR>
+nnoremap <leader>ag :Ag<space>
 nnoremap <leader>lo :Locate<space>
 nnoremap <silent> <leader>bb :Buffers<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
@@ -280,10 +280,6 @@ nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>f: :History:<CR>
 nnoremap <silent> <leader>f/ :History/<CR>
 let g:fzf_tags_command = 'tags'
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
 " FZF END
 
 " AIRLINE SETTINGS
