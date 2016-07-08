@@ -103,8 +103,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
-Plug 'matze/vim-move'
-
 " Pretty looking vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -242,7 +240,9 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 " case matters for meta key
 nnoremap <C-j> 3<C-E>3j
+vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
+vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
 nnoremap k gk
 nnoremap j gj
@@ -503,12 +503,6 @@ let g:autoflake_remove_all_unused_imports=1
 let g:autoflake_disable_show_diff=1
 let g:autoflake_remove_unused_variables=1
 " END AUTOFLAKE SETTINGS
-
-" VIM-MOVE PLUGIN SETTINGS
-let g:move_map_keys = 0
-vmap <C-j> <Plug>MoveBlockDown
-vmap <C-k> <Plug>MoveBlockUp
-" END VIM-MOVE
 
 " LISTTOGGLE PLUGIN SETTINGS
 let g:lt_location_list_toggle_map = '<leader>ll'
