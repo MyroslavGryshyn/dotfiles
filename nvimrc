@@ -407,7 +407,7 @@ nnoremap <leader>tl :TestLast<CR>
 nnoremap <leader>tv :TestVisit<CR>
 " END VIM TEST RUNNER
 
-" DEPLETE SETTINGS
+" DEOPLETE SETTINGS
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_refresh_always = 1
@@ -461,6 +461,7 @@ let g:gutentags_ctags_executable = 'tags'
 
 " FUGITIVE SETTINGS
 nnoremap ,ss :Gstatus<CR>
+nnoremap ,ge :Gsplit!<space>
 " END FUGITIVE
 
 " VIM-SESSION SETTINGS
