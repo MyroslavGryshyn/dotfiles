@@ -76,9 +76,6 @@ Plug 'Raimondi/delimitMate'
 " Fix focus events in tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-" Delete buffers without closing windows
-Plug 'moll/vim-bbye'
-
 " Some usefull keypairs
 Plug 'tpope/vim-unimpaired'
 
@@ -470,10 +467,6 @@ let g:gutentags_ctags_executable = 'tags'
 nnoremap ,ss :Gstatus<CR>
 " END FUGITIVE
 
-" BBYE SETTINGS
-nnoremap <Leader>dd :Bdelete<CR>
-" END BBYE SETTINGS
-
 " VIM-SESSION SETTINGS
 let g:session_autoload='no'
 let g:session_default_name='default'
@@ -527,4 +520,5 @@ autocmd FileType nginx setlocal commentstring=#\ %s
 autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
 
+" Need this setting for vim-vitality plugin
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1

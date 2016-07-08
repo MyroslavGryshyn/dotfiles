@@ -106,7 +106,7 @@ alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -sel clip -o'
 
 alias gp='git push origin HEAD'
-alias gs='git status -s'
+alias gs='git status -sb'
 alias gd='git diff -w'
 alias gl="git log --abbrev-commit --decorate --format=format:'%C(bold blue)%h -%C(reset) %C(white)%s%C(reset) %C(bold blue)- %an%C(reset)%C(bold yellow)%d%C(reset)'"
 alias glg="git log --abbrev-commit --decorate --format=format:'%C(bold blue)%h -%C(reset) %C(white)%s%C(reset) %C(bold blue)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all --graph"
