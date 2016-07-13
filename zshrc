@@ -115,6 +115,7 @@ alias gll="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 alias rm=trash
 alias tmux="TERM=xterm-256color tmux"
 alias vim="nvim"
+alias pty="prettyjson"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
