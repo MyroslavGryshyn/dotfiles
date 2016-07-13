@@ -203,3 +203,7 @@ fi
 export TERM="xterm-256color"
 
 [[ -s $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
