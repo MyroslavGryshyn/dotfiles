@@ -90,14 +90,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
-Plug 'sjl/vitality.vim'
-
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
-
-" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " Vim sessions enhancement
 Plug 'xolox/vim-misc'
@@ -108,6 +102,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
+
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 
 call plug#end()
 
@@ -265,9 +264,10 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " FZF PLUGIN SETTINGS
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-n> :GFiles<CR>
+nnoremap <silent> <C-y> :GFiles<CR>
+nnoremap <silent> <C-e> :History<CR>
 nnoremap <silent> <C-_> :BLines<CR>
-nnoremap <silent> <leader>co :Commits<CR>
+nnoremap <silent> <leader>co :BCommits<CR>
 nnoremap <silent> <leader>gs :GFiles?<CR>
 nnoremap <silent> <leader>li :Lines<CR>
 nnoremap <leader>ag :Ag<space>
@@ -276,7 +276,7 @@ nnoremap <silent> <leader>bb :Buffers<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>T :Tags<CR>
-nnoremap <silent> <leader>rr :History<CR>
+" nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>f: :History:<CR>
 nnoremap <silent> <leader>f/ :History/<CR>
 let g:fzf_tags_command = 'tags'
@@ -494,6 +494,7 @@ iabbr ipmort import
 iabbr teh the
 iabbr yuo you
 iabbr ipdb import ipdb; ipdb.set_trace()
+cabbr git Git!
 
 " AUTOFLAKE SETTINGS
 let g:autoflake_remove_all_unused_imports=1
@@ -510,6 +511,3 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 autocmd FileType nginx setlocal commentstring=#\ %s
 autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
-
-" Need this setting for vim-vitality plugin
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
