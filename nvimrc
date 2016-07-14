@@ -248,6 +248,8 @@ nnoremap j gj
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$
+
+nnoremap <c-w>; <c-w>p
 " END MAPPINGS
 
 " DELIMITMATE SETTINGS
@@ -511,3 +513,5 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 autocmd FileType nginx setlocal commentstring=#\ %s
 autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
+"
+highlight! link Error ErrorMsg
