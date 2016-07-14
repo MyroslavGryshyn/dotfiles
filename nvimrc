@@ -325,7 +325,7 @@ nnoremap <silent> <Leader>nn :NERDTreeFind<CR>
 nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHijackNetrw = 1
-let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
 " automatically remove buffer after a file was deleted with context menu
 let NERDTreeAutoDeleteBuffer = 1

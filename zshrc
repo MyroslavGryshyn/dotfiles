@@ -63,7 +63,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+export EDITOR='nvim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -124,7 +124,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_OPTS='--color bg+:0'
+export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
 
 fkill() {
     pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
