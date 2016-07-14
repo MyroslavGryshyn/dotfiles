@@ -266,7 +266,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " FZF PLUGIN SETTINGS
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-y> :GFiles<CR>
+nnoremap <silent> <leader>gf :GFiles<CR>
 nnoremap <silent> <C-e> :History<CR>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <leader>co :BCommits<CR>
@@ -282,6 +282,11 @@ nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>f: :History:<CR>
 nnoremap <silent> <leader>f/ :History/<CR>
 let g:fzf_tags_command = 'tags'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_nvim_statusline = 0
 " FZF END
 
 " AIRLINE SETTINGS
@@ -515,3 +520,6 @@ autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
 "
 highlight! link Error ErrorMsg
+
+" Insert timestamp
+nnoremap <leader>st "=strftime("%a %d %b %Y")<CR>Pa<CR><ESC>kyypVr-
