@@ -265,20 +265,13 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " END DELIMITMATE SETTINGS
 
 " FZF PLUGIN SETTINGS
+nnoremap <silent> <C-_> :Ag<CR>
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <leader>gf :GFiles<CR>
-nnoremap <silent> <C-e> :History<CR>
-nnoremap <silent> <C-_> :BLines<CR>
-nnoremap <silent> <leader>co :BCommits<CR>
-nnoremap <silent> <leader>gs :GFiles?<CR>
-nnoremap <silent> <leader>li :Lines<CR>
-nnoremap <leader>ag :Ag<space>
-nnoremap <leader>lo :Locate<space>
+nnoremap <silent> <leader>gf :GFiles?<CR>
 nnoremap <silent> <leader>bb :Buffers<CR>
-nnoremap <silent> <leader>tt :BTags<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
-nnoremap <silent> <leader>T :Tags<CR>
-" nnoremap <silent> <leader>rr :History<CR>
+nnoremap <silent> <leader>rr :History<CR>
+nnoremap <silent> <leader>tt :Tags<CR>
 nnoremap <silent> <leader>f: :History:<CR>
 nnoremap <silent> <leader>f/ :History/<CR>
 let g:fzf_tags_command = 'tags'
@@ -286,7 +279,20 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-let g:fzf_nvim_statusline = 0
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'String'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'String'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 " FZF END
 
 " AIRLINE SETTINGS
