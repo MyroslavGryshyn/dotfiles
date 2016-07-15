@@ -201,6 +201,7 @@ autocmd BufWritePre * :call TrimWhitespace()
 cabbrev h tab help
 
 " MAPPINGS
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>l
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
@@ -219,8 +220,6 @@ nnoremap gP "+P
 nnoremap \ ,
 nnoremap <leader>sr :SyntasticReset<CR>
 nnoremap <leader>sc :SyntasticCheck<CR>
-inoremap <ESC> <ESC>l
-inoremap <C-[> <Esc>l
 nnoremap <C-]> g<C-]>
 " Use Q instead of q to start recording a macro
 nnoremap Q q
@@ -265,7 +264,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " END DELIMITMATE SETTINGS
 
 " FZF PLUGIN SETTINGS
-nnoremap <silent> <C-_> :Ag<CR>
+nnoremap <C-_> :Ag<space>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>gf :GFiles?<CR>
 nnoremap <silent> <leader>bb :Buffers<CR>
