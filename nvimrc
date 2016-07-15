@@ -42,6 +42,9 @@ Plug 'tell-k/vim-autoflake', {'for': 'python'}
 " Enhance tabs
 Plug 'gcmt/taboo.vim'
 
+" Buffers
+Plug 'qpkorr/vim-bufkill'
+
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
@@ -201,6 +204,7 @@ autocmd BufWritePre * :call TrimWhitespace()
 cabbrev h tab help
 
 " MAPPINGS
+nnoremap <silent> <leader>dd :BD<CR>
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>l
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
@@ -474,7 +478,7 @@ let g:gutentags_ctags_executable = 'tags'
 
 " FUGITIVE SETTINGS
 nnoremap ,ss :Gstatus<CR>
-nnoremap ,ge :Gsplit!<space>
+nnoremap ,ge :Gedit<space>
 " END FUGITIVE
 
 " VIM-SESSION SETTINGS
