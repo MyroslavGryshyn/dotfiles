@@ -12,5 +12,7 @@
     ~/.bashrc: bashrc
     ~/.bash_aliases: bash_aliases
     ~/.config/nvim/init.vim: nvimrc
+    ~/init.vim: nvimrc
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
+    ~/.agignore: agignore
