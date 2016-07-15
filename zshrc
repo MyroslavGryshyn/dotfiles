@@ -126,15 +126,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
 
-fkill() {
-    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-    if [ "x$pid" != "x" ]
-    then
-        kill -${1:-9} $pid
-    fi
-}
-# fbr - checkout git branch (including remote branches)
 fbranch() {
     local branches branch
     branches=$(git branch --all | grep -v HEAD) &&

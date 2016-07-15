@@ -274,6 +274,7 @@ nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>tt :Tags<CR>
 nnoremap <silent> <leader>f: :History:<CR>
 nnoremap <silent> <leader>f/ :History/<CR>
+nnoremap <silent> <leader>T :Tags '<c-r><c-w><cr>
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
