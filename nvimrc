@@ -110,6 +110,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+Plug 'pgdouyon/vim-evanesco'
 
 call plug#end()
 
