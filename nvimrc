@@ -39,12 +39,6 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'tell-k/vim-autoflake', {'for': 'python'}
 
-" Enhance tabs
-Plug 'gcmt/taboo.vim'
-
-" Buffers
-Plug 'qpkorr/vim-bufkill'
-
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
@@ -60,10 +54,12 @@ Plug 'kana/vim-textobj-line'
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 
 " Helpful plugins
-Plug 'majutsushi/tagbar'
-Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic'
+Plug 'mbbill/undotree'
+
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-fnr'
 
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
@@ -81,9 +77,6 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Some usefull keypairs
 Plug 'tpope/vim-unimpaired'
-
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-fnr'
 
 Plug 'Chiel92/vim-autoformat'
 
@@ -166,10 +159,6 @@ set timeoutlen=1000 ttimeoutlen=0
 set undofile  " keep undo history for all file changes
 set wildignore+=*.pyc,*/.git/*,*/__pycache__/*
 
-" Remember taboo names in session
-set sessionoptions+=tabpages,globals
-set sessionoptions-=blank,help
-
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
 endif
@@ -235,7 +224,6 @@ nnoremap ZX :qall<CR>
 nnoremap ZV :qall!<CR>
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
-nnoremap <silent> <Space> :nohlsearch<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " mappings to move in cmdline mode
@@ -269,16 +257,12 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " END DELIMITMATE SETTINGS
 
 " FZF PLUGIN SETTINGS
-nnoremap <C-_> :Ag<space>
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <leader>gf :GFiles?<CR>
 nnoremap <silent> <leader>bb :Buffers<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
-nnoremap <silent> <leader>tt :Tags<CR>
-nnoremap <silent> <leader>f: :History:<CR>
-nnoremap <silent> <leader>f/ :History/<CR>
-nnoremap <silent> <leader>T :Tags '<c-r><c-w><cr>
+nnoremap <silent> <leader>T :Tags<CR>
+nnoremap <silent> <leader>tt :BTags<CR>
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -377,20 +361,15 @@ nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
 nmap <leader>fw <Plug>CtrlSFCwordPath
 nnoremap <leader>ft :CtrlSFOpen<CR>
+nnoremap <C-_> :CtrlSF<space><space>%<left><left>
 let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_winsize = '50%'
+let g:ctrlsf_winsize = '35%'
 let g:ctrlsf_mapping = {
             \ "next": "n",
             \ "prev": "N",
             \ }
 let g:ctrlsf_selected_line_hl = ''
 " END CTRLSF SETTINGS
-
-" TAGBAR SETTINGS
-let g:tagbar_sort = 0
-let g:tagbar_compact = 1
-nnoremap <leader>tg :TagbarToggle<CR><C-W>=
-" END TAGBAR SETTINGS
 
 " JEDI SETTINGS
 let g:jedi#completions_enabled = 0
@@ -437,38 +416,11 @@ inoremap <silent><expr> <C-n>
 " END DEOPLETE SETTINGS
 
 " AUTOFORMAT SETTINGS
-noremap <F8> :Autoformat<CR>
+noremap <leader>af :Autoformat<CR>
 let g:formatters_jinja = ['htmlbeautify']
 let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_python = ['autopep8']
 " END AUTOFORMAT
-
-" TABOO SETTINGS
-" Don't manage tabline
-let g:taboo_tabline = 0
-" END TABOO
-
-" HIGHLIGHT NEXT SEARCH MATCH
-nnoremap <silent> n n:call HLNext(0.1)<cr>
-nnoremap <silent> N N:call HLNext(0.1)<cr>
-
-function! HLNext (blinktime)
-    let target_pat = '\c\%#'.@/
-    let ring = matchadd('ErrorMsg', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
-endfunction
-
-function! ToggleMovement(firstOp, thenOp)
-    let pos = getpos('.')
-    execute "normal! " . a:firstOp
-    if pos == getpos('.')
-        execute "normal! " . a:thenOp
-    endif
-endfunction
-" END HIGHLIGHT NEXT SEARCH
 
 " THE ORIGINAL CARET 0 SWAP
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
@@ -478,7 +430,7 @@ let g:gutentags_ctags_executable = 'tags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
-nnoremap ,ss :Gstatus<CR>
+nnoremap <silent> ,ss :Gedit :<CR>
 nnoremap ,ge :Gedit<space>
 " END FUGITIVE
 
@@ -529,8 +481,15 @@ let g:lt_quickfix_list_toggle_map = '<leader>qq'
 autocmd FileType nginx setlocal commentstring=#\ %s
 autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
-"
+
 highlight! link Error ErrorMsg
 
 " Insert timestamp
 nnoremap <leader>st "=strftime("%a %d %b %Y")<CR>Pa<CR><ESC>kyypVr-
+
+" FIND AND REPLACE PLUGIN SETTINGS
+nmap <leader>fr <Plug>(FNR)
+xmap <leader>fr <Plug>(FNR)
+nmap <leader>fR <Plug>(FNR%)
+xmap <leader>fR <Plug>(FNR%)
+" END FIND AND REPLACE
