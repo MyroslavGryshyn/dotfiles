@@ -64,6 +64,8 @@ Plug 'mbbill/undotree'
 
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
+Plug 'myint/indent-finder'
+Plug 'tweekmonster/impsort.vim'
 
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
