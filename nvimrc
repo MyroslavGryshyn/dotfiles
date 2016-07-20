@@ -38,10 +38,11 @@ Plug 'benmills/vimux'
 " Python plugins
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'tell-k/vim-autoflake', {'for': 'python'}
 Plug 'bps/vim-textobj-python', {'for': 'python'}
+Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'kh3phr3n/python-syntax', {'for': 'python'}
+Plug 'tweekmonster/impsort.vim', {'for': 'python'}
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -55,7 +56,6 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
-Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 
 " Helpful plugins
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
@@ -65,7 +65,6 @@ Plug 'mbbill/undotree'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
 Plug 'myint/indent-finder'
-Plug 'tweekmonster/impsort.vim'
 
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
@@ -261,7 +260,7 @@ au FileType markdown let delimitMate_nesting_quotes = ["`"]
 " Put triple quotes on the separate line after cr
 au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
 let delimitMate_quotes = "\" ' `"
-au FileType markdown let delimitMate_quotes = "\" ' ` *"
+au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " END DELIMITMATE SETTINGS
 
@@ -451,7 +450,9 @@ let g:gutentags_ctags_executable = 'tags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
+nnoremap <silent> ,gc :GcommitCurrent<CR>
 nnoremap <silent> ,ss :Gstatus<CR>
+nnoremap <silent> ,dd :GdiffThis<CR>
 nnoremap ,ge :Gedit<space>
 " END FUGITIVE
 
@@ -500,9 +501,6 @@ autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 
 highlight! link Error ErrorMsg
 
-" Insert timestamp
-nnoremap <leader>st "=strftime("%a %d %b %Y")<CR>Pa<CR><ESC>kyypVr-
-
 " FIND AND REPLACE PLUGIN SETTINGS
 nmap <leader>fr <Plug>(FNR)
 xmap <leader>fr <Plug>(FNR)
@@ -515,3 +513,7 @@ let g:gbr_current_branch_top = 1
 " END GBR SETTINGS
 
 let g:easygit_enable_command = 1
+
+" IMPSORT PLUGIN SETTINGS
+nnoremap <leader>is :ImpSort!<cr>
+" END IMPSORT SETTINGS
