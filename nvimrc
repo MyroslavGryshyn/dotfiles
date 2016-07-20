@@ -14,7 +14,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-markdown'
 Plug 'evanmiller/nginx-vim-syntax', {'for': 'nginx'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
-Plug 'hdima/python-syntax', { 'for': 'python' }
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'vim-scripts/django.vim', { 'for': ['htmldjango', 'html']}
@@ -41,6 +40,8 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'tell-k/vim-autoflake', {'for': 'python'}
+Plug 'bps/vim-textobj-python', {'for': 'python'}
+Plug 'kh3phr3n/python-syntax', {'for': 'python'}
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -392,11 +393,11 @@ nnoremap <silent> <leader>gg :call jedi#goto()<CR>
 nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " END JEDI SETTINGS
 
+" JAVASCRIPT SYNTAX SETTINGS
 let g:javascript_fold=0
+" END JAVASCRIPT SETTINGS
 
 " PYTHON SYNTAX SETTINGS
-let python_highlight_indent_errors = 0
-let python_highlight_space_errors = 0
 let python_highlight_all = 1
 " END PYTHON SYNTAX SETTINGS
 
