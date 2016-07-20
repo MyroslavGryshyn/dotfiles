@@ -174,13 +174,13 @@ autocmd BufRead,BufNewFile *.py set filetype=python
 
 " Enable omni completion and set filetype indent settings.
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
+autocmd FileType gitcommit setlocal colorcolumn=51 textwidth=72
 autocmd FileType html,markdown,htmldjango,jinja setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80
-autocmd FileType xml setlocal shiftwidth=4 tabstop=4
 autocmd FileType python setlocal colorcolumn=73,80
 autocmd FileType rst setlocal filetype=text
 autocmd FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
-autocmd FileType gitcommit setlocal colorcolumn=51 textwidth=72
+autocmd FileType xml setlocal shiftwidth=4 tabstop=4
 
 " trim whitespace on save
 fun! TrimWhitespace()
@@ -349,7 +349,7 @@ highlight SyntasticErrorSign ctermbg=18 ctermfg=red
 highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_aggregate_errors = 1
-nnoremap cot :SyntasticToggleMode<CR>
+nnoremap <leader>st :SyntasticToggleMode<CR>
 " END SYNTASTIC SETTINGS
 
 " GITGUTTER SETTINGS
@@ -366,8 +366,8 @@ nmap <Leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
 nmap <leader>fw <Plug>CtrlSFCwordPath
-nnoremap <leader>ft :CtrlSFOpen<CR>
 nnoremap <C-_> :CtrlSF<space><space>%<left><left>
+nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '35%'
 let g:ctrlsf_mapping = {
@@ -399,7 +399,6 @@ hi MatchParen cterm=none ctermbg=19 ctermfg=none
 " END MATCHPAREN
 
 " VIM TEST RUNNER SETTINGS
-let test#python#runner = 'djangonose'
 let test#python#runner = 'nose'
 let test#strategy = "vimux"
 
@@ -424,8 +423,8 @@ inoremap <silent><expr> <C-n>
 " AUTOFORMAT SETTINGS
 noremap <leader>af :Autoformat<CR>
 let g:formatters_jinja = ['htmlbeautify']
-let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_python = ['autopep8']
+let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 " END AUTOFORMAT
 
 " THE ORIGINAL CARET 0 SWAP
@@ -436,7 +435,7 @@ let g:gutentags_ctags_executable = 'tags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
-nnoremap <silent> ,ss :Gedit :<CR>
+nnoremap <silent> ,ss :Gstatus<CR>
 nnoremap ,ge :Gedit<space>
 " END FUGITIVE
 
@@ -454,8 +453,8 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " VIMUX SETTINGS
 map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>vq :VimuxCloseRunner<CR>
-map <Leader>vi :VimuxInspectRunner<CR>
+map <silent> <Leader>vq :VimuxCloseRunner<CR>
+map <silent> <Leader>vi :VimuxInspectRunner<CR>
 " END VIMUX SETTINGS
 
 " INDEXED SEARCH SETTGINS
@@ -463,14 +462,9 @@ let g:indexed_search_colors=0
 nnoremap <silent> g/ :ShowSearchIndex<cr>
 " END INDEXED SEARCH
 
-" Abbrebiations -- add when you encounter them
-iabbr ipmrot import
-iabbr improt import
-iabbr ipmort import
-iabbr teh the
-iabbr yuo you
+" Abbreviations
 iabbr ipdb import ipdb; ipdb.set_trace()
-cabbr git Git!
+cabbr git Gsplit!
 
 " AUTOFLAKE SETTINGS
 let g:autoflake_remove_all_unused_imports=1
