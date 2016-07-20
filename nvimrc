@@ -18,8 +18,8 @@ Plug 'hdima/python-syntax', { 'for': 'python' }
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'vim-scripts/django.vim', { 'for': ['htmldjango', 'html']}
+Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'tmux-plugins/vim-tmux'
-Plug 'avakhov/vim-yaml'
 
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -31,7 +31,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
 " Used to run test in a separate tmux pane
-Plug 'benmills/vimux', {'for': 'python'}
+Plug 'benmills/vimux'
 
 " Python plugins
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -354,6 +354,12 @@ nnoremap cot :SyntasticToggleMode<CR>
 
 " GITGUTTER SETTINGS
 let g:gitgutter_sign_column_always = 1
+let g:gitgutter_diff_args = '-w'
+let g:gitgutter_map_keys = 0
+nmap [c <Plug>GitGutterPrevHunk
+nmap ]c <Plug>GitGutterNextHunk
+nmap <Leader>gs <Plug>GitGutterStageHunk
+nmap <Leader>gu <Plug>GitGutterUndoHunk
 " END GITGUTTER SETTINGS
 
 " CTRLSF SETTINGS
