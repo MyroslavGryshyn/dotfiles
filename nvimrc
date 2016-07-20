@@ -28,7 +28,7 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Integration with git
 Plug 'airblade/vim-gitgutter'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'takahirojin/gbr.vim'
 Plug 'chemzqm/vim-easygit'
@@ -69,6 +69,7 @@ Plug 'Valloric/ListToggle'
 
 " Highlight enclosing tags
 Plug 'Valloric/MatchTagAlways', {'for': ['html', 'htmldjango', 'jinja']}
+Plug 'docunext/closetag.vim', {'for': ['html', 'htmldjango', 'jinja']}
 
 Plug 'Shougo/junkfile.vim'
 
