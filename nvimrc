@@ -20,6 +20,7 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'vim-scripts/django.vim', { 'for': ['htmldjango', 'html']}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'tmux-plugins/vim-tmux'
+Plug 'tpope/vim-git'
 
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -27,8 +28,10 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Integration with git
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'takahirojin/gbr.vim'
+Plug 'chemzqm/vim-easygit'
 
 " Used to run test in a separate tmux pane
 Plug 'benmills/vimux'
@@ -493,3 +496,9 @@ xmap <leader>fr <Plug>(FNR)
 nmap <leader>fR <Plug>(FNR%)
 xmap <leader>fR <Plug>(FNR%)
 " END FIND AND REPLACE
+
+" GBR PLUGIN SETTINGS
+let g:gbr_current_branch_top = 1
+" END GBR SETTINGS
+
+let g:easygit_enable_command = 1
