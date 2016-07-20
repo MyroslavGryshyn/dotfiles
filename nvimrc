@@ -92,6 +92,8 @@ Plug 'tpope/vim-surround'
 
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 
 " Vim sessions enhancement
 Plug 'xolox/vim-misc'
