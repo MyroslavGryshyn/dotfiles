@@ -434,6 +434,13 @@ let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 " END AUTOFORMAT
 
 " THE ORIGINAL CARET 0 SWAP
+function! ToggleMovement(firstOp, thenOp)
+    let pos = getpos('.')
+    execute "normal! " . a:firstOp
+    if pos == getpos('.')
+        execute "normal! " . a:thenOp
+    endif
+endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " GUTENTAGS SETTINGS
