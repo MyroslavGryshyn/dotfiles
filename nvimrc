@@ -24,6 +24,9 @@ Plug 'tpope/vim-git'
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'wellle/tmux-complete.vim'
+Plug 'Shougo/neopairs.vim'
+Plug 'Shougo/neosnippet.vim'
 
 " Integration with git
 Plug 'airblade/vim-gitgutter'
@@ -64,6 +67,8 @@ Plug 'mbbill/undotree'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
 Plug 'myint/indent-finder'
+
+Plug 'honza/vim-snippets'
 
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
@@ -123,6 +128,8 @@ filetype plugin indent on
 syntax on
 
 set autoread  " for vim-tmux-focus-events plugin
+" Enable complete filename after =
+set isfname-==
 set wrap
 let &showbreak = '+++ '
 set background=dark
@@ -422,10 +429,16 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#sources#jedi#enable_cache = 1
+let deoplete#tag#cache_limit_size = 5000000
+" Silence messages
+set shortmess+=c
+" Sort candidates
+call deoplete#custom#set('_', 'sorters', ['sorter_word'])
 " trigger deoplete manually in insert mode
 inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
             \ deoplete#mappings#manual_complete()
+let g:neoinclude#ctags_commands = 'tags'
 " END DEOPLETE SETTINGS
 
 " AUTOFORMAT SETTINGS
@@ -514,3 +527,20 @@ let g:gbr_current_branch_top = 1
 let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
 " END IMPSORT SETTINGS
+
+" TMUX COMPLETE SETTINGS
+let g:tmuxcomplete#trigger = ''
+" END TMUX COMPLETE
+"
+" Neosnippet plugin settings
+let g:neosnippet#disable_runtime_snippets = {
+        \   '_' : 1,
+        \ }
+let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+" end neosnippet
