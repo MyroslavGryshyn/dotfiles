@@ -512,4 +512,5 @@ let g:gbr_current_branch_top = 1
 
 " ISORT PLUGIN SETTINGS
 let g:vim_isort_map = '<leader>is'
+nnoremap <leader>is :Isort<CR>
 " END IMPSORT SETTINGS
