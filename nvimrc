@@ -27,10 +27,9 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Integration with git
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'takahirojin/gbr.vim'
-Plug 'chemzqm/vim-easygit'
+Plug 'tpope/vim-fugitive'
 
 " Used to run test in a separate tmux pane
 Plug 'benmills/vimux'
@@ -41,8 +40,8 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'tell-k/vim-autoflake', {'for': 'python'}
 Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
-Plug 'kh3phr3n/python-syntax', {'for': 'python'}
-Plug 'tweekmonster/impsort.vim', {'for': 'python'}
+Plug 'yevhen-m/python-syntax', {'for': 'python'}
+Plug 'fisadev/vim-isort', {'for': 'python'}
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -271,6 +270,7 @@ nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
+let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -450,9 +450,7 @@ let g:gutentags_ctags_executable = 'tags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
-nnoremap <silent> ,gc :GcommitCurrent<CR>
 nnoremap <silent> ,ss :Gstatus<CR>
-nnoremap <silent> ,dd :GdiffThis<CR>
 nnoremap ,ge :Gedit<space>
 " END FUGITIVE
 
@@ -512,8 +510,6 @@ xmap <leader>fR <Plug>(FNR%)
 let g:gbr_current_branch_top = 1
 " END GBR SETTINGS
 
-let g:easygit_enable_command = 1
-
-" IMPSORT PLUGIN SETTINGS
-nnoremap <leader>is :ImpSort!<cr>
+" ISORT PLUGIN SETTINGS
+let g:vim_isort_map = '<leader>is'
 " END IMPSORT SETTINGS
