@@ -24,7 +24,6 @@ Plug 'tpope/vim-git'
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'wellle/tmux-complete.vim'
 Plug 'Shougo/neopairs.vim'
 Plug 'Shougo/neosnippet.vim'
 
@@ -45,6 +44,7 @@ Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
+Plug 'yggdroot/indentline', {'for': 'python'}
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -63,12 +63,14 @@ Plug 'kana/vim-textobj-line'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
+Plug 'bogado/file-line'
 
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
 Plug 'myint/indent-finder'
 
 Plug 'honza/vim-snippets'
+Plug 'andrewradev/splitjoin.vim'
 
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
@@ -427,13 +429,13 @@ nnoremap <leader>tv :TestVisit<CR>
 " DEOPLETE SETTINGS
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_refresh_always = 1
 let g:deoplete#sources#jedi#enable_cache = 1
 let deoplete#tag#cache_limit_size = 5000000
+let g:deoplete#auto_complete_delay = 300
 " Silence messages
 set shortmess+=c
 " Sort candidates
-call deoplete#custom#set('_', 'sorters', ['sorter_word'])
+call deoplete#custom#set('_', 'matchers', ['matcher_head'])
 " trigger deoplete manually in insert mode
 inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
@@ -491,7 +493,6 @@ nnoremap <silent> g/ :ShowSearchIndex<cr>
 " END INDEXED SEARCH
 
 " Abbreviations
-iabbr ipdb import ipdb; ipdb.set_trace()
 cabbr git Gsplit!
 
 " AUTOFLAKE SETTINGS
@@ -528,11 +529,7 @@ let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
 " END IMPSORT SETTINGS
 
-" TMUX COMPLETE SETTINGS
-let g:tmuxcomplete#trigger = ''
-" END TMUX COMPLETE
-"
-" Neosnippet plugin settings
+" NEOSNIPPET PLUGIN SETTINGS
 let g:neosnippet#disable_runtime_snippets = {
         \   '_' : 1,
         \ }
@@ -543,4 +540,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-" end neosnippet
+" END NEOSNIPPET
+
+" INDENTLINE SETTINGS
+let g:indentLine_fileType = ['python']
