@@ -80,6 +80,7 @@ Plug 'Valloric/MatchTagAlways', {'for': ['html', 'htmldjango', 'jinja']}
 Plug 'docunext/closetag.vim', {'for': ['html', 'htmldjango', 'jinja']}
 
 Plug 'Shougo/junkfile.vim'
+Plug 'pbrisbin/vim-mkdir'
 
 " Autoclose parens, quotes, etc.
 Plug 'Raimondi/delimitMate'
