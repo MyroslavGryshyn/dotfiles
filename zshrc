@@ -49,7 +49,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip pyenv python sudo zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git pip pyenv python sudo zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -123,8 +123,41 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+fstash() {
+  local out q k sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+    fzf --ansi --no-sort --query="$q" --print-query \
+        --expect=ctrl-d,ctrl-b);
+  do
+    mapfile -t out <<< "$out"
+    q="${out[0]}"
+    k="${out[1]}"
+    sha="${out[-1]}"
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git diff $sha
+    elif [[ "$k" == 'ctrl-b' ]]; then
+      git stash branch "stash-$sha" $sha
+      break;
+    else
+      git stash show -p $sha
+    fi
+  done
+}
 
 fbranch() {
     local branches branch
@@ -151,6 +184,34 @@ fshow() {
     {}
     FZF-EOF"
 }
+# fsha - get git commit sha
+# example usage: git rebase -i `fsha`
+fsha() {
+  local commits commit
+  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
+  echo -n $(echo "$commit" | sed "s/ .*//")
+}
+
+Z_SCRIPT="$HOME/.rupa_z/z.sh"
+[[ -s $Z_SCRIPT ]] && source $Z_SCRIPT
+
+unalias z
+z() {
+  if [[ -z "$*" ]]; then
+    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+  else
+    _last_z_args="$@"
+    _z "$@"
+  fi
+}
+
+zz() {
+  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q $_last_z_args)"
+}
+
+alias j=z
+alias jj=zz
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -168,9 +229,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 if [ -d "$HOME/bin" ] ; then
     PATH="$PATH:$HOME/bin"
 fi
-
-Z_SCRIPT="$HOME/.rupa_z/z.sh"
-[[ -s $Z_SCRIPT ]] && source $Z_SCRIPT
 
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 

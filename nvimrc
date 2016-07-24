@@ -11,7 +11,7 @@ endfunction
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins
-Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-markdown'
 Plug 'evanmiller/nginx-vim-syntax', {'for': 'nginx'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
 Plug 'cespare/vim-toml', {'for': 'toml'}
@@ -50,6 +50,7 @@ Plug 'yggdroot/indentline', {'for': 'python'}
 Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
 Plug 'dyng/ctrlsf.vim'
+Plug 'gabesoft/vim-ags'
 
 " Running tests from vim (vimux plugin)
 Plug 'janko-m/vim-test', {'for': 'python'}
@@ -58,12 +59,14 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
+Plug 'sgur/vim-textobj-parameter'
 
 " Helpful plugins
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic'
 Plug 'mbbill/undotree'
 Plug 'bogado/file-line'
+Plug 'unblevable/quick-scope'
 
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
@@ -545,3 +548,9 @@ endif
 
 " INDENTLINE SETTINGS
 let g:indentLine_fileType = ['python']
+let g:indentLine_faster = 1
+" END INDENTLINE SETTINGS
+
+" QUICKSCOPE PLUGIN SETTINGS
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" END QUICKSCOPE SETTINGS
