@@ -11,7 +11,7 @@ endfunction
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins
-" Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 Plug 'evanmiller/nginx-vim-syntax', {'for': 'nginx'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
 Plug 'cespare/vim-toml', {'for': 'toml'}
@@ -44,7 +44,6 @@ Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
-Plug 'yggdroot/indentline', {'for': 'python'}
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -278,10 +277,14 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " FZF PLUGIN SETTINGS
 nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-_> :BLines<CR>
+nnoremap <silent> <C-g> :GFiles?<CR>
 nnoremap <silent> <leader>bb :Buffers<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
+nnoremap <silent> <leader>q: :History:<CR>
+nnoremap <silent> <leader>q/ :History/<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
@@ -387,7 +390,6 @@ nmap <Leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
 nmap <leader>fw <Plug>CtrlSFCwordPath
-nnoremap <C-_> :CtrlSF<space><space>%<left><left>
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '35%'
@@ -545,11 +547,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 " END NEOSNIPPET
-
-" INDENTLINE SETTINGS
-let g:indentLine_fileType = ['python']
-let g:indentLine_faster = 1
-" END INDENTLINE SETTINGS
 
 " QUICKSCOPE PLUGIN SETTINGS
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

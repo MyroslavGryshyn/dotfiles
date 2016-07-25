@@ -123,10 +123,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export FZF_COMPLETION_TRIGGER=''
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
-
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
 
