@@ -438,6 +438,7 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#sources#jedi#enable_cache = 1
 let deoplete#tag#cache_limit_size = 5000000
 let g:deoplete#auto_complete_delay = 300
+let g:neoinclude#ctags_commands = 'tags'
 " Silence messages
 set shortmess+=c
 " Sort candidates
@@ -446,7 +447,10 @@ call deoplete#custom#set('_', 'matchers', ['matcher_head'])
 inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
             \ deoplete#mappings#manual_complete()
-let g:neoinclude#ctags_commands = 'tags'
+inoremap <silent> <C-j> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+    return deoplete#close_popup() . "\<CR>"
+endfunction
 " END DEOPLETE SETTINGS
 
 " AUTOFORMAT SETTINGS
