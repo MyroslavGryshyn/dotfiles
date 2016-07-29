@@ -48,7 +48,6 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
-Plug 'dyng/ctrlsf.vim'
 Plug 'gabesoft/vim-ags'
 
 " Running tests from vim (vimux plugin)
@@ -69,17 +68,16 @@ Plug 'unblevable/quick-scope'
 
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
+" Set proper indentation settings for the file
 Plug 'myint/indent-finder'
 
 Plug 'honza/vim-snippets'
-Plug 'andrewradev/splitjoin.vim'
 
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
 
 " Highlight enclosing tags
 Plug 'Valloric/MatchTagAlways', {'for': ['html', 'htmldjango', 'jinja']}
-Plug 'docunext/closetag.vim', {'for': ['html', 'htmldjango', 'jinja']}
 
 Plug 'Shougo/junkfile.vim'
 Plug 'pbrisbin/vim-mkdir'
@@ -213,7 +211,7 @@ autocmd BufWritePre * :call TrimWhitespace()
 cabbrev h tab help
 
 " MAPPINGS
-nnoremap <silent> <leader>dd :BD<CR>
+nnoremap <silent> <space> :nohl<CR>
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>l
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
@@ -386,20 +384,6 @@ nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gu <Plug>GitGutterUndoHunk
 " END GITGUTTER SETTINGS
 
-" CTRLSF SETTINGS
-nmap <leader>ff <Plug>CtrlSFPrompt
-vmap <leader>fw <Plug>CtrlSFVwordPath
-nmap <leader>fw <Plug>CtrlSFCwordPath
-nnoremap <leader>ft :CtrlSFOpen<CR>
-let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_winsize = '35%'
-let g:ctrlsf_mapping = {
-            \ "next": "n",
-            \ "prev": "N",
-            \ }
-let g:ctrlsf_selected_line_hl = ''
-" END CTRLSF SETTINGS
-
 " JEDI SETTINGS
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_initialization = 0
@@ -555,3 +539,9 @@ endif
 " QUICKSCOPE PLUGIN SETTINGS
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " END QUICKSCOPE SETTINGS
+
+" AGS PLUGIN SETTINGS
+nnoremap <leader>ff :Ags<space>
+nnoremap <leader>ft :AgsLast<CR>
+nnoremap <leader>fq :AgsQuit<CR>
+" END AGS SETTINGS
