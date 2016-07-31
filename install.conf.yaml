@@ -2,18 +2,17 @@
     link:
       relink: true
       create: true
-- clean: ['~']
+- clean: [$HOME]
 - shell:
     - mkdir -p $HOME/.config/nvim
+    - rm $HOME/.bashrc
+    - rm $HOME/.zshrc
 - link:
-    ~/.zshrc: zshrc
-    ~/.tmux.conf: tmux.conf
-    ~/.tmux_airline: tmux_airline
-    ~/.bashrc: bashrc
-    ~/.bash_aliases: bash_aliases
-    ~/.config/nvim/init.vim: nvimrc
-    ~/init.vim: nvimrc
-    ~/.gitconfig: gitconfig
-    ~/.gitignore_global: gitignore_global
-    ~/.agignore: agignore
-    ~/.isort.cfg: isort.cfg
+    $HOME/.zshrc: zshrc
+    $HOME/.bashrc: bashrc
+    $HOME/.bash_aliases: bash_aliases
+    $HOME/.config/nvim/init.vim: nvimrc
+    $HOME/.gitconfig: gitconfig
+    $HOME/.gitignore_global: gitignore_global
+    $HOME/.agignore: agignore
+    $HOME/.isort.cfg: isort.cfg

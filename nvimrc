@@ -11,15 +11,12 @@ endfunction
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins
-Plug 'tpope/vim-markdown'
-Plug 'evanmiller/nginx-vim-syntax', {'for': 'nginx'}
-Plug 'Glench/Vim-Jinja2-Syntax', {'for': ['html', 'jinja']}
+Plug 'tpope/vim-markdown', {'for': 'md'}
 Plug 'cespare/vim-toml', {'for': 'toml'}
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'vim-scripts/django.vim', { 'for': ['htmldjango', 'html']}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tpope/vim-git'
+Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'vim-scripts/django.vim', { 'for': 'htmldjango'}
 
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -29,12 +26,11 @@ Plug 'Shougo/neosnippet.vim'
 
 " Integration with git
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/gv.vim'
-Plug 'takahirojin/gbr.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
-" Used to run test in a separate tmux pane
-Plug 'benmills/vimux'
+" Running tests from vim
+Plug 'janko-m/vim-test', {'for': 'python'}
 
 " Python plugins
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -50,26 +46,22 @@ Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
 Plug 'gabesoft/vim-ags'
 
-" Running tests from vim (vimux plugin)
-Plug 'janko-m/vim-test', {'for': 'python'}
-
 " Text objects
-Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-entire'
 Plug 'sgur/vim-textobj-parameter'
 
 " Helpful plugins
+Plug 'unblevable/quick-scope'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic'
-Plug 'mbbill/undotree'
+" Set proper indentation settings for the file
+Plug 'myint/indent-finder'
 Plug 'bogado/file-line'
-Plug 'unblevable/quick-scope'
+Plug 'mbbill/undotree'
 
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
-" Set proper indentation settings for the file
-Plug 'myint/indent-finder'
 
 Plug 'honza/vim-snippets'
 
@@ -77,7 +69,7 @@ Plug 'honza/vim-snippets'
 Plug 'Valloric/ListToggle'
 
 " Highlight enclosing tags
-Plug 'Valloric/MatchTagAlways', {'for': ['html', 'htmldjango', 'jinja']}
+Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
 
 Plug 'Shougo/junkfile.vim'
 Plug 'pbrisbin/vim-mkdir'
@@ -102,7 +94,6 @@ Plug 'tpope/vim-surround'
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
 
 " Vim sessions enhancement
 Plug 'xolox/vim-misc'
@@ -243,9 +234,6 @@ nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-" mappings to move in cmdline mode
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
 " Smart scrolling
 nnoremap <C-j> 3<C-E>3j
 vnoremap <C-j> 3<C-E>3j
@@ -380,8 +368,14 @@ let g:gitgutter_diff_args = '-w'
 let g:gitgutter_map_keys = 0
 nmap [c <Plug>GitGutterPrevHunk
 nmap ]c <Plug>GitGutterNextHunk
-nmap <Leader>gs <Plug>GitGutterStageHunk
-nmap <Leader>gu <Plug>GitGutterUndoHunk
+" You should work with changes
+nmap <Leader>cs <Plug>GitGutterStageHunk
+nmap <Leader>cu <Plug>GitGutterUndoHunk
+nmap <leader>cp <Plug>GitGutterPreviewHunk
+omap ic <Plug>GitGutterTextObjectInnerPending
+omap ac <Plug>GitGutterTextObjectOuterPending
+xmap ic <Plug>GitGutterTextObjectInnerVisual
+xmap ac <Plug>GitGutterTextObjectOuterVisual
 " END GITGUTTER SETTINGS
 
 " JEDI SETTINGS
@@ -407,7 +401,7 @@ hi MatchParen cterm=none ctermbg=19 ctermfg=none
 
 " VIM TEST RUNNER SETTINGS
 let test#python#runner = 'nose'
-let test#strategy = "vimux"
+let test#strategy = "dispatch"
 
 nnoremap <leader>tn :TestNearest<CR>
 nnoremap <leader>tf :TestFile<CR>
@@ -420,8 +414,7 @@ nnoremap <leader>tv :TestVisit<CR>
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#sources#jedi#enable_cache = 1
-let deoplete#tag#cache_limit_size = 5000000
-let g:deoplete#auto_complete_delay = 300
+let deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
 " Silence messages
 set shortmess+=c
@@ -439,7 +432,7 @@ endfunction
 
 " AUTOFORMAT SETTINGS
 noremap <leader>af :Autoformat<CR>
-let g:formatters_jinja = ['htmlbeautify']
+let g:formatters_html = ['htmlbeautify']
 let g:formatters_python = ['autopep8']
 let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 " END AUTOFORMAT
@@ -475,12 +468,6 @@ let g:session_command_aliases = 1
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " END MARKDOWN
 
-" VIMUX SETTINGS
-map <Leader>vp :VimuxPromptCommand<CR>
-map <silent> <Leader>vq :VimuxCloseRunner<CR>
-map <silent> <Leader>vi :VimuxInspectRunner<CR>
-" END VIMUX SETTINGS
-
 " INDEXED SEARCH SETTGINS
 let g:indexed_search_colors=0
 nnoremap <silent> g/ :ShowSearchIndex<cr>
@@ -513,10 +500,6 @@ xmap <leader>fr <Plug>(FNR)
 nmap <leader>fR <Plug>(FNR%)
 xmap <leader>fR <Plug>(FNR%)
 " END FIND AND REPLACE
-
-" GBR PLUGIN SETTINGS
-let g:gbr_current_branch_top = 1
-" END GBR SETTINGS
 
 " ISORT PLUGIN SETTINGS
 let g:vim_isort_map = '<leader>is'
