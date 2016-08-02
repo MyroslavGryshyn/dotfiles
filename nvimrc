@@ -203,7 +203,6 @@ cabbrev h tab help
 
 " MAPPINGS
 nnoremap <silent> <space> :nohl<CR>
-inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>l
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
@@ -449,6 +448,7 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " GUTENTAGS SETTINGS
 let g:gutentags_ctags_executable = 'tags'
+let g:gutentags_generate_on_write = 0
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
@@ -528,3 +528,30 @@ nnoremap <leader>ff :Ags<space>
 nnoremap <leader>ft :AgsLast<CR>
 nnoremap <leader>fq :AgsQuit<CR>
 " END AGS SETTINGS
+
+function! ToggleEscapeMapping()
+    if b:escape_mapping
+        let b:escape_mapping = 0
+        inoremap <silent> <esc> <esc>l
+        echom 'ESC mapping does not touch iminsert'
+    else
+        let b:escape_mapping = 1
+        inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
+        echom 'ESC mapping resets iminsert'
+    endif
+endfunction
+" reset imsert by default
+inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
+autocmd BufEnter * let b:escape_mapping = 1
+autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
+
+function! ToggleGutentagsTagFileGeneration()
+    if g:gutentags_generate_on_write
+        let g:gutentags_generate_on_write = 0
+        echom 'Gutentags does not autogenerate tag file'
+    else
+        let g:gutentags_generate_on_write = 1
+        echom 'Gutentags autogenerates tag file'
+    endif
+endfunction
+nnoremap cot :call ToggleGutentagsTagFileGeneration()<CR>
