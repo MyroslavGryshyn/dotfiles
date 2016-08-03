@@ -453,7 +453,7 @@ let g:gutentags_generate_on_write = 0
 
 " FUGITIVE SETTINGS
 nnoremap <silent> ,ss :Gstatus<CR>
-nnoremap ,ge :Gedit<space>
+nnoremap ,ge :Gtabedit<space>
 " END FUGITIVE
 
 " VIM-SESSION SETTINGS
@@ -474,7 +474,7 @@ nnoremap <silent> g/ :ShowSearchIndex<cr>
 " END INDEXED SEARCH
 
 " Abbreviations
-cabbr git Gsplit!
+cabbr git Gtabedit!
 
 " AUTOFLAKE SETTINGS
 let g:autoflake_remove_all_unused_imports=1
@@ -532,17 +532,18 @@ nnoremap <leader>fq :AgsQuit<CR>
 function! ToggleEscapeMapping()
     if b:escape_mapping
         let b:escape_mapping = 0
-        inoremap <silent> <esc> <esc>l
+        inoremap <buffer> <silent> <esc> <esc>l
         echom 'ESC mapping does not touch iminsert'
     else
         let b:escape_mapping = 1
-        inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
+        inoremap <buffer> <silent> <esc> <esc>:set iminsert=0<CR>l
         echom 'ESC mapping resets iminsert'
     endif
 endfunction
 " reset imsert by default
 inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
 autocmd BufEnter * let b:escape_mapping = 1
+autocmd BufEnter * set iminsert=0
 autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
 
 function! ToggleGutentagsTagFileGeneration()
