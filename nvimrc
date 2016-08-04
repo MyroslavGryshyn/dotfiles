@@ -49,6 +49,7 @@ Plug 'dyng/ctrlsf.vim'
 " Text objects
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
+" very helpful plugin when writing code
 Plug 'sgur/vim-textobj-parameter'
 
 " Helpful plugins
@@ -60,6 +61,7 @@ Plug 'myint/indent-finder'
 Plug 'bogado/file-line'
 Plug 'mbbill/undotree'
 
+" this plugin is a dependency
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-fnr'
 
@@ -203,6 +205,10 @@ cabbrev h tab help
 
 " MAPPINGS
 nnoremap <silent> <space> :nohl<CR>
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
@@ -451,6 +457,10 @@ let g:gutentags_ctags_executable = 'tags'
 let g:gutentags_generate_on_write = 0
 " END GUTENTAGS
 
+" FNR PLUGIN SETTINGS
+let g:fnr_flags = 'gc'
+" END FNR SETTINGS
+
 " FUGITIVE SETTINGS
 nnoremap <silent> ,ss :Gstatus<CR>
 nnoremap ,ge :Gtabedit<space>
@@ -493,13 +503,6 @@ autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
 
 highlight! link Error ErrorMsg
-
-" FIND AND REPLACE PLUGIN SETTINGS
-nmap <leader>fr <Plug>(FNR)
-xmap <leader>fr <Plug>(FNR)
-nmap <leader>fR <Plug>(FNR%)
-xmap <leader>fR <Plug>(FNR%)
-" END FIND AND REPLACE
 
 " ISORT PLUGIN SETTINGS
 let g:vim_isort_map = '<leader>is'
@@ -560,6 +563,7 @@ let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '40%'
 let g:ctrlsf_populate_qflist = 1
+let g:ctrlsf_context = '-C 1'
 let g:ctrlsf_mapping = {
             \ "next": "n",
             \ "prev": "N",
