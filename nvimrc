@@ -44,7 +44,7 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
 Plug 'henrik/vim-indexed-search'
-Plug 'gabesoft/vim-ags'
+Plug 'dyng/ctrlsf.vim'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
@@ -523,12 +523,6 @@ endif
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " END QUICKSCOPE SETTINGS
 
-" AGS PLUGIN SETTINGS
-nnoremap <leader>ff :Ags<space>
-nnoremap <leader>ft :AgsLast<CR>
-nnoremap <leader>fq :AgsQuit<CR>
-" END AGS SETTINGS
-
 function! ToggleEscapeMapping()
     if b:escape_mapping
         let b:escape_mapping = 0
@@ -556,3 +550,19 @@ function! ToggleGutentagsTagFileGeneration()
     endif
 endfunction
 nnoremap cot :call ToggleGutentagsTagFileGeneration()<CR>
+
+" CTRLSF SETTINGS
+nmap <leader>ff <Plug>CtrlSFPrompt
+vmap <leader>fw <Plug>CtrlSFVwordPath
+nmap <leader>fw <Plug>CtrlSFCwordPath
+nnoremap <leader>ft :CtrlSFOpen<CR>
+let g:ctrlsf_confirm_save = 0
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_winsize = '40%'
+let g:ctrlsf_populate_qflist = 1
+let g:ctrlsf_mapping = {
+            \ "next": "n",
+            \ "prev": "N",
+            \ }
+let g:ctrlsf_selected_line_hl = ''
+" END CTRLSF SETTINGS
