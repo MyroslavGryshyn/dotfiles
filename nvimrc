@@ -111,8 +111,6 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'pgdouyon/vim-evanesco'
-
 call plug#end()
 
 let mapleader=","
@@ -277,6 +275,7 @@ nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>q: :History:<CR>
 nnoremap <silent> <leader>q/ :History/<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
+let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
