@@ -452,8 +452,7 @@ endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " GUTENTAGS SETTINGS
-let g:gutentags_ctags_executable = 'tags'
-let g:gutentags_generate_on_write = 0
+let g:gutentags_ctags_executable = 'my_tags'
 " END GUTENTAGS
 
 " FNR PLUGIN SETTINGS
