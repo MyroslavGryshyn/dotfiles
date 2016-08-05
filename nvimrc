@@ -54,7 +54,8 @@ Plug 'sgur/vim-textobj-parameter'
 
 " Helpful plugins
 Plug 'unblevable/quick-scope'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/syntastic'
 " Set proper indentation settings for the file
 Plug 'myint/indent-finder'
@@ -189,6 +190,7 @@ autocmd FileType python setlocal colorcolumn=73,80
 autocmd FileType rst setlocal filetype=text
 autocmd FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
 autocmd FileType xml setlocal shiftwidth=4 tabstop=4
+autocmd FileType nerdtree setlocal colorcolumn&
 
 " trim whitespace on save
 fun! TrimWhitespace()
@@ -243,8 +245,10 @@ vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
 vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
-nnoremap k gk
-nnoremap j gj
+nnoremap <silent> k gk:nohl<CR>
+nnoremap <silent> j gj:nohl<CR>
+nnoremap <silent> h h:nohl<CR>
+nnoremap <silent> l l:nohl<CR>
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$
@@ -456,7 +460,7 @@ let g:gutentags_ctags_executable = 'my_tags'
 " END GUTENTAGS
 
 " FNR PLUGIN SETTINGS
-let g:fnr_flags = 'gc'
+let g:fnr_flags = 'IWGC'
 " END FNR SETTINGS
 
 " FUGITIVE SETTINGS
@@ -562,9 +566,17 @@ let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '40%'
 let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_context = '-C 1'
-let g:ctrlsf_mapping = {
-            \ "next": "n",
-            \ "prev": "N",
-            \ }
 let g:ctrlsf_selected_line_hl = ''
 " END CTRLSF SETTINGS
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
