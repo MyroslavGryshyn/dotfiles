@@ -62,10 +62,6 @@ Plug 'myint/indent-finder'
 Plug 'bogado/file-line'
 Plug 'mbbill/undotree'
 
-" this plugin is a dependency
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-fnr'
-
 Plug 'honza/vim-snippets'
 
 " Toggle quick and location lists
@@ -139,7 +135,6 @@ set ignorecase
 set list
 set listchars=tab:▸▸,trail:·
 set nofoldenable
-set noshowcmd
 set splitbelow
 set splitright
 set updatetime=400  " try to change this value for gitgutter
@@ -458,10 +453,6 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 " GUTENTAGS SETTINGS
 let g:gutentags_ctags_executable = 'my_tags'
 " END GUTENTAGS
-
-" FNR PLUGIN SETTINGS
-let g:fnr_flags = 'IWGC'
-" END FNR SETTINGS
 
 " FUGITIVE SETTINGS
 nnoremap <silent> ,ss :Gstatus<CR>

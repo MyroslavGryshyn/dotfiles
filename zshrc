@@ -49,7 +49,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip pyenv python sudo zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(pip pyenv python sudo zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -124,44 +124,12 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.key-binding.zsh ] && source ~/.key-binding.zsh
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
-export FZF_TMUX=0
+export FZF_TMUX=1
 
-fbranch() {
-    local branches branch
-    branches=$(git branch --all | grep -v HEAD) &&
-        branch=$(echo "$branches" |
-    fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-        git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
-}
-# fcoc - checkout git commit
-fcheckout() {
-    local commits commit
-    commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
-        commit=$(echo "$commits" | fzf --tac +s +m -e) &&
-        git checkout $(echo "$commit" | sed "s/ .*//")
-}
-# fshow - git commit browser
-fshow() {
-    git log --graph --color=always \
-        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr %C(auto)%C(blue)%cn" "$@" |
-    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-        --bind "ctrl-m:execute:
-    (grep -o '[a-f0-9]\{7\}' | head -1 |
-    xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-    {}
-    FZF-EOF"
-}
-# fsha - get git commit sha
-# example usage: git rebase -i `fsha`
-fsha() {
-  local commits commit
-  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
-  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
-  echo -n $(echo "$commit" | sed "s/ .*//")
-}
 
 Z_SCRIPT="$HOME/.rupa_z/z.sh"
 [[ -s $Z_SCRIPT ]] && source $Z_SCRIPT
