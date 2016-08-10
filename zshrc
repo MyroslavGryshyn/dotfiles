@@ -127,7 +127,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
-export FZF_COMPLETION_TRIGGER=''
 export FZF_TMUX=0
 
 

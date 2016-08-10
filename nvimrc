@@ -181,11 +181,11 @@ autocmd FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd FileType gitcommit setlocal colorcolumn=51 textwidth=72
 autocmd FileType html,markdown,htmldjango,jinja setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80
-autocmd FileType python setlocal colorcolumn=73,80
 autocmd FileType rst setlocal filetype=text
 autocmd FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
 autocmd FileType xml setlocal shiftwidth=4 tabstop=4
 autocmd FileType nerdtree setlocal colorcolumn&
+autocmd FileType python setlocal colorcolumn=73,80
 
 " trim whitespace on save
 fun! TrimWhitespace()
@@ -451,7 +451,9 @@ endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " GUTENTAGS SETTINGS
-let g:gutentags_ctags_executable = 'my_tags'
+let g:gutentags_project_info = []
+call add(g:gutentags_project_info, {'type': 'python', 'file': 'requirements.txt'})
+let g:gutentags_ctags_executable_python = 'python-ctags'
 " END GUTENTAGS
 
 " FUGITIVE SETTINGS
