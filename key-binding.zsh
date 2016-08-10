@@ -4,7 +4,8 @@ is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
-gf() {
+# Changed files
+gj() {
   is_in_git_repo || return
   git -c color.status=always status --short |
   fzf-tmux -m --ansi --nth 2..,.. \
@@ -13,7 +14,7 @@ gf() {
   cut -c4-
 }
 
-gb() {
+gi() {
   is_in_git_repo || return
   git branch -a --color=always | grep -v '/HEAD\s' | sort |
   fzf-tmux --ansi --multi --tac --preview-window right:70% \
@@ -46,6 +47,40 @@ gr() {
   cut -d' ' -f1
 }
 
+# Checkout git commit
+fzf-checkout() {
+    local commits commit
+    commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
+        commit=$(echo "$commits" | fzf --tac +s +m -e) &&
+        git checkout $(echo "$commit" | sed "s/ .*//")
+}
+bindkey -s '^g^o' 'fzf-checkout\n'
+
+# Checkout git branch
+fzf-branch() {
+    local branches branch
+    branches=$(git branch --all | grep -v HEAD) &&
+        branch=$(echo "$branches" |
+    fzf -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+        git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+bindkey -s '^g^k' 'fzf-branch\n'
+
+# Git log
+fzf-show() {
+    is_in_git_repo || return
+    git log --graph --color=always \
+        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr %C(auto)%C(blue)%cn" "$@" |
+    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+        --bind "ctrl-m:execute:
+    (grep -o '[a-f0-9]\{7\}' | head -1 |
+    xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+    {}
+    FZF-EOF"
+}
+bindkey -s '^g^l' 'fzf-show\n'
+
+
 join-lines() {
   local item
   while read item; do
@@ -61,5 +96,5 @@ bind-git-helper() {
     eval "bindkey '^g^$c' fzf-g$c-widget"
   done
 }
-bind-git-helper f b t r h
+bind-git-helper j i t r h
 unset -f bind-git-helper
