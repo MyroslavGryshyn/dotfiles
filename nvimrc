@@ -5,7 +5,7 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
 endif
 
 function! DoRemote(arg)
-  UpdateRemotePlugins
+    UpdateRemotePlugins
 endfunction
 
 call plug#begin('~/.config/nvim/plugged')
@@ -51,16 +51,17 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 " very helpful plugin when writing code
 Plug 'sgur/vim-textobj-parameter'
+Plug 'junegunn/vim-after-object'
 
 " Helpful plugins
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'unblevable/quick-scope'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', {'on': 'SyntasticCheck'}
 " Set proper indentation settings for the file
 Plug 'myint/indent-finder'
 Plug 'bogado/file-line'
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
+Plug 'szw/vim-maximizer'
 
 Plug 'honza/vim-snippets'
 
@@ -144,6 +145,7 @@ set iminsert=0
 set imsearch=0
 
 set noshowmode
+set showcmd
 set expandtab  " <tab> inserts spaces
 set infercase
 set noacd
@@ -162,6 +164,7 @@ set tabstop=4  " columns per tabstop
 set timeoutlen=1000 ttimeoutlen=0
 set undofile  " keep undo history for all file changes
 set wildignore+=*.pyc,*/.git/*,*/__pycache__/*
+set pastetoggle=cop
 
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
@@ -278,23 +281,23 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-s': 'split',
+            \ 'ctrl-v': 'vsplit' }
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'String'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'String'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'String'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'String'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
 " FZF END
 
 " AIRLINE SETTINGS
@@ -506,14 +509,14 @@ nnoremap <leader>is :Isort<CR>
 
 " NEOSNIPPET PLUGIN SETTINGS
 let g:neosnippet#disable_runtime_snippets = {
-        \   '_' : 1,
-        \ }
+            \   '_' : 1,
+            \ }
 let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+    set conceallevel=2 concealcursor=niv
 endif
 " END NEOSNIPPET
 
@@ -538,17 +541,6 @@ autocmd BufEnter * let b:escape_mapping = 1
 autocmd BufEnter * set iminsert=0
 autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
 
-function! ToggleGutentagsTagFileGeneration()
-    if g:gutentags_generate_on_write
-        let g:gutentags_generate_on_write = 0
-        echom 'Gutentags does not autogenerate tag file'
-    else
-        let g:gutentags_generate_on_write = 1
-        echom 'Gutentags autogenerates tag file'
-    endif
-endfunction
-nnoremap cot :call ToggleGutentagsTagFileGeneration()<CR>
-
 " CTRLSF SETTINGS
 nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
@@ -562,14 +554,11 @@ let g:ctrlsf_context = '-C 1'
 let g:ctrlsf_selected_line_hl = ''
 " END CTRLSF SETTINGS
 
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
+" VIM-AFTER-OBJECT PLUGIN SETTINGS
+autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+" END VIM-AFTER-OBJECT SETTINGS
+
+" MAXIMIZER PLUGIN SETTINGS
+let g:maximizer_set_default_mapping = 0
+nnoremap <silent> com :MaximizerToggle<CR>
+" END MAXIMIZER PLUGIN
