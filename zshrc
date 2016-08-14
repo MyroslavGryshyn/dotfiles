@@ -1,11 +1,33 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+source $HOME/antigen/antigen.zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# Load oh-my-zsh's library
+antigen use oh-my-zsh
+
+# Bundles from the default repo
+antigen bundle pip
+antigen bundle pyenv
+antigen bundle python
+antigen bundle sudo
+antigen bundle command-not-found
+antigen bundle heroku
+antigen bundle colored-man-pages
+antigen bundle colorize
+antigen bundle compleat
+antigen bundle safe-paste
+antigen bundle tmux
+antigen bundle z
+antigen bundle vagrant
+antigen bundle django
+
+# Bundles from third-party repos
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle djui/alias-tips
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Load the theme
+antigen theme robbyrussell
+
+antigen apply
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,18 +67,10 @@ HYPHEN_INSENSITIVE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(pip pyenv python sudo zsh-autosuggestions zsh-syntax-highlighting)
-
 # User configuration
 
 export PATH="$HOME/.pyenv/plugins/pyenv-virtualenv/shims:$HOME/.pyenv/libexec:$HOME/.pyenv/plugins/python-build/bin:$HOME/.pyenv/plugins/pyenv-virtualenv/bin:$HOME/.pyenv/plugins/pyenv-update/bin:$HOME/.pyenv/plugins/pyenv-installer/bin:$HOME/.pyenv/plugins/pyenv-doctor/bin:$HOME/.pyenv/shims:$HOME/.pyenv/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/.fzf/bin:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -95,8 +109,6 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias l='ls -1F --group-directories-first --color=never'
 alias ll='ls -AFlh --color=never'
 alias la='ls -A --color=never'
