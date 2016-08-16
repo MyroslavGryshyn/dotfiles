@@ -1,59 +1,44 @@
 [user]
-    email = yvhn.yvhn@gmail.com
-    name = yevhen-m
+	email = yvhn.yvhn@gmail.com
+	name = yevhen-m
 [core]
-    editor = vim
-    excludesfile = /home/ymal/.gitignore_global
+	editor = vim
+	excludesfile = ~/.gitignore_global
 [push]
-    ; Push only the current branch to the one that git pull will pull from
-    ; (check that their names match)
-    default = simple
+	; Push only the current branch to the one that git pull will pull from
+	; (check that their names match)
+	default = simple
 [diff]
-    tool = vimdiff
+	tool = vimdiff
 [difftool]
-    prompt = false
+	prompt = false
 [alias]
-    ss = status -s
-    daddy = ! git show-branch -a 2>/dev/null | grep '\\*' | grep -v `git rev-parse --abbrev-ref HEAD` | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//'
-    stash-unapply = !git stash show -p | git apply -R
+	ss = status -s
+	daddy = ! git show-branch -a 2>/dev/null | grep '\\*' | grep -v `git rev-parse --abbrev-ref HEAD` | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//'
+	stash-unapply = !git stash show -p | git apply -R
 [merge]
-    tool = vimdiff
-    conflictstyle = diff3
+	tool = vimdiff
+	conflictstyle = diff3
 [color]
-    ui = auto
+	ui = auto
 [color "branch"]
-    current = blue
-    local = yellow
-    remote = green
+	current = blue
+	local = yellow
+	remote = green
 [color "diff"]
-    meta = blue
-    frag = magenta
-    old = red
-    new = green
+	meta = blue
+	frag = magenta
+	old = red
+	new = green
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = red
+	added = yellow
+	changed = green
+	untracked = red
 [pull]
-    rebase = true
+	rebase = true
 [fetch]
-    prune = true
-; Show changes of specified line range
-; git log -L <x,y>:some-file.txt
-;
-; Show changes that are not in master
-; git log --no-merges master..
-
-; Get version file version from another file
-; git show some_branch:some_file.js > some_branch__some_file.js
-;
-; Take file from another branches or commits
-; git checkout some-branch-name file-name.js
-; git checkout {{some-commit-hash}} file-name.js
-;
-; git reset HEAD file-name.js to unstage a file
-; git checkout file-name.js to reset file to HEAD state
+	prune = true
 [mergetool]
-    prompt = false
+	prompt = false
 [clean]
 	requireForce = false
