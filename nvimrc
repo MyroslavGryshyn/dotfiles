@@ -48,7 +48,6 @@ Plug 'dyng/ctrlsf.vim'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
 " very helpful plugin when writing code
 Plug 'sgur/vim-textobj-parameter'
 Plug 'junegunn/vim-after-object'
@@ -308,7 +307,7 @@ let g:airline_section_error = ''
 let g:airline#extensions#branch#format = 2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#syntastic#enabled = 0
@@ -317,12 +316,11 @@ let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
-let g:airline#extensions#tagbar#enabled = 0
 " END AIRLINE SETTINGS
 
 " NERDTREE SETTINGS

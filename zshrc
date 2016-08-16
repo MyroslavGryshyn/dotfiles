@@ -23,7 +23,7 @@ antigen bundle django
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle djui/alias-tips
 antigen bundle zsh-users/zsh-autosuggestions
-
+antigen-bundle Tarrasch/zsh-autoenv
 # Load the theme
 antigen theme robbyrussell
 
