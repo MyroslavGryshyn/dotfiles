@@ -117,6 +117,7 @@ colorscheme base16-eighties
 
 filetype plugin indent on
 syntax on
+set synmaxcol=250
 
 set autoread  " for vim-tmux-focus-events plugin
 " Enable complete filename after =
@@ -244,8 +245,6 @@ vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
 nnoremap <silent> k gk:nohl<CR>
 nnoremap <silent> j gj:nohl<CR>
-nnoremap <silent> h h:nohl<CR>
-nnoremap <silent> l l:nohl<CR>
 nnoremap 0 g0
 nnoremap ^ g^
 nnoremap $ g$

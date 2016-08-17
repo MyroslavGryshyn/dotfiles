@@ -49,19 +49,19 @@ gr() {
 
 # Checkout git commit
 fzf-checkout() {
-    local commits commit
-    commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
-        commit=$(echo "$commits" | fzf --tac +s +m -e) &&
-        git checkout $(echo "$commit" | sed "s/ .*//")
+  local commits commit
+  commits=$(git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr %C(auto)%C(blue)%cn") &&
+    commit=$(echo "$commits" | fzf --ansi --no-sort --reverse --tiebreak=index) &&
+    git checkout $(echo "$commit" | grep -o "[a-f0-9]\{7,\}")
 }
 bindkey -s '^g^o' 'fzf-checkout\n'
 
 # Checkout git branch
 fzf-branch() {
     local branches branch
-    branches=$(git branch --all | grep -v HEAD) &&
+    branches=$(git branch -a --color=always | grep -v HEAD | sort) &&
         branch=$(echo "$branches" |
-    fzf -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+    fzf --ansi --tac -d $(( 2 + $(wc -l <<< "$branches") )) +m +s) &&
         git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 bindkey -s '^g^k' 'fzf-branch\n'
