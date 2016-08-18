@@ -539,6 +539,7 @@ inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
 autocmd BufEnter * let b:escape_mapping = 1
 autocmd BufEnter * set iminsert=0
 autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
+autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 
 " CTRLSF SETTINGS
 nmap <leader>ff <Plug>CtrlSFPrompt
