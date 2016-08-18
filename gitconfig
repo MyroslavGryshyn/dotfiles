@@ -2,7 +2,6 @@
 	email = yvhn.yvhn@gmail.com
 	name = yevhen-m
 [core]
-	editor = vim
 	excludesfile = ~/.gitignore_global
 [push]
 	; Push only the current branch to the one that git pull will pull from
