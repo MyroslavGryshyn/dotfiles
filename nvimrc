@@ -450,7 +450,7 @@ endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " FUGITIVE SETTINGS
-nnoremap <silent> ,ss :Gstatus<CR>
+nnoremap ,ss :Gstatus<CR>
 nnoremap ,ge :Gedit<space>
 nnoremap ,gt :Gtabedit<space>
 nnoremap ,gv :Gvsplit<space>
