@@ -53,7 +53,6 @@ Plug 'junegunn/vim-after-object'
 
 " Helpful plugins
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
-Plug 'unblevable/quick-scope'
 Plug 'scrooloose/syntastic', {'on': 'SyntasticCheck'}
 " Set proper indentation settings for the file
 Plug 'myint/indent-finder'
@@ -452,7 +451,10 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " FUGITIVE SETTINGS
 nnoremap <silent> ,ss :Gstatus<CR>
-nnoremap ,ge :Gtabedit<space>
+nnoremap ,ge :Gedit<space>
+nnoremap ,gt :Gtabedit<space>
+nnoremap ,gv :Gvsplit<space>
+nnoremap ,gs :Gsplit<space>
 " END FUGITIVE
 
 " VIM-SESSION SETTINGS
@@ -496,7 +498,7 @@ highlight! link Error ErrorMsg
 " ISORT PLUGIN SETTINGS
 let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
-" END IMPSORT SETTINGS
+" END ISORT SETTINGS
 
 " NEOSNIPPET PLUGIN SETTINGS
 let g:neosnippet#disable_runtime_snippets = {
@@ -510,10 +512,6 @@ if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
 " END NEOSNIPPET
-
-" QUICKSCOPE PLUGIN SETTINGS
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" END QUICKSCOPE SETTINGS
 
 function! ToggleEscapeMapping()
     if b:escape_mapping
