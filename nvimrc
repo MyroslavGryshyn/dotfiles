@@ -268,6 +268,7 @@ nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
+nnoremap <leader>aa :Ag<space>
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
