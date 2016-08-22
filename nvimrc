@@ -200,10 +200,6 @@ cabbrev h tab help
 
 " MAPPINGS
 nnoremap <silent> <space> :nohl<CR>
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
