@@ -267,8 +267,6 @@ nnoremap <silent> <leader>bb :Buffers<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
-nnoremap <silent> <leader>q: :History:<CR>
-nnoremap <silent> <leader>q/ :History/<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
@@ -357,7 +355,7 @@ highlight SyntasticErrorSign ctermbg=18 ctermfg=red
 highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_aggregate_errors = 1
-nnoremap <leader>st :SyntasticToggleMode<CR>
+nnoremap cot :SyntasticToggleMode<CR>
 " END SYNTASTIC SETTINGS
 
 " GITGUTTER SETTINGS
@@ -479,11 +477,6 @@ let g:autoflake_disable_show_diff=1
 let g:autoflake_remove_unused_variables=1
 " END AUTOFLAKE SETTINGS
 
-" LISTTOGGLE PLUGIN SETTINGS
-let g:lt_location_list_toggle_map = '<leader>ll'
-let g:lt_quickfix_list_toggle_map = '<leader>qq'
-" END LISTTOGGLE
-
 " VIM-COMMENTARY SETTINGS
 autocmd FileType nginx setlocal commentstring=#\ %s
 autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
@@ -541,7 +534,7 @@ let g:ctrlsf_selected_line_hl = ''
 " END CTRLSF SETTINGS
 
 " VIM-AFTER-OBJECT PLUGIN SETTINGS
-autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ', '.')
 " END VIM-AFTER-OBJECT SETTINGS
 
 " MAXIMIZER PLUGIN SETTINGS
