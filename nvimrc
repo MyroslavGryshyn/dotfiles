@@ -263,7 +263,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-g> :GFiles?<CR>
-nnoremap <silent> <leader>bb :Buffers<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
