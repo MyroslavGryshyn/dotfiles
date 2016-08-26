@@ -112,7 +112,6 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 alias l='ls -1F --group-directories-first --color=never'
 alias ll='ls -AFlh --color=never'
 alias la='ls -A --color=never'
-alias open='xdg-open'
 
 alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -sel clip -o'
