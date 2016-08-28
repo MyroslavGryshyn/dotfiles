@@ -15,7 +15,7 @@ Plug 'tpope/vim-markdown', {'for': 'md'}
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 
 " Autocomplete engines
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -262,7 +262,9 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " FZF PLUGIN SETTINGS
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-_> :BLines<CR>
-nnoremap <silent> <C-g> :GFiles?<CR>
+nnoremap <silent> <C-g><C-j> :GFiles?<CR>
+nnoremap <silent> <C-g><C-l> :Commits<CR>
+nnoremap <silent> <C-g><C-o> :BCommits<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
@@ -384,10 +386,6 @@ nnoremap <silent> <leader>gg :call jedi#goto()<CR>
 nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " END JEDI SETTINGS
 
-" JAVASCRIPT SYNTAX SETTINGS
-let g:javascript_fold=0
-" END JAVASCRIPT SETTINGS
-
 " PYTHON SYNTAX SETTINGS
 let python_highlight_all = 1
 " END PYTHON SYNTAX SETTINGS
@@ -495,9 +493,9 @@ let g:neosnippet#disable_runtime_snippets = {
             \   '_' : 1,
             \ }
 let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-e>     <Plug>(neosnippet_expand_target)
 if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
