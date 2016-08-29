@@ -53,7 +53,7 @@ Plug 'junegunn/vim-after-object'
 
 " Helpful plugins
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
-Plug 'scrooloose/syntastic', {'on': 'SyntasticCheck'}
+Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
 " Set proper indentation settings for the file
 Plug 'myint/indent-finder'
 Plug 'bogado/file-line'
