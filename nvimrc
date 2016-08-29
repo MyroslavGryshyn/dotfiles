@@ -167,6 +167,9 @@ set pastetoggle=cop
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
 endif
+if filereadable(glob('~/.pyenv/versions/neovim36/bin/python'))
+    let g:python3_host_prog = glob('~/.pyenv/versions/neovim36/bin/python')
+endif
 if filereadable(glob('~/.pyenv/versions/neovim2/bin/python'))
     let g:python_host_prog = glob('~/.pyenv/versions/neovim2/bin/python')
 endif
