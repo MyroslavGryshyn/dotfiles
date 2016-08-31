@@ -231,6 +231,9 @@ nnoremap ZX :qall<CR>
 nnoremap ZV :qall!<CR>
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
+nnoremap <silent> th :tabfirst<CR>
+nnoremap <silent> tl :tablast<CR>
+nnoremap <silent> <c-w>t :tabnew<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling
