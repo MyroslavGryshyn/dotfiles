@@ -14,7 +14,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-markdown', {'for': 'md'}
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
-Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 
 " Autocomplete engines
@@ -66,7 +65,7 @@ Plug 'honza/vim-snippets'
 Plug 'Valloric/ListToggle'
 
 " Highlight enclosing tags
-Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'jinja']}
+Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html']}
 
 Plug 'Shougo/junkfile.vim'
 Plug 'pbrisbin/vim-mkdir'
@@ -183,7 +182,7 @@ autocmd BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
 " Enable omni completion and set filetype indent settings.
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd FileType gitcommit setlocal colorcolumn=51 textwidth=72
-autocmd FileType html,markdown,jinja setlocal shiftwidth=4 tabstop=4
+autocmd FileType html,markdown setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd FileType rst setlocal filetype=text
 autocmd FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
@@ -484,7 +483,6 @@ let g:autoflake_remove_unused_variables=1
 
 " VIM-COMMENTARY SETTINGS
 autocmd FileType nginx setlocal commentstring=#\ %s
-autocmd FileType jinja setlocal commentstring=<!--\ %s\ -->
 " END VIM-COMMENTARY
 
 highlight! link Error ErrorMsg
