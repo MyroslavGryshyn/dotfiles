@@ -58,6 +58,7 @@ Plug 'myint/indent-finder'
 Plug 'bogado/file-line'
 Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
 Plug 'szw/vim-maximizer'
+Plug 'justinmk/vim-sneak'
 
 Plug 'honza/vim-snippets'
 
