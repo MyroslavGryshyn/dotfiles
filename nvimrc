@@ -11,7 +11,6 @@ endfunction
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins
-Plug 'tpope/vim-markdown', {'for': 'md'}
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
@@ -48,14 +47,12 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'kana/vim-textobj-user'
 " very helpful plugin when writing code
 Plug 'sgur/vim-textobj-parameter'
-Plug 'junegunn/vim-after-object'
 
 " Helpful plugins
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
 " Set proper indentation settings for the file
 Plug 'myint/indent-finder'
-Plug 'bogado/file-line'
 Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
 Plug 'szw/vim-maximizer'
 Plug 'justinmk/vim-sneak'
@@ -183,7 +180,7 @@ autocmd BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
 " Enable omni completion and set filetype indent settings.
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd FileType gitcommit setlocal colorcolumn=51 textwidth=72
-autocmd FileType html,markdown setlocal shiftwidth=4 tabstop=4
+autocmd FileType html setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd FileType rst setlocal filetype=text
 autocmd FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
@@ -392,10 +389,6 @@ nnoremap <silent> <leader>gg :call jedi#goto()<CR>
 nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " END JEDI SETTINGS
 
-" PYTHON SYNTAX SETTINGS
-let python_highlight_all = 1
-" END PYTHON SYNTAX SETTINGS
-
 " MATCHPAREN PLUGIN SETTINGS
 hi MatchParen cterm=none ctermbg=19 ctermfg=none
 " END MATCHPAREN
@@ -435,7 +428,6 @@ endfunction
 noremap <leader>af :Autoformat<CR>
 let g:formatters_html = ['htmlbeautify']
 let g:formatters_python = ['autopep8']
-let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 " END AUTOFORMAT
 
 " THE ORIGINAL CARET 0 SWAP
@@ -464,17 +456,10 @@ let g:session_autosave_periodic=5
 let g:session_command_aliases = 1
 " END VIM SESSION
 
-" MARKDOWN PLUGIN SETTINGS
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-" END MARKDOWN
-
 " INDEXED SEARCH SETTGINS
 let g:indexed_search_colors=0
 nnoremap <silent> g/ :ShowSearchIndex<cr>
 " END INDEXED SEARCH
-
-" Abbreviations
-cabbr git Gtabedit!
 
 " AUTOFLAKE SETTINGS
 let g:autoflake_remove_all_unused_imports=1
@@ -527,7 +512,6 @@ autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 " CTRLSF SETTINGS
 nmap <leader>ff <Plug>CtrlSFPrompt
 vmap <leader>fw <Plug>CtrlSFVwordPath
-nmap <leader>fw <Plug>CtrlSFCwordPath
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
@@ -536,10 +520,6 @@ let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_context = '-C 1'
 let g:ctrlsf_selected_line_hl = ''
 " END CTRLSF SETTINGS
-
-" VIM-AFTER-OBJECT PLUGIN SETTINGS
-autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ', '.')
-" END VIM-AFTER-OBJECT SETTINGS
 
 " MAXIMIZER PLUGIN SETTINGS
 let g:maximizer_set_default_mapping = 0
