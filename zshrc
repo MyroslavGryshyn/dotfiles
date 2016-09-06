@@ -130,7 +130,7 @@ alias vim="nvim"
 alias pty="prettyjson"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
+BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-eighties.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -170,7 +170,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
+BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-eighties.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # add ~/bin directory to my path

@@ -37,6 +37,7 @@ Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
+Plug 'tweekmonster/django-plus.vim'
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -483,9 +484,11 @@ let g:neosnippet#disable_runtime_snippets = {
             \   '_' : 1,
             \ }
 let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
-imap <C-e>     <Plug>(neosnippet_expand_or_jump)
-smap <C-e>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-e>     <Plug>(neosnippet_expand_target)
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
 if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
