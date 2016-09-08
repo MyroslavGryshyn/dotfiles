@@ -37,7 +37,6 @@ Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
-Plug 'tweekmonster/django-plus.vim'
 
 " Enhance vim searching
 Plug 'thinca/vim-visualstar'
@@ -468,11 +467,7 @@ let g:autoflake_disable_show_diff=1
 let g:autoflake_remove_unused_variables=1
 " END AUTOFLAKE SETTINGS
 
-" VIM-COMMENTARY SETTINGS
-autocmd FileType nginx setlocal commentstring=#\ %s
-" END VIM-COMMENTARY
-
-highlight! link Error ErrorMsg
+au FileType qf setlocal nonumber colorcolumn=
 
 " ISORT PLUGIN SETTINGS
 let g:vim_isort_map = '<leader>is'
@@ -484,10 +479,9 @@ let g:neosnippet#disable_runtime_snippets = {
             \   '_' : 1,
             \ }
 let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-e>     <Plug>(neosnippet_expand_target)
 
 if has('conceal')
     set conceallevel=2 concealcursor=niv
