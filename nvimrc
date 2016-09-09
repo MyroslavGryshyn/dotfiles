@@ -1,175 +1,181 @@
 filetype off
 
-if empty(glob("~/.config/nvim/autoload/plug.vim"))
-    !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
+" Autoinstall vim-plug {{{
+    if empty(glob("~/.config/nvim/autoload/plug.vim"))
+        !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    endif
+" }}}
 
 call plug#begin('~/.config/nvim/plugged')
+" Syntax plugins {{{
+    Plug 'cespare/vim-toml', {'for': 'toml'}
+    Plug 'avakhov/vim-yaml', {'for': 'yaml'}
+    Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+" }}}
 
-" Syntax plugins
-Plug 'cespare/vim-toml', {'for': 'toml'}
-Plug 'avakhov/vim-yaml', {'for': 'yaml'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+" Autocomplete engines {{{
+    function! DoRemote(arg)
+        UpdateRemotePlugins
+    endfunction
 
-" Autocomplete engines
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'Shougo/neopairs.vim'
-Plug 'Shougo/neosnippet.vim'
+    Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+    Plug 'zchee/deoplete-jedi', {'for': 'python'}
+    Plug 'Shougo/neopairs.vim'
+    Plug 'Shougo/neosnippet.vim'
+" }}}
 
-" Integration with git
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+" Integration with git {{{
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
+" }}}
 
-" Running tests from vim
-Plug 'janko-m/vim-test', {'for': 'python'}
+" Running tests from vim {{{
+    Plug 'janko-m/vim-test', {'for': 'python'}
+" }}}
 
-" Python plugins
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-Plug 'tell-k/vim-autoflake', {'for': 'python'}
-Plug 'bps/vim-textobj-python', {'for': 'python'}
-Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
-Plug 'yevhen-m/python-syntax', {'for': 'python'}
-Plug 'fisadev/vim-isort', {'for': 'python'}
+" Python plugins {{{
+    Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+    Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
+    Plug 'tell-k/vim-autoflake', {'for': 'python'}
+    Plug 'bps/vim-textobj-python', {'for': 'python'}
+    Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
+    Plug 'yevhen-m/python-syntax', {'for': 'python'}
+    Plug 'fisadev/vim-isort', {'for': 'python'}
+" }}}
 
-" Enhance vim searching
-Plug 'thinca/vim-visualstar'
-Plug 'henrik/vim-indexed-search'
-Plug 'dyng/ctrlsf.vim'
+" Enhance vim searching {{{
+    Plug 'thinca/vim-visualstar'
+    Plug 'henrik/vim-indexed-search'
+    Plug 'dyng/ctrlsf.vim'
+" }}}
 
-" Text objects
-Plug 'kana/vim-textobj-user'
-" very helpful plugin when writing code
-Plug 'sgur/vim-textobj-parameter'
+" Text objects {{{
+    Plug 'kana/vim-textobj-user'
+    " very helpful plugin when writing code
+    Plug 'sgur/vim-textobj-parameter'
+" }}}
 
-" Helpful plugins
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
-Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
-" Set proper indentation settings for the file
-Plug 'myint/indent-finder'
-Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
-Plug 'szw/vim-maximizer'
-Plug 'justinmk/vim-sneak'
+" Helpful plugins {{{
+    Plug 'Valloric/vim-operator-highlight'
+    Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
+    Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
+    Plug 'neomake/neomake'
+    " Set proper indentation settings for the file
+    Plug 'myint/indent-finder'
+    Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
+    Plug 'szw/vim-maximizer'
+    Plug 'justinmk/vim-sneak'
+    Plug 'honza/vim-snippets'
+    " Toggle quick and location lists
+    Plug 'Valloric/ListToggle'
+    " Highlight enclosing tags
+    Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html']}
+    Plug 'Shougo/junkfile.vim'
+    Plug 'pbrisbin/vim-mkdir'
+    " Autoclose parens, quotes, etc.
+    Plug 'Raimondi/delimitMate'
+    " Fix focus events in tmux
+    Plug 'tmux-plugins/vim-tmux-focus-events'
+    " Some usefull keypairs
+    Plug 'tpope/vim-unimpaired'
+    Plug 'Chiel92/vim-autoformat'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
+    " Sugar for unix shell commands
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-dispatch'
+    " Vim sessions enhancement
+    Plug 'xolox/vim-misc'
+    Plug 'xolox/vim-session'
+    " Pretty looking vim
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'chriskempson/base16-vim'
+    Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
+" }}}
 
-Plug 'honza/vim-snippets'
-
-" Toggle quick and location lists
-Plug 'Valloric/ListToggle'
-
-" Highlight enclosing tags
-Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html']}
-
-Plug 'Shougo/junkfile.vim'
-Plug 'pbrisbin/vim-mkdir'
-
-" Autoclose parens, quotes, etc.
-Plug 'Raimondi/delimitMate'
-
-" Fix focus events in tmux
-Plug 'tmux-plugins/vim-tmux-focus-events'
-
-" Some usefull keypairs
-Plug 'tpope/vim-unimpaired'
-
-Plug 'Chiel92/vim-autoformat'
-
-Plug 'ludovicchabant/vim-gutentags'
-
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-
-" Sugar for unix shell commands
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dispatch'
-
-" Vim sessions enhancement
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-
-" Pretty looking vim
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
-Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
-
-" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
+" FZF {{{
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+" }}}
 call plug#end()
 
-let mapleader=","
+" Main settings {{{
+    let mapleader=","
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-eighties
+    let base16colorspace=256  " Access colors present in 256 colorspace
+    colorscheme base16-eighties
 
-filetype plugin indent on
-syntax on
-set synmaxcol=250
+    filetype plugin indent on
+    syntax on
+    set synmaxcol=250
 
-set autoread  " for vim-tmux-focus-events plugin
-" Enable complete filename after =
-set isfname-==
-set wrap
-let &showbreak = '+++ '
-set background=dark
-set backspace=2
-set complete-=t  "dont't include words from tag file
-set completeopt-=preview
-set cursorline
-set gdefault
-set hidden
-set history=1000
-set ignorecase
-set list
-set listchars=tab:▸▸,trail:·
-set nofoldenable
-set splitbelow
-set splitright
-set updatetime=400  " try to change this value for gitgutter
-" This order matters!
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
+    set autoread  " for vim-tmux-focus-events plugin
+    " Enable complete filename after =
+    set isfname-==
+    set wrap
+    let &showbreak = '+++ '
+    set background=dark
+    set backspace=2
+    set complete-=t  "dont't include words from tag file
+    set completeopt-=preview
+    set cursorline
+    set gdefault
+    set hidden
+    set history=1000
+    set ignorecase
+    set list
+    set listchars=tab:▸▸,trail:·
+    set nofoldenable
+    set splitbelow
+    set splitright
+    set updatetime=400  " try to change this value for gitgutter
+    " This order matters!
+    set keymap=russian-jcukenwin
+    set iminsert=0
+    set imsearch=0
 
-set noshowmode
-set showcmd
-set expandtab  " <tab> inserts spaces
-set infercase
-set noacd
-set nobackup
-set showmatch
-set noswapfile
-set nrformats=  "treat all numbers as decimal, not octal"
-set number
-set omnifunc=syntaxcomplete#Complete
-set path+=**
-set scrolloff=5
-set shell=/bin/zsh
-set shiftwidth=4 " columns per <<
-set softtabstop=4  " spaces per tab
-set tabstop=4  " columns per tabstop
-set timeoutlen=1000 ttimeoutlen=0
-set undofile  " keep undo history for all file changes
-set wildignore+=*.pyc,*/.git/*,*/__pycache__/*
-set pastetoggle=cop
+    set noshowmode
+    set showcmd
+    set expandtab  " <tab> inserts spaces
+    set infercase
+    set noacd
+    set nobackup
+    set showmatch
+    set noswapfile
+    set nrformats=  "treat all numbers as decimal, not octal"
+    set number
+    set omnifunc=syntaxcomplete#Complete
+    set path+=**
+    set scrolloff=5
+    set shell=/bin/zsh
+    set shiftwidth=4 " columns per <<
+    set softtabstop=4  " spaces per tab
+    set tabstop=4  " columns per tabstop
+    set timeoutlen=1000 ttimeoutlen=0
+    set undofile  " keep undo history for all file changes
+    set wildignore+=*.pyc,*/.git/*,*/__pycache__/*
+    set pastetoggle=cop
+" }}}
 
-if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
-    let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
-endif
-if filereadable(glob('~/.pyenv/versions/neovim36/bin/python'))
-    let g:python3_host_prog = glob('~/.pyenv/versions/neovim36/bin/python')
-endif
-if filereadable(glob('~/.pyenv/versions/neovim2/bin/python'))
-    let g:python_host_prog = glob('~/.pyenv/versions/neovim2/bin/python')
-endif
+" Vim-plug settings {{{
+    let g:plug_window = 'enew'
+" }}}
+
+" Python {{{
+    if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
+        let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
+    endif
+    if filereadable(glob('~/.pyenv/versions/neovim36/bin/python'))
+        let g:python3_host_prog = glob('~/.pyenv/versions/neovim36/bin/python')
+    endif
+    if filereadable(glob('~/.pyenv/versions/neovim2/bin/python'))
+        let g:python_host_prog = glob('~/.pyenv/versions/neovim2/bin/python')
+    endif
+" }}}
 
 " Open the file on the last exit place
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -248,6 +254,8 @@ nnoremap $ g$
 nnoremap <c-w>; <c-w>p
 nnoremap <c-w><c-q> <c-w>c
 nnoremap <c-w>q <c-w>c
+
+nnoremap <leader>R :%s/
 " END MAPPINGS
 
 " DELIMITMATE SETTINGS
@@ -297,88 +305,104 @@ let g:fzf_colors =
             \ 'header':  ['fg', 'Comment'] }
 " FZF END
 
-" AIRLINE SETTINGS
-let g:airline#extensions#whitespace#checks = []
-let g:airline#extensions#branch#displayed_head_limit = 13
-let g:airline_section_warning = ''
-let g:airline_section_error = ''
-let g:airline#extensions#branch#format = 2
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#syntastic#enabled = 0
-let g:airline_detect_iminsert=1
-let g:airline#extensions#tmuxline#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_splits = 1
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
-" END AIRLINE SETTINGS
+" Airline settings {{{
+    let g:airline#extensions#whitespace#checks = []
+    let g:airline#extensions#branch#displayed_head_limit = 13
+    let g:airline_section_warning = ''
+    let g:airline_section_error = ''
+    let g:airline#extensions#branch#format = 2
+    let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#tabline#show_close_button = 0
+    let g:airline#extensions#tabline#buffer_nr_show = 0
+    let g:airline_skip_empty_sections = 1
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline#extensions#syntastic#enabled = 0
+    let g:airline_detect_iminsert=1
+    let g:airline#extensions#tmuxline#enabled = 0
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_tabs = 1
+    let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#show_tab_nr = 0
+    let g:airline#extensions#tabline#show_splits = 1
+    let g:airline#extensions#wordcount#enabled = 0
+    let g:airline_powerline_fonts = 1
+    let g:airline_theme='bubblegum'
+" }}}
 
-" NERDTREE SETTINGS
-nnoremap <silent> <Leader>nn :NERDTreeFind<CR>
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
-let g:NERDTreeShowHidden=1
-let g:NERDTreeHijackNetrw = 1
-let g:NERDTreeQuitOnOpen = 0
-let NERDTreeIgnore=['\.pyc$', '__pycache__']
-" automatically remove buffer after a file was deleted with context menu
-let NERDTreeAutoDeleteBuffer = 1
-" END NERDTREE SETTINGS
+" Nerdtree settings {{{
+    nnoremap <silent> <Leader>nn :NERDTreeFind<CR>
+    nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
+    let g:NERDTreeShowHidden=1
+    let g:NERDTreeHijackNetrw = 1
+    let g:NERDTreeQuitOnOpen = 0
+    let NERDTreeIgnore=['\.pyc$', '__pycache__']
+    " automatically remove buffer after a file was deleted with context menu
+    let NERDTreeAutoDeleteBuffer = 1
+" }}}
 
-" UNDOTREE SETTINGS
-let g:undotree_SetFocusWhenToggle = 1
-" END UNDOTREE SETTINGS
+" Undotree settings {{{
+    let g:undotree_SetFocusWhenToggle = 1
+" }}}
 
-" SYNTASTIC SETTINGS
-" ignore line length, whitespace around operators and bad indentation
-let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E231,F403,F405,E126'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_error_symbol='●'
-let g:syntastic_warning_symbol='●'
-let g:syntastic_style_error_symbol='●'
-let g:syntastic_style_warning_symbol='●'
-" close loclist when there are no errors
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_auto_jump = 0
-let g:syntastic_enable_highlighting = 0
-let g:syntastic_loc_list_height = 5
-" don't check on open, because it is lagging with big files
-let g:syntastic_check_on_open=0
-" don't use active mode, because it's laggin with big files
-" you can always turn it on for the specified file
-let g:syntastic_mode_map = {
-            \ "mode": "passive",
-            \ "active_filetypes": [],
-            \ "passive_filetypes": [] }
-highlight SyntasticErrorSign ctermbg=18 ctermfg=red
-highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_aggregate_errors = 1
-nnoremap cot :SyntasticToggleMode<CR>
-" END SYNTASTIC SETTINGS
+" Syntastic settings {{{
+    " ignore line length, whitespace around operators and bad indentation
+    let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E231,F403,F405,E126'
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_error_symbol='●'
+    let g:syntastic_warning_symbol='●'
+    let g:syntastic_style_error_symbol='●'
+    let g:syntastic_style_warning_symbol='●'
+    " close loclist when there are no errors
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_auto_jump = 0
+    let g:syntastic_enable_highlighting = 0
+    let g:syntastic_loc_list_height = 5
+    " don't check on open, because it is lagging with big files
+    let g:syntastic_check_on_open=0
+    " don't use active mode, because it's laggin with big files
+    " you can always turn it on for the specified file
+    let g:syntastic_mode_map = {
+                \ "mode": "passive",
+                \ "active_filetypes": [],
+                \ "passive_filetypes": [] }
+    highlight SyntasticErrorSign ctermbg=18 ctermfg=red
+    highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
+    let g:syntastic_python_checkers=['flake8']
+    let g:syntastic_aggregate_errors = 1
+    nnoremap cot :SyntasticToggleMode<CR>
+" }}}
 
-" GITGUTTER SETTINGS
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_diff_args = '-w'
-let g:gitgutter_map_keys = 0
-nmap [c <Plug>GitGutterPrevHunk
-nmap ]c <Plug>GitGutterNextHunk
-" You should work with changes
-nmap <Leader>cs <Plug>GitGutterStageHunk
-nmap <Leader>cu <Plug>GitGutterUndoHunk
-nmap <leader>cp <Plug>GitGutterPreviewHunk
-omap ic <Plug>GitGutterTextObjectInnerPending
-omap ac <Plug>GitGutterTextObjectOuterPending
-xmap ic <Plug>GitGutterTextObjectInnerVisual
-xmap ac <Plug>GitGutterTextObjectOuterVisual
-" END GITGUTTER SETTINGS
+" Neomake settings {{{
+    let g:neomake_python_enabled_makers = ['flake8']
+    " E501 -- line too long
+    " E402 -- import not at top of file
+    " E128 -- continuation line underindented
+    " E225 -- missing whitespace around operator
+    " E231 -- missing whitespace after ','
+    " F403 -- import * used, unable to detect undefined names
+    " F405 -- name may be undefined, or defined from * imports
+    " E126 -- indentation error
+    let g:neomake_python_flake8_maker = { 'args': ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126'], }
+    let g:neomake_verbose = 0
+    autocmd! BufWritePost,BufEnter * Neomake
+" }}}
+
+" Gitgutter settings {{{
+    autocmd! BufWritePost,BufEnter * GitGutter
+    let g:gitgutter_sign_column_always = 1
+    let g:gitgutter_diff_args = '-w'
+    let g:gitgutter_map_keys = 0
+    nmap [c <Plug>GitGutterPrevHunk
+    nmap ]c <Plug>GitGutterNextHunk
+    " You should work with changes
+    nmap <Leader>cs <Plug>GitGutterStageHunk
+    nmap <Leader>cu <Plug>GitGutterUndoHunk
+    nmap <leader>cp <Plug>GitGutterPreviewHunk
+    omap ic <Plug>GitGutterTextObjectInnerPending
+    omap ac <Plug>GitGutterTextObjectOuterPending
+    xmap ic <Plug>GitGutterTextObjectInnerVisual
+    xmap ac <Plug>GitGutterTextObjectOuterVisual
+" }}}
 
 " JEDI SETTINGS
 let g:jedi#completions_enabled = 0
