@@ -181,7 +181,7 @@ endif
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " autodetect python filetype
-autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
+autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80 omnifunc=jedi#completions
 
 autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd! FileType gitcommit setlocal colorcolumn=51 textwidth=72
@@ -406,12 +406,18 @@ xmap ac <Plug>GitGutterTextObjectOuterVisual
 " }}}
 
 " Jedi settings {{{
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_initialization = 0
+" Set omnifunc to jedi, create mappings and show signatures
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 1
+let g:jedi#completions_command = "<C-K>"
+let g:jedi#goto_command = "<leader>gg"
+let g:jedi#goto_assignment_command = ""
+let g:jedi#goto_definitions_command = ""
+let g:jedi#rename_command = ""
+let g:jedi#usages_command = ""
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
-nnoremap <silent> <leader>gg :call jedi#goto()<CR>
-nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
+let g:jedi#show_call_signatures = 0
 " }}}
 
 " Matchparen plugin settings {{{
@@ -432,7 +438,6 @@ nnoremap <leader>tv :TestVisit<CR>
 " Deoplete settings {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#sources#jedi#enable_cache = 1
 let deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
 " Silence messages
