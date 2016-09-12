@@ -181,7 +181,7 @@ endif
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " autodetect python filetype
-autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80 omnifunc=jedi#completions
+autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
 
 autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd! FileType gitcommit setlocal colorcolumn=51 textwidth=72
@@ -403,6 +403,11 @@ omap ic <Plug>GitGutterTextObjectInnerPending
 omap ac <Plug>GitGutterTextObjectOuterPending
 xmap ic <Plug>GitGutterTextObjectInnerVisual
 xmap ac <Plug>GitGutterTextObjectOuterVisual
+
+highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
+highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
+highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
+highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
 " Jedi settings {{{
