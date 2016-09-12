@@ -56,7 +56,7 @@ Plug 'sgur/vim-textobj-parameter'
 " }}}
 
 " Helpful plugins {{{
-Plug 'Valloric/vim-operator-highlight'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
 Plug 'neomake/neomake'
@@ -557,4 +557,12 @@ let g:ctrlsf_selected_line_hl = ''
 " Maximizer plugin settings {{{
 let g:maximizer_set_default_mapping = 0
 nnoremap <silent> com :MaximizerToggle<CR>
+" }}}
+
+" Rainbow parentheses settings {{{
+" Activation based on file type
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType python,javascript RainbowParentheses
+augroup END
 " }}}
