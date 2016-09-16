@@ -45,7 +45,6 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 
 " Enhance vim searching {{{
 Plug 'thinca/vim-visualstar'
-Plug 'henrik/vim-indexed-search'
 Plug 'dyng/ctrlsf.vim'
 " }}}
 
@@ -131,7 +130,7 @@ set listchars=tab:▸▸,trail:·
 set nofoldenable
 set splitbelow
 set splitright
-set updatetime=400  " try to change this value for gitgutter
+set updatetime=4000  " try to change this value for gitgutter
 " This order matters!
 set keymap=russian-jcukenwin
 set iminsert=0
@@ -284,7 +283,7 @@ nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>tt :BTags<CR>
 nnoremap <leader>aa :Ag<space>
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': 'new' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
@@ -458,7 +457,7 @@ endfunction
 " }}}
 
 " Autoformat settings {{{
-noremap <leader>af :Autoformat<CR>
+noremap <F3> :Autoformat<CR>
 let g:formatters_html = ['htmlbeautify']
 let g:formatters_python = ['autopep8']
 " }}}
@@ -488,11 +487,6 @@ let g:session_default_name='default'
 let g:session_autosave='yes'
 let g:session_autosave_periodic=5
 let g:session_command_aliases = 1
-" }}}
-
-" Indexed search settgins {{{
-let g:indexed_search_colors=0
-nnoremap <silent> g/ :ShowSearchIndex<cr>
 " }}}
 
 " Autoflake settings {{{
@@ -550,7 +544,7 @@ let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '40%'
 let g:ctrlsf_populate_qflist = 1
-let g:ctrlsf_context = '-C 1'
+let g:ctrlsf_context = '-C 3'
 let g:ctrlsf_selected_line_hl = ''
 " }}}
 
@@ -565,4 +559,18 @@ augroup rainbow_lisp
   autocmd!
   autocmd FileType python,javascript RainbowParentheses
 augroup END
+" }}}
+
+" Highlight next search match {{{
+nnoremap <silent> n n:call HLNext(0.1)<cr>
+nnoremap <silent> N N:call HLNext(0.1)<cr>
+
+function! HLNext (blinktime)
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('ErrorMsg', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
 " }}}
