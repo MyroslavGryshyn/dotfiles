@@ -120,7 +120,7 @@ set background=dark
 set backspace=2
 set complete-=t  "dont't include words from tag file
 set completeopt-=preview
-set cursorline
+" set cursorline
 set gdefault
 set hidden
 set history=1000
@@ -419,7 +419,7 @@ let g:jedi#goto_assignment_command = ""
 let g:jedi#goto_definitions_command = ""
 let g:jedi#rename_command = ""
 let g:jedi#usages_command = ""
-let g:jedi#smart_auto_mappings = 0
+let g:jedi#smart_auto_mappings = 1
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#show_call_signatures = 0
 " }}}
