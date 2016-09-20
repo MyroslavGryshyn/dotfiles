@@ -36,8 +36,6 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " Python plugins {{{
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-Plug 'tell-k/vim-autoflake', {'for': 'python'}
-Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
@@ -212,6 +210,8 @@ nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
 nnoremap Y y$
+cnoremap BD bd!
+
 " Yank to system clipboard
 nnoremap gy "+y
 vnoremap gy "+y
@@ -308,6 +308,8 @@ let g:fzf_colors =
 
 " Airline settings {{{
 let g:airline#extensions#whitespace#checks = []
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#branch#displayed_head_limit = 13
 let g:airline_section_warning = ''
 let g:airline_section_error = ''
@@ -317,7 +319,7 @@ let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#syntastic#enabled = 0
+" let g:airline#extensions#syntastic#enabled = 0
 let g:airline_detect_iminsert=1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
@@ -331,9 +333,10 @@ let g:airline_theme='bubblegum'
 " }}}
 
 " Nerdtree settings {{{
-nnoremap <silent> <Leader>nn :NERDTreeFind<CR>
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>nn :NERDTreeFind<CR><C-w>=
+nnoremap <silent> <leader>nt :NERDTreeToggle<CR><C-w>=
 let g:NERDTreeShowHidden=1
+let g:NERDTreeHighlightCursorline = 0
 let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeQuitOnOpen = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
@@ -489,17 +492,13 @@ let g:session_autosave_periodic=5
 let g:session_command_aliases = 1
 " }}}
 
-" Autoflake settings {{{
-let g:autoflake_remove_all_unused_imports=1
-let g:autoflake_disable_show_diff=1
-let g:autoflake_remove_unused_variables=1
+" Remove colorcolumns in quickfix and location list windows {{{
+au FileType qf setlocal colorcolumn=
 " }}}
 
-au FileType qf setlocal nonumber colorcolumn=
-
 " Isort plugin settings {{{
-let g:vim_isort_map = '<leader>is'
-nnoremap <leader>is :Isort<CR>
+let g:vim_isort_map = '<F9>'
+nnoremap <F9> :Isort<CR>
 " }}}
 
 " Neosnippet plugin settings {{{
@@ -507,9 +506,9 @@ let g:neosnippet#disable_runtime_snippets = {
             \   '_' : 1,
             \ }
 let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
-imap <C-e>     <Plug>(neosnippet_expand_or_jump)
-smap <C-e>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-e>     <Plug>(neosnippet_expand_target)
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-e>     <Plug>(neosnippet_expand_target)
 
 if has('conceal')
     set conceallevel=2 concealcursor=niv
