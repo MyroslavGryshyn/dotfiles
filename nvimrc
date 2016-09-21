@@ -246,11 +246,20 @@ vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
 vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
-nnoremap <silent> k gk:nohl<CR>
-nnoremap <silent> j gj:nohl<CR>
-nnoremap 0 g0
-nnoremap ^ g^
-nnoremap $ g$
+    nnoremap <silent> k gk:nohl<CR>
+    nnoremap gk k
+
+    nnoremap <silent> j gj:nohl<CR>
+    nnoremap gj j
+
+    nnoremap 0 g0
+    nnoremap g0 0
+
+    nnoremap ^ g^
+    nnoremap g^ ^
+
+    nnoremap $ g$
+    nnoremap g$ $
 
 nnoremap <c-w>; <c-w>p
 nnoremap <c-w><c-q> <c-w>c
@@ -416,7 +425,7 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " Set omnifunc to jedi, create mappings and show signatures
 let g:jedi#auto_initialization = 1
 let g:jedi#completions_enabled = 1
-let g:jedi#completions_command = "<C-K>"
+let g:jedi#completions_command = "<C-E>"
 let g:jedi#goto_command = "<leader>gg"
 let g:jedi#goto_assignment_command = ""
 let g:jedi#goto_definitions_command = ""
@@ -508,7 +517,7 @@ let g:neosnippet#disable_runtime_snippets = {
 let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-e>     <Plug>(neosnippet_expand_target)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 if has('conceal')
     set conceallevel=2 concealcursor=niv
