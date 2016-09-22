@@ -177,8 +177,9 @@ endif
 " Open the file on the last exit place
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-" autodetect python filetype
+" Python autocommands {{{
 autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
+" }}}
 
 autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd! FileType gitcommit setlocal colorcolumn=51 textwidth=72
@@ -328,6 +329,7 @@ let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#disable_rtp_load = 0
 " let g:airline#extensions#syntastic#enabled = 0
 let g:airline_detect_iminsert=1
 let g:airline#extensions#tmuxline#enabled = 0
@@ -404,8 +406,8 @@ autocmd! BufWritePost,BufEnter * Neomake
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_map_keys = 0
-nmap [c <Plug>GitGutterPrevHunk
-nmap ]c <Plug>GitGutterNextHunk
+nmap <silent> [c :GitGutterPrevHunk<CR>zz
+nmap <silent> ]c :GitGutterNextHunk<CR>zz
 " You should work with changes
 nmap <Leader>cs <Plug>GitGutterStageHunk
 nmap <Leader>cu <Plug>GitGutterUndoHunk
