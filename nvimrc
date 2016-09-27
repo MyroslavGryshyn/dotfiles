@@ -427,8 +427,8 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " Set omnifunc to jedi, create mappings and show signatures
 let g:jedi#auto_initialization = 1
 let g:jedi#completions_enabled = 1
-let g:jedi#completions_command = "<C-E>"
 let g:jedi#goto_command = "<leader>gg"
+let g:jedi#completions_command = ""
 let g:jedi#goto_assignment_command = ""
 let g:jedi#goto_definitions_command = ""
 let g:jedi#rename_command = ""
@@ -548,6 +548,7 @@ autocmd! BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 
 " Ctrlsf settings {{{
 nmap <leader>ff <Plug>CtrlSFPrompt
+nmap <leader>fw <Plug>CtrlSFCwordExec
 vmap <leader>fw <Plug>CtrlSFVwordPath
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
@@ -583,4 +584,8 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
+" }}}
+
+" Junkfile mapping {{{
+nnoremap <leader>N :JunkfileOpen<space>
 " }}}
