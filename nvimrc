@@ -400,6 +400,10 @@ let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_python_flake8_maker = { 'args': ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126'], }
 let g:neomake_verbose = 0
 autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text': '●', 'texthl': 'NeomakeMessageSign'}
+let g:neomake_error_sign = {'text': '●', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_info_sign = {'text': '●', 'texthl': 'NeomakeInfoSign'}
 " }}}
 
 " Gitgutter settings {{{
