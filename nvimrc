@@ -179,6 +179,7 @@ autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 
 " Python autocommands {{{
 autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
+autocmd! BufRead,BufNewFile *.html set filetype=html
 " }}}
 
 autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
@@ -283,6 +284,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " FZF settings {{{
 nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <leader>m :Marks<CR>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-g><C-j> :GFiles?<CR>
 nnoremap <silent> <C-g><C-l> :Commits<CR>
