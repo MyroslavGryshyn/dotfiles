@@ -39,6 +39,7 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
+Plug 'nathanaelkane/vim-indent-guides', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -514,8 +515,8 @@ au FileType qf setlocal colorcolumn=
 " }}}
 
 " Isort plugin settings {{{
-let g:vim_isort_map = '<F9>'
-nnoremap <F9> :Isort<CR>
+let g:vim_isort_map = '<leader>si'
+nnoremap <leader>si :Isort<CR>
 " }}}
 
 " Neosnippet plugin settings {{{
@@ -594,4 +595,10 @@ endfunction
 
 " Junkfile mapping {{{
 nnoremap <leader>N :JunkfileOpen<space>
+" }}}
+
+" Indent-guides settings {{{
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=18
+let g:indent_guides_guide_size = 1
 " }}}
