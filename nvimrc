@@ -34,6 +34,7 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
+Plug 'voithos/vim-python-matchit', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
@@ -117,7 +118,6 @@ set wrap
 let &showbreak = '+++ '
 set background=dark
 set backspace=2
-set complete-=t  "dont't include words from tag file
 set completeopt-=preview
 " set cursorline
 set gdefault
@@ -249,10 +249,10 @@ vnoremap <C-j> 3<C-E>3j
 nnoremap <C-k> 3<C-Y>3k
 vnoremap <C-k> 3<C-Y>3k
 " Operate on display lines, not real lines
-    nnoremap <silent> k gk:nohl<CR>
+    nnoremap k gk
     nnoremap gk k
 
-    nnoremap <silent> j gj:nohl<CR>
+    nnoremap j gj
     nnoremap gj j
 
     nnoremap 0 g0
@@ -463,7 +463,7 @@ nnoremap <leader>tv :TestVisit<CR>
 " Deoplete settings {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let deoplete#tag#cache_limit_size = 50000000
+let deoplete#tag#cache_limit_size = 500000000
 let g:neoinclude#ctags_commands = 'tags'
 " Silence messages
 set shortmess+=c
@@ -478,7 +478,7 @@ endfunction
 " }}}
 
 " Autoformat settings {{{
-noremap <F3> :Autoformat<CR>
+noremap <leader>sf :Autoformat<CR>
 let g:formatters_html = ['htmlbeautify']
 let g:formatters_python = ['autopep8']
 " }}}
@@ -598,7 +598,33 @@ nnoremap <leader>N :JunkfileOpen<space>
 " }}}
 
 " Indent-guides settings {{{
-hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesOdd  ctermbg=18
 hi IndentGuidesEven ctermbg=18
+nnoremap cog :IndentGuidesToggle<CR>
 let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+" }}}
+
+" Highlight all instances of word under cursor, when idle {{{
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap coz :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    au! auto_highlight
+    augroup! auto_highlight
+    setl updatetime=4000
+    echo 'Highlight current word: OFF'
+    return 0
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
 " }}}
