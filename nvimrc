@@ -214,6 +214,7 @@ inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
 nnoremap Y y$
 cnoremap BD bd!
+nnoremap ,BD :bd!<CR>
 
 " Yank to system clipboard
 nnoremap gy "+y
@@ -294,7 +295,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>cc :Commands<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
-nnoremap <silent> <leader>tt :BTags<CR>
+nnoremap <silent> <leader>t :BTags<CR>
 nnoremap <leader>aa :Ag<space>
 let g:fzf_layout = { 'window': 'new' }
 let g:fzf_history_dir = '~/.fzf-history'
@@ -453,11 +454,11 @@ hi MatchParen cterm=none ctermbg=19 ctermfg=none
 let test#python#runner = 'nose'
 let test#strategy = "dispatch"
 
-nnoremap <leader>tn :TestNearest<CR>
-nnoremap <leader>tf :TestFile<CR>
-nnoremap <leader>ts :TestSuite<CR>
-nnoremap <leader>tl :TestLast<CR>
-nnoremap <leader>tv :TestVisit<CR>
+" nnoremap <leader>tn :TestNearest<CR>
+" nnoremap <leader>tf :TestFile<CR>
+" nnoremap <leader>ts :TestSuite<CR>
+" nnoremap <leader>tl :TestLast<CR>
+" nnoremap <leader>tv :TestVisit<CR>
 " }}}
 
 " Deoplete settings {{{
@@ -608,7 +609,7 @@ let g:indent_guides_start_level = 2
 " Highlight all instances of word under cursor, when idle {{{
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
-nnoremap coz :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 function! AutoHighlightToggle()
   let @/ = ''
   if exists('#auto_highlight')
@@ -627,4 +628,8 @@ function! AutoHighlightToggle()
     return 1
   endif
 endfunction
+" }}}
+
+" Clear ipdb breakpoints {{{
+command! ClearPdb g/pdb/d
 " }}}
