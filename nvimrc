@@ -54,7 +54,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'sgur/vim-textobj-parameter'
 " }}}
 
-" Helpful plugins {{{
+" Helpful plugins {{
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
@@ -85,15 +85,14 @@ Plug 'tpope/vim-surround'
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
-" Vim sessions enhancement
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
+" Session management
+Plug 'tpope/vim-obsession'
 " Pretty looking vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
-" }}}
+" }}
 
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -501,14 +500,6 @@ nnoremap ,ge :Gedit<space>
 nnoremap ,gt :Gtabedit<space>
 nnoremap ,gv :Gvsplit<space>
 nnoremap ,gs :Gsplit<space>
-" }}}
-
-" Vim-session settings {{{
-let g:session_autoload='no'
-let g:session_default_name='default'
-let g:session_autosave='yes'
-let g:session_autosave_periodic=5
-let g:session_command_aliases = 1
 " }}}
 
 " Remove colorcolumns in quickfix and location list windows {{{
