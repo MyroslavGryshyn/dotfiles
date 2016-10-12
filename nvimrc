@@ -41,6 +41,7 @@ Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'nathanaelkane/vim-indent-guides', {'for': 'python'}
+Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -539,10 +540,10 @@ function! ToggleEscapeMapping()
 endfunction
 " reset imsert by default
 inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
-autocmd! BufEnter * let b:escape_mapping = 1
-autocmd! BufEnter * set iminsert=0
-autocmd! BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
-autocmd! BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
+autocmd BufEnter * let b:escape_mapping = 1
+autocmd BufEnter * set iminsert=0
+autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
+autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 " }}}
 
 " Ctrlsf settings {{{
@@ -623,4 +624,10 @@ endfunction
 
 " Clear ipdb breakpoints {{{
 command! ClearPdb g/pdb/d
+" }}}
+
+" SimplyFold settings {{{
+let g:SimpylFold_docstring_preview = 1
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 " }}}
