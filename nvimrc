@@ -127,6 +127,7 @@ let &showbreak = '+++ '
 set background=dark
 set backspace=2
 set completeopt-=preview
+set winheight=20
 " set cursorline
 set gdefault
 set hidden
@@ -293,10 +294,11 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " }}}
 
 " FZF settings {{{
+nnoremap <silent> <C-g><C-j> :GFiles?<CR>
+nnoremap <leader>aa :Ag<space>
 " nnoremap <silent> <C-p> :Files<CR>
 " nnoremap <silent> <leader>m :Marks<CR>
 " nnoremap <silent> <C-_> :BLines<CR>
-" nnoremap <silent> <C-g><C-j> :GFiles?<CR>
 " nnoremap <silent> <C-g><C-l> :Commits<CR>
 " nnoremap <silent> <C-g><C-o> :BCommits<CR>
 " nnoremap <silent> <leader>b :Buffers<CR>
@@ -304,8 +306,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " nnoremap <silent> <leader>rr :History<CR>
 " nnoremap <silent> <leader>T :Tags<CR>
 " nnoremap <silent> <leader>t :BTags<CR>
-" nnoremap <leader>aa :Ag<space>
-let g:fzf_layout = { 'window': 'new' }
+let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
@@ -489,6 +490,7 @@ endfunction
 " Autoformat settings {{{
 noremap <leader>sf :Autoformat<CR>
 let g:formatters_html = ['htmlbeautify']
+let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_python = ['autopep8']
 " }}}
 

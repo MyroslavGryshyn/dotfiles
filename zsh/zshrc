@@ -2,9 +2,8 @@
 bindkey -e
 
 # Load pure prompt
-autoload -U promptinit; promptinit
-prompt pure
-unsetopt PROMPT_CR
+# autoload -U promptinit; promptinit
+# prompt pure
 
 # Load antibody
 source <(antibody init)
@@ -17,9 +16,6 @@ antibody bundle hcgraf/zsh-sudo
 # Update pure prompt with antibody
 antibody bundle mafredri/zsh-async
 antibody bundle sindresorhus/pure
-
-# This plugin MUST be loaded last
-antibody bundle zsh-users/zsh-syntax-highlighting
 
 # Enable smart completions
 source ~/dotfiles/zsh/completions.zsh
@@ -142,3 +138,6 @@ fi
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
+
+# This plugin MUST be loaded last
+antibody bundle zsh-users/zsh-syntax-highlighting
