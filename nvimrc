@@ -95,14 +95,6 @@ Plug 'chriskempson/base16-vim'
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}
 
-" CtrlP plugins {{{
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
-Plug 'mattn/ctrlp-mark'
-Plug 'mattn/ctrlp-register'
-" }}}
-
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -296,16 +288,16 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " FZF settings {{{
 nnoremap <silent> <C-g><C-j> :GFiles?<CR>
 nnoremap <leader>aa :Ag<space>
-" nnoremap <silent> <C-p> :Files<CR>
-" nnoremap <silent> <leader>m :Marks<CR>
-" nnoremap <silent> <C-_> :BLines<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <leader>m :Marks<CR>
+nnoremap <silent> <C-_> :BLines<CR>
 " nnoremap <silent> <C-g><C-l> :Commits<CR>
 " nnoremap <silent> <C-g><C-o> :BCommits<CR>
-" nnoremap <silent> <leader>b :Buffers<CR>
-" nnoremap <silent> <leader>cc :Commands<CR>
-" nnoremap <silent> <leader>rr :History<CR>
-" nnoremap <silent> <leader>T :Tags<CR>
-" nnoremap <silent> <leader>t :BTags<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>cc :Commands<CR>
+nnoremap <silent> <leader>rr :History<CR>
+nnoremap <silent> <leader>T :Tags<CR>
+nnoremap <silent> <leader>t :BTags<CR>
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
@@ -640,38 +632,4 @@ command! ClearPdb g/pdb/d
 let g:SimpylFold_docstring_preview = 1
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" }}}
-
-" Ctrlp settings {{{
-nnoremap <leader>cc :CtrlPCmdPalette<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>T :CtrlPTag<CR>
-nnoremap <leader>t :CtrlPBufTag %<CR>
-nnoremap <leader>rr :CtrlPMRU<CR>
-nnoremap <silent> <C-_> :CtrlPLine %<CR>
-nnoremap <silent> <leader>m :CtrlPMark<CR>
-let g:airline#extensions#ctrlp#show_adjacent_modes = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_reuse_window = 'netrw\|help'
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
-let g:ctrlp_working_path_mode = 'wr'
-let g:ctrlp_open_new_file = 'r'
-" This settings are ignored if ag is used
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = 'env'
-let g:ctrlp_open_multiple_files = '1'
-" Ignore python env if its in the project root
-let g:ctrlp_switch_buffer = 'etvh'
-" Change this if you want to try lazy update
-let g:ctrlp_lazy_update = 0
-" The silver searcher
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    " All ignored items are listen in .agignore file
-    let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
 " }}}
