@@ -19,6 +19,7 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Shougo/neopairs.vim'
 Plug 'Shougo/neosnippet.vim'
 " }}}
@@ -433,18 +434,13 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
 " Jedi settings {{{
-" Set omnifunc to jedi, create mappings and show signatures
-let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 1
-let g:jedi#goto_command = "<leader>gg"
-let g:jedi#completions_command = ""
-let g:jedi#goto_assignment_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#rename_command = ""
-let g:jedi#usages_command = ""
-let g:jedi#smart_auto_mappings = 1
-let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#auto_vim_configuration = 0
+nnoremap <silent> <leader>gg :call jedi#goto()<CR>
+nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " }}}
 
 " Matchparen plugin settings {{{
