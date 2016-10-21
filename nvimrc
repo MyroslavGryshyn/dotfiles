@@ -21,7 +21,6 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Shougo/neopairs.vim'
-Plug 'Shougo/neosnippet.vim'
 " }}}
 
 " Integration with git {{{
@@ -66,6 +65,7 @@ Plug 'myint/indent-finder'
 Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
 Plug 'szw/vim-maximizer'
 Plug 'justinmk/vim-sneak'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
@@ -510,20 +510,6 @@ let g:vim_isort_map = '<leader>si'
 nnoremap <leader>si :Isort<CR>
 " }}}
 
-" Neosnippet plugin settings {{{
-let g:neosnippet#disable_runtime_snippets = {
-            \   '_' : 1,
-            \ }
-let g:neosnippet#snippets_directory=glob('~/.config/nvim/plugged/vim-snippets/snippets')
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-if has('conceal')
-    set conceallevel=2 concealcursor=niv
-endif
-" }}}
-
 " Custom func to change iminsert option {{{
 function! ToggleEscapeMapping()
     if b:escape_mapping
@@ -628,4 +614,10 @@ command! ClearPdb g/pdb/d
 let g:SimpylFold_docstring_preview = 1
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" }}}
+
+" Ultisnips settings {{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " }}}

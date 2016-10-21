@@ -11,6 +11,7 @@ source <(antibody init)
 # Plugins
 antibody bundle djui/alias-tips
 antibody bundle zsh-users/zsh-autosuggestions
+antibody bundle srijanshetty/zsh-pip-completion
 antibody bundle zsh-users/zsh-completions
 antibody bundle hcgraf/zsh-sudo
 # Update pure prompt with antibody
