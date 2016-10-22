@@ -123,7 +123,6 @@ set completeopt-=preview
 set winheight=20
 " set cursorline
 set gdefault
-set hidden
 set history=1000
 set ignorecase
 set list
