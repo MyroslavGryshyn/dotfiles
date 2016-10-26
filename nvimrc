@@ -120,8 +120,6 @@ let &showbreak = '+++ '
 set background=dark
 set backspace=2
 set completeopt-=preview
-set winheight=20
-" set cursorline
 set gdefault
 set history=1000
 set ignorecase
@@ -322,19 +320,16 @@ let g:fzf_colors =
 " }}}
 
 " Airline settings {{{
+let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#branch#displayed_head_limit = 13
-let g:airline_section_warning = ''
-let g:airline_section_error = ''
 let g:airline#extensions#branch#format = 2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline_skip_empty_sections = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#disable_rtp_load = 0
 let g:airline#extensions#syntastic#enabled = 0
 let g:airline_detect_iminsert=1
 let g:airline#extensions#tmuxline#enabled = 0
@@ -404,7 +399,7 @@ let g:neomake_python_enabled_makers = ['flake8']
 " E126 -- indentation error
 let g:neomake_python_flake8_maker = { 'args': ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126'], }
 let g:neomake_verbose = 0
-autocmd! BufWritePost,BufEnter * Neomake
+autocmd! BufWritePost,BufEnter *.py Neomake
 let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '●', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_error_sign = {'text': '●', 'texthl': 'NeomakeErrorSign'}
@@ -616,7 +611,7 @@ autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 " }}}
 
 " Ultisnips settings {{{
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger=""
 " }}}
