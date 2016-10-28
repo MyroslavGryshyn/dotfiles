@@ -397,7 +397,7 @@ let g:neomake_python_enabled_makers = ['flake8']
 " F403 -- import * used, unable to detect undefined names
 " F405 -- name may be undefined, or defined from * imports
 " E126 -- indentation error
-let g:neomake_python_flake8_maker = { 'args': ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126'], }
+let g:neomake_python_flake8_args = { 'args': ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126'], }
 let g:neomake_verbose = 0
 autocmd! BufWritePost,BufEnter *.py Neomake
 let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
@@ -526,15 +526,15 @@ autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 
 " Ctrlsf settings {{{
 nmap <leader>ff <Plug>CtrlSFPrompt
+nmap <leader>fq <Plug>CtrlSFQuickfixPrompt
 nmap <leader>fw <Plug>CtrlSFCwordExec
-vmap <leader>fw <Plug>CtrlSFVwordPath
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '40%'
 let g:ctrlsf_populate_qflist = 1
-let g:ctrlsf_context = '-C 3'
-let g:ctrlsf_selected_line_hl = ''
+let g:ctrlsf_context = '-B 3 -A 2'
+let g:ctrlsf_selected_line_hl = 'p'
 " }}}
 
 " Maximizer plugin settings {{{
