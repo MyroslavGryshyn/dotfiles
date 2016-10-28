@@ -26,6 +26,7 @@ Plug 'Shougo/neopairs.vim'
 " Integration with git {{{
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+" Commit browser
 Plug 'junegunn/gv.vim'
 " }}}
 
@@ -34,7 +35,6 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
-Plug 'voithos/vim-python-matchit', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
@@ -397,7 +397,7 @@ let g:neomake_python_enabled_makers = ['flake8']
 " F403 -- import * used, unable to detect undefined names
 " F405 -- name may be undefined, or defined from * imports
 " E126 -- indentation error
-let g:neomake_python_flake8_args = { 'args': ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126'], }
+let g:neomake_python_flake8_args = ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126']
 let g:neomake_verbose = 0
 autocmd! BufWritePost,BufEnter *.py Neomake
 let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
@@ -409,17 +409,11 @@ let g:neomake_info_sign = {'text': '●', 'texthl': 'NeomakeInfoSign'}
 " Gitgutter settings {{{
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
-let g:gitgutter_map_keys = 0
+" center hunk
 nmap <silent> [c :GitGutterPrevHunk<CR>zz
 nmap <silent> ]c :GitGutterNextHunk<CR>zz
 " You should work with changes
-nmap <Leader>cs <Plug>GitGutterStageHunk
-nmap <Leader>cu <Plug>GitGutterUndoHunk
-nmap <leader>cp <Plug>GitGutterPreviewHunk
-omap ic <Plug>GitGutterTextObjectInnerPending
-omap ac <Plug>GitGutterTextObjectOuterPending
-xmap ic <Plug>GitGutterTextObjectInnerVisual
-xmap ac <Plug>GitGutterTextObjectOuterVisual
+nmap <leader>hh :GitGutterAll<cr>
 
 highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
 highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
@@ -434,6 +428,7 @@ let g:jedi#show_call_signatures = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
 nnoremap <silent> <leader>gg :call jedi#goto()<CR>
+nnoremap <silent> <leader>gu :call jedi#usages()<CR>
 nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " }}}
 
