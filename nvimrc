@@ -135,7 +135,7 @@ set iminsert=0
 set imsearch=0
 
 set noshowmode
-set showcmd
+set noshowcmd
 set expandtab  " <tab> inserts spaces
 set infercase
 set noacd
@@ -244,10 +244,10 @@ nnoremap <silent> <c-w>t :tabnew<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling
-nnoremap <C-j> 3<C-E>3j
-vnoremap <C-j> 3<C-E>3j
-nnoremap <C-k> 3<C-Y>3k
-vnoremap <C-k> 3<C-Y>3k
+nnoremap <C-j> 2<C-E>
+vnoremap <C-j> 2<C-E>
+nnoremap <C-k> 2<C-Y>
+vnoremap <C-k> 2<C-Y>
 " Operate on display lines, not real lines
     nnoremap k gk
     nnoremap gk k
@@ -343,12 +343,16 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 " }}}
 
+" netrw settings {{{
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+" }}}
+
 " Nerdtree settings {{{
 nnoremap <silent> <Leader>nn :NERDTreeFind<CR><C-w>=
 nnoremap <silent> <leader>nt :NERDTreeToggle<CR><C-w>=
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHighlightCursorline = 0
-let g:NERDTreeHijackNetrw = 1
 let g:NERDTreeQuitOnOpen = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
 " automatically remove buffer after a file was deleted with context menu
