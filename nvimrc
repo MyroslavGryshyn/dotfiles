@@ -317,6 +317,8 @@ let g:fzf_colors =
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
+" Turn off preview window for GFiles? command
+autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
 " }}}
 
 " Airline settings {{{
@@ -413,11 +415,16 @@ let g:neomake_info_sign = {'text': '●', 'texthl': 'NeomakeInfoSign'}
 " Gitgutter settings {{{
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
-" center hunk
-nmap <silent> [c :GitGutterPrevHunk<CR>zz
-nmap <silent> ]c :GitGutterNextHunk<CR>zz
-" You should work with changes
+let g:gitgutter_map_keys = 0
+" center after moving to the next hunk
+nmap <silent> [h :GitGutterPrevHunk<CR>zz
+nmap <silent> ]h :GitGutterNextHunk<CR>zz
+" Refresh gitgutter signs in all buffers
 nmap <leader>hh :GitGutterAll<cr>
+nmap <Leader>hs <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterUndoHunk
+nmap <Leader>hp <Plug>GitGutterPreviewHunk
+
 
 highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
 highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
@@ -614,3 +621,4 @@ let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger=""
 " }}}
+autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
