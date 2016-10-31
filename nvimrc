@@ -284,18 +284,19 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " }}}
 
 " FZF settings {{{
-nnoremap <silent> <C-g><C-j> :GFiles?<CR>
-nnoremap <leader>aa :Ag<space>
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <leader>m :Marks<CR>
-nnoremap <silent> <C-_> :BLines<CR>
+let g:fzf_command_prefix = 'FZF'
+nnoremap <silent> <C-g><C-j> :FZFGFiles?<CR>
+nnoremap <leader>aa :FZFAg<space>
+nnoremap <silent> <C-p> :FZFFiles<CR>
+nnoremap <silent> <leader>m :FZFMarks<CR>
+nnoremap <silent> <C-_> :FZFBLines<CR>
 " nnoremap <silent> <C-g><C-l> :Commits<CR>
 " nnoremap <silent> <C-g><C-o> :BCommits<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>cc :Commands<CR>
-nnoremap <silent> <leader>rr :History<CR>
-nnoremap <silent> <leader>T :Tags<CR>
-nnoremap <silent> <leader>t :BTags<CR>
+nnoremap <silent> <leader>b :FZFBuffers<CR>
+nnoremap <silent> <leader>cc :FZFCommands<CR>
+nnoremap <silent> <leader>rr :FZFHistory<CR>
+nnoremap <silent> <leader>T :FZFTags<CR>
+nnoremap <silent> <leader>t :FZFBTags<CR>
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
@@ -318,7 +319,7 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 " Turn off preview window for GFiles? command
-autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
+autocmd VimEnter * command! -bang -nargs=? FZFGFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
 " }}}
 
 " Airline settings {{{
