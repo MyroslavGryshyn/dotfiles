@@ -271,7 +271,13 @@ nnoremap <c-w>q <c-w>c
 nnoremap <leader>R :%s/
 " }}}
 
+" Ultisnips settings {{{
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+" }}}
+
 " Delimitmate settings {{{
+imap <C-k> <Plug>delimitMateS-Tab
 let delimitMate_excluded_regions = "Comment"
 let delimitMate_expand_cr = 1
 au FileType python let delimitMate_nesting_quotes = ["'", '"']
@@ -616,9 +622,4 @@ autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 " }}}
 
-" Ultisnips settings {{{
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger=""
-" }}}
 autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
