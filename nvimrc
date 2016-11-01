@@ -245,9 +245,9 @@ nnoremap <silent> <c-w>t :tabnew<CR>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling
 nnoremap <C-j> 2<C-E>
-vnoremap <C-j> 2<C-E>
+vnoremap <C-j> 3j
 nnoremap <C-k> 2<C-Y>
-vnoremap <C-k> 2<C-Y>
+vnoremap <C-k> 3k
 " Operate on display lines, not real lines
     nnoremap k gk
     nnoremap gk k
@@ -288,7 +288,6 @@ let g:fzf_command_prefix = 'FZF'
 nnoremap <silent> <C-g><C-j> :FZFGFiles?<CR>
 nnoremap <leader>aa :FZFAg<space>
 nnoremap <silent> <C-p> :FZFFiles<CR>
-nnoremap <silent> <leader>m :FZFMarks<CR>
 nnoremap <silent> <C-_> :FZFBLines<CR>
 " nnoremap <silent> <C-g><C-l> :Commits<CR>
 " nnoremap <silent> <C-g><C-o> :BCommits<CR>
@@ -406,7 +405,7 @@ let g:neomake_python_enabled_makers = ['flake8']
 " E126 -- indentation error
 let g:neomake_python_flake8_args = ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126']
 let g:neomake_verbose = 0
-autocmd! BufWritePost,BufEnter *.py Neomake
+autocmd! BufWritePost *.py Neomake
 let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '●', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_error_sign = {'text': '●', 'texthl': 'NeomakeErrorSign'}
