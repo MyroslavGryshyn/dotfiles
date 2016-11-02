@@ -40,7 +40,6 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
-Plug 'nathanaelkane/vim-indent-guides', {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 " }}}
 
@@ -87,6 +86,8 @@ Plug 'tpope/vim-surround'
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'aliev/vim-compiler-python'
 " Session management
 Plug 'tpope/vim-obsession'
 " Pretty looking vim
@@ -454,7 +455,7 @@ hi MatchParen cterm=none ctermbg=19 ctermfg=none
 " }}}
 
 " Vim test runner settings {{{
-let test#python#runner = 'nose'
+let test#python#runner = 'djangotest'
 let test#strategy = "dispatch"
 
 " nnoremap <leader>tn :TestNearest<CR>
@@ -469,6 +470,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let deoplete#tag#cache_limit_size = 500000000
 let g:neoinclude#ctags_commands = 'tags'
+let g:deoplete#auto_complete_delay = 500
 " Silence messages
 set shortmess+=c
 " trigger deoplete manually in insert mode
@@ -580,14 +582,6 @@ endfunction
 nnoremap <leader>N :JunkfileOpen<space>
 " }}}
 
-" Indent-guides settings {{{
-hi IndentGuidesOdd  ctermbg=18
-hi IndentGuidesEven ctermbg=18
-nnoremap cog :IndentGuidesToggle<CR>
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-" }}}
-
 " Highlight all instances of word under cursor, when idle {{{
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
@@ -620,6 +614,11 @@ command! ClearPdb g/pdb/d
 let g:SimpylFold_docstring_preview = 1
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" }}}
+
+" Python Compiler {{{
+let g:python_compiler_fixqflist = 1
+let g:python_compiler_highlight_errors = 0
 " }}}
 
 autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
