@@ -458,11 +458,8 @@ hi MatchParen cterm=none ctermbg=19 ctermfg=none
 let test#python#runner = 'djangotest'
 let test#strategy = "dispatch"
 
-" nnoremap <leader>tn :TestNearest<CR>
-" nnoremap <leader>tf :TestFile<CR>
-" nnoremap <leader>ts :TestSuite<CR>
-" nnoremap <leader>tl :TestLast<CR>
-" nnoremap <leader>tv :TestVisit<CR>
+nnoremap <leader>rt :TestNearest<CR>
+nnoremap <leader>rf :TestFile<CR>
 " }}}
 
 " Deoplete settings {{{
@@ -470,7 +467,6 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let deoplete#tag#cache_limit_size = 500000000
 let g:neoinclude#ctags_commands = 'tags'
-let g:deoplete#auto_complete_delay = 500
 " Silence messages
 set shortmess+=c
 " trigger deoplete manually in insert mode
