@@ -465,7 +465,7 @@ nnoremap <leader>rf :TestFile<CR>
 " Deoplete settings {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let deoplete#tag#cache_limit_size = 500000000
+let deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
 " Silence messages
 set shortmess+=c
@@ -572,10 +572,6 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
-" }}}
-
-" Junkfile mapping {{{
-nnoremap <leader>N :JunkfileOpen<space>
 " }}}
 
 " Highlight all instances of word under cursor, when idle {{{
