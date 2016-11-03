@@ -245,9 +245,9 @@ nnoremap <silent> <c-w>t :tabnew<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling
-nnoremap <C-j> 2<C-E>
+nnoremap <C-j> 3<C-E>
 vnoremap <C-j> 3j
-nnoremap <C-k> 2<C-Y>
+nnoremap <C-k> 3<C-Y>
 vnoremap <C-k> 3k
 " Operate on display lines, not real lines
     nnoremap k gk
