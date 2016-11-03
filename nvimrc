@@ -55,6 +55,7 @@ Plug 'sgur/vim-textobj-parameter'
 " }}}
 
 " Helpful plugins {{
+Plug 'Yggdroot/indentLine', {'for': 'python'}
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
@@ -86,7 +87,7 @@ Plug 'tpope/vim-surround'
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
+" Plug 'radenling/vim-dispatch-neovim'
 Plug 'aliev/vim-compiler-python'
 " Session management
 Plug 'tpope/vim-obsession'
@@ -613,4 +614,7 @@ let g:python_compiler_fixqflist = 1
 let g:python_compiler_highlight_errors = 0
 " }}}
 
-autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
+" IndentLine settings {{{
+let g:indentLine_fileType = ['python']
+let g:indentLine_faster = 1
+" }}}
