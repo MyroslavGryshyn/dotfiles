@@ -113,6 +113,7 @@ colorscheme base16-eighties
 filetype plugin indent on
 syntax on
 set synmaxcol=250
+set hidden
 
 set autoread  " for vim-tmux-focus-events plugin
 " Enable complete filename after =
@@ -616,5 +617,4 @@ let g:python_compiler_highlight_errors = 0
 
 " IndentLine settings {{{
 let g:indentLine_fileType = ['python']
-let g:indentLine_faster = 1
 " }}}
