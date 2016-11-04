@@ -40,7 +40,6 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'fisadev/vim-isort', {'for': 'python'}
-Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -604,12 +603,6 @@ endfunction
 command! ClearPdb g/pdb/d
 " }}}
 
-" SimplyFold settings {{{
-let g:SimpylFold_docstring_preview = 1
-autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" }}}
-
 " Python Compiler {{{
 let g:python_compiler_fixqflist = 1
 let g:python_compiler_highlight_errors = 0
@@ -617,4 +610,5 @@ let g:python_compiler_highlight_errors = 0
 
 " IndentLine settings {{{
 let g:indentLine_fileType = ['python']
+let g:indentLine_faster = 1
 " }}}
