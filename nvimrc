@@ -499,11 +499,8 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 " }}}
 
 " Fugitive settings {{{
-nnoremap ,ss :Gstatus<CR>
-nnoremap ,ge :Gedit<space>
-nnoremap ,gt :Gtabedit<space>
-nnoremap ,gv :Gvsplit<space>
-nnoremap ,gs :Gsplit<space>
+nnoremap ,gd :Gdiff<space>
+nnoremap ,gw :Gwrite<cr>
 " }}}
 
 " Remove colorcolumns in quickfix and location list windows {{{
@@ -609,6 +606,7 @@ let g:python_compiler_highlight_errors = 0
 " }}}
 
 " IndentLine settings {{{
+let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python']
 let g:indentLine_faster = 1
 " }}}
