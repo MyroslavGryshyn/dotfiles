@@ -24,7 +24,7 @@ Plug 'Shougo/neopairs.vim'
 " }}}
 
 " Integration with git {{{
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 " Commit browser
 Plug 'junegunn/gv.vim'
@@ -130,7 +130,7 @@ set listchars=tab:▸▸,trail:·
 set nofoldenable
 set splitbelow
 set splitright
-set updatetime=4000  " try to change this value for gitgutter
+set updatetime=4000
 " This order matters!
 set keymap=russian-jcukenwin
 set iminsert=0
@@ -228,8 +228,6 @@ vnoremap gp "+p
 nnoremap gP "+P
 
 nnoremap \ ,
-nnoremap <leader>sr :SyntasticReset<CR>
-nnoremap <leader>sc :SyntasticCheck<CR>
 nnoremap <C-]> g<C-]>
 " Use Q instead of q to start recording a macro
 nnoremap Q q
@@ -297,8 +295,6 @@ nnoremap <silent> <C-g><C-j> :FZFGFiles?<CR>
 nnoremap <leader>aa :FZFAg<space>
 nnoremap <silent> <C-p> :FZFFiles<CR>
 nnoremap <silent> <C-_> :FZFBLines<CR>
-" nnoremap <silent> <C-g><C-l> :Commits<CR>
-" nnoremap <silent> <C-g><C-o> :BCommits<CR>
 nnoremap <silent> <leader>b :FZFBuffers<CR>
 nnoremap <silent> <leader>cc :FZFCommands<CR>
 nnoremap <silent> <leader>rr :FZFHistory<CR>
@@ -418,26 +414,6 @@ let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '●', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_error_sign = {'text': '●', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_info_sign = {'text': '●', 'texthl': 'NeomakeInfoSign'}
-" }}}
-
-" Gitgutter settings {{{
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_diff_args = '-w'
-let g:gitgutter_map_keys = 0
-" center after moving to the next hunk
-nmap <silent> [h :GitGutterPrevHunk<CR>zz
-nmap <silent> ]h :GitGutterNextHunk<CR>zz
-" Refresh gitgutter signs in all buffers
-nmap <leader>hh :GitGutterAll<cr>
-nmap <Leader>hs <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterUndoHunk
-nmap <Leader>hp <Plug>GitGutterPreviewHunk
-
-
-highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
-highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
-highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
-highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
 " Jedi settings {{{
@@ -609,4 +585,13 @@ let g:python_compiler_highlight_errors = 0
 let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python']
 let g:indentLine_faster = 1
+" }}}
+
+" Signify settings {{{
+let g:signify_vcs_list = ['git']
+let g:signify_update_on_bufenter = 1
+let g:signify_update_on_focusgained = 1
+let g:signify_cursorhold_normal = 1
+let g:signify_cursorhold_insert = 1
+nnoremap <leader>sc :SignifyFold!<CR>
 " }}}
