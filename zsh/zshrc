@@ -70,7 +70,7 @@ alias vim="nvim"
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
-export FZF_TMUX=1
+export FZF_TMUX=0
 
 
 # Z settings

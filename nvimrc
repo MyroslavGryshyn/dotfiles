@@ -475,6 +475,7 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 " }}}
 
 " Fugitive settings {{{
+cnoreabbrev git Git
 nnoremap ,gd :Gdiff<space>
 nnoremap ,gw :Gwrite<cr>
 " }}}
