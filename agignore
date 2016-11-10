@@ -3,3 +3,4 @@ env/
 __pycache__/
 *.pyc
 .git/
+bitcoin_dir/

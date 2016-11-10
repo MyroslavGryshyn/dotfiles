@@ -54,6 +54,7 @@ Plug 'sgur/vim-textobj-parameter'
 " }}}
 
 " Helpful plugins {{
+Plug 'junegunn/vim-peekaboo'
 Plug 'Yggdroot/indentLine', {'for': 'python'}
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
@@ -86,7 +87,7 @@ Plug 'tpope/vim-surround'
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
-" Plug 'radenling/vim-dispatch-neovim'
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'aliev/vim-compiler-python'
 " Session management
 Plug 'tpope/vim-obsession'
@@ -589,10 +590,10 @@ let g:indentLine_faster = 1
 " }}}
 
 " Signify settings {{{
+nnoremap <leader>sr :SignifyRefresh<CR>
 let g:signify_vcs_list = ['git']
 let g:signify_update_on_bufenter = 1
 let g:signify_update_on_focusgained = 1
 let g:signify_cursorhold_normal = 1
 let g:signify_cursorhold_insert = 1
-nnoremap <leader>sc :SignifyFold!<CR>
 " }}}
