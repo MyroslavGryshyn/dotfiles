@@ -112,7 +112,7 @@ colorscheme base16-eighties
 
 filetype plugin indent on
 syntax on
-set synmaxcol=250
+set synmaxcol=500
 set hidden
 
 set autoread  " for vim-tmux-focus-events plugin
