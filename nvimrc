@@ -209,6 +209,8 @@ cabbrev h tab help
 " }}}
 
 " Mappings {{{
+map ; :
+noremap ;; ;
 nnoremap <silent> <space> :nohl<CR>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
