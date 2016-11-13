@@ -209,8 +209,6 @@ cabbrev h tab help
 " }}}
 
 " Mappings {{{
-map ; :
-noremap ;; ;
 nnoremap <silent> <space> :nohl<CR>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
@@ -587,7 +585,6 @@ let g:python_compiler_highlight_errors = 0
 let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python']
 let g:indentLine_faster = 1
-let g:indentLine_char = '┊'
 " }}}
 
 " Peekaboo settings {{{
