@@ -156,7 +156,7 @@ set softtabstop=4  " spaces per tab
 set tabstop=4  " columns per tabstop
 set timeoutlen=1000 ttimeoutlen=0
 set undofile  " keep undo history for all file changes
-set wildignore+=*.pyc,*/.git/*,*/__pycache__/*
+set wildignore+=*.pyc,*/*,*/__pycache__/*
 set pastetoggle=cop
 " }}}
 
