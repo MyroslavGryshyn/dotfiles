@@ -47,12 +47,6 @@ Plug 'thinca/vim-visualstar'
 Plug 'dyng/ctrlsf.vim'
 " }}}
 
-" Text objects {{{
-Plug 'kana/vim-textobj-user'
-" very helpful plugin when writing code
-Plug 'sgur/vim-textobj-parameter'
-" }}}
-
 " Helpful plugins {{
 Plug 'junegunn/vim-peekaboo'
 Plug 'Yggdroot/indentLine', {'for': 'python'}
