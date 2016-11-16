@@ -474,7 +474,7 @@ cnoreabbrev git Git
 " }}}
 
 " Remove colorcolumns in quickfix and location list windows {{{
-au FileType qf setlocal colorcolumn=
+au FileType qf,GV setlocal colorcolumn=
 " }}}
 
 " Isort plugin settings {{{
