@@ -95,6 +95,8 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt HISTIGNORESPACE
 
+KEYTIMEOUT=1
+
 # Aliases
 alias l='ls -1F --group-directories-first --color=never'
 alias ll='ls -AFlh --color=never'

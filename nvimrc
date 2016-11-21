@@ -318,6 +318,7 @@ let g:fzf_colors =
             \ 'header':  ['fg', 'Comment'] }
 " Turn off preview window for GFiles? command
 autocmd VimEnter * command! -bang -nargs=? FZFGFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
+hi Number ctermfg=14
 " }}}
 
 " Airline settings {{{
@@ -503,9 +504,8 @@ autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 " }}}
 
 " Ctrlsf settings {{{
-nmap <leader>ff <Plug>CtrlSFPrompt
-nmap <leader>fq <Plug>CtrlSFQuickfixPrompt
-nmap <leader>fw <Plug>CtrlSFCwordExec
+nmap <leader>fs <Plug>CtrlSFPrompt
+nmap <leader>ff <Plug>CtrlSFQuickfixPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
