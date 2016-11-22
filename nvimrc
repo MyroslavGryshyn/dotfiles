@@ -24,7 +24,8 @@ Plug 'Shougo/neopairs.vim'
 " }}}
 
 " Integration with git {{{
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
+" Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 " Commit browser
 Plug 'junegunn/gv.vim'
@@ -593,3 +594,17 @@ let g:signify_update_on_focusgained = 1
 let g:signify_cursorhold_normal = 1
 let g:signify_cursorhold_insert = 1
 " }}}
+
+" Gitgutter settings {{{
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_diff_args = '-w'
+let g:gitgutter_map_keys = 0
+nmap <silent> [c :GitGutterPrevHunk<CR>zz
+nmap <silent> ]c :GitGutterNextHunk<CR>zz
+" Refine gitgutter signs
+highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
+highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
+highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
+highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
+" }}}
+
