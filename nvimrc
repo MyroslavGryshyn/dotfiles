@@ -26,7 +26,6 @@ Plug 'Shougo/neopairs.vim'
 
 " Integration with git {{{
 Plug 'airblade/vim-gitgutter'
-" Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 " Commit browser
 Plug 'junegunn/gv.vim'
@@ -585,15 +584,6 @@ let g:indentLine_faster = 1
 
 " Peekaboo settings {{{
 let g:peekaboo_delay = 750
-" }}}
-
-" Signify settings {{{
-nnoremap <leader>sr :SignifyRefresh<CR>
-let g:signify_vcs_list = ['git']
-let g:signify_update_on_bufenter = 1
-let g:signify_update_on_focusgained = 1
-let g:signify_cursorhold_normal = 1
-let g:signify_cursorhold_insert = 1
 " }}}
 
 " Gitgutter settings {{{
