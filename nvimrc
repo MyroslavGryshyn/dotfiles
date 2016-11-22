@@ -13,6 +13,7 @@ Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 " }}}
 
+
 " Autocomplete engines {{{
 function! DoRemote(arg)
     UpdateRemotePlugins
@@ -599,8 +600,11 @@ let g:signify_cursorhold_insert = 1
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_map_keys = 0
-nmap <silent> [c :GitGutterPrevHunk<CR>zz
-nmap <silent> ]c :GitGutterNextHunk<CR>zz
+nmap <silent> [c :GitGutterPrevHunk<CR>
+nmap <silent> ]c :GitGutterNextHunk<CR>
+" Go to first or last chunk
+nmap <silent> ]C G[c
+nmap <silent> [C gg]c
 " Refine gitgutter signs
 highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
 highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
