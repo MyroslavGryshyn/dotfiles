@@ -261,9 +261,6 @@ vnoremap <C-k> 3k
     nnoremap g$ $
 
 nnoremap <c-w>; <c-w>p
-nnoremap <c-w><c-q> <c-w>c
-nnoremap <c-w>q <c-w>c
-
 nnoremap <leader>R :%s/
 " }}}
 
