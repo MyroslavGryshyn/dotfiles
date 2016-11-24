@@ -95,8 +95,6 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt HISTIGNORESPACE
 
-KEYTIMEOUT=1
-
 # Aliases
 alias l='ls -1F --group-directories-first --color=never'
 alias ll='ls -AFlh --color=never'
@@ -119,7 +117,7 @@ alias vim="nvim"
 
 # FZF settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.key-binding.zsh ] && source ~/.key-binding.zsh
+[ -f ~/.fzf-key-bindings.zsh ] && source ~/.fzf-key-bindings.zsh
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
