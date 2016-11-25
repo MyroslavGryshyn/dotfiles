@@ -49,6 +49,7 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
+Plug 'yssl/QFEnter'
 Plug 'junegunn/vim-peekaboo'
 Plug 'Yggdroot/indentLine', {'for': 'python'}
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -201,6 +202,7 @@ autocmd! BufWritePre * :call TrimWhitespace()
 
 " Open help in a new tab {{{
 cabbrev h tab help
+cabbrev ln lne
 " }}}
 
 " Mappings {{{
@@ -577,6 +579,9 @@ let g:python_compiler_highlight_errors = 0
 let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python']
 let g:indentLine_faster = 1
+if !exists("g:syntax_on")
+    syntax on
+endif
 " }}}
 
 " Peekaboo settings {{{
@@ -599,3 +604,8 @@ highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
 highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
+" QFEnter plugin settings {{{
+let g:qfenter_vopen_map = ['<C-v>']
+let g:qfenter_hopen_map = ['<C-CR>', '<C-s>']
+let g:qfenter_topen_map = ['<C-t>']
+" }}}
