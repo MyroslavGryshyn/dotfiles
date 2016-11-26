@@ -13,7 +13,6 @@ Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 " }}}
 
-
 " Autocomplete engines {{{
 function! DoRemote(arg)
     UpdateRemotePlugins
@@ -50,6 +49,8 @@ Plug 'dyng/ctrlsf.vim'
 
 " Helpful plugins {{
 Plug 'yssl/QFEnter'
+" Toggle quick and location lists
+Plug 'Valloric/ListToggle'
 Plug 'junegunn/vim-peekaboo'
 Plug 'Yggdroot/indentLine', {'for': 'python'}
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -63,8 +64,6 @@ Plug 'szw/vim-maximizer'
 Plug 'justinmk/vim-sneak'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Toggle quick and location lists
-Plug 'Valloric/ListToggle'
 " Highlight enclosing tags
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html']}
 Plug 'Shougo/junkfile.vim'
@@ -295,7 +294,7 @@ nnoremap <silent> <leader>cc :FZFCommands<CR>
 nnoremap <silent> <leader>rr :FZFHistory<CR>
 nnoremap <silent> <leader>T :FZFTags<CR>
 nnoremap <silent> <leader>t :FZFBTags<CR>
-let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_action = {
@@ -504,8 +503,8 @@ autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 " }}}
 
 " Ctrlsf settings {{{
-nmap <leader>fs <Plug>CtrlSFPrompt
-nmap <leader>ff <Plug>CtrlSFQuickfixPrompt
+nmap <leader>ff <Plug>CtrlSFPrompt
+nmap <leader>fs <Plug>CtrlSFQuickfixPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
