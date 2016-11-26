@@ -120,7 +120,7 @@ alias vim="nvim"
 [ -f ~/.fzf-key-bindings.zsh ] && source ~/.fzf-key-bindings.zsh
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
-export FZF_DEFAULT_OPTS='--color=dark,bg+:18'
+export FZF_DEFAULT_OPTS='--color=dark,bg+:18 --bind=ctrl-z:toggle-up'
 export FZF_TMUX=0
 
 

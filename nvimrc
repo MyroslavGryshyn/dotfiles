@@ -205,7 +205,20 @@ cabbrev ln lne
 " }}}
 
 " Mappings {{{
+" Close quickfix and location lists
+nnoremap <leader>cc :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohl<CR>
+" Quit
+inoremap <C-Q>     <esc>:q<cr>
+nnoremap <C-Q>     :q<cr>
+" Quickfix and location lists
+nnoremap ]q :cnext<cr>zz
+nnoremap [q :cprev<cr>zz
+nnoremap ]l :lnext<cr>zz
+nnoremap [l :lprev<cr>zz
+" Buffers
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
@@ -214,6 +227,11 @@ nnoremap Y y$
 cnoremap BD bd!
 nnoremap ,BD :bd!<CR>
 
+" Readline style keybindings for command line
+cnoremap        <C-A> <Home>
+cnoremap        <C-B> <Left>
+cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
+cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 " Yank to system clipboard
 nnoremap gy "+y
 vnoremap gy "+y
@@ -290,7 +308,7 @@ nnoremap <leader>aa :FZFAg<space>
 nnoremap <silent> <C-p> :FZFFiles<CR>
 nnoremap <silent> <C-_> :FZFBLines<CR>
 nnoremap <silent> <leader>b :FZFBuffers<CR>
-nnoremap <silent> <leader>cc :FZFCommands<CR>
+nnoremap <silent> <leader>cl :FZFCommands<CR>
 nnoremap <silent> <leader>rr :FZFHistory<CR>
 nnoremap <silent> <leader>T :FZFTags<CR>
 nnoremap <silent> <leader>t :FZFBTags<CR>
