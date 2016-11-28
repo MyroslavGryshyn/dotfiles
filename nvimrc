@@ -69,7 +69,8 @@ Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html']}
 Plug 'Shougo/junkfile.vim'
 Plug 'pbrisbin/vim-mkdir'
 " Autoclose parens, quotes, etc.
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+Plug 'yevhen-m/auto-pairs'
 " Fix focus events in tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Some usefull keypairs
@@ -139,6 +140,7 @@ set infercase
 set noacd
 set nobackup
 set showmatch
+set matchtime=2
 set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
@@ -286,19 +288,6 @@ nnoremap <leader>R :%s/
 " Ultisnips settings {{{
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-" }}}
-
-" Delimitmate settings {{{
-imap <C-k> <Plug>delimitMateS-Tab
-let delimitMate_excluded_regions = "Comment"
-let delimitMate_expand_cr = 1
-au FileType python let delimitMate_nesting_quotes = ["'", '"']
-au FileType markdown let delimitMate_nesting_quotes = ["`"]
-" Put triple quotes on the separate line after cr
-au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
-let delimitMate_quotes = "\" ' `"
-au FileType markdown let delimitMate_quotes = "\" ' `"
-au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " }}}
 
 " FZF settings {{{
@@ -625,4 +614,7 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 let g:qfenter_vopen_map = ['<C-v>']
 let g:qfenter_hopen_map = ['<C-CR>', '<C-s>']
 let g:qfenter_topen_map = ['<C-t>']
+" }}}
+" Autopairs settings {{{
+let g:AutoPairsShortcutJump='<c-k>'
 " }}}
