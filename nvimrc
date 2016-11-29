@@ -207,20 +207,17 @@ cabbrev ln lne
 " }}}
 
 " Mappings {{{
+" Disable CTRL-A on tmux or on screen
+if $TERM =~ 'screen'
+  nnoremap <C-a> <nop>
+  nnoremap <Leader><C-a> <C-a>
+endif
 " Close quickfix and location lists
 nnoremap <leader>cc :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohl<CR>
 " Quit
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
-" Quickfix and location lists
-nnoremap ]q :cnext<cr>zz
-nnoremap [q :cprev<cr>zz
-nnoremap ]l :lnext<cr>zz
-nnoremap [l :lprev<cr>zz
-" Buffers
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
@@ -477,6 +474,10 @@ nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 " }}}
 
 " Fugitive settings {{{
+cnoreabbrev gdiff Gdiff
+cnoreabbrev gstatus Gstatus
+cnoreabbrev gwrite Gwrite
+cnoreabbrev gcommit Gcommit
 cnoreabbrev git Git
 " }}}
 
