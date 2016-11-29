@@ -48,8 +48,8 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
+Plug 'inside/vim-search-pulse'
 Plug 'mhinz/vim-hugefile'
-Plug 'mhinz/vim-halo'
 Plug 'romainl/vim-qf'
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
@@ -92,7 +92,7 @@ Plug 'tpope/vim-obsession'
 " Pretty looking vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
+Plug 'yevhen-m/base16-vim'
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}
 
@@ -116,7 +116,7 @@ set hidden
 set autoread  " for vim-tmux-focus-events plugin
 " Enable complete filename after =
 set isfname-==
-set inccommand=split
+set inccommand=nosplit
 set wrap
 let &showbreak = '+++ '
 set background=dark
@@ -538,44 +538,6 @@ augroup rainbow_lisp
   autocmd!
   autocmd FileType python,javascript RainbowParentheses
 augroup END
-" }}}
-
-" Highlight next search match {{{
-nnoremap <silent> n n:call HLNext(0.1)<cr>
-nnoremap <silent> N N:call HLNext(0.1)<cr>
-
-function! HLNext (blinktime)
-    let target_pat = '\c\%#'.@/
-    let ring = matchadd('ErrorMsg', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
-endfunction
-" }}}
-
-" Highlight all instances of word under cursor, when idle {{{
-" Useful when studying strange source code.
-" Type z/ to toggle highlighting on/off.
-nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
-function! AutoHighlightToggle()
-  let @/ = ''
-  if exists('#auto_highlight')
-    au! auto_highlight
-    augroup! auto_highlight
-    setl updatetime=4000
-    echo 'Highlight current word: OFF'
-    return 0
-  else
-    augroup auto_highlight
-      au!
-      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    augroup end
-    setl updatetime=500
-    echo 'Highlight current word: ON'
-    return 1
-  endif
-endfunction
 " }}}
 
 " Clear ipdb breakpoints {{{
