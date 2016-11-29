@@ -116,6 +116,7 @@ set hidden
 set autoread  " for vim-tmux-focus-events plugin
 " Enable complete filename after =
 set isfname-==
+set inccommand=split
 set wrap
 let &showbreak = '+++ '
 set background=dark
