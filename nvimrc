@@ -48,7 +48,9 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
-Plug 'yssl/QFEnter'
+Plug 'mhinz/vim-hugefile'
+Plug 'mhinz/vim-halo'
+Plug 'romainl/vim-qf'
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
 Plug 'junegunn/vim-peekaboo'
@@ -294,13 +296,14 @@ nnoremap <leader>aa :FZFAg<space>
 nnoremap <silent> <C-p> :FZFFiles<CR>
 nnoremap <silent> <C-_> :FZFBLines<CR>
 nnoremap <silent> <leader>b :FZFBuffers<CR>
-nnoremap <silent> <leader>cl :FZFCommands<CR>
+nnoremap <silent> <leader>cs :FZFCommands<CR>
 nnoremap <silent> <leader>rr :FZFHistory<CR>
 nnoremap <silent> <leader>T :FZFTags<CR>
 nnoremap <silent> <leader>t :FZFBTags<CR>
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
+let g:fzf_commands_expect = 'ctrl-x'
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-s': 'split',
@@ -478,6 +481,7 @@ cnoreabbrev gdiff Gdiff
 cnoreabbrev gstatus Gstatus
 cnoreabbrev gwrite Gwrite
 cnoreabbrev gcommit Gcommit
+cnoreabbrev gread Gread
 cnoreabbrev git Git
 " }}}
 
@@ -611,11 +615,18 @@ highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
 highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
-" QFEnter plugin settings {{{
-let g:qfenter_vopen_map = ['<C-v>']
-let g:qfenter_hopen_map = ['<C-CR>', '<C-s>']
-let g:qfenter_topen_map = ['<C-t>']
-" }}}
 " Autopairs settings {{{
 let g:AutoPairsShortcutJump='<c-k>'
+" }}}
+
+" Show cursorline in active window {{{
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+" }}}
+
+" vim-qf settings {{{
+let g:qf_mapping_ack_style = 1
 " }}}
