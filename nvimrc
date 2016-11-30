@@ -43,12 +43,11 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
-Plug 'thinca/vim-visualstar'
+Plug 'haya14busa/vim-asterisk'
 Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
-Plug 'inside/vim-search-pulse'
 Plug 'mhinz/vim-hugefile'
 Plug 'romainl/vim-qf'
 " Toggle quick and location lists
@@ -592,4 +591,17 @@ augroup END
 
 " vim-qf settings {{{
 let g:qf_mapping_ack_style = 1
+" }}}
+
+" Vim-asterisk settings {{{
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)<Plug>Pulse
+map g#  <Plug>(asterisk-g#)<Plug>Pulse
+map z*  <Plug>(asterisk-z*)<Plug>Pulse
+map gz* <Plug>(asterisk-gz*)<Plug>Pulse
+map z#  <Plug>(asterisk-z#)<Plug>Pulse
+map gz# <Plug>(asterisk-gz#)<Plug>Pulse
+
+let g:asterisk#keeppos = 1
 " }}}
