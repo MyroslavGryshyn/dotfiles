@@ -48,6 +48,7 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
+Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-hugefile'
 Plug 'romainl/vim-qf'
 " Toggle quick and location lists
@@ -604,4 +605,11 @@ map z#  <Plug>(asterisk-z#)<Plug>Pulse
 map gz# <Plug>(asterisk-gz#)<Plug>Pulse
 
 let g:asterisk#keeppos = 1
+" }}}
+
+" Vim-easy-align plugin {{{
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 " }}}
