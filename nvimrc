@@ -1,5 +1,3 @@
-filetype off
-
 " Autoinstall vim-plug {{{
 if empty(glob("~/.config/nvim/autoload/plug.vim"))
     !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -54,7 +52,6 @@ Plug 'mhinz/vim-hugefile'
 Plug 'romainl/vim-qf'
 Plug 'yssl/QFEnter'
 " Toggle quick and location lists
-Plug 'Valloric/ListToggle'
 Plug 'junegunn/vim-peekaboo'
 Plug 'Yggdroot/indentLine', {'for': 'python'}
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -102,6 +99,9 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
+
+Plug 'Shougo/unite.vim'
+
 call plug#end()
 
 " Main settings {{{
@@ -110,11 +110,8 @@ let mapleader=","
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
 
-filetype plugin indent on
-syntax on
 set synmaxcol=500
 set hidden
-
 set autoread  " for vim-tmux-focus-events plugin
 " Enable complete filename after =
 set isfname-==
@@ -212,12 +209,14 @@ cabbrev ln lne
 " }}}
 
 " Mappings {{{
+nnoremap <leader>e :e $MYVIMRC<cr>
 " Close quickfix and location lists
 nnoremap <leader>cc :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohl<CR>
 " Quit
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
+nnoremap <leader>q :q<cr>
 " Switch keymaps easily
 nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
