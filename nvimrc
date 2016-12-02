@@ -48,9 +48,11 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
+Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-hugefile'
 Plug 'romainl/vim-qf'
+Plug 'yssl/QFEnter'
 " Toggle quick and location lists
 Plug 'Valloric/ListToggle'
 Plug 'junegunn/vim-peekaboo'
@@ -210,11 +212,6 @@ cabbrev ln lne
 " }}}
 
 " Mappings {{{
-" Disable CTRL-A on tmux or on screen
-if $TERM =~ 'screen'
-  nnoremap <C-a> <nop>
-  nnoremap <Leader><C-a> <C-a>
-endif
 " Close quickfix and location lists
 nnoremap <leader>cc :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohl<CR>
@@ -261,10 +258,10 @@ nnoremap <silent> <c-w>t :tabnew<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling
-nnoremap <C-j> 3<C-E>
-vnoremap <C-j> 3j
-nnoremap <C-k> 3<C-Y>
-vnoremap <C-k> 3k
+nnoremap <C-j> 2<C-E>
+vnoremap <C-j> 2j
+nnoremap <C-k> 2<C-Y>
+vnoremap <C-k> 2k
 " Operate on display lines, not real lines
     nnoremap k gk
     nnoremap gk k
@@ -591,7 +588,6 @@ augroup END
 " }}}
 
 " vim-qf settings {{{
-let g:qf_mapping_ack_style = 1
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
 " }}}
@@ -614,4 +610,14 @@ let g:asterisk#keeppos = 1
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+" }}}
+
+" QFEnter plugin settings {{{
+let g:qfenter_vopen_map = ['<C-v>']
+let g:qfenter_hopen_map = ['<C-CR>', '<C-s>']
+let g:qfenter_topen_map = ['<C-t>']
+" }}}
+
+" Neopairs settings {{{
+let g:neopairs#enable = 1
 " }}}
