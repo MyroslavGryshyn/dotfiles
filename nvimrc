@@ -41,7 +41,6 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
-Plug 'inside/vim-search-pulse'
 Plug 'haya14busa/vim-asterisk'
 Plug 'dyng/ctrlsf.vim'
 " }}}
@@ -593,22 +592,14 @@ let g:qf_auto_open_loclist = 0
 " }}}
 
 " Vim-asterisk settings {{{
-map g*  <Plug>(asterisk-g*)<Plug>Pulse
-map g#  <Plug>(asterisk-g#)<Plug>Pulse
-map z*  <Plug>(asterisk-z*)<Plug>Pulse
-map gz* <Plug>(asterisk-gz*)<Plug>Pulse
-map z#  <Plug>(asterisk-z#)<Plug>Pulse
-map gz# <Plug>(asterisk-gz#)<Plug>Pulse
-let g:vim_search_pulse_disable_auto_mappings = 1
-
-nmap * <Plug>(asterisk-*)<Plug>Pulse
-nmap # <Plug>(asterisk-#)<Plug>Pulse
-nmap n n<Plug>Pulse
-nmap N N<Plug>Pulse
-" " Pulses cursor line on first match
-" " when doing search with / or ?
-cmap <silent> <expr> <enter> search_pulse#PulseFirst()
-
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
 " }}}
 
