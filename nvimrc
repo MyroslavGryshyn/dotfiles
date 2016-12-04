@@ -41,6 +41,7 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
+Plug 'inside/vim-search-pulse'
 Plug 'haya14busa/vim-asterisk'
 Plug 'dyng/ctrlsf.vim'
 " }}}
@@ -109,7 +110,7 @@ let mapleader=","
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
-
+set clipboard^=unnamedplus
 set synmaxcol=500
 set hidden
 set autoread  " for vim-tmux-focus-events plugin
@@ -127,8 +128,6 @@ set ignorecase
 set list
 set listchars=tab:▸▸,trail:·
 set nofoldenable
-set splitbelow
-set splitright
 set updatetime=4000
 " This order matters!
 set keymap=russian-jcukenwin
@@ -153,7 +152,10 @@ set shell=/bin/zsh
 set shiftwidth=4 " columns per <<
 set softtabstop=4  " spaces per tab
 set tabstop=4  " columns per tabstop
-set timeoutlen=1000 ttimeoutlen=0
+set timeout           " for mappings
+set timeoutlen=1000   " default value
+set ttimeout          " for key codes
+set ttimeoutlen=10    " unnoticeable small value
 set undofile  " keep undo history for all file changes
 set wildignore+=*.pyc,*/__pycache__/*
 set pastetoggle=cop
@@ -212,7 +214,7 @@ cabbrev ln lne
 nnoremap <leader>e :e $MYVIMRC<cr>
 " Close quickfix and location lists
 nnoremap <leader>cc :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohl<CR>
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " Quit
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
@@ -224,21 +226,15 @@ cnoremap <c-l> <c-^>
 nnoremap Y y$
 cnoremap BD bd!
 nnoremap ,BD :bd!<CR>
+" Don't loose selection when shifting sidewards
+xnoremap <  <gv
+xnoremap >  >gv
 
 " Readline style keybindings for command line
 cnoremap        <C-A> <Home>
 cnoremap        <C-B> <Left>
 cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
-" Yank to system clipboard
-nnoremap gy "+y
-vnoremap gy "+y
-vnoremap gY "+Y
-nnoremap gY "+y$
-" Paste from system clipboard
-nnoremap gp "+p
-vnoremap gp "+p
-nnoremap gP "+P
 
 nnoremap \ ,
 nnoremap <C-]> g<C-]>
@@ -263,19 +259,29 @@ nnoremap <C-k> 2<C-Y>
 vnoremap <C-k> 2k
 " Operate on display lines, not real lines
     nnoremap k gk
+    vnoremap k gk
     nnoremap gk k
+    vnoremap gk k
 
     nnoremap j gj
+    vnoremap j gj
     nnoremap gj j
+    vnoremap gj j
 
     nnoremap 0 g0
+    vnoremap 0 g0
     nnoremap g0 0
+    vnoremap g0 0
 
     nnoremap ^ g^
+    vnoremap ^ g^
     nnoremap g^ ^
+    vnoremap g^ ^
 
     nnoremap $ g$
+    vnoremap $ g$
     nnoremap g$ $
+    vnoremap g$ $
 
 nnoremap <c-w>; <c-w>p
 nnoremap <leader>R :%s/
@@ -559,14 +565,9 @@ let g:peekaboo_delay = 750
 " }}}
 
 " Gitgutter settings {{{
+let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
-let g:gitgutter_map_keys = 0
-nmap <silent> [c :GitGutterPrevHunk<CR>
-nmap <silent> ]c :GitGutterNextHunk<CR>
-" Go to first or last chunk
-nmap <silent> ]C G[c
-nmap <silent> [C gg]c
 " Refine gitgutter signs
 highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
 highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
@@ -592,14 +593,21 @@ let g:qf_auto_open_loclist = 0
 " }}}
 
 " Vim-asterisk settings {{{
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
 map g*  <Plug>(asterisk-g*)<Plug>Pulse
 map g#  <Plug>(asterisk-g#)<Plug>Pulse
 map z*  <Plug>(asterisk-z*)<Plug>Pulse
 map gz* <Plug>(asterisk-gz*)<Plug>Pulse
 map z#  <Plug>(asterisk-z#)<Plug>Pulse
 map gz# <Plug>(asterisk-gz#)<Plug>Pulse
+let g:vim_search_pulse_disable_auto_mappings = 1
+
+nmap * <Plug>(asterisk-*)<Plug>Pulse
+nmap # <Plug>(asterisk-#)<Plug>Pulse
+nmap n n<Plug>Pulse
+nmap N N<Plug>Pulse
+" " Pulses cursor line on first match
+" " when doing search with / or ?
+cmap <silent> <expr> <enter> search_pulse#PulseFirst()
 
 let g:asterisk#keeppos = 1
 " }}}
