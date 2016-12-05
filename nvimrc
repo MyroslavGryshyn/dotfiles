@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
 " }}}
 
 " Autocomplete engines {{{
@@ -564,7 +565,6 @@ let g:peekaboo_delay = 750
 " }}}
 
 " Gitgutter settings {{{
-let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
 " Refine gitgutter signs
