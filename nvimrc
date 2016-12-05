@@ -47,6 +47,7 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Helpful plugins {{
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-hugefile'
@@ -618,4 +619,13 @@ let g:qfenter_topen_map = ['<C-t>']
 
 " Neopairs settings {{{
 let g:neopairs#enable = 1
+" }}}
+" Tmux navigator settings {{{
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-p> :TmuxNavigatePrevious<cr>
 " }}}
