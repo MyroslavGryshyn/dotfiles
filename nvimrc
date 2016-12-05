@@ -304,7 +304,7 @@ nnoremap <silent> <leader>cs :FZFCommands<CR>
 nnoremap <silent> <leader>rr :FZFHistory<CR>
 nnoremap <silent> <leader>T :FZFTags<CR>
 nnoremap <silent> <leader>t :FZFBTags<CR>
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_commands_expect = 'ctrl-x'
