@@ -214,7 +214,7 @@ cabbrev ln lne
 " Mappings {{{
 nnoremap <leader>e :e $MYVIMRC<cr>
 " Close quickfix and location lists
-nnoremap <leader>cc :cclose<bar>lclose<cr>
+nnoremap <leader>c :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " Quit
 inoremap <C-Q>     <esc>:q<cr>
@@ -294,17 +294,14 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 " }}}
 
 " FZF settings {{{
-let g:fzf_command_prefix = 'FZF'
-nnoremap <silent> <C-g><C-j> :FZFGFiles?<CR>
-nnoremap <leader>aa :FZFAg<space>
-nnoremap <silent> <C-p> :FZFFiles<CR>
-nnoremap <silent> <C-_> :FZFBLines<CR>
-nnoremap <silent> <leader>b :FZFBuffers<CR>
-nnoremap <silent> <leader>cs :FZFCommands<CR>
-nnoremap <silent> <leader>rr :FZFHistory<CR>
-nnoremap <silent> <leader>T :FZFTags<CR>
-nnoremap <silent> <leader>t :FZFBTags<CR>
-let g:fzf_layout = { 'down': '~25%' }
+nnoremap <silent> <C-g><C-j> :GFiles?<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-_> :BLines<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>rr :History<CR>
+nnoremap <silent> <leader>T :Tags<CR>
+nnoremap <silent> <leader>t :BTags<CR>
+let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_commands_expect = 'ctrl-x'
@@ -519,8 +516,8 @@ autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 " }}}
 
 " Ctrlsf settings {{{
-nmap <leader>ff <Plug>CtrlSFPrompt
-nmap <leader>fs <Plug>CtrlSFQuickfixPrompt
+nmap <leader>fs <Plug>CtrlSFPrompt
+nmap <leader>ff <Plug>CtrlSFQuickfixPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'bottom'
