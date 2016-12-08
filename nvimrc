@@ -102,11 +102,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
 
-" Shougo plugins {{{
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim'
-" }}}
-
 call plug#end()
 
 " Main settings {{{
@@ -295,13 +290,13 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 " FZF settings {{{
 nnoremap <silent> <C-g><C-j> :GFiles?<CR>
-nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-_> :BLines<CR>
+nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>t :BTags<CR>
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': 'tabnew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_commands_expect = 'ctrl-x'
