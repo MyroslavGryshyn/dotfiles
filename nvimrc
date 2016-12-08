@@ -23,6 +23,7 @@ Plug 'Shougo/neopairs.vim'
 " }}}
 
 " Integration with git {{{
+Plug 'lambdalisue/vim-gita'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " Commit browser
