@@ -104,6 +104,7 @@ Plug 'junegunn/fzf.vim'
 
 " Shougo plugins {{{
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/denite.nvim'
 " }}}
 
 call plug#end()
@@ -227,9 +228,6 @@ nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
 nnoremap Y y$
-" Don't loose selection when shifting sidewards
-xnoremap <  <gv
-xnoremap >  >gv
 
 " Readline style keybindings for command line
 cnoremap        <C-A> <Home>
