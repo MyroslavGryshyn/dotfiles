@@ -102,7 +102,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
 
+" Shougo plugins {{{
 Plug 'Shougo/unite.vim'
+" }}}
 
 call plug#end()
 
@@ -225,8 +227,6 @@ nnoremap <c-l> <c-^>
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
 nnoremap Y y$
-cnoremap BD bd!
-nnoremap ,BD :bd!<CR>
 " Don't loose selection when shifting sidewards
 xnoremap <  <gv
 xnoremap >  >gv
@@ -237,6 +237,7 @@ cnoremap        <C-B> <Left>
 cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 
+" Use backslash to jump to previous char match
 nnoremap \ ,
 nnoremap <C-]> g<C-]>
 " Use Q instead of q to start recording a macro
@@ -244,8 +245,9 @@ nnoremap Q q
 " Use q only to close plugin windows
 nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
+" Quit vim
 nnoremap ZX :qall<CR>
-nnoremap ZV :qall!<CR>
+" Change tabs
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
 nnoremap <silent> th :tabfirst<CR>
@@ -410,6 +412,8 @@ let g:neomake_python_enabled_makers = ['flake8']
 " F403 -- import * used, unable to detect undefined names
 " F405 -- name may be undefined, or defined from * imports
 " E126 -- indentation error
+let g:neomake_highlight_columns = 0
+let g:neomake_highlight_lines = 0
 let g:neomake_python_flake8_args = ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126']
 let g:neomake_verbose = 0
 autocmd! BufWritePost *.py Neomake
