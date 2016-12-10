@@ -104,6 +104,12 @@ Plug 'junegunn/fzf.vim'
 " }}}
 call plug#end()
 
+" Abbreviations {{{
+if filereadable(expand('~/.config/nvim/abbreviations.vim'))
+  source ~/.config/nvim/abbreviations.vim
+endif
+" }}}
+
 " Main settings {{{
 let mapleader=","
 
@@ -203,13 +209,12 @@ endfun
 autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
-" Open help in a new tab {{{
-cabbrev h tab help
-cabbrev ln lne
-" }}}
-
 " Mappings {{{
-nnoremap <leader>e :e $MYVIMRC<cr>
+" Edit init.vim
+nnoremap <leader>ev :e $MYVIMRC<cr>
+" Edit abbreviations
+nnoremap <leader>ea :e ~/.config/nvim/abbreviations.vim<CR>
+
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
@@ -472,15 +477,6 @@ function! ToggleMovement(firstOp, thenOp)
     endif
 endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
-" }}}
-
-" Fugitive settings {{{
-cnoreabbrev gdiff Gdiff
-cnoreabbrev gstatus Gstatus
-cnoreabbrev gwrite Gwrite
-cnoreabbrev gcommit Gcommit
-cnoreabbrev gread Gread
-cnoreabbrev git Git
 " }}}
 
 " Remove colorcolumns in quickfix and location list windows {{{
