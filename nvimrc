@@ -19,11 +19,9 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'Shougo/neopairs.vim'
 " }}}
 
 " Integration with git {{{
-Plug 'lambdalisue/vim-gita'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " Commit browser
@@ -55,9 +53,7 @@ Plug 'mhinz/vim-hugefile'
 Plug 'romainl/vim-qf'
 Plug 'yssl/QFEnter'
 " Toggle quick and location lists
-Plug 'junegunn/vim-peekaboo'
 Plug 'Yggdroot/indentLine', {'for': 'python'}
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
 Plug 'neomake/neomake'
@@ -69,8 +65,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Highlight enclosing tags
-Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html']}
-Plug 'Shougo/junkfile.vim'
+Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
+Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'pbrisbin/vim-mkdir'
 " Autoclose parens, quotes, etc.
 " Plug 'Raimondi/delimitMate'
@@ -86,9 +82,13 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Sugar for unix shell commands
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'aliev/vim-compiler-python'
+
+" Dispath plugins {{{
+Plug 'tpope/vim-dispatch', {'on': 'Dispatch'}
+Plug 'radenling/vim-dispatch-neovim', {'on': 'Dispatch'}
+Plug 'aliev/vim-compiler-python', {'on': 'Dispatch'}
+" }}}
+
 " Session management
 Plug 'tpope/vim-obsession'
 " Pretty looking vim
@@ -102,7 +102,6 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
-
 call plug#end()
 
 " Main settings {{{
@@ -183,7 +182,6 @@ autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 
 " Python autocommands {{{
 autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
-autocmd! BufRead,BufNewFile *.html set filetype=html
 " }}}
 
 autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
@@ -281,7 +279,7 @@ vnoremap <C-k> 2k
     vnoremap g$ $
 
 nnoremap <c-w>; <c-w>p
-nnoremap <leader>R :%s/
+nnoremap <leader>rs :%s/
 " }}}
 
 " Ultisnips settings {{{
@@ -295,9 +293,9 @@ nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>rr :History<CR>
-nnoremap <silent> <leader>T :Tags<CR>
-nnoremap <silent> <leader>t :BTags<CR>
-let g:fzf_layout = { 'window': 'tabnew' }
+nnoremap <silent> <leader>t :Tags<CR>
+nnoremap <silent> <leader>T :BTags<CR>
+let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
 let g:fzf_commands_expect = 'ctrl-x'
@@ -459,6 +457,8 @@ endfunction
 
 " Autoformat settings {{{
 noremap <leader>sf :Autoformat<CR>
+vnoremap <leader>sf :'<,>'Autoformat<CR>
+
 let g:formatters_html = ['htmlbeautify']
 let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_python = ['autopep8']
@@ -489,8 +489,8 @@ au FileType qf,GV setlocal colorcolumn=
 " }}}
 
 " Isort plugin settings {{{
-let g:vim_isort_map = '<leader>si'
-nnoremap <leader>si :Isort<CR>
+let g:vim_isort_map = '<leader>is'
+nnoremap <leader>is :Isort<CR>
 " }}}
 
 " Custom func to change iminsert option {{{
@@ -510,7 +510,6 @@ inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
 autocmd BufEnter * let b:escape_mapping = 1
 autocmd BufEnter * set iminsert=0
 autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
-autocmd BufEnter * nnoremap <silent> cos :syntax sync fromstart<CR>
 " }}}
 
 " Ctrlsf settings {{{
@@ -527,15 +526,7 @@ let g:ctrlsf_selected_line_hl = 'p'
 
 " Maximizer plugin settings {{{
 let g:maximizer_set_default_mapping = 0
-nnoremap <silent> com :MaximizerToggle<CR>
-" }}}
-
-" Rainbow parentheses settings {{{
-" Activation based on file type
-augroup rainbow_lisp
-  autocmd!
-  autocmd FileType python,javascript RainbowParentheses
-augroup END
+nnoremap <leader>m :MaximizerToggle<CR>
 " }}}
 
 " Clear ipdb breakpoints {{{
@@ -556,10 +547,6 @@ if !exists("g:syntax_on")
 endif
 " }}}
 
-" Peekaboo settings {{{
-let g:peekaboo_delay = 750
-" }}}
-
 " Gitgutter settings {{{
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_diff_args = '-w'
@@ -574,7 +561,7 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 let g:AutoPairsShortcutJump='<c-k>'
 " }}}
 
-" Show cursorline in active window {{{
+" Show cursorline only in active window {{{
 augroup CursorLineOnlyInActiveWindow
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -615,6 +602,7 @@ let g:qfenter_topen_map = ['<C-t>']
 " Neopairs settings {{{
 let g:neopairs#enable = 1
 " }}}
+
 " Tmux navigator settings {{{
 let g:tmux_navigator_no_mappings = 1
 
