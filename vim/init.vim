@@ -158,6 +158,8 @@ set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
 
+set splitbelow
+set splitright
 set noshowmode
 set noshowcmd
 set expandtab  " <tab> inserts spaces
