@@ -319,7 +319,6 @@ let g:fzf_colors =
             \ 'header':  ['fg', 'Comment'] }
 " Turn off preview window for GFiles? command
 autocmd VimEnter * command! -bang -nargs=? FZFGFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
-hi Number ctermfg=14
 " }}}
 
 " Airline settings {{{
