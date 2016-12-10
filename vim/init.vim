@@ -4,7 +4,9 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
 endif
 " }}}
 
+" Plugins {{{
 call plug#begin('~/.config/nvim/plugged')
+
 " Syntax plugins {{{
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'avakhov/vim-yaml', {'for': 'yaml'}
@@ -24,7 +26,6 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 " Integration with git {{{
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-" Commit browser
 Plug 'junegunn/gv.vim'
 " }}}
 
@@ -33,76 +34,93 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
+Plug 'Yggdroot/indentLine', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
-Plug 'fisadev/vim-isort', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
 Plug 'haya14busa/vim-asterisk'
+Plug 'justinmk/vim-sneak'
 Plug 'dyng/ctrlsf.vim'
 " }}}
 
-" Helpful plugins {{
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'justinmk/vim-dirvish'
-Plug 'junegunn/vim-easy-align'
-Plug 'mhinz/vim-hugefile'
-Plug 'romainl/vim-qf'
-Plug 'yssl/QFEnter'
-" Toggle quick and location lists
-Plug 'Yggdroot/indentLine', {'for': 'python'}
+" Filesystem browsers {{{
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
-Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
-Plug 'neomake/neomake'
-" Set proper indentation settings for the file
-Plug 'myint/indent-finder'
-Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
-Plug 'szw/vim-maximizer'
-Plug 'justinmk/vim-sneak'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" Highlight enclosing tags
-Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
-Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
-Plug 'pbrisbin/vim-mkdir'
-" Autoclose parens, quotes, etc.
-" Plug 'Raimondi/delimitMate'
-Plug 'yevhen-m/auto-pairs'
-" Fix focus events in tmux
-Plug 'tmux-plugins/vim-tmux-focus-events'
-" Some usefull keypairs
-Plug 'tpope/vim-unimpaired'
-Plug 'Chiel92/vim-autoformat'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-" Sugar for unix shell commands
-Plug 'tpope/vim-eunuch'
-
-" Dispath plugins {{{
-Plug 'tpope/vim-dispatch', {'on': 'Dispatch'}
-Plug 'radenling/vim-dispatch-neovim', {'on': 'Dispatch'}
-Plug 'aliev/vim-compiler-python', {'on': 'Dispatch'}
+Plug 'justinmk/vim-dirvish'
 " }}}
 
-" Session management
+" Quickfix list enhancement {{{
+Plug 'romainl/vim-qf'
+Plug 'yssl/QFEnter'
+" }}}
+
+" Linting {{{
+Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
+Plug 'neomake/neomake'
+" }}}
+
+" Formatters {{{
+Plug 'Chiel92/vim-autoformat'
+" }}}
+
+" Snippets {{{
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" }}}
+
+" Tags {{{
+Plug 'ludovicchabant/vim-gutentags'
+" }}}
+
+" Tmux {{{
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
+" }}}
+
+" Helpful plugins {{{
+Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
+Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
+Plug 'junegunn/vim-easy-align'
+Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
+Plug 'mhinz/vim-hugefile'
+Plug 'myint/indent-finder'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'szw/vim-maximizer', {'on': 'MaximizerToggle'}
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'yevhen-m/auto-pairs'
+" }}}
+
+" Dispatch plugins {{{
+Plug 'aliev/vim-compiler-python', {'on': 'Dispatch'}
+Plug 'radenling/vim-dispatch-neovim', {'on': 'Dispatch'}
+Plug 'tpope/vim-dispatch', {'on': 'Dispatch'}
+" }}}
+
+" Session management {{{
 Plug 'tpope/vim-obsession'
-" Pretty looking vim
+" }}}
+
+" Colorscheme {{{
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'yevhen-m/base16-vim'
-Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
-" }}
+" }}}
 
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
+
 call plug#end()
+" }}}
 
 " Abbreviations {{{
 if filereadable(expand('~/.config/nvim/abbreviations.vim'))
@@ -115,6 +133,7 @@ let mapleader=","
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
+
 set clipboard^=unnamedplus
 set synmaxcol=500
 set hidden
@@ -217,13 +236,13 @@ nnoremap <leader>ea :e ~/.config/nvim/abbreviations.vim<CR>
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 " Quit
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
 nnoremap <leader>q :q<cr>
-" Switch keymaps easily
 nnoremap <c-l> <c-^>
+" Switch keymaps easily
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
 nnoremap Y y$
@@ -257,33 +276,35 @@ nnoremap <C-j> 2<C-E>
 vnoremap <C-j> 2j
 nnoremap <C-k> 2<C-Y>
 vnoremap <C-k> 2k
-" Operate on display lines, not real lines
-    nnoremap k gk
-    vnoremap k gk
-    nnoremap gk k
-    vnoremap gk k
+" Operate on display lines, not real lines {{{
+nnoremap k gk
+vnoremap k gk
+nnoremap gk k
+vnoremap gk k
 
-    nnoremap j gj
-    vnoremap j gj
-    nnoremap gj j
-    vnoremap gj j
+nnoremap j gj
+vnoremap j gj
+nnoremap gj j
+vnoremap gj j
 
-    nnoremap 0 g0
-    vnoremap 0 g0
-    nnoremap g0 0
-    vnoremap g0 0
+nnoremap 0 g0
+vnoremap 0 g0
+nnoremap g0 0
+vnoremap g0 0
 
-    nnoremap ^ g^
-    vnoremap ^ g^
-    nnoremap g^ ^
-    vnoremap g^ ^
+nnoremap ^ g^
+vnoremap ^ g^
+nnoremap g^ ^
+vnoremap g^ ^
 
-    nnoremap $ g$
-    vnoremap $ g$
-    nnoremap g$ $
-    vnoremap g$ $
+nnoremap $ g$
+vnoremap $ g$
+nnoremap g$ $
+vnoremap g$ $
+" }}}
 
 nnoremap <c-w>; <c-w>p
+" Replace in all buffer
 nnoremap <leader>rs :%s/
 " }}}
 
@@ -323,7 +344,7 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 " Turn off preview window for GFiles? command
-autocmd VimEnter * command! -bang -nargs=? FZFGFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
+autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
 " }}}
 
 " Airline settings {{{
