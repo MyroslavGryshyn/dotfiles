@@ -461,7 +461,7 @@ endfunction
 
 " Autoformat settings {{{
 noremap <leader>ss :Autoformat<CR>
-vnoremap <leader>ss :'<,>'Autoformat<CR>
+vnoremap <leader>ss :'<,'>Autoformat<CR>
 
 let g:formatters_html = ['htmlbeautify']
 let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
