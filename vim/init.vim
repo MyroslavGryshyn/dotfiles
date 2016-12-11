@@ -231,6 +231,11 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
+" Resize vim windows
+nnoremap <left>   <c-w><
+nnoremap <right>  <c-w>>
+nnoremap <up>     <c-w>+
+nnoremap <down>   <c-w>-
 " Edit init.vim
 nnoremap <leader>ev :e $MYVIMRC<cr>
 " Edit abbreviations
