@@ -9,7 +9,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins {{{
 Plug 'cespare/vim-toml', {'for': 'toml'}
-Plug 'avakhov/vim-yaml', {'for': 'yaml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
 " }}}
