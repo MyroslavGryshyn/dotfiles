@@ -252,6 +252,9 @@ nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 " Quit
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
+" Save and quit
+inoremap <C-S> <esc>:x<cr>
+nnoremap <C-s> :x<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <c-l> <c-^>
 " Switch keymaps easily
