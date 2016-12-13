@@ -629,3 +629,8 @@ nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-p> :TmuxNavigatePrevious<cr>
 " }}}
+
+" Sneak settings {{{
+let g:sneak#use_ic_scs = 1
+let g:sneak#label = 1
+" }}}
