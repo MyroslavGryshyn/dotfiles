@@ -247,7 +247,7 @@ nnoremap <leader>ea :e ~/.config/nvim/abbreviations.vim<CR>
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>
 " Quit
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
