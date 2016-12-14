@@ -54,7 +54,6 @@ Plug 'justinmk/vim-dirvish'
 " }}}
 
 " Quickfix list enhancement {{{
-Plug 'romainl/vim-qf'
 Plug 'yssl/QFEnter'
 " }}}
 
@@ -250,12 +249,10 @@ nnoremap <leader>ea :e ~/.config/nvim/abbreviations.vim<CR>
 nnoremap <leader>c :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 " Quit
-inoremap <C-Q>     <esc>:q<cr>
-nnoremap <C-Q>     :q<cr>
-" Save and quit
-inoremap <C-S> <esc>:x<cr>
-nnoremap <C-s> :x<cr>
+inoremap <C-S>     <esc>:x<cr>
+nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
+" Save and quit
 nnoremap <c-l> <c-^>
 " Switch keymaps easily
 inoremap <c-l> <c-^>
@@ -632,5 +629,4 @@ nnoremap <silent> <M-p> :TmuxNavigatePrevious<cr>
 
 " Sneak settings {{{
 let g:sneak#use_ic_scs = 1
-let g:sneak#label = 1
 " }}}
