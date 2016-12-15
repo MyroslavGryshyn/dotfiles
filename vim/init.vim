@@ -252,6 +252,7 @@ nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<c
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
+nnoremap <C-Q> :q<CR>
 " Save and quit
 nnoremap <c-l> <c-^>
 " Switch keymaps easily
@@ -333,6 +334,22 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
+nnoremap <leader>fa :Rg!<space>
+
+imap <c-x><c-l> <plug>(fzf-complete-line)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
