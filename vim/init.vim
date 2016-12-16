@@ -40,6 +40,7 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
+Plug 'raimon49/requirements.txt.vim'
 " }}}
 
 " Enhance vim searching {{{
@@ -95,6 +96,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'yevhen-m/auto-pairs'
+Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 " }}}
 
 " Dispatch plugins {{{
