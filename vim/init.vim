@@ -191,10 +191,6 @@ set pastetoggle=cop
 let g:plug_window = 'enew'
 " }}}
 
-" Change cursor shape in insert mode {{{
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-" }}}
-
 " Python {{{
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
