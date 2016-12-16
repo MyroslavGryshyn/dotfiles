@@ -330,7 +330,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>rr :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
-nnoremap <leader>fa :Rg!<space>
+nnoremap <leader>fa :Ag!<space>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
