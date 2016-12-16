@@ -540,12 +540,11 @@ autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
 " }}}
 
 " Ctrlsf settings {{{
-nmap <leader>fs <Plug>CtrlSFPrompt
-nmap <leader>ff <Plug>CtrlSFQuickfixPrompt
+nmap <leader>ff <Plug>CtrlSFPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
-let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_winsize = '40%'
+let g:ctrlsf_position = 'left'
+let g:ctrlsf_winsize = '50%'
 let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_context = '-B 3 -A 2'
 let g:ctrlsf_selected_line_hl = 'p'
