@@ -596,6 +596,10 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 " }}}
 
+" Turn off cursorline in insert mode {{{
+autocmd InsertEnter,InsertLeave * set cul!
+" }}}
+
 " vim-qf settings {{{
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
