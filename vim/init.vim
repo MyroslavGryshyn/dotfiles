@@ -540,6 +540,10 @@ autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
 " }}}
 
 " Ctrlsf settings {{{
+let g:ctrlsf_mapping = {
+    \ "next": "n",
+    \ "prev": "N",
+    \ }
 nmap <leader>ff <Plug>CtrlSFPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
