@@ -100,9 +100,8 @@ Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 " }}}
 
 " Dispatch plugins {{{
-Plug 'aliev/vim-compiler-python', {'on': 'Dispatch'}
-Plug 'radenling/vim-dispatch-neovim', {'on': 'Dispatch'}
-Plug 'tpope/vim-dispatch', {'on': 'Dispatch'}
+Plug 'tpope/vim-dispatch'
+Plug 'aliev/vim-compiler-python'
 " }}}
 
 " Session management {{{
@@ -341,13 +340,6 @@ autocmd VimEnter * command! -bang -nargs=* Ag
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
