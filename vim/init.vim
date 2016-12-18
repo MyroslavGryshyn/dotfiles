@@ -26,6 +26,7 @@ Plug 'Shougo/echodoc.vim', {'for': 'python'}
 " Integration with git {{{
 " Plug 'tpope/vim-fugitive'
 " Plug 'junegunn/gv.vim'
+Plug 'cohama/agit.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'lambdalisue/vim-gita', {'on': ['Gita']}
 " }}}
