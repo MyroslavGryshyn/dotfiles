@@ -24,9 +24,10 @@ Plug 'Shougo/echodoc.vim', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
+" Plug 'tpope/vim-fugitive'
+" Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+Plug 'lambdalisue/vim-gita', {'on': ['Gita']}
 " }}}
 
 " Running tests from vim {{{
@@ -108,11 +109,11 @@ Plug 'aliev/vim-compiler-python'
 Plug 'tpope/vim-obsession'
 " }}}
 
-" Colorscheme {{{
+" " Colorscheme {{{
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'yevhen-m/base16-vim'
-" }}}
+" " }}}
 
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
