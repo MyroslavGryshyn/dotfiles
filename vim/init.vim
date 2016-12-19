@@ -545,6 +545,7 @@ autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
 " }}}
 
 " Ctrlsf settings {{{
+let g:ctrlsf_ackprg = '/usr/local/bin/rg'
 let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
