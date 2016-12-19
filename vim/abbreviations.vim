@@ -14,7 +14,6 @@ cnoreabbrev gstatus Gstatus
 cnoreabbrev gwrite Gwrite
 cnoreabbrev gcommit Gcommit
 cnoreabbrev gread Gread
-cnoreabbrev git Git
 " }}}
 
 " Agit {{{

@@ -51,7 +51,8 @@ Plug 'dyng/ctrlsf.vim'
 " }}}
 
 " Filesystem browsers {{{
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " }}}
 
 " Quickfix list enhancement {{{
@@ -120,6 +121,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
 
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 " }}}
 
@@ -154,7 +156,7 @@ set smartcase
 set list
 set listchars=tab:▸▸,trail:·
 set nofoldenable
-set updatetime=4000
+set updatetime=250
 " This order matters!
 set keymap=russian-jcukenwin
 set iminsert=0
@@ -173,6 +175,7 @@ set matchtime=2
 set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
+set relativenumber
 set omnifunc=syntaxcomplete#Complete
 set path+=**
 set scrolloff=5
@@ -233,11 +236,18 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
+" Delete to the black hole register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+" Copy curreny file's path to clipboard
+nnoremap cp :let @+=expand("%")<cr>
 " Resize vim windows
 nnoremap <left>   <c-w><
 nnoremap <right>  <c-w>>
 nnoremap <up>     <c-w>+
 nnoremap <down>   <c-w>-
+" Remove current line in insert mode
+inoremap <c-d> <esc>ddi
 " Edit init.vim
 nnoremap <leader>ev :e $MYVIMRC<cr>
 " Edit abbreviations
@@ -329,12 +339,14 @@ nnoremap <silent> <C-g><C-j> :GFiles?<CR>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>rr :History<CR>
+nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
-imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-f> <plug>(fzf-complete-path)
+
+" Just make this mapping easier
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'tags'
@@ -359,7 +371,6 @@ let g:fzf_colors =
             \ 'header':  ['fg', 'Comment'] }
 " Turn off preview window for GFiles? command
 autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
-" }}}
 
 " Airline settings {{{
 let g:airline#extensions#neomake#enabled = 1
@@ -425,7 +436,6 @@ highlight SyntasticErrorSign ctermbg=18 ctermfg=red
 highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_aggregate_errors = 1
-nnoremap cot :SyntasticToggleMode<CR>
 " }}}
 
 " Neomake settings {{{
