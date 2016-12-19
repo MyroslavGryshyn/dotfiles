@@ -370,7 +370,18 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 " Turn off preview window for GFiles? command
-autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:50%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+" }}}
 
 " Airline settings {{{
 let g:airline#extensions#neomake#enabled = 1
@@ -549,7 +560,6 @@ autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
 " }}}
 
 " Ctrlsf settings {{{
-let g:ctrlsf_ackprg = '/usr/local/bin/rg'
 let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
