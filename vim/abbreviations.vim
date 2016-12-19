@@ -19,4 +19,5 @@ cnoreabbrev git Git
 
 " Agit {{{
 cnoreabbrev agit Agit
+cnoreabbrev agitfile AgitFile
 " }}}

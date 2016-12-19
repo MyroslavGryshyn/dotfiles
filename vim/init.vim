@@ -24,6 +24,7 @@ Plug 'Shougo/echodoc.vim', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'cohama/agit.vim'
 Plug 'airblade/vim-gitgutter'
@@ -51,7 +52,6 @@ Plug 'dyng/ctrlsf.vim'
 
 " Filesystem browsers {{{
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'}
-Plug 'justinmk/vim-dirvish'
 " }}}
 
 " Quickfix list enhancement {{{
@@ -386,8 +386,8 @@ let g:airline_theme='bubblegum'
 " }}}
 
 " Nerdtree settings {{{
-nnoremap <silent> <Leader>nn :NERDTreeFind<CR><C-w>=
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR><C-w>=
+nnoremap <silent> - :NERDTreeFind<CR><C-w>=
+nnoremap <silent> _ :NERDTreeToggle<CR><C-w>=
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHighlightCursorline = 0
 let g:NERDTreeQuitOnOpen = 0
@@ -645,6 +645,10 @@ nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-p> :TmuxNavigatePrevious<cr>
+" }}}
+
+" Remove colorcolumns in quickfix and location list windows {{{
+au FileType qf,GV setlocal colorcolumn=
 " }}}
 
 " Sneak settings {{{
