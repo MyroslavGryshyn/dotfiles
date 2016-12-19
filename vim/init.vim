@@ -25,7 +25,6 @@ Plug 'Shougo/echodoc.vim', {'for': 'python'}
 
 " Integration with git {{{
 " Plug 'tpope/vim-fugitive'
-" Plug 'junegunn/gv.vim'
 Plug 'cohama/agit.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'lambdalisue/vim-gita', {'on': ['Gita']}
@@ -519,10 +518,6 @@ function! ToggleMovement(firstOp, thenOp)
     endif
 endfunction
 nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
-" }}}
-
-" Remove colorcolumns in quickfix and location list windows {{{
-au FileType qf,GV setlocal colorcolumn=
 " }}}
 
 " Isort plugin settings {{{

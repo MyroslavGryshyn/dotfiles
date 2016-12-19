@@ -16,3 +16,7 @@ cnoreabbrev gcommit Gcommit
 cnoreabbrev gread Gread
 cnoreabbrev git Git
 " }}}
+
+" Gita {{{
+cnoreabbrev gita Gita
+" }}}
