@@ -20,3 +20,7 @@ cnoreabbrev git Git
 " Gita {{{
 cnoreabbrev gita Gita
 " }}}
+
+" Agit {{{
+cnoreabbrev agit Agit
+" }}}
