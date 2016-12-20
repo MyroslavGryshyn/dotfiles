@@ -155,7 +155,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-eighties.sh"
+BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-ocean.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Add ~/bin directory to my path

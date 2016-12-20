@@ -135,7 +135,7 @@ endif
 let mapleader=","
 
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-eighties
+colorscheme base16-ocean
 
 set clipboard^=unnamedplus
 set synmaxcol=500
@@ -236,6 +236,8 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
+" Paste current word in command mode
+cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 " Delete to the black hole register
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
