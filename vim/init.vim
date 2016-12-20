@@ -221,10 +221,10 @@ autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
 autocmd! FileType gitcommit setlocal colorcolumn=51 textwidth=72
 autocmd! FileType html setlocal shiftwidth=4 tabstop=4
 autocmd! FileType javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80
+autocmd! FileType nerdtree setlocal colorcolumn&
 autocmd! FileType rst setlocal filetype=text
 autocmd! FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
 autocmd! FileType xml setlocal shiftwidth=4 tabstop=4
-autocmd! FileType nerdtree setlocal colorcolumn&
 " }}}
 
 " Trim whitespace on save {{{
@@ -531,9 +531,12 @@ function! ToggleEscapeMapping()
 endfunction
 " reset imsert by default
 inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
-autocmd BufEnter * let b:escape_mapping = 1
-autocmd BufEnter * set iminsert=0
-autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
+augroup toggle_escape
+    autocmd!
+    autocmd BufEnter * let b:escape_mapping = 1
+    autocmd BufEnter * set iminsert=0
+    autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
+augroup END
 " }}}
 
 " Ctrlsf settings {{{
@@ -593,11 +596,9 @@ augroup CursorLineOnlyInActiveWindow
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
+  " Hide cursorline in insert mode
+  autocmd InsertEnter,InsertLeave * set cul!
 augroup END
-" }}}
-
-" Turn off cursorline in insert mode {{{
-autocmd InsertEnter,InsertLeave * set cul!
 " }}}
 
 " vim-qf settings {{{
