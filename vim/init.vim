@@ -125,7 +125,7 @@ Plug 'ryanoasis/vim-devicons'
 call plug#end()
 " }}}
 
-" Abbreviations {{{
+" Source abbreviations {{{
 if filereadable(expand('~/.config/nvim/abbreviations.vim'))
   source ~/.config/nvim/abbreviations.vim
 endif
@@ -156,7 +156,6 @@ set ignorecase
 set smartcase
 set list
 set listchars=tab:▸▸,trail:·
-set nofoldenable
 set updatetime=250
 " This order matters!
 set keymap=russian-jcukenwin
@@ -197,7 +196,7 @@ set pastetoggle=cop
 let g:plug_window = 'enew'
 " }}}
 
-" Python {{{
+" Python host prog {{{
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
 endif
@@ -225,6 +224,10 @@ autocmd! FileType nerdtree setlocal colorcolumn&
 autocmd! FileType rst setlocal filetype=text
 autocmd! FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
 autocmd! FileType xml setlocal shiftwidth=4 tabstop=4
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
 " }}}
 
 " Trim whitespace on save {{{
@@ -237,7 +240,6 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
-
 " Edit init.vim {{{
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>:AirlineRefresh<cr>
