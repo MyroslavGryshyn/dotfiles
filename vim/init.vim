@@ -512,17 +512,6 @@ let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_python = ['autopep8']
 " }}}
 
-" Swap movements {{{
-function! ToggleMovement(firstOp, thenOp)
-    let pos = getpos('.')
-    execute "normal! " . a:firstOp
-    if pos == getpos('.')
-        execute "normal! " . a:thenOp
-    endif
-endfunction
-nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
-" }}}
-
 " Isort plugin settings {{{
 let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
