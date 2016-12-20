@@ -135,7 +135,7 @@ endif
 let mapleader=","
 
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-ocean
+colorscheme base16-eighties
 
 set clipboard^=unnamedplus
 set synmaxcol=500
