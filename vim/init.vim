@@ -133,6 +133,7 @@ endif
 
 " Main settings {{{
 let mapleader=","
+let localleader = " "
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
@@ -236,6 +237,21 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
+
+" Edit init.vim {{{
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :so $MYVIMRC<cr>:AirlineRefresh<cr>
+" Edit abbreviations (TODO get path from $MYVIMRC dir)
+nnoremap <leader>ea :split ~/.config/nvim/abbreviations.vim<cr>
+nnoremap <leader>sa :so ~/.config/nvim/abbreviations.vim<cr>
+" }}}
+
+" Move to start of line
+nnoremap H g^
+" Move to end of line
+nnoremap L g$
+" Mark this position
+nnoremap M mM
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 " Delete to the black hole register
@@ -250,10 +266,6 @@ nnoremap <up>     <c-w>+
 nnoremap <down>   <c-w>-
 " Remove current line in insert mode
 inoremap <c-d> <esc>ddi
-" Edit init.vim
-nnoremap <leader>ev :e $MYVIMRC<cr>
-" Edit abbreviations
-nnoremap <leader>ea :e ~/.config/nvim/abbreviations.vim<CR>
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
@@ -540,7 +552,7 @@ let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
     \ }
-nmap <leader>ff <Plug>CtrlSFPrompt
+nnoremap <leader>ff <Plug>CtrlSFPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'left'

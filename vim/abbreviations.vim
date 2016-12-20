@@ -1,10 +1,14 @@
 " Vim {{{
 cabbrev h tab help
 cabbrev ln lne
+iabbrev adn and
+iabbrev waht what
+iabbrev tehn then
 " }}}
 
 " Python {{{
 iabbr improt import
+iabbr ipmort import
 " }}}
 
 " Fugitive {{{
