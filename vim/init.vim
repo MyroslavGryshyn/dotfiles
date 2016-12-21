@@ -665,5 +665,3 @@ au FileType qf,GV setlocal colorcolumn=
 " Sneak settings {{{
 let g:sneak#use_ic_scs = 1
 " }}}
-
-echom "init.vim sourced"
