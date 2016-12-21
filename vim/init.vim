@@ -166,7 +166,6 @@ set splitbelow
 set splitright
 set noshowmode
 set noshowcmd
-set expandtab  " <tab> inserts spaces
 set infercase
 set noacd
 set nobackup
@@ -176,13 +175,10 @@ set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
 set relativenumber
-set omnifunc=syntaxcomplete#Complete
 set path+=**
 set scrolloff=5
 set shell=/bin/zsh
 set shiftwidth=4 " columns per <<
-set softtabstop=4  " spaces per tab
-set tabstop=4  " columns per tabstop
 set timeout           " for mappings
 set timeoutlen=1000   " default value
 set ttimeout          " for key codes
