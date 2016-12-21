@@ -208,26 +208,8 @@ if filereadable(glob('~/.pyenv/versions/neovim2/bin/python'))
 endif
 " }}}
 
-" Autocommands {{{
-" Open the file on the last exit place
+" Open file on the last exit place {{{
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-" Python autocommands {{{
-autocmd! BufRead,BufNewFile *.py set filetype=python colorcolumn=73,80
-" }}}
-
-autocmd! FileType css setlocal shiftwidth=2 tabstop=2 colorcolumn=80
-autocmd! FileType gitcommit setlocal colorcolumn=51 textwidth=72
-autocmd! FileType html setlocal shiftwidth=4 tabstop=4
-autocmd! FileType javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80
-autocmd! FileType nerdtree setlocal colorcolumn&
-autocmd! FileType rst setlocal filetype=text
-autocmd! FileType text setlocal shiftwidth=2 textwidth=80 colorcolumn=80
-autocmd! FileType xml setlocal shiftwidth=4 tabstop=4
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
 " }}}
 
 " Trim whitespace on save {{{
