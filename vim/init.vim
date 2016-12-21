@@ -248,6 +248,11 @@ nnoremap <leader>ea :split ~/.config/nvim/abbreviations.vim<cr>
 nnoremap <leader>sa :so ~/.config/nvim/abbreviations.vim<cr>
 " }}}
 
+" Always use very magic search mode
+nnoremap / /\v
+" Replace in all buffer
+nnoremap <leader>rs :%s/\v
+
 " Move to start of line
 nnoremap H g^
 " Move to end of line
@@ -341,8 +346,6 @@ vnoremap g$ $
 " }}}
 
 nnoremap <c-w>; <c-w>p
-" Replace in all buffer
-nnoremap <leader>rs :%s/
 " }}}
 
 " Ultisnips settings {{{
@@ -358,6 +361,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
+nnoremap <leader>fa :Ag!<space>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-f> <plug>(fzf-complete-path)
@@ -371,6 +375,11 @@ let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit' }
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
 " }}}
 
 " Airline settings {{{
