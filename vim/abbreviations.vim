@@ -24,3 +24,5 @@ cnoreabbrev gread Gread
 cnoreabbrev agit Agit
 cnoreabbrev agitfile AgitFile
 " }}}
+
+echom "abbreviations.vim sourced"

@@ -240,12 +240,14 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
-" Edit init.vim {{{
-nnoremap <leader>ev :split $MYVIMRC<cr>
-nnoremap <leader>sv :so $MYVIMRC<cr>:AirlineRefresh<cr>
-" Edit abbreviations (TODO get path from $MYVIMRC dir)
-nnoremap <leader>ea :split ~/.config/nvim/abbreviations.vim<cr>
-nnoremap <leader>sa :so ~/.config/nvim/abbreviations.vim<cr>
+
+" Edit init.vim and abbreviations.vim files {{{
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :execute("source ".$MYVIMRC." \| AirlineRefresh")<cr>
+
+let abbr_file = fnamemodify($MYVIMRC, ':p:h')."/abbreviations.vim"
+nnoremap <leader>ea :execute("edit ".abbr_file)<cr>
+nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 " }}}
 
 " Always use very magic search mode
@@ -663,3 +665,5 @@ au FileType qf,GV setlocal colorcolumn=
 " Sneak settings {{{
 let g:sneak#use_ic_scs = 1
 " }}}
+
+echom "init.vim sourced"
