@@ -45,7 +45,6 @@ Plug 'raimon49/requirements.txt.vim'
 " }}}
 
 " Enhance vim searching {{{
-Plug 'haya14busa/vim-asterisk'
 Plug 'justinmk/vim-sneak'
 Plug 'dyng/ctrlsf.vim'
 " }}}
@@ -83,6 +82,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
+Plug 'ivyl/vim-bling'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
@@ -597,18 +597,6 @@ let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
 " }}}
 
-" Vim-asterisk settings {{{
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
-let g:asterisk#keeppos = 1
-" }}}
-
 " Vim-easy-align plugin {{{
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -642,4 +630,8 @@ au FileType qf,GV setlocal colorcolumn=
 
 " Sneak settings {{{
 let g:sneak#use_ic_scs = 1
+" }}}
+
+" Bling settings {{{
+let g:bling_time = 50
 " }}}
