@@ -535,7 +535,7 @@ let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
     \ }
-nnoremap <leader>ff <Plug>CtrlSFPrompt
+nmap <leader>ff <Plug>CtrlSFPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_position = 'left'
