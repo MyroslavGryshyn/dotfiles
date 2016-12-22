@@ -626,5 +626,7 @@ let g:sneak#use_ic_scs = 1
 " }}}
 
 " Bling settings {{{
-let g:bling_time = 50
+let g:bling_count = 1
+let g:bling_color_fg = 'black'
+let g:bling_color_bg = 'yellow'
 " }}}
