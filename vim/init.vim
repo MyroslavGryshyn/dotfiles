@@ -173,7 +173,6 @@ set matchtime=2
 set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
-set relativenumber
 set path+=**
 set scrolloff=5
 set shell=/bin/zsh
