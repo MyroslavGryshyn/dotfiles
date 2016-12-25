@@ -206,6 +206,10 @@ endif
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " }}}
 
+" Python autocommands {{{
+autocmd! BufRead,BufNewFile *.py set filetype=python
+" }}}
+
 " Trim whitespace on save {{{
 fun! TrimWhitespace()
     let l:save_cursor = getpos('.')
@@ -249,8 +253,6 @@ nnoremap <left>   <c-w><
 nnoremap <right>  <c-w>>
 nnoremap <up>     <c-w>+
 nnoremap <down>   <c-w>-
-" Remove current line in insert mode
-inoremap <c-d> <esc>ddi
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
