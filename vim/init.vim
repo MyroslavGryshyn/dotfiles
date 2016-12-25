@@ -81,7 +81,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
-Plug 'ivyl/vim-bling'
+Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
@@ -626,8 +626,14 @@ au FileType qf,GV setlocal colorcolumn=
 let g:sneak#use_ic_scs = 1
 " }}}
 
-" Bling settings {{{
-let g:bling_count = 1
-let g:bling_color_fg = 'black'
-let g:bling_color_bg = 'yellow'
+" Vim-asterisk settings {{{
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+let g:asterisk#keeppos = 1
 " }}}
