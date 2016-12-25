@@ -207,7 +207,11 @@ autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 " }}}
 
 " Python autocommands {{{
-autocmd! BufRead,BufNewFile *.py set filetype=python
+augroup PythonBuffer
+    autocmd!
+    autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
+    autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
+augroup END
 " }}}
 
 " Trim whitespace on save {{{
