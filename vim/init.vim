@@ -11,6 +11,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
+Plug 'elzr/vim-json', {'for': 'json'}
 " }}}
 
 " Autocomplete engines {{{
@@ -24,6 +25,7 @@ Plug 'Shougo/echodoc.vim', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
+Plug 'tpope/vim-git'
 Plug 'chrisbra/vim-diff-enhanced', {'on': 'EnhancedDiff'}
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
