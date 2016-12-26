@@ -34,7 +34,7 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
-Plug 'Yggdroot/indentLine', {'for': 'python'}
+Plug 'Yggdroot/indentLine'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
