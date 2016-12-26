@@ -24,6 +24,7 @@ Plug 'Shougo/echodoc.vim', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
+Plug 'chrisbra/vim-diff-enhanced', {'on': 'EnhancedDiff'}
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'airblade/vim-gitgutter'
@@ -536,6 +537,7 @@ let g:ctrlsf_mapping = {
 nmap <leader>ff <Plug>CtrlSFPrompt
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
+let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_position = 'left'
 let g:ctrlsf_winsize = '50%'
 let g:ctrlsf_populate_qflist = 1
