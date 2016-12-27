@@ -240,12 +240,6 @@ nnoremap / /\v
 " Replace in all buffer
 nnoremap <leader>rs :%s/\v
 
-" Move to start of line
-nnoremap H g^
-" Move to end of line
-nnoremap L g$
-" Mark this position
-nnoremap M mM
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 " Delete to the black hole register
@@ -642,4 +636,15 @@ map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
+" }}}
+
+" Swap movements {{{
+function! ToggleMovement(firstOp, thenOp)
+    let pos = getpos('.')
+    execute "normal! " . a:firstOp
+    if pos == getpos('.')
+        execute "normal! " . a:thenOp
+    endif
+endfunction
+nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 " }}}
