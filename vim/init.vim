@@ -12,7 +12,6 @@ Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
 Plug 'elzr/vim-json', {'for': 'json'}
-Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'moskytw/nginx-contrib-vim', {'for': 'nginx'}
 " }}}
 
