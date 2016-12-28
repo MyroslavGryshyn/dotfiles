@@ -240,6 +240,8 @@ nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 
 " Always use very magic search mode
 nnoremap / /\v
+cnoremap g/ g/\v
+
 " Replace in all buffer
 nnoremap <leader>rs :%s/\v
 
