@@ -240,7 +240,6 @@ nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 
 " Always use very magic search mode
 nnoremap / /\v
-cnoremap g/ g/\v
 
 " Replace in all buffer
 nnoremap <leader>rs :%s/\v
@@ -385,10 +384,9 @@ let g:airline_theme='bubblegum'
 " }}}
 
 " Nerdtree settings {{{
-nnoremap <silent> - :NERDTreeFind<CR><C-w>=
-nnoremap <silent> _ :NERDTreeToggle<CR><C-w>=
+nnoremap <silent> - :NERDTreeFind<CR>
+nnoremap <silent> _ :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
-let g:NERDTreeHighlightCursorline = 0
 let g:NERDTreeQuitOnOpen = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
 " automatically remove buffer after a file was deleted with context menu
