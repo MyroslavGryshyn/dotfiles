@@ -241,6 +241,9 @@ nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 " Always use very magic search mode
 nnoremap / /\v
 
+" Visually select the text that was last edited/pasted
+noremap gV `[v`]
+
 " Replace in all buffer
 nnoremap <leader>rs :%s/\v
 
@@ -270,6 +273,8 @@ nnoremap <c-l> <c-^>
 " Switch keymaps easily
 inoremap <c-l> <c-^>
 cnoremap <c-l> <c-^>
+
+vnoremap gy y`>
 nnoremap Y y$
 
 " Readline style keybindings for command line
