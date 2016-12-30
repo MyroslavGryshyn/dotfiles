@@ -194,6 +194,12 @@ set pastetoggle=cop
 let g:plug_window = 'enew'
 " }}}
 
+" Filetype autocommands {{{
+autocmd Filetype javascript setlocal shiftwidth=2 tabstop=2 colorcolumn=80 expandtab
+autocmd Filetype python setlocal colorcolumn=73,80 expandtab shiftwidth=4 tabstop=4
+autocmd Filetype css setlocal shiftwidth=4 tabstop=4 expandtab
+" }}}
+
 " Python host prog {{{
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
