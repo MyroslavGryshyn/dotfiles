@@ -85,6 +85,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
+Plug 'PeterRincker/vim-argumentative'
 Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
