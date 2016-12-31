@@ -90,7 +90,6 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
-Plug 'junegunn/vim-easy-align'
 Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
 Plug 'mhinz/vim-hugefile'
 Plug 'myint/indent-finder'
@@ -182,6 +181,8 @@ set path+=**
 set scrolloff=5
 set shell=/bin/zsh
 set shiftwidth=4 " columns per <<
+set tabstop=4
+set shiftwidth=4
 set timeout           " for mappings
 set timeoutlen=1000   " default value
 set ttimeout          " for key codes
@@ -604,13 +605,6 @@ augroup END
 " vim-qf settings {{{
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
-" }}}
-
-" Vim-easy-align plugin {{{
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
 " }}}
 
 " QFEnter plugin settings {{{
