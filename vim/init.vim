@@ -358,7 +358,7 @@ imap <c-f> <plug>(fzf-complete-path)
 " Just make this mapping easier
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
-let g:fzf_tags_command = 'tags'
+let g:fzf_tags_command = 'ctags'
 let g:fzf_commands_expect = 'ctrl-x'
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
@@ -367,13 +367,13 @@ let g:fzf_action = {
 " }}}
 
 " Airline settings {{{
+let g:airline#extensions#branch#enabled = 0  " disable fugitive
 let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#branch#displayed_head_limit = 13
 let g:airline#extensions#branch#format = 2
-let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -446,10 +446,10 @@ let g:neomake_highlight_lines = 0
 let g:neomake_python_flake8_args = ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126']
 let g:neomake_verbose = 0
 autocmd! BufWritePost *.py Neomake
-let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_message_sign = {'text': '●', 'texthl': 'NeomakeMessageSign'}
-let g:neomake_error_sign = {'text': '●', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_info_sign = {'text': '●', 'texthl': 'NeomakeInfoSign'}
+let g:neomake_warning_sign = {'text': '●', 'texthl': 'SyntasticWarningSign'}
+let g:neomake_message_sign = {'text': '●', 'texthl': 'SyntasticErrorSign'}
+let g:neomake_error_sign = {'text': '●', 'texthl': 'SyntasticErrorSign'}
+let g:neomake_info_sign = {'text': '●', 'texthl': 'SyntasticErrorSign'}
 " }}}
 
 " Jedi settings {{{
@@ -488,6 +488,7 @@ inoremap <silent><expr> <C-n>
             \ deoplete#mappings#manual_complete()
 " Close popup and insert a new line
 inoremap <silent> <C-j> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
     return deoplete#close_popup() . "\<CR>"
 endfunction
