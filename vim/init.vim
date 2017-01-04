@@ -169,7 +169,6 @@ set splitbelow
 set splitright
 set noshowmode
 set noshowcmd
-set infercase
 set noacd
 set nobackup
 set showmatch
@@ -180,16 +179,15 @@ set number
 set path+=**
 set scrolloff=5
 set shell=/bin/zsh
-set shiftwidth=4 " columns per <<
-set tabstop=4
-set shiftwidth=4
+set shiftwidth=4 " number of spaces per <<
+set tabstop=4  " number of visible spaces per TAB
 set timeout           " for mappings
 set timeoutlen=1000   " default value
 set ttimeout          " for key codes
 set ttimeoutlen=10    " unnoticeable small value
 set undofile  " keep undo history for all file changes
+set wildmenu  " visual autocomplete for command menu
 set wildignore+=*.pyc,*/__pycache__/*
-set pastetoggle=cop
 " }}}
 
 " Vim-plug settings {{{
@@ -230,6 +228,10 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Mappings {{{
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
 
 " Edit init.vim and abbreviations.vim files {{{
 nnoremap <leader>ev :e $MYVIMRC<cr>
@@ -367,7 +369,10 @@ let g:fzf_action = {
 " }}}
 
 " Airline settings {{{
-let g:airline#extensions#branch#enabled = 0  " disable fugitive
+
+" Disable fugitive cause it breaks airline when you work with  untracked files
+let g:airline#extensions#branch#enabled = 0
+
 let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
@@ -640,15 +645,4 @@ map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
-" }}}
-
-" Swap movements {{{
-function! ToggleMovement(firstOp, thenOp)
-    let pos = getpos('.')
-    execute "normal! " . a:firstOp
-    if pos == getpos('.')
-        execute "normal! " . a:thenOp
-    endif
-endfunction
-nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 " }}}
