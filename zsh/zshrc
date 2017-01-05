@@ -121,8 +121,18 @@ alias vim="nvim"
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
 export FZF_DEFAULT_OPTS='--color=dark,bg+:18 --bind=ctrl-z:toggle-up'
-export FZF_TMUX=0
+export FZF_TMUX_HEIGHT=50%
 
+
+# fkill - kill process
+fkill() {
+  pid=$(ps -ef | sed 1d | fzf-tmux -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -${1:-9} $pid
+  fi
+}
 
 # Z settings
 Z_SCRIPT="$HOME/.rupa_z/z.sh"
