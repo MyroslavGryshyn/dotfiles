@@ -227,6 +227,16 @@ endfun
 autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
+" Trim empty lines at the end of file {{{
+function! TrimEndLines()
+    let save_cursor = getpos(".")
+    :silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_cursor)
+endfunction
+
+autocmd! BufWritePre *.py :call TrimEndLines()
+" }}}
+
 " Mappings {{{
 
 " move to beginning/end of line
@@ -271,6 +281,7 @@ nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<c
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
+nnoremap <leader>x :x<cr>
 nnoremap <C-Q> :q<CR>
 " Save and quit
 nnoremap <c-l> <c-^>
@@ -580,7 +591,6 @@ endif
 
 " Gitgutter settings {{{
 let g:gitgutter_sign_column_always = 1
-let g:gitgutter_diff_args = '-w'
 " Refine gitgutter signs
 highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
 highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
