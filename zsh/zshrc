@@ -95,65 +95,20 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt HISTIGNORESPACE
 
-# Aliases
-alias l='ls -1F --group-directories-first --color=never'
-alias ll='ls -AFlh --color=never'
-alias la='ls -A --color=never'
-
-alias pbcopy='xclip -sel clip'
-alias pbpaste='xclip -sel clip -o'
-
-alias gp='git push origin HEAD'
-alias gs='git status -sb'
-alias gd='git diff -w'
-alias gdc='git diff --cached -w'
-alias gl="git log --abbrev-commit --decorate --format=format:'%C(bold blue)%h -%C(reset) %C(white)%s%C(reset) %C(bold blue)- %an%C(reset)%C(bold yellow)%d%C(reset)'"
-alias glg="git log --abbrev-commit --decorate --format=format:'%C(bold blue)%h -%C(reset) %C(white)%s%C(reset) %C(bold blue)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all --graph"
-alias gls="git log --pretty='format:%C(yellow)%h%C(reset) %C(blue)%ad %C(reset)%s %C(reset)%C(green)- %an,%C(reset) %C(bold blue)%ar' --date=short -S"
-alias gll="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold blue)- %an%C(reset)' --all"
-alias rm=trash
-alias tmux="TERM=xterm-256color tmux"
-alias vim="nvim"
-
-# FZF settings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.fzf-key-bindings.zsh ] && source ~/.fzf-key-bindings.zsh
-
-export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
-export FZF_DEFAULT_OPTS='--color=dark,bg+:18 --bind=ctrl-z:toggle-up'
-export FZF_TMUX_HEIGHT=50%
-
-
-# fkill - kill process
-fkill() {
-  pid=$(ps -ef | sed 1d | fzf-tmux -m | awk '{print $2}')
-
-  if [ "x$pid" != "x" ]
-  then
-    kill -${1:-9} $pid
-  fi
-}
-
 # Z settings
 Z_SCRIPT="$HOME/.rupa_z/z.sh"
 [[ -s $Z_SCRIPT ]] && source $Z_SCRIPT
 
-unalias z
-z() {
-  if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf-tmux +s --tac | sed 's/^[0-9,.]* *//')"
-  else
-    _last_z_args="$@"
-    _z "$@"
-  fi
-}
+# FZF settings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf-key-bindings.zsh ] && source ~/.fzf-key-bindings.zsh
+[ -f ~/.fzf-funcs.zsh ] && source ~/.fzf-funcs.zsh
+[ -f ~/.shortcuts.zsh ] && source ~/.shortcuts.zsh
 
-zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf-tmux -q $_last_z_args)"
-}
-
-alias j=z
-alias jj=zz
+export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
+export FZF_DEFAULT_OPTS='--color=dark,bg+:18 --bind=ctrl-z:toggle-up'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_TMUX_HEIGHT=50%
 
 # Pyenv settings
 export PYENV_ROOT="$HOME/.pyenv"
