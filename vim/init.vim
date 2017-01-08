@@ -366,7 +366,7 @@ nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
-imap <c-f> <plug>(fzf-complete-path)
+imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " Just make this mapping easier
 let g:fzf_layout = { 'window': 'enew' }
