@@ -14,3 +14,4 @@ alias gp='git push origin HEAD'
 
 alias rm=trash
 alias vim="nvim"
+alias e="nvim"

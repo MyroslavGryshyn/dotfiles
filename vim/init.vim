@@ -100,7 +100,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'yevhen-m/auto-pairs'
+" Autoclose parens, quotes, etc.
+Plug 'Raimondi/delimitMate'
 Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 " }}}
 
@@ -177,7 +178,7 @@ set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
 set path+=**
-set scrolloff=5
+set scrolloff=99
 set shell=/bin/zsh
 set shiftwidth=4 " number of spaces per <<
 set tabstop=4  " number of visible spaces per TAB
@@ -364,6 +365,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
+nnoremap <leader>fa :Ag!<space>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -377,12 +379,17 @@ let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit' }
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
 " }}}
 
 " Airline settings {{{
 
 " Disable fugitive cause it breaks airline when you work with  untracked files
-let g:airline#extensions#branch#enabled = 0
+" let g:airline#extensions#branch#enabled = 0
 
 let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#whitespace#checks = []
@@ -504,7 +511,6 @@ inoremap <silent><expr> <C-n>
             \ deoplete#mappings#manual_complete()
 " Close popup and insert a new line
 inoremap <silent> <C-j> <C-r>=<SID>my_cr_function()<CR>
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
     return deoplete#close_popup() . "\<CR>"
 endfunction
@@ -582,11 +588,8 @@ let g:python_compiler_highlight_errors = 0
 
 " IndentLine settings {{{
 let g:indentLine_color_term = 19
-let g:indentLine_fileType = ['python']
-let g:indentLine_faster = 1
-if !exists("g:syntax_on")
-    syntax on
-endif
+let g:indentLine_fileType = ['python', 'javascript']
+" Dont use indentline_faster with delimitmate
 " }}}
 
 " Gitgutter settings {{{
@@ -596,10 +599,6 @@ highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
 highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
 highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
 highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
-" }}}
-
-" Autopairs settings {{{
-let g:AutoPairsShortcutJump='<c-k>'
 " }}}
 
 " Show cursorline only in active window {{{
@@ -655,4 +654,17 @@ map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
+" }}}
+
+" Delimitmate settings {{{
+imap <C-k> <Plug>delimitMateS-Tab
+let delimitMate_excluded_regions = "Comment"
+let delimitMate_expand_cr = 1
+au FileType python let delimitMate_nesting_quotes = ["'", '"']
+au FileType markdown let delimitMate_nesting_quotes = ["`"]
+" Put triple quotes on the separate line after cr
+au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
+let delimitMate_quotes = "\" ' `"
+au FileType markdown let delimitMate_quotes = "\" ' `"
+au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " }}}
