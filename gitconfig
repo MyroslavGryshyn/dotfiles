@@ -2,7 +2,7 @@
 	email = yvhn.yvhn@gmail.com
 	name = yevhen-m
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/dotfiles/gitignore_global
 [push]
 	; Push only the current branch to the one that git pull will pull from
 	; (check that their names match)
