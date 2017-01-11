@@ -96,7 +96,7 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt HISTIGNORESPACE
 
 # Z settings
-Z_SCRIPT="$HOME/.rupa_z/z.sh"
+Z_SCRIPT="$HOME/.config/z/z.sh"
 [[ -s $Z_SCRIPT ]] && source $Z_SCRIPT
 
 # FZF settings
@@ -131,7 +131,8 @@ fi
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # virtualenv-wrapper
 export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
+VIRTUALENVWRAPPER="/usr/local/bin/virtualenvwrapper.sh"
+[[ -s $VIRTUALENVWRAPPER ]] && source $VIRTUALENVWRAPPER
 
 # Inherit environment if its activated
 if [ -n "$VIRTUAL_ENV" ]; then
