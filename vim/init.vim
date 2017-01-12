@@ -410,7 +410,7 @@ let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16_eighties'
+let g:airline_theme='bubblegum'
 " }}}
 
 " Nerdtree settings {{{
