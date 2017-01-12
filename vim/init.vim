@@ -178,7 +178,7 @@ set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
 set path+=**
-set scrolloff=99
+set scrolloff=20
 set shell=/bin/zsh
 set shiftwidth=4 " number of spaces per <<
 set tabstop=4  " number of visible spaces per TAB
@@ -188,7 +188,7 @@ set ttimeout          " for key codes
 set ttimeoutlen=10    " unnoticeable small value
 set undofile  " keep undo history for all file changes
 set wildmenu  " visual autocomplete for command menu
-set wildignore+=*.pyc,*/__pycache__/*
+set wildignore+=*.pyc,*/__pycache__/*,*/venv/*,*/env/*
 " }}}
 
 " Vim-plug settings {{{
@@ -277,7 +277,7 @@ nnoremap <down>   <c-w>-
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 " Quit
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
