@@ -45,6 +45,7 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'raimon49/requirements.txt.vim'
+Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -178,7 +179,7 @@ set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
 set path+=**
-set scrolloff=20
+set scrolloff=10
 set shell=/bin/zsh
 set shiftwidth=4 " number of spaces per <<
 set tabstop=4  " number of visible spaces per TAB
@@ -214,6 +215,8 @@ autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 " Python autocommands {{{
 augroup PythonBuffer
     autocmd!
+    autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+    autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
     autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
     autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
 augroup END
@@ -239,6 +242,8 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
+" Enable folding with the spacebar
+nnoremap <space> za
 
 " move to beginning/end of line
 nnoremap B ^
@@ -277,18 +282,13 @@ nnoremap <down>   <c-w>-
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
+nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>
 " Quit
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <C-Q> :q<CR>
-" Save and quit
-nnoremap <c-l> <c-^>
-" Switch keymaps easily
-inoremap <c-l> <c-^>
-cnoremap <c-l> <c-^>
 
 vnoremap gy y`>
 nnoremap Y y$
@@ -588,7 +588,7 @@ let g:python_compiler_highlight_errors = 0
 
 " IndentLine settings {{{
 let g:indentLine_color_term = 19
-let g:indentLine_fileType = ['python', 'javascript']
+let g:indentLine_fileType = ['python']
 " Dont use indentline_faster with delimitmate
 " }}}
 
@@ -667,4 +667,8 @@ au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
 let delimitMate_quotes = "\" ' `"
 au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+" }}}
+
+" SimplyFold settings {{{
+let g:SimpylFold_docstring_preview=1
 " }}}
