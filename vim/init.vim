@@ -143,6 +143,7 @@ let localleader = " "
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
 
+set nofoldenable
 set clipboard^=unnamedplus
 set synmaxcol=500
 set hidden
@@ -242,9 +243,6 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
-" Enable folding with the spacebar
-nnoremap <space> za
-
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
@@ -282,13 +280,19 @@ nnoremap <down>   <c-w>-
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 " Quit
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>x :x<cr>
 nnoremap <C-Q> :q<CR>
+
+" Switch to alternate buffer
+nnoremap <c-l> <c-^>
+" Switch keymaps easily
+inoremap <c-l> <c-^>
+cnoremap <c-l> <c-^>
 
 vnoremap gy y`>
 nnoremap Y y$
