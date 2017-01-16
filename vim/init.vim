@@ -180,7 +180,6 @@ set noswapfile
 set nrformats=  "treat all numbers as decimal, not octal"
 set number
 set path+=**
-set scrolloff=10
 set shell=/bin/zsh
 set shiftwidth=4 " number of spaces per <<
 set tabstop=4  " number of visible spaces per TAB
@@ -280,7 +279,7 @@ nnoremap <down>   <c-w>-
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>zz
 " Quit
 inoremap <C-S>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
