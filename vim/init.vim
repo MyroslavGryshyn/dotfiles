@@ -322,10 +322,10 @@ nnoremap <silent> <c-w>t :tabnew<CR>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling
-nnoremap <C-j> 2<C-E>
-vnoremap <C-j> 2j
-nnoremap <C-k> 2<C-Y>
-vnoremap <C-k> 2k
+nnoremap <C-j> 5<C-E>
+vnoremap <C-j> 5j
+nnoremap <C-k> 5<C-Y>
+vnoremap <C-k> 5k
 " Operate on display lines, not real lines {{{
 nnoremap k gk
 vnoremap k gk
@@ -675,4 +675,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " SimplyFold settings {{{
 let g:SimpylFold_docstring_preview=1
+" }}}
+" Fugitive settings {{{
+nnoremap <leader>gd :Gdiff<cr>gg
 " }}}
