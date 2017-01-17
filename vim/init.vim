@@ -378,10 +378,6 @@ nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
 
-nnoremap <leader>fa :Ag!<space>
-" Select and search with Ag
-xnoremap <silent> <Leader>fa y:Ag! <C-R>"<CR>
-
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
@@ -399,6 +395,10 @@ autocmd VimEnter * command! -bang -nargs=* Ag
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
+
+nnoremap <leader>fa :Ag<space>
+" Select and search with Ag
+xnoremap <silent> <Leader>fa y:Ag <C-R>"<CR>
 " }}}
 
 " Airline settings {{{
