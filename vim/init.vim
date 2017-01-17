@@ -263,11 +263,14 @@ nnoremap <leader>rs :%s/\v
 
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
+
 " Delete to the black hole register
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
-" Copy curreny file's path to clipboard
+
+" Copy current file's path to clipboard
 nnoremap cp :let @+=expand("%")<cr>
+
 " Resize vim windows
 nnoremap <left>   <c-w><
 nnoremap <right>  <c-w>>
@@ -277,6 +280,7 @@ nnoremap <down>   <c-w>-
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>zz
+
 " Quit
 inoremap <C-s>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
@@ -295,11 +299,14 @@ cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 " Use backslash to jump to previous char match
 nnoremap \ ,
 nnoremap <C-]> g<C-]>
+
 " Use Q instead of q to start recording a macro
 nnoremap Q q
+
 " Use q only to close plugin windows
 nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
+
 " Quit vim
 nnoremap ZX :qall<CR>
 
@@ -685,3 +692,12 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 nnoremap <leader>gd :Gdiff<cr>gg
 nmap <leader>gs :Gstatus<cr>gg<c-n>
 " }}}
+
+augroup vimrc
+    autocmd!
+    " Automatic rename of tmux window
+    if exists('$TMUX') && !exists('$NORENAME')
+        au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
+        au VimLeave * call system('tmux set-window automatic-rename on')
+    endif
+augroup END
