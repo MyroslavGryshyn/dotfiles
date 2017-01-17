@@ -106,7 +106,7 @@ Z_SCRIPT="$HOME/.config/z/z.sh"
 [ -f ~/.shortcuts.zsh ] && source ~/.shortcuts.zsh
 
 export FZF_DEFAULT_COMMAND='ag -g "" --hidden'
-export FZF_DEFAULT_OPTS='--color=dark,bg+:18 --bind=ctrl-z:toggle-up'
+export FZF_DEFAULT_OPTS='--color=dark,bg+:18 --bind=ctrl-z:toggle-up --inline-info'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_TMUX_HEIGHT=50%
 export FZF_CTRL_T_OPTS='--no-reverse'

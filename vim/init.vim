@@ -45,7 +45,6 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'raimon49/requirements.txt.vim'
-Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -91,7 +90,7 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
-Plug 'mbbill/undotree', {'on': 'UndotreeShow'}
+Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
 Plug 'mhinz/vim-hugefile'
 Plug 'myint/indent-finder'
 Plug 'pbrisbin/vim-mkdir'
@@ -215,8 +214,6 @@ autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 " Python autocommands {{{
 augroup PythonBuffer
     autocmd!
-    autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-    autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
     autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
     autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
 augroup END
@@ -281,17 +278,10 @@ nnoremap <down>   <c-w>-
 nnoremap <leader>c :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>zz
 " Quit
-inoremap <C-S>     <esc>:x<cr>
+inoremap <C-s>     <esc>:x<cr>
 nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>x :x<cr>
 nnoremap <C-Q> :q<CR>
-
-" Switch to alternate buffer
-nnoremap <c-l> <c-^>
-" Switch keymaps easily
-inoremap <c-l> <c-^>
-cnoremap <c-l> <c-^>
 
 vnoremap gy y`>
 nnoremap Y y$
@@ -312,44 +302,56 @@ nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
 " Quit vim
 nnoremap ZX :qall<CR>
+
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
 nnoremap <silent> th :tabfirst<CR>
 nnoremap <silent> tl :tablast<CR>
 nnoremap <silent> <c-w>t :tabnew<CR>
+
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-" Smart scrolling
-nnoremap <C-j> 5<C-E>
-vnoremap <C-j> 5j
-nnoremap <C-k> 5<C-Y>
-vnoremap <C-k> 5k
+
+" Smart scrolling -- preserve cursor position for better readablility
+nnoremap <C-d> 10<C-E>
+vnoremap <C-d> 10j
+nnoremap <C-u> 10<C-Y>
+vnoremap <C-u> 10k
+
+" Moving lines
+nnoremap <silent> <C-k> :move-2<cr>
+nnoremap <silent> <C-j> :move+<cr>
+nnoremap <silent> <C-h> <<
+nnoremap <silent> <C-l> >>
+
+xnoremap <silent> <C-k> :move-2<cr>gv
+xnoremap <silent> <C-j> :move'>+<cr>gv
+xnoremap <silent> <C-h> <gv
+xnoremap <silent> <C-l> >gv
+
 " Operate on display lines, not real lines {{{
 nnoremap k gk
-vnoremap k gk
 nnoremap gk k
-vnoremap gk k
-
 nnoremap j gj
-vnoremap j gj
 nnoremap gj j
-vnoremap gj j
-
 nnoremap 0 g0
-vnoremap 0 g0
 nnoremap g0 0
-vnoremap g0 0
-
 nnoremap ^ g^
-vnoremap ^ g^
 nnoremap g^ ^
-vnoremap g^ ^
-
 nnoremap $ g$
-vnoremap $ g$
 nnoremap g$ $
-vnoremap g$ $
+
+xnoremap k gk
+xnoremap gk k
+xnoremap j gj
+xnoremap gj j
+xnoremap 0 g0
+xnoremap g0 0
+xnoremap ^ g^
+xnoremap g^ ^
+xnoremap $ g$
+xnoremap g$ $
 " }}}
 
 nnoremap <c-w>; <c-w>p
@@ -368,7 +370,10 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>T :BTags<CR>
+
 nnoremap <leader>fa :Ag!<space>
+" Select and search with Ag
+xnoremap <silent> <Leader>fa y:Ag! <C-R>"<CR>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -428,6 +433,8 @@ let NERDTreeAutoDeleteBuffer = 1
 
 " Undotree settings {{{
 let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_WindowLayout = 2
+nnoremap U :UndotreeToggle<CR>
 " }}}
 
 " Syntastic settings {{{
@@ -565,6 +572,8 @@ let g:ctrlsf_mapping = {
     \ "prev": "N",
     \ }
 nmap <leader>ff <Plug>CtrlSFPrompt
+" Select and search with CtrlSF
+xnoremap <silent> <leader>ff y:CtrlSF <c-r>"<cr>
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_regex_pattern = 1
@@ -672,9 +681,7 @@ au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " }}}
 
-" SimplyFold settings {{{
-let g:SimpylFold_docstring_preview=1
-" }}}
 " Fugitive settings {{{
 nnoremap <leader>gd :Gdiff<cr>gg
+nmap <leader>gs :Gstatus<cr>gg<c-n>
 " }}}
