@@ -1,4 +1,4 @@
-alias l='ls -1F --group-directories-first'
+alias l='k -h -A'
 alias ll='ls -AFlh'
 alias la='ls -A'
 
