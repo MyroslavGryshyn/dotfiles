@@ -239,6 +239,7 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
+nnoremap <leader>j <c-^>
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
@@ -373,10 +374,11 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 nnoremap <silent> <C-g><C-j> :GFiles?<CR>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>t :Tags<CR>
-nnoremap <silent> <leader>T :BTags<CR>
+nnoremap <silent> <leader>bb :Buffers<CR>
+nnoremap <silent> <leader>bv :BTags<CR>
+nnoremap <silent> <leader>hh :History<CR>
+nnoremap <silent> <leader>ee :Commands<CR>
 
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
