@@ -246,6 +246,12 @@ nnoremap <leader>j <c-^>
 nnoremap B ^
 nnoremap E $
 
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+
 " Edit init.vim and abbreviations.vim files {{{
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <silent> <leader>sv :execute("source ".$MYVIMRC." \| AirlineRefresh")<cr>
@@ -291,6 +297,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <C-Q> :q<CR>
 
 vnoremap gy y`>
+" Make Y behave like other capitals
 nnoremap Y y$
 
 " Readline style keybindings for command line
@@ -532,7 +539,7 @@ inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
             \ deoplete#mappings#manual_complete()
 " Close popup and insert a new line
-inoremap <silent> <C-j> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <cr> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
     return deoplete#close_popup() . "\<CR>"
 endfunction
@@ -681,9 +688,7 @@ let g:asterisk#keeppos = 1
 " }}}
 
 " Delimitmate settings {{{
-imap <C-k> <Plug>delimitMateS-Tab
 let delimitMate_excluded_regions = "Comment"
-let delimitMate_expand_cr = 1
 au FileType python let delimitMate_nesting_quotes = ["'", '"']
 au FileType markdown let delimitMate_nesting_quotes = ["`"]
 " Put triple quotes on the separate line after cr
