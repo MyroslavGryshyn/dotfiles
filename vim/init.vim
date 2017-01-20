@@ -32,6 +32,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
+Plug 'gregsexton/gitv', {'on': 'Gitv'}
 " }}}
 
 " Running tests from vim {{{
