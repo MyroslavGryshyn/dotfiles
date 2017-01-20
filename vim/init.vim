@@ -328,12 +328,13 @@ vnoremap <C-d> 10j
 nnoremap <C-u> 10<C-Y>
 vnoremap <C-u> 10k
 
-" Moving lines
-nnoremap <silent> <C-k> :move-2<cr>
-nnoremap <silent> <C-j> :move+<cr>
-nnoremap <silent> <C-h> <<
-nnoremap <silent> <C-l> >>
+" Moving across windows
+nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+nnoremap <c-h> <C-w>h
+nnoremap <c-l> <C-w>l
 
+" Visual mode -- moving lines
 xnoremap <silent> <C-k> :move-2<cr>gv
 xnoremap <silent> <C-j> :move'>+<cr>gv
 xnoremap <silent> <C-h> <gv
@@ -667,14 +668,14 @@ let g:sneak#use_ic_scs = 1
 " }}}
 
 " Vim-asterisk settings {{{
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
+" Highlight word under the cursor
+nmap gd  <Plug>(asterisk-z*)
+" Visually select and search
+vmap * <Plug>(asterisk-*)
+vmap #   <Plug>(asterisk-z#)
+" Search substrings too
 map g*  <Plug>(asterisk-g*)
 map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
 " }}}
 
