@@ -31,6 +31,7 @@ Plug 'chrisbra/vim-diff-enhanced', {'on': 'EnhancedDiff'}
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
 " }}}
 
 " Running tests from vim {{{
