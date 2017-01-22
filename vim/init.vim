@@ -13,6 +13,7 @@ Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
 Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'moskytw/nginx-contrib-vim', {'for': 'nginx'}
+Plug 'tmux-plugins/vim-tmux'
 " }}}
 
 " Autocomplete engines {{{
@@ -711,3 +712,7 @@ augroup vimrc
         au VimLeave * call system('tmux set-window automatic-rename on')
     endif
 augroup END
+
+" Vim-commentary settings {{{
+autocmd FileType jinja setlocal commentstring=<!--\ %s-->
+" }}}
