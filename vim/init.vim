@@ -13,7 +13,6 @@ Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
 Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'moskytw/nginx-contrib-vim', {'for': 'nginx'}
-Plug 'tmux-plugins/vim-tmux'
 " }}}
 
 " Autocomplete engines {{{
@@ -82,6 +81,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " Tmux {{{
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
