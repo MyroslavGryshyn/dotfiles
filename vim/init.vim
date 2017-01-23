@@ -283,6 +283,9 @@ nnoremap <left>  <c-w>>
 nnoremap <down>     <c-w>+
 nnoremap <up>   <c-w>-
 
+" Paste current word in command mode
+cnoremap <c-k> <C-R>=expand("<cword>")<CR>
+
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
