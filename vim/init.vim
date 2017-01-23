@@ -33,7 +33,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
-Plug 'gregsexton/gitv', {'on': 'Gitv'}
 " }}}
 
 " Running tests from vim {{{
@@ -271,9 +270,6 @@ noremap gV `[v`]
 " Replace in all buffer
 nnoremap <leader>rs :%s/\v
 
-" Paste current word in command mode
-cnoremap <c-k> <C-R>=expand("<cword>")<CR>
-
 " Delete to the black hole register
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
@@ -282,19 +278,19 @@ vnoremap <leader>d "_d
 nnoremap cp :let @+=expand("%")<cr>
 
 " Resize vim windows
-nnoremap <left>   <c-w><
-nnoremap <right>  <c-w>>
-nnoremap <up>     <c-w>+
-nnoremap <down>   <c-w>-
+nnoremap <right>   <c-w><
+nnoremap <left>  <c-w>>
+nnoremap <down>     <c-w>+
+nnoremap <up>   <c-w>-
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>zz
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
+nnoremap <silent> <cr> zz
 
 " Quit
-inoremap <C-s>     <esc>:x<cr>
-nnoremap <C-s>     :x<cr>
 nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :qall<cr>
 nnoremap <C-Q> :q<CR>
 
 vnoremap gy y`>
@@ -318,23 +314,21 @@ nnoremap Q q
 nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
 
-" Quit vim
-nnoremap ZX :qall<CR>
-
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
 nnoremap <silent> tp :tabprev<CR>
 nnoremap <silent> th :tabfirst<CR>
 nnoremap <silent> tl :tablast<CR>
-nnoremap <silent> <c-w>t :tabnew<CR>
+nnoremap tc :tabclose<cr>
+nnoremap <c-w>t :tabnew<CR>
 
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Smart scrolling -- preserve cursor position for better readablility
-nnoremap <C-d> 10<C-E>
+nnoremap <C-d> 10<C-E>10j
 vnoremap <C-d> 10j
-nnoremap <C-u> 10<C-Y>
+nnoremap <C-u> 10<C-Y>10k
 vnoremap <C-u> 10k
 
 " Moving across windows
@@ -372,8 +366,6 @@ xnoremap g^ ^
 xnoremap $ g$
 xnoremap g$ $
 " }}}
-
-nnoremap <c-w>; <c-w>p
 " }}}
 
 " Ultisnips settings {{{
@@ -409,9 +401,9 @@ autocmd VimEnter * command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
-nnoremap <leader>fa :Ag<space>
+nnoremap <leader>fa :Ag!<space>
 " Select and search with Ag
-xnoremap <silent> <Leader>fa y:Ag <C-R>"<CR>
+xnoremap <silent> <Leader>fa y:Ag! <C-R>"<CR>
 " }}}
 
 " Airline settings {{{
@@ -446,6 +438,7 @@ nnoremap <silent> - :NERDTreeFind<CR>
 nnoremap <silent> _ :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeQuitOnOpen = 0
+let g:NERDTreeHighlightCursorline = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
 " automatically remove buffer after a file was deleted with context menu
 let NERDTreeAutoDeleteBuffer = 1
@@ -633,16 +626,6 @@ highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
 highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
-" Show cursorline only in active window {{{
-augroup CursorLineOnlyInActiveWindow
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-  " Hide cursorline in insert mode
-  autocmd InsertEnter,InsertLeave * set cul!
-augroup END
-" }}}
-
 " vim-qf settings {{{
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
@@ -715,4 +698,9 @@ augroup END
 
 " Vim-commentary settings {{{
 autocmd FileType jinja setlocal commentstring=<!--\ %s-->
+" }}}
+
+" Vimagit settings {{{
+let g:magit_show_help=0
+let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 " }}}
