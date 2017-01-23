@@ -293,8 +293,9 @@ nnoremap <silent> <cr> zz
 
 " Quit
 nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :qall<cr>
 nnoremap <C-Q> :q<CR>
+nnoremap <leader>Q :qall<cr>
+nnoremap ZX :qall<cr>
 
 vnoremap gy y`>
 " Make Y behave like other capitals
@@ -329,10 +330,8 @@ nnoremap <c-w>t :tabnew<CR>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Smart scrolling -- preserve cursor position for better readablility
-nnoremap <C-d> 10<C-E>10j
-vnoremap <C-d> 10j
-nnoremap <C-u> 10<C-Y>10k
-vnoremap <C-u> 10k
+nnoremap <C-d> <C-d>M
+nnoremap <C-u> <C-u>M
 
 " Moving across windows
 nnoremap <c-k> <c-w>k
