@@ -608,7 +608,6 @@ let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_position = 'left'
 let g:ctrlsf_winsize = '50%'
-let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_context = '-B 3 -A 2'
 let g:ctrlsf_selected_line_hl = 'p'
 " }}}
@@ -733,6 +732,7 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 " }}}
 
 " Grepper settings {{{
+let g:grepper = {}
 let g:grepper.highlight = 1
 nnoremap <leader>gr :Grepper<space>
 nmap gs  <plug>(GrepperOperator)
