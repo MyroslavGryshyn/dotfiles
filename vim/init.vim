@@ -51,6 +51,7 @@ Plug 'raimon49/requirements.txt.vim'
 " Enhance vim searching {{{
 Plug 'justinmk/vim-sneak'
 Plug 'dyng/ctrlsf.vim'
+Plug 'mhinz/vim-grepper'
 " }}}
 
 " Filesystem browsers {{{
@@ -101,7 +102,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 " Autoclose parens, quotes, etc.
 Plug 'Raimondi/delimitMate'
 Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
@@ -277,19 +277,29 @@ vnoremap <leader>d "_d
 " Copy current file's path to clipboard
 nnoremap cp :let @+=expand("%")<cr>
 
-" Disable vim windows
-nnoremap <right> <nop>
-nnoremap <left>  <nop>
-nnoremap <down> <nop>
-nnoremap <up>   <nop>
-
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 
 " Close quickfix and location lists
 nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
+
+" Switch results from quickfix list
+nnoremap <left> :cprev<cr>zz
+nnoremap <right> :cnext<cr>zz
+nnoremap <s-left> :cpfile<cr>zz
+nnoremap <s-right> :cnfile<cr>zz
+
+" Switch results from location list
+nnoremap <up> :lprev<cr>zz
+nnoremap <down> :lnext<cr>zz
+nnoremap <S-up> :lnfile<cr>zz
+nnoremap <S-down> :lpfile<cr>zz
+
+" Center cursor easily
 nnoremap <silent> <cr> zz
+
+" Clear highlighting
+nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 
 " Quit
 nnoremap <leader>q :q<cr>
@@ -720,4 +730,11 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 " Save and return to normal mode on FocusLost {{{
 au FocusLost * :silent! wall                 " Save on FocusLost
 au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
+" }}}
+
+" Grepper settings {{{
+let g:grepper.highlight = 1
+nnoremap <leader>gr :Grepper<space>
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
 " }}}
