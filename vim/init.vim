@@ -322,6 +322,8 @@ nnoremap <silent> <leader><leader> :update<CR>
 
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
+nnoremap <silent> ]t :tabnext<cr>
+nnoremap <silent> [t :tabprev<cr>
 nnoremap <silent> tp :tabprev<CR>
 nnoremap <silent> th :tabfirst<CR>
 nnoremap <silent> tl :tablast<CR>
