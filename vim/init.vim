@@ -288,12 +288,20 @@ nnoremap <left> :cprev<cr>zz
 nnoremap <right> :cnext<cr>zz
 nnoremap <s-left> :cpfile<cr>zz
 nnoremap <s-right> :cnfile<cr>zz
+nnoremap [q :cprev<cr>zz
+nnoremap ]q :cnext<cr>zz
+nnoremap ]Q :cnfile<cr>zz
+nnoremap [Q :cpfile<cr>zz
 
 " Switch results from location list
 nnoremap <up> :lprev<cr>zz
 nnoremap <down> :lnext<cr>zz
 nnoremap <S-up> :lnfile<cr>zz
 nnoremap <S-down> :lpfile<cr>zz
+nnoremap [l :lprev<cr>zz
+nnoremap ]l :lnext<cr>zz
+nnoremap [L :lpfile<cr>zz
+nnoremap ]L :lnfile<cr>zz
 
 " Center cursor easily
 nnoremap <silent> <cr> zz
@@ -321,6 +329,8 @@ cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 
 " Use backslash to jump to previous char match
 nnoremap \ ,
+
+" Jump to tag smartly
 nnoremap <C-]> g<C-]>
 
 " Use Q instead of q to start recording a macro
@@ -329,6 +339,10 @@ nnoremap Q q
 " Use q only to close plugin windows
 nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
+
+" Insert blank lines above or belowe the cursor
+nnoremap <silent> ]e :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent> [e :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
@@ -600,7 +614,7 @@ let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
     \ }
-nmap <leader>ff <Plug>CtrlSFPrompt
+nmap <leader>ff :CtrlSFQuickfix<space>
 " Select and search with CtrlSF
 xnoremap <silent> <leader>ff y:CtrlSF <c-r>"<cr>
 nnoremap <leader>ft :CtrlSFOpen<CR>
@@ -706,6 +720,7 @@ nnoremap <leader>gc :Gcommit<space>
 nnoremap <leader>gl :Glog<space>
 nnoremap <leader>gp :Git push<cr>
 nnoremap <leader>gv :GV<cr>
+nnoremap <leader>gw :Gwrite<cr>
 " }}}
 
 augroup vimrc
