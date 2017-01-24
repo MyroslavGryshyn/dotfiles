@@ -241,16 +241,16 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
+" Switch to alternate buffer
 nnoremap <leader>j <c-^>
-" move to beginning/end of line
+
+" Move to beginning/end of line
 nnoremap B ^
 nnoremap E $
 
-" Movement in insert mode
+" Movement in insert mode (only sideways)
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
 
 " Edit init.vim and abbreviations.vim files {{{
 nnoremap <leader>ev :e $MYVIMRC<cr>
@@ -277,11 +277,11 @@ vnoremap <leader>d "_d
 " Copy current file's path to clipboard
 nnoremap cp :let @+=expand("%")<cr>
 
-" Resize vim windows
-nnoremap <right>   <c-w><
-nnoremap <left>  <c-w>>
-nnoremap <down>     <c-w>+
-nnoremap <up>   <c-w>-
+" Disable vim windows
+nnoremap <right> <nop>
+nnoremap <left>  <nop>
+nnoremap <down> <nop>
+nnoremap <up>   <nop>
 
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
@@ -296,6 +296,8 @@ nnoremap <leader>q :q<cr>
 nnoremap <C-Q> :q<CR>
 nnoremap <leader>Q :qall<cr>
 nnoremap ZX :qall<cr>
+
+nnoremap <leader>z :x<cr>
 
 vnoremap gy y`>
 " Make Y behave like other capitals
@@ -529,7 +531,7 @@ let g:deoplete#enable_ignore_case = 1
 let deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
 " Get quiet messages in auto completion
-set shortmess+=c
+set shortmess+=cI
 " trigger deoplete manually in insert mode
 inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
@@ -674,6 +676,8 @@ let g:asterisk#keeppos = 1
 " }}}
 
 " Delimitmate settings {{{
+imap <C-k> <Plug>delimitMateS-Tab
+let delimitMate_expand_cr = 1
 let delimitMate_excluded_regions = "Comment"
 au FileType python let delimitMate_nesting_quotes = ["'", '"']
 au FileType markdown let delimitMate_nesting_quotes = ["`"]
@@ -687,6 +691,10 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 " Fugitive settings {{{
 nnoremap <leader>gd :Gdiff<cr>gg
 nmap <leader>gs :Gstatus<cr>gg<c-n>
+nnoremap <leader>gc :Gcommit<space>
+nnoremap <leader>gl :Glog<space>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gv :GV<cr>
 " }}}
 
 augroup vimrc
@@ -705,4 +713,9 @@ autocmd FileType jinja setlocal commentstring=<!--\ %s-->
 " Vimagit settings {{{
 let g:magit_show_help=0
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
+" }}}
+
+" Save and return to normal mode on FocusLost {{{
+au FocusLost * :silent! wall                 " Save on FocusLost
+au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
 " }}}
