@@ -616,7 +616,7 @@ let g:ctrlsf_mapping = {
     \ }
 nmap <leader>ff :CtrlSFQuickfix<space>
 " Select and search with CtrlSF
-xnoremap <silent> <leader>ff y:CtrlSF <c-r>"<cr>
+xnoremap <silent> <leader>ff y:CtrlSFQuickfix <c-r>"<cr>
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_regex_pattern = 1
