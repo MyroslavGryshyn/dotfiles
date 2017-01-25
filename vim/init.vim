@@ -248,7 +248,7 @@ nnoremap <leader>j <c-^>
 nnoremap B ^
 nnoremap E $
 
-" Movement in insert mode (only sideways)
+" Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 
@@ -341,8 +341,8 @@ nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
 
 " Insert blank lines above or belowe the cursor
-nnoremap <silent> ]e :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent> [e :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent> ]<space> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent> [<space> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
@@ -445,8 +445,6 @@ let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#branch#displayed_head_limit = 13
-let g:airline#extensions#branch#format = 2
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -614,14 +612,16 @@ let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
     \ }
-nmap <leader>ff :CtrlSFQuickfix<space>
+nmap <leader>ff :CtrlSF<space>
+nmap <leader>fq :CtrlSFQuickfix<space>
 " Select and search with CtrlSF
-xnoremap <silent> <leader>ff y:CtrlSFQuickfix <c-r>"<cr>
+xnoremap <silent> <leader>ff y:CtrlSF <c-r>"<cr>
+xnoremap <silent> <leader>fq y:CtrlSFQuickfix <c-r>"<cr>
 nnoremap <leader>ft :CtrlSFOpen<CR>
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_regex_pattern = 1
-let g:ctrlsf_position = 'left'
-let g:ctrlsf_winsize = '50%'
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_winsize = '60%'
 let g:ctrlsf_context = '-B 3 -A 2'
 let g:ctrlsf_selected_line_hl = 'p'
 " }}}
@@ -701,7 +701,6 @@ let g:asterisk#keeppos = 1
 " }}}
 
 " Delimitmate settings {{{
-imap <C-k> <Plug>delimitMateS-Tab
 let delimitMate_expand_cr = 1
 let delimitMate_excluded_regions = "Comment"
 au FileType python let delimitMate_nesting_quotes = ["'", '"']
