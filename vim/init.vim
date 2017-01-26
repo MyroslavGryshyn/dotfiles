@@ -144,6 +144,9 @@ let localleader = " "
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
 
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
+set noequalalways
 set nofoldenable
 set clipboard^=unnamedplus
 set synmaxcol=500
@@ -341,8 +344,8 @@ nnoremap q <Nop>
 nnoremap <silent> <leader><leader> :update<CR>
 
 " Insert blank lines above or belowe the cursor
-nnoremap <silent> ]<space> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent> [<space> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent> [<space> :pu! _<cr>:']+1<cr>
+nnoremap <silent> ]<space> :pu _<cr>:'[-1<cr>
 
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
@@ -417,7 +420,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " Just make this mapping easier
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '15new' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'ctags'
 let g:fzf_commands_expect = 'ctrl-x'
@@ -701,6 +704,7 @@ let g:asterisk#keeppos = 1
 " }}}
 
 " Delimitmate settings {{{
+imap <C-k> <Plug>delimitMateS-Tab
 let delimitMate_expand_cr = 1
 let delimitMate_excluded_regions = "Comment"
 au FileType python let delimitMate_nesting_quotes = ["'", '"']
