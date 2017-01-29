@@ -22,7 +22,6 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'Shougo/echodoc.vim', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
@@ -420,7 +419,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " Just make this mapping easier
-let g:fzf_layout = { 'window': '15new' }
+let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_tags_command = 'ctags'
 let g:fzf_commands_expect = 'ctrl-x'
@@ -564,14 +563,10 @@ inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
             \ deoplete#mappings#manual_complete()
 " Close popup and insert a new line
-inoremap <silent> <cr> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <c-j> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
     return deoplete#close_popup() . "\<CR>"
 endfunction
-" }}}
-
-" Echodoc settings {{{
-let g:echodoc_enable_at_startup = 1
 " }}}
 
 " Autoformat settings {{{
@@ -742,11 +737,6 @@ autocmd FileType jinja setlocal commentstring=<!--\ %s-->
 " Vimagit settings {{{
 let g:magit_show_help=0
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
-" }}}
-
-" Save and return to normal mode on FocusLost {{{
-au FocusLost * :silent! wall                 " Save on FocusLost
-au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
 " }}}
 
 " Grepper settings {{{
