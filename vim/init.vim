@@ -8,6 +8,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins {{{
+Plug 'chase/vim-ansible-yaml', {'for': 'ansible'}
 Plug 'cespare/vim-toml', {'for': 'toml'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
@@ -362,6 +363,9 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Smart scrolling -- preserve cursor position for better readablility
 nnoremap <C-d> <C-d>M
 nnoremap <C-u> <C-u>M
+
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 " Moving across windows
 nnoremap <c-k> <c-w>k
