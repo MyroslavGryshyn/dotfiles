@@ -61,6 +61,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Quickfix list enhancement {{{
 Plug 'yssl/QFEnter'
+Plug 'sk1418/QFGrep'
 " }}}
 
 " Linting {{{
@@ -139,7 +140,6 @@ endif
 
 " Main settings {{{
 let mapleader=","
-let localleader = " "
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
@@ -331,7 +331,7 @@ cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
 cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 
 " Use backslash to jump to previous char match
-nnoremap \ ,
+nnoremap \\ ,
 
 " Jump to tag smartly
 nnoremap <C-]> g<C-]>
@@ -372,6 +372,10 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-j> <c-w>j
 nnoremap <c-h> <C-w>h
 nnoremap <c-l> <C-w>l
+
+" Move to a splitted window
+nnoremap <c-w>v <c-w>vl
+nnoremap <c-w>s <c-w>sj
 
 " Visual mode -- moving lines
 xnoremap <silent> <C-k> :move-2<cr>gv
@@ -749,4 +753,13 @@ let g:grepper.highlight = 1
 nnoremap <leader>gr :Grepper<space>
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
+" }}}
+
+" QFEnter settings {{{
+nmap \g <Plug>QFGrepG
+nmap \v <Plug>QFGrepV
+nmap \r <Plug>QFRestore
+let g:QFG_hi_prompt='ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
+let g:QFG_hi_info = 'ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
+let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
 " }}}
