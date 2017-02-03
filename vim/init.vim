@@ -146,6 +146,8 @@ colorscheme base16-eighties
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
+" Get quiet messages in auto completion
+set shortmess+=cI
 set noequalalways
 set nofoldenable
 set clipboard^=unnamedplus
@@ -560,17 +562,10 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
-" Get quiet messages in auto completion
-set shortmess+=cI
 " trigger deoplete manually in insert mode
 inoremap <silent><expr> <C-n>
             \ pumvisible() ? "\<C-n>" :
             \ deoplete#mappings#manual_complete()
-" Close popup and insert a new line
-inoremap <silent> <c-j> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-    return deoplete#close_popup() . "\<CR>"
-endfunction
 " }}}
 
 " Autoformat settings {{{
