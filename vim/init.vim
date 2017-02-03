@@ -373,10 +373,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-h> <C-w>h
 nnoremap <c-l> <C-w>l
 
-" Move to a splitted window
-nnoremap <c-w>v <c-w>vl
-nnoremap <c-w>s <c-w>sj
-
 " Visual mode -- moving lines
 xnoremap <silent> <C-k> :move-2<cr>gv
 xnoremap <silent> <C-j> :move'>+<cr>gv
