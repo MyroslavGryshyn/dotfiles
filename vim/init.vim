@@ -615,6 +615,7 @@ nmap <leader>fq :CtrlSFQuickfix<space>
 xnoremap <silent> <leader>ff y:CtrlSF <c-r>"<cr>
 xnoremap <silent> <leader>fq y:CtrlSFQuickfix <c-r>"<cr>
 nnoremap <leader>ft :CtrlSFOpen<CR>
+let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_position = 'bottom'
@@ -741,6 +742,7 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 " Grepper settings {{{
 let g:grepper = {}
 let g:grepper.highlight = 1
+let g:grepper.prompt = 0
 nnoremap <leader>gr :Grepper<space>
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
