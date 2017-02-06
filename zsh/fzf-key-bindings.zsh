@@ -61,7 +61,7 @@ fzf-branch() {
     local branches branch
     branches=$(git branch -a --color=always | grep -v HEAD | sort) &&
         branch=$(echo "$branches" |
-    fzf-tmux --ansi --tac -d $(( 2 + $(wc -l <<< "$branches") )) +m +s) &&
+    fzf --ansi --tac -d $(( 2 + $(wc -l <<< "$branches") )) +m +s) &&
         git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 bindkey -s '^g^k' 'fzf-branch\n'
