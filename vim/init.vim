@@ -546,7 +546,7 @@ nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " }}}
 
 " Matchparen plugin settings {{{
-hi MatchParen cterm=none ctermbg=19 ctermfg=none
+hi MatchParen cterm=none ctermbg=19 ctermfg=7
 " }}}
 
 " Vim test runner settings {{{
