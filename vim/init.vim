@@ -743,9 +743,10 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 let g:grepper = {}
 let g:grepper.highlight = 1
 let g:grepper.prompt = 0
-nnoremap <leader>gr :Grepper<space>
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
+let g:grepper.switch = 0
+nnoremap <leader>gr :Grepper<space>-query<space>
+nmap gr  <plug>(GrepperOperator)
+xmap gr  <plug>(GrepperOperator)
 " }}}
 
 " QFEnter settings {{{
