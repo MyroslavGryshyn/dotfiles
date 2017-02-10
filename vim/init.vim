@@ -159,7 +159,8 @@ set autoread  " for vim-tmux-focus-events plugin
 set isfname-==
 set inccommand=nosplit
 set wrap
-let &showbreak = '+++ '
+" let &showbreak = '+++ '
+let &showbreak = '↪ '
 set background=dark
 set backspace=2
 set completeopt-=preview
