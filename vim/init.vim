@@ -67,6 +67,7 @@ Plug 'sk1418/QFGrep'
 " Linting {{{
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
 Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 " }}}
 
 " Formatters {{{
@@ -507,8 +508,6 @@ let g:syntastic_mode_map = {
             \ "mode": "passive",
             \ "active_filetypes": [],
             \ "passive_filetypes": [] }
-highlight SyntasticErrorSign ctermbg=18 ctermfg=red
-highlight SyntasticWarningSign ctermbg=18 ctermfg=yellow
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_aggregate_errors = 1
 " }}}
@@ -527,7 +526,7 @@ let g:neomake_highlight_columns = 0
 let g:neomake_highlight_lines = 0
 let g:neomake_python_flake8_args = ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126']
 let g:neomake_verbose = 0
-autocmd! BufWritePost *.py Neomake
+" autocmd! BufWritePost *.py Neomake
 let g:neomake_warning_sign = {'text': '●', 'texthl': 'SyntasticWarningSign'}
 let g:neomake_message_sign = {'text': '●', 'texthl': 'SyntasticErrorSign'}
 let g:neomake_error_sign = {'text': '●', 'texthl': 'SyntasticErrorSign'}
@@ -646,11 +645,6 @@ let g:indentLine_fileType = ['python']
 
 " Gitgutter settings {{{
 let g:gitgutter_sign_column_always = 1
-" Refine gitgutter signs
-highlight GitGutterAdd ctermfg=2 ctermbg=18 cterm=bold
-highlight GitGutterChange ctermfg=4 ctermbg=18 cterm=bold
-highlight GitGutterDelete ctermfg=1 ctermbg=18 cterm=bold
-highlight GitGutterChangeDelete ctermfg=5 ctermbg=18 cterm=bold
 " }}}
 
 " vim-qf settings {{{
@@ -755,4 +749,14 @@ nmap \r <Plug>QFRestore
 let g:QFG_hi_prompt='ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
 let g:QFG_hi_info = 'ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
 let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
+" }}}
+
+" ALE settings {{{
+let g:ale_lint_on_save = 1
+let g:ale_sign_warning = '●'
+let g:ale_sign_error = '●'
+let g:ale_lint_on_save = 1
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
+let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126'
 " }}}
