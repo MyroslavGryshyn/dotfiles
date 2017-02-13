@@ -288,7 +288,7 @@ nnoremap cp :let @+=expand("%")<cr>
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 
 " Close quickfix and location lists
-nnoremap <leader>c :cclose<bar>lclose<cr>
+nnoremap <silent> <leader>c :cclose<bar>lclose<cr>
 
 " Switch results from quickfix list
 nnoremap <left> :cprev<cr>zz
@@ -751,6 +751,7 @@ let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
 " ALE settings {{{
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
 let g:ale_sign_warning = ''
 let g:ale_sign_error = ''
 nmap <silent> [e <Plug>(ale_previous_wrap)
