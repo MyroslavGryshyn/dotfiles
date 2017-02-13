@@ -139,6 +139,12 @@ if filereadable(expand('~/.config/nvim/abbreviations.vim'))
 endif
 " }}}
 
+" Source functions {{{
+if filereadable(expand('~/.config/nvim/functions.vim'))
+    source ~/.config/nvim/functions.vim
+endif
+" }}}
+
 " Main settings {{{
 let mapleader=","
 
