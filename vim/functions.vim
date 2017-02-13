@@ -1,4 +1,4 @@
-function! s:UpdatePlugins()
+function! s:SafePlugUpdate()
     " Create a snapshot and save it
     let l:path = expand('~/.config/nvim/plug-snapshots/'.strftime("%d-%m-%y"))
     execute "silent PlugSnapshot!".l:path
@@ -7,4 +7,4 @@ function! s:UpdatePlugins()
     " Update plugins as usual
     execute "PlugUpdate"
 endfunction
-command! UpdatePlugins call s:UpdatePlugins()
+command! SafePlugUpdate call s:SafePlugUpdate()
