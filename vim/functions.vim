@@ -11,14 +11,17 @@ function! s:SafePlugUpdate()
 endfunction
 command! SafePlugUpdate call s:SafePlugUpdate()
 
+function! s:EchoFailure(message)
+    echohl ErrorMsg
+    echo a:message
+    echohl None
+endfunction
+
 function! s:PlugRevert()
     if filereadable(s:plug_snapshot_path)
         execute "source ".s:plug_snapshot_path
     else
-        let l:msg = "Snapshot for today (".s:date.") not found!"
-        execute "silent echohl ErrorMsg"
-        execute 'echo "'.l:msg.'"'
-        execute "silent echohl Normal"
+        call s:EchoFailure("Snapshot for today (".s:date.") not found!")
     endif
 endfunction
 command! PlugRevert call s:PlugRevert()
