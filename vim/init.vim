@@ -258,6 +258,9 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
 
+" Center easily
+nnoremap <leader>m zz
+
 " Move to beginning/end of line
 nnoremap B ^
 nnoremap E $
@@ -627,7 +630,7 @@ let g:ctrlsf_selected_line_hl = 'p'
 
 " Maximizer plugin settings {{{
 let g:maximizer_set_default_mapping = 0
-nnoremap <leader>m :MaximizerToggle<CR>
+nnoremap <c-z> :MaximizerToggle<CR>
 " }}}
 
 " Clear ipdb breakpoints {{{
