@@ -326,7 +326,8 @@ nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 
 " Quit
 nnoremap <leader>q :q<cr>
-nnoremap <C-Q> :q<CR>
+" Try <c-w><c-w> instead of <c-q> as I accidentally close windows
+nnoremap <c-w><c-w> :q<CR>
 nnoremap <leader>Q :qall<cr>
 nnoremap ZX :qall<cr>
 
