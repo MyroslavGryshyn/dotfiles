@@ -259,7 +259,9 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 nnoremap <leader>j <c-^>
 
 " Center easily
-nnoremap <leader>m zz
+nnoremap <cr> zz
+" Turn off binding in cmdline window
+autocmd CmdwinEnter * map <buffer> <cr> <cr>
 
 " Move to beginning/end of line
 nnoremap B ^
