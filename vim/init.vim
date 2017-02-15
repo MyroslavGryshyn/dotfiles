@@ -546,7 +546,7 @@ let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
-nnoremap <silent> <leader>gg :call jedi#goto_assignments()<CR>
+nnoremap <silent> <leader>gg :call jedi#goto()<CR>
 nnoremap <silent> <leader>gu :call jedi#usages()<CR>
 nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
 " }}}
