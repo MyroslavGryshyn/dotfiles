@@ -328,10 +328,12 @@ nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 
 " Quit
 nnoremap <leader>q :q<cr>
-" Try <c-w><c-w> instead of <c-q> as I accidentally close windows
-nnoremap <c-w><c-w> :q<CR>
+nnoremap <c-q> :q<CR>
 nnoremap <leader>Q :qall<cr>
 nnoremap ZX :qall<cr>
+
+" Add binding for opening splits
+nnoremap <c-s> <c-w>
 
 nnoremap <leader>z :x<cr>
 
