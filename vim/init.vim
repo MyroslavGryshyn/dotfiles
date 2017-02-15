@@ -112,6 +112,7 @@ Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 " Dispatch plugins {{{
 Plug 'tpope/vim-dispatch'
 Plug 'aliev/vim-compiler-python'
+Plug 'radenling/vim-dispatch-neovim'
 " }}}
 
 " Session management {{{
