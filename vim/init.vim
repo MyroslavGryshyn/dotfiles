@@ -316,8 +316,6 @@ nnoremap ]l :lnext<cr>zz
 nnoremap [L :lpfile<cr>zz
 nnoremap ]L :lnfile<cr>zz
 
-" Center cursor easily
-nnoremap <silent> <cr> zz
 
 " Clear highlighting
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
