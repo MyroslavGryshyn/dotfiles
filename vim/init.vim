@@ -90,6 +90,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
+Plug 'kana/vim-operator-user'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
@@ -449,13 +450,18 @@ let g:fzf_action = {
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit' }
 
-" TODO add operators, I can use gh and gH bindings here
-
 " Use ? key to preview context of the selected match
 autocmd VimEnter * command! -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
 nnoremap <leader>gh :Ag<space>
+
+map gh <Plug>(operator-fzfag)
+call operator#user#define('fzfag', 'Fzf_ag')
+function! Fzf_ag(motion_wiseness)
+    echo "TODO fix this"
+endfunction
+
 " Select and search with Ag
 xnoremap <silent> <Leader>gh y:Ag <C-R>"<CR>
 " }}}
