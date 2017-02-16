@@ -448,6 +448,12 @@ let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit' }
+
+" TODO add operators, I can use gh and gH bindings here
+" :Ag  - Start fzf with hidden preview window that can be enabled with ? key
+" :Ag! - Start fzf in fullscreen and display the preview window above
+" TODO filter results without preview window and then open it to the top
+command! -bang -nargs=* Ag
 autocmd VimEnter * command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -457,6 +463,17 @@ autocmd VimEnter * command! -bang -nargs=* Ag
 nnoremap <leader>fa :Ag!<space>
 " Select and search with Ag
 xnoremap <silent> <Leader>fa y:Ag! <C-R>"<CR>
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+nnoremap <leader>gf :Rg!<space>
+" Select and search with Ag
+xnoremap <silent> <Leader>gf y:Ag! <C-R>"<CR>
 " }}}
 
 " Airline settings {{{
