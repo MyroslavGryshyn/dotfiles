@@ -667,6 +667,7 @@ let g:python_compiler_highlight_errors = 0
 " IndentLine settings {{{
 let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python']
+nnoremap <leader>it :IndentLinesToggle<cr>
 " Dont use indentline_faster with delimitmate
 " }}}
 
