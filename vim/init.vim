@@ -50,7 +50,6 @@ Plug 'raimon49/requirements.txt.vim'
 
 " Enhance vim searching {{{
 Plug 'justinmk/vim-sneak'
-Plug 'dyng/ctrlsf.vim'
 Plug 'mhinz/vim-grepper'
 " }}}
 
@@ -261,6 +260,7 @@ nnoremap <leader>j <c-^>
 
 " Center easily
 nnoremap <cr> zz
+
 " Turn off binding in cmdline window
 autocmd CmdwinEnter * map <buffer> <cr> <cr>
 
@@ -454,7 +454,7 @@ let g:fzf_action = {
 autocmd VimEnter * command! -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
-nnoremap <leader>gh :Ag<space>
+nnoremap <leader>gd :Ag<space>
 " }}}
 
 " Airline settings {{{
@@ -611,26 +611,6 @@ augroup toggle_escape
 augroup END
 " }}}
 
-" Ctrlsf settings {{{
-let g:ctrlsf_mapping = {
-    \ "next": "n",
-    \ "prev": "N",
-    \ }
-nmap <leader>ff :CtrlSF<space>
-nmap <leader>fq :CtrlSFQuickfix<space>
-" Select and search with CtrlSF
-xnoremap <silent> <leader>ff y:CtrlSF <c-r>"<cr>
-xnoremap <silent> <leader>fq y:CtrlSFQuickfix <c-r>"<cr>
-nnoremap <leader>ft :CtrlSFOpen<CR>
-let g:ctrlsf_populate_qflist = 1
-let g:ctrlsf_confirm_save = 0
-let g:ctrlsf_regex_pattern = 1
-let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_winsize = '60%'
-let g:ctrlsf_context = '-B 3 -A 2'
-let g:ctrlsf_selected_line_hl = 'p'
-" }}}
-
 " Maximizer plugin settings {{{
 let g:maximizer_set_default_mapping = 0
 nnoremap <c-z> :MaximizerToggle<CR>
@@ -754,9 +734,6 @@ let g:grepper.ag.grepprg .= " --hidden"
 nnoremap <leader>gr :Grepper -query<space>
 nmap gr  <plug>(GrepperOperator)
 xmap gr  <plug>(GrepperOperator)
-" Highlight word under the cursor and search in the current buffer
-nmap gd  :Grepper -buffer -noswitch -cword<cr>
-
 " }}}
 
 " QFEnter settings {{{
