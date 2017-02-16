@@ -725,6 +725,7 @@ nnoremap <leader>gv :GV<cr>
 nnoremap <leader>gw :Gwrite<cr>
 " }}}
 
+" Change tmux window name {{{
 augroup vimrc
     autocmd!
     " Automatic rename of tmux window
@@ -733,6 +734,7 @@ augroup vimrc
         au VimLeave * call system('tmux set-window automatic-rename on')
     endif
 augroup END
+" }}}
 
 " Vim-commentary settings {{{
 autocmd FileType jinja setlocal commentstring=<!--\ %s-->
