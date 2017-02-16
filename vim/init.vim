@@ -455,15 +455,6 @@ autocmd VimEnter * command! -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
 nnoremap <leader>gh :Ag<space>
-
-map gh <Plug>(operator-fzfag)
-call operator#user#define('fzfag', 'Fzf_ag')
-function! Fzf_ag(motion_wiseness)
-    echo "TODO fix this"
-endfunction
-
-" Select and search with Ag
-xnoremap <silent> <Leader>gh y:Ag <C-R>"<CR>
 " }}}
 
 " Airline settings {{{
