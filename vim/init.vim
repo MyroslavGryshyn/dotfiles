@@ -691,8 +691,6 @@ let g:sneak#use_ic_scs = 1
 " }}}
 
 " Vim-asterisk settings {{{
-" Highlight word under the cursor
-nmap gd  <Plug>(asterisk-z*)
 " Visually select and search
 vmap * <Plug>(asterisk-*)
 vmap #   <Plug>(asterisk-z#)
@@ -748,13 +746,16 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 " Grepper settings {{{
 let g:grepper = {}
 let g:grepper.highlight = 1
+let g:grepper.tools = ['ag']
 let g:grepper.prompt = 0
 " Search in hidden fields with ag
 runtime autoload/grepper.vim
 let g:grepper.ag.grepprg .= " --hidden"
-nnoremap <leader>gr :Grepper<space>-query<space>
+nnoremap <leader>gr :Grepper -query<space>
 nmap gr  <plug>(GrepperOperator)
 xmap gr  <plug>(GrepperOperator)
+" Highlight word under the cursor and search in the current buffer
+nmap gd  :Grepper -buffer -noswitch -cword<cr>
 " }}}
 
 " QFEnter settings {{{
