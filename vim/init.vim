@@ -91,8 +91,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 
 " Helpful plugins {{{
 Plug 'kana/vim-operator-user'
-" TODO change mappings for this plugin
-" Plug 'PeterRincker/vim-argumentative'
+Plug 'PeterRincker/vim-argumentative'
 Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
@@ -309,16 +308,19 @@ cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 nnoremap <silent> <leader>c :cclose<bar>lclose<cr>
 
 " Switch results from quickfix list
-nnoremap { :cprev<cr>zz
-nnoremap } :cnext<cr>zz
-nnoremap <leader>} :cnfile<cr>zz
-nnoremap <leader>{ :cpfile<cr>zz
+nnoremap <silent> ck :cprev<bar>normal zz<cr>
+nnoremap <silent> cj :cnext<bar>normal zz<cr>
+nnoremap <silent> cJ :cnfile<bar>normal zz<cr>
+nnoremap <silent> cK :cpfile<bar>normal zz<cr>
 
 " Switch results from location list
-nnoremap < :lprev<cr>zz
-nnoremap > :lnext<cr>zz
-nnoremap <leader>< :lpfile<cr>zz
-nnoremap <leader>> :lnfile<cr>zz
+" I've never used this mappings before, and now they are very useful
+nnoremap <silent> gk :lprev<bar>normal zz<cr>
+nnoremap <silent> gj :lnext<bar>normal zz<cr>
+nnoremap <silent> gK :lpfile<bar>normal zz<cr>
+nnoremap <silent> gJ :lnfile<bar>normal zz<cr>
+nnoremap <silent> g^ :lfirst<bar>normal zz<cr>
+nnoremap <silent> g$ :llast<bar>normal zz<cr>
 
 " Clear highlighting
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
@@ -412,26 +414,16 @@ xnoremap <silent> <C-l> >gv
 
 " Operate on display lines, not real lines {{{
 nnoremap k gk
-nnoremap gk k
 nnoremap j gj
-nnoremap gj j
-nnoremap 0 g0
-nnoremap g0 0
 nnoremap ^ g^
-nnoremap g^ ^
 nnoremap $ g$
-nnoremap g$ $
+nnoremap 0 g0
 
 xnoremap k gk
-xnoremap gk k
 xnoremap j gj
-xnoremap gj j
 xnoremap 0 g0
-xnoremap g0 0
 xnoremap ^ g^
-xnoremap g^ ^
 xnoremap $ g$
-xnoremap g$ $
 " }}}
 " }}}
 
