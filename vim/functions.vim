@@ -52,4 +52,4 @@ function! g:_Fzf_ag(type) abort
 endfunction
 
 call operator#user#define('fzfag', 'g:_Fzf_ag')
-map gd <Plug>(operator-fzfag)
+map gh <Plug>(operator-fzfag)

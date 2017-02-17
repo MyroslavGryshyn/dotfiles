@@ -455,7 +455,7 @@ let g:fzf_action = {
 autocmd VimEnter * command! -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
-nnoremap <leader>gd :Ag<space>
+nnoremap <leader>gh :Ag<space>
 " }}}
 
 " Airline settings {{{
