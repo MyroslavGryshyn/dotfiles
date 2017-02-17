@@ -267,7 +267,10 @@ autocmd CmdwinEnter * map <buffer> <cr> <cr>
 
 " Move to beginning/end of line
 nnoremap B ^
+vnoremap B ^
 nnoremap E $
+" Need to press h not to select new-line char
+vnoremap E $h
 
 " Movement in insert mode
 inoremap <C-h> <C-o>h
@@ -728,9 +731,14 @@ let g:grepper = {}
 let g:grepper.highlight = 1
 let g:grepper.tools = ['ag']
 let g:grepper.prompt = 0
+let g:grepper.open = 0
+
+" Open quickfix window automatically
+autocmd User Grepper copen
 " Search in hidden fields with ag
 runtime autoload/grepper.vim
 let g:grepper.ag.grepprg .= " --hidden"
+
 
 nnoremap <leader>gr :Grepper -query<space>
 nmap gr  <plug>(GrepperOperator)
