@@ -59,6 +59,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " }}}
 
 " Quickfix list enhancement {{{
+Plug 'romainl/vim-qf'
 Plug 'yssl/QFEnter'
 Plug 'sk1418/QFGrep'
 " }}}
@@ -90,7 +91,8 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 
 " Helpful plugins {{{
 Plug 'kana/vim-operator-user'
-Plug 'PeterRincker/vim-argumentative'
+" TODO change mappings for this plugin
+" Plug 'PeterRincker/vim-argumentative'
 Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
@@ -156,7 +158,6 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " Get quiet messages in auto completion
 set shortmess+=cI
-set noequalalways
 set nofoldenable
 set clipboard^=unnamedplus
 set synmaxcol=500
@@ -308,25 +309,16 @@ cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 nnoremap <silent> <leader>c :cclose<bar>lclose<cr>
 
 " Switch results from quickfix list
-nnoremap <left> :cprev<cr>zz
-nnoremap <right> :cnext<cr>zz
-nnoremap <s-left> :cpfile<cr>zz
-nnoremap <s-right> :cnfile<cr>zz
-nnoremap [q :cprev<cr>zz
-nnoremap ]q :cnext<cr>zz
-nnoremap ]Q :cnfile<cr>zz
-nnoremap [Q :cpfile<cr>zz
+nnoremap { :cprev<cr>zz
+nnoremap } :cnext<cr>zz
+nnoremap <leader>} :cnfile<cr>zz
+nnoremap <leader>{ :cpfile<cr>zz
 
 " Switch results from location list
-nnoremap <up> :lprev<cr>zz
-nnoremap <down> :lnext<cr>zz
-nnoremap <S-up> :lnfile<cr>zz
-nnoremap <S-down> :lpfile<cr>zz
-nnoremap [l :lprev<cr>zz
-nnoremap ]l :lnext<cr>zz
-nnoremap [L :lpfile<cr>zz
-nnoremap ]L :lnfile<cr>zz
-
+nnoremap < :lprev<cr>zz
+nnoremap > :lnext<cr>zz
+nnoremap <leader>< :lpfile<cr>zz
+nnoremap <leader>> :lnfile<cr>zz
 
 " Clear highlighting
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
@@ -371,13 +363,30 @@ nnoremap <silent> ]<space> :pu _<cr>:'[-1<cr>
 
 " Change tabs
 nnoremap <silent> tn :tabnext<CR>
-nnoremap <silent> ]t :tabnext<cr>
-nnoremap <silent> [t :tabprev<cr>
 nnoremap <silent> tp :tabprev<CR>
 nnoremap <silent> th :tabfirst<CR>
 nnoremap <silent> tl :tablast<CR>
+
+nnoremap ]t :tabnext<cr>
+nnoremap [t :tabprev<cr>
+nnoremap [T :tabfirst<cr>
+nnoremap ]T :tablast<cr>
+
+" Open or close tabs
 nnoremap tc :tabclose<cr>
 nnoremap <c-w>t :tabnew<CR>
+
+" Show prev or next changes
+nnoremap g;  g;zz
+nnoremap g,  g,zz
+
+" Change marks to be more convenient
+nnoremap '  `
+nnoremap `  '
+
+" Switch buffers
+nnoremap [b  :bprevious<cr>
+nnoremap ]b  :bnext<cr>
 
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -700,6 +709,7 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 nnoremap <leader>gd :Gdiff<cr>gg
 nmap <leader>gs :Gstatus<cr>gg<c-n>
 nnoremap <leader>gc :Gcommit<space>
+nnoremap <leader>ge :Gedit<cr>
 nnoremap <leader>gl :Glog<space>
 nnoremap <leader>gp :Git push<cr>
 nnoremap <leader>gv :GV<cr>
@@ -731,10 +741,12 @@ let g:grepper = {}
 let g:grepper.highlight = 1
 let g:grepper.tools = ['ag']
 let g:grepper.prompt = 0
+" Use location list
 let g:grepper.open = 0
+let g:grepper.quickfix = 0
 
 " Open quickfix window automatically
-autocmd User Grepper copen
+autocmd User Grepper lopen
 " Search in hidden fields with ag
 runtime autoload/grepper.vim
 let g:grepper.ag.grepprg .= " --hidden"
@@ -745,7 +757,7 @@ nmap gr  <plug>(GrepperOperator)
 xmap gr  <plug>(GrepperOperator)
 " }}}
 
-" QFEnter settings {{{
+" QFGrep settings {{{
 nmap \g <Plug>QFGrepG
 nmap \v <Plug>QFGrepV
 nmap \r <Plug>QFRestore
@@ -753,14 +765,25 @@ let g:QFG_hi_prompt='ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
 let g:QFG_hi_info = 'ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
 let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
 " }}}
+" Vim-qf settings {{{
+let g:qf_loclist_window_bottom = 0
+" }}}
 
 " ALE settings {{{
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
-let g:ale_sign_warning = ''
-let g:ale_sign_error = ''
+let g:ale_sign_warning = 'W>'
+let g:ale_sign_error = 'E>'
+" Use quickfix list
+let g:ale_set_quickfix = 1
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
 let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126'
+" }}}
+
+" Gutentags settings {{{
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_enabled = 1
+nnoremap <leader>gt :GutentagsToggleEnabled<cr>
 " }}}
