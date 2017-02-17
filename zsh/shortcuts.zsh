@@ -1,5 +1,5 @@
 alias l='ls -1F --group-directories-first'
-alias ll='k -hA'
+alias ll='k -hA --no-vcs'
 alias la='ls -A'
 
 # Linux shortcuts
