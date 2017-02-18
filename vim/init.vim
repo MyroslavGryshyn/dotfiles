@@ -436,6 +436,8 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 " FZF settings {{{
 nnoremap <silent> <C-g><C-j> :GFiles?<CR>
+nnoremap <silent> <C-g><C-g> <c-g>
+nnoremap <silent> <C-g><C-p> :GFiles<cr>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>t :Tags<CR>
