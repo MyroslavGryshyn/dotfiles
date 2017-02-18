@@ -312,6 +312,8 @@ nnoremap <silent> ck :cprev<bar>normal zz<cr>
 nnoremap <silent> cj :cnext<bar>normal zz<cr>
 nnoremap <silent> cJ :cnfile<bar>normal zz<cr>
 nnoremap <silent> cK :cpfile<bar>normal zz<cr>
+nnoremap <silent> c^ :cfirst<bar>normal zz<cr>
+nnoremap <silent> c$ :clast<bar>normal zz<cr>
 
 " Switch results from location list
 " I've never used this mappings before, and now they are very useful
@@ -457,7 +459,7 @@ let g:fzf_action = {
 
 " Use ? key to preview context of the selected match
 autocmd VimEnter * command! -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('up:60%:hidden', '?'), 0)
+  \ call fzf#vim#ag(<q-args>, '--hidden', fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
 nnoremap <leader>gh :Ag<space>
 " }}}
