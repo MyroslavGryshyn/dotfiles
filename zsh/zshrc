@@ -149,4 +149,4 @@ fi
 # Edit long commands with vim
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^Xe' edit-command-line
+bindkey '^g^g' edit-command-line

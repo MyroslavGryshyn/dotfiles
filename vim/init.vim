@@ -333,6 +333,9 @@ nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 " Quit
 nnoremap <leader>q :q<cr>
 nnoremap <c-q> :q<CR>
+" Return to normal mode, save and exit,
+" very useful in case I have to edit cli command
+inoremap <c-q> <esc>:x<cr>
 nnoremap <leader>Q :qall<cr>
 nnoremap ZX :qall<cr>
 
