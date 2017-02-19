@@ -102,7 +102,6 @@ Plug 'myint/indent-finder'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'szw/vim-maximizer', {'on': 'MaximizerToggle'}
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Autoclose parens, quotes, etc.
@@ -206,6 +205,10 @@ set ttimeoutlen=10    " unnoticeable small value
 set undofile  " keep undo history for all file changes
 set wildmenu  " visual autocomplete for command menu
 set wildignore+=*.pyc,*/__pycache__/*,*/venv/*,*/env/*
+
+" Options for the project specific scripts
+set exrc
+set secure
 " }}}
 
 " Vim-plug settings {{{
@@ -489,6 +492,7 @@ let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
+let g:airline_section_warning = '%{gutentags#statusline()}'
 " }}}
 
 " Nerdtree settings {{{
@@ -783,3 +787,8 @@ let g:gutentags_define_advanced_commands = 1
 let g:gutentags_enabled = 1
 nnoremap <leader>gt :GutentagsToggleEnabled<cr>
 " }}}
+
+function! s:my_cr_function() abort
+  return deoplete#close_popup() . "\<CR>"
+endfunction
+imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
