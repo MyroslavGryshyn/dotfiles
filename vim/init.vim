@@ -40,13 +40,13 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine', {'for': 'python', 'on': ['IndentLinesToggle', 'IndentLinesReset']}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
 Plug 'yevhen-m/python-syntax', {'for': 'python'}
-Plug 'raimon49/requirements.txt.vim'
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 " }}}
 
 " Enhance vim searching {{{
@@ -55,8 +55,8 @@ Plug 'mhinz/vim-grepper'
 " }}}
 
 " Filesystem browsers {{{
-Plug 'scrooloose/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeFind', 'NERDTreeToggle']}
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', {'on': ['NERDTreeFind', 'NERDTreeToggle']}
 " }}}
 
 " Quickfix list enhancement {{{
@@ -67,12 +67,14 @@ Plug 'sk1418/QFGrep'
 
 " Linting {{{
 Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
-Plug 'neomake/neomake'
+" I have to commnet this plugin, airline throws errors if I use vim-plug's
+" 'on'
+" Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 " }}}
 
 " Formatters {{{
-Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 " }}}
 
 " Snippets {{{
@@ -84,9 +86,13 @@ Plug 'ludovicchabant/vim-gutentags'
 " }}}
 
 " Tmux {{{
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'christoomey/vim-tmux-navigator', {'on': [
+            \'TmuxNavigateLeft', 'TmuxNavigateDown',
+            \'TmuxNavigateUp', 'TmuxNavigateRight',
+            \'TmuxNavigatePrevious'
+            \]}
+Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
@@ -118,13 +124,13 @@ Plug 'radenling/vim-dispatch-neovim'
 " }}}
 
 " Session management {{{
-Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession', {'on': 'Obsession'}
 " }}}
 
 " " Colorscheme {{{
+Plug 'yevhen-m/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'yevhen-m/base16-vim'
 " " }}}
 
 " FZF {{{
@@ -266,8 +272,8 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 nnoremap <leader>j <c-^>
 
 " Highlight current match
-noremap <silent> n n:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [100, 300]})<cr>
-noremap <silent> N N:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [100, 300]})<cr>
+noremap <silent> n n:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [50, 200]})<cr>
+noremap <silent> N N:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [50, 200]})<cr>
 
 " Center easily
 nnoremap <cr> zz
@@ -484,7 +490,8 @@ nnoremap <leader>gh :Ag<space>
 " Disable fugitive cause it breaks airline when you work with  untracked files
 " let g:airline#extensions#branch#enabled = 0
 
-let g:airline#extensions#neomake#enabled = 1
+" I don't load neomake on startup, so I turn this off
+" let g:airline#extensions#neomake#enabled = 1
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
@@ -799,9 +806,14 @@ let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126
 " }}}
 
 " Gutentags settings {{{
-let g:gutentags_define_advanced_commands = 1
 let g:gutentags_enabled = 1
-nnoremap <leader>gt :GutentagsToggleEnabled<cr>
+nnoremap <leader>gt :GutentagsToggle<cr>
+autocmd FileType GV GutentagsDisable
+command! GutentagsEnable :let g:gutentags_enabled=1<bar>echom "Gutentags enabled."
+command! GutentagsDisable :let g:gutentags_enabled=0<bar>echom "Gutentags disabled."
+command! GutentagsToggle
+            \ :let g:gutentags_enabled=!g:gutentags_enabled
+            \ <bar>echom "Gutentags ".(g:gutentags_enabled ? "enabled." : "disabled.")
 " }}}
 
 " Tmux-complete settings {{{
