@@ -23,6 +23,7 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'wellle/tmux-complete.vim'
 " }}}
 
 " Integration with git {{{
@@ -90,6 +91,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
+Plug 'mhinz/vim-halo'
 Plug 'kana/vim-operator-user'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'haya14busa/vim-asterisk'
@@ -155,6 +157,7 @@ colorscheme base16-eighties
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " Get quiet messages in auto completion
+set nowrapscan
 set shortmess+=cI
 set nofoldenable
 set clipboard^=unnamedplus
@@ -261,6 +264,10 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " Mappings {{{
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
+
+" Highlight current match
+noremap <silent> n n:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [100, 300]})<cr>
+noremap <silent> N N:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [100, 300]})<cr>
 
 " Center easily
 nnoremap <cr> zz
@@ -706,6 +713,12 @@ au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
 let delimitMate_quotes = "\" ' `"
 au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+
+" Close deoplete popup or expand CR
+function! s:my_cr_function() abort
+  return deoplete#close_popup() . "\<CR>"
+endfunction
+imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
 " }}}
 
 " Fugitive settings {{{
@@ -791,7 +804,6 @@ let g:gutentags_enabled = 1
 nnoremap <leader>gt :GutentagsToggleEnabled<cr>
 " }}}
 
-function! s:my_cr_function() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
+" Tmux-complete settings {{{
+let g:tmuxcomplete#trigger = ''
+" }}}
