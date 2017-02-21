@@ -40,7 +40,7 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
-Plug 'Yggdroot/indentLine', {'for': 'python', 'on': ['IndentLinesToggle', 'IndentLinesReset']}
+Plug 'Yggdroot/indentLine', {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
@@ -241,11 +241,11 @@ autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "nor
 " }}}
 
 " Python autocommands {{{
-augroup PythonBuffer
-    autocmd!
-    autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
-    autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
-augroup END
+" augroup PythonBuffer
+"     autocmd!
+"     autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
+"     autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
+" augroup END
 " }}}
 
 " Trim whitespace on save {{{
@@ -634,9 +634,8 @@ let g:python_compiler_highlight_errors = 0
 " }}}
 
 " IndentLine settings {{{
-let g:indentLine_color_term = 19
-let g:indentLine_fileType = ['python']
-nnoremap <leader>it :IndentLinesToggle<cr>
+let g:indentLine_fileType = ['python', 'vim']
+nnoremap coi :IndentLinesToggle<cr>
 " Dont use indentline_faster with delimitmate
 " }}}
 
@@ -785,7 +784,7 @@ let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126
 
 " Gutentags settings {{{
 let g:gutentags_enabled = 1
-nnoremap <leader>gt :GutentagsToggle<cr>
+nnoremap cot :GutentagsToggle<cr>
 autocmd FileType GV GutentagsDisable
 command! GutentagsEnable :let g:gutentags_enabled=1<bar>echom "Gutentags enabled."
 command! GutentagsDisable :let g:gutentags_enabled=0<bar>echom "Gutentags disabled."
