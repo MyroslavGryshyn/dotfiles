@@ -777,6 +777,7 @@ let g:ale_sign_warning = 'W>'
 let g:ale_sign_error = 'E>'
 " Use quickfix list
 let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 0
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
 let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126'
