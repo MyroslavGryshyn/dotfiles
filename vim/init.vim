@@ -50,8 +50,10 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 " }}}
 
 " Enhance vim searching {{{
+Plug 'henrik/vim-indexed-search'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
+Plug 'thinca/vim-visualstar'
 " }}}
 
 " Filesystem browsers {{{
@@ -100,7 +102,6 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 Plug 'mhinz/vim-halo'
 Plug 'kana/vim-operator-user'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'haya14busa/vim-asterisk'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
@@ -240,12 +241,12 @@ endif
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " }}}
 
-" Python autocommands {{{
-" augroup PythonBuffer
-"     autocmd!
-"     autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
-"     autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
-" augroup END
+" Python autocommands (reset indentline, it does not work otherwise!!!) {{{
+augroup PythonBuffer
+    autocmd!
+    autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
+    autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
+augroup END
 " }}}
 
 " Trim whitespace on save {{{
@@ -268,12 +269,20 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
+
+" Easily source scripts
+nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
+
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
 
 " Highlight current match
-noremap <silent> n n:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [50, 200]})<cr>
-noremap <silent> N N:call halo#run({"hlgroup": "Search", "shape": "line", 'intervals': [50, 200]})<cr>
+function! HighlighCurrentMatch()
+    call halo#run({"hlgroup": "Search", "shape": "line", "intervals": [50, 200]})
+    call indexed_search#show_index(0)
+endfunction
+noremap <silent> n n:call HighlighCurrentMatch()<cr>
+noremap <silent> N N:call HighlighCurrentMatch()<cr>
 
 " Center easily
 nnoremap <cr> zz
@@ -634,6 +643,7 @@ let g:python_compiler_highlight_errors = 0
 " }}}
 
 " IndentLine settings {{{
+let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python', 'vim']
 nnoremap coi :IndentLinesToggle<cr>
 " Dont use indentline_faster with delimitmate
@@ -674,16 +684,6 @@ au FileType qf,GV setlocal colorcolumn=
 
 " Sneak settings {{{
 let g:sneak#use_ic_scs = 1
-" }}}
-
-" Vim-asterisk settings {{{
-" Visually select and search
-vmap * <Plug>(asterisk-*)
-vmap #   <Plug>(asterisk-z#)
-" Search substrings too
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-let g:asterisk#keeppos = 1
 " }}}
 
 " Delimitmate settings {{{
@@ -795,4 +795,12 @@ command! GutentagsToggle
 
 " Tmux-complete settings {{{
 let g:tmuxcomplete#trigger = ''
+" }}}
+
+" Indexed-search settings {{{
+let g:indexed_search_mappings = 0
+let g:indexed_search_colors = 0
+let g:indexed_search_shortmess = 1
+nmap / <Plug>(indexed-search-/)
+nmap ? <Plug>(indexed-search-?)
 " }}}
