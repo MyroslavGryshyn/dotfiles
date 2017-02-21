@@ -619,28 +619,6 @@ let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
 " }}}
 
-" Custom func to change iminsert option {{{
-function! ToggleEscapeMapping()
-    if b:escape_mapping
-        let b:escape_mapping = 0
-        inoremap <buffer> <silent> <esc> <esc>l
-        echom 'ESC mapping does not touch iminsert'
-    else
-        let b:escape_mapping = 1
-        inoremap <buffer> <silent> <esc> <esc>:set iminsert=0<CR>l
-        echom 'ESC mapping resets iminsert'
-    endif
-endfunction
-" reset imsert by default
-inoremap <silent> <esc> <esc>:set iminsert=0<CR>l
-augroup toggle_escape
-    autocmd!
-    autocmd BufEnter * let b:escape_mapping = 1
-    autocmd BufEnter * set iminsert=0
-    autocmd BufEnter * nnoremap col :call ToggleEscapeMapping()<CR>
-augroup END
-" }}}
-
 " Maximizer plugin settings {{{
 let g:maximizer_set_default_mapping = 0
 nnoremap <c-z> :MaximizerToggle<CR>
