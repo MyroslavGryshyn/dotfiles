@@ -51,7 +51,7 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
 " Enhance vim searching {{{
 Plug 'henrik/vim-indexed-search'
-Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-grepper'
 Plug 'thinca/vim-visualstar'
 " }}}
@@ -682,10 +682,6 @@ nnoremap <silent> <M-p> :TmuxNavigatePrevious<cr>
 au FileType qf,GV setlocal colorcolumn=
 " }}}
 
-" Sneak settings {{{
-let g:sneak#use_ic_scs = 1
-" }}}
-
 " Delimitmate settings {{{
 imap <C-k> <Plug>delimitMateS-Tab
 let delimitMate_expand_cr = 1
@@ -804,4 +800,11 @@ let g:indexed_search_colors = 0
 let g:indexed_search_shortmess = 1
 nmap / <Plug>(indexed-search-/)
 nmap ? <Plug>(indexed-search-?)
+" }}}
+
+" Easymotion settings {{{
+nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_verbose = 0
 " }}}
