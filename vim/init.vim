@@ -278,7 +278,7 @@ nnoremap <leader>j <c-^>
 
 " Highlight current match
 function! HighlighCurrentMatch()
-    call halo#run({"hlgroup": "Search", "shape": "line", "intervals": [50, 200]})
+    call halo#run({"hlgroup": "Search", "shape": "line", "intervals": [50]})
     call indexed_search#show_index(0)
 endfunction
 noremap <silent> n n:call HighlighCurrentMatch()<cr>
