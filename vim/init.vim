@@ -229,6 +229,9 @@ let g:plug_window = 'enew'
 if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
 endif
+if filereadable(glob('~/.pyenv/versions/neovim35/bin/python'))
+    let g:python3_host_prog = glob('~/.pyenv/versions/neovim35/bin/python')
+endif
 if filereadable(glob('~/.pyenv/versions/neovim36/bin/python'))
     let g:python3_host_prog = glob('~/.pyenv/versions/neovim36/bin/python')
 endif
