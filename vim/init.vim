@@ -740,6 +740,7 @@ let g:grepper = {}
 let g:grepper.highlight = 1
 let g:grepper.tools = ['ag']
 let g:grepper.prompt = 0
+let g:grepper.stop = 1000
 " Use location list
 let g:grepper.open = 0
 let g:grepper.quickfix = 0
