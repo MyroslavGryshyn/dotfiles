@@ -19,7 +19,7 @@
 	tool = vimdiff
 	conflictstyle = diff3
 [color]
-	ui = auto
+	ui = always
 [color "branch"]
 	current = blue
 	local = yellow

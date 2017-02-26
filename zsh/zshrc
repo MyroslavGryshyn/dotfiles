@@ -146,6 +146,9 @@ fi
 
 [[ -s $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
+# Prepend location for brew-installed packages
+export PATH=/usr/local/bin:$PATH
+
 # Edit long commands with vim
 autoload edit-command-line
 zle -N edit-command-line
