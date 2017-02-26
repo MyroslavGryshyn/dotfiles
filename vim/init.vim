@@ -23,7 +23,6 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'wellle/tmux-complete.vim'
 " }}}
 
 " Integration with git {{{
@@ -794,10 +793,6 @@ command! GutentagsDisable :let g:gutentags_enabled=0<bar>echom "Gutentags disabl
 command! GutentagsToggle
             \ :let g:gutentags_enabled=!g:gutentags_enabled
             \ <bar>echom "Gutentags ".(g:gutentags_enabled ? "enabled." : "disabled.")
-" }}}
-
-" Tmux-complete settings {{{
-let g:tmuxcomplete#trigger = ''
 " }}}
 
 " Indexed-search settings {{{
