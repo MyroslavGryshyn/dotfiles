@@ -99,6 +99,7 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
+Plug 'szw/vim-g'
 Plug 'mhinz/vim-halo'
 Plug 'kana/vim-operator-user'
 Plug 'PeterRincker/vim-argumentative'
@@ -215,6 +216,7 @@ set ttimeoutlen=10    " unnoticeable small value
 set undofile  " keep undo history for all file changes
 set wildmenu  " visual autocomplete for command menu
 set wildignore+=*.pyc,*/__pycache__/*,*/venv/*,*/env/*
+set mouse=a
 
 " Options for the project specific scripts
 set exrc
@@ -811,4 +813,9 @@ nmap s <Plug>(easymotion-s2)
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_verbose = 0
+" }}}
+
+" Vim-g settings {{{
+let g:vim_g_command = "G"
+let g:vim_g_f_command = "Gf"
 " }}}
