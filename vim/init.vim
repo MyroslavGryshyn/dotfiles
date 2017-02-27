@@ -328,7 +328,7 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
 " Copy current file's path to clipboard
-nnoremap cp :let @+=expand("%")<cr>
+nnoremap cop :let @+=expand("%")<cr>
 
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
@@ -337,19 +337,19 @@ cnoremap <c-k> <C-R>=expand("<cword>")<CR>
 nnoremap <silent> <leader>c :cclose<bar>lclose<cr>
 
 " Switch results from quickfix list
-nnoremap <silent> ck :cprev<bar>normal zz<cr>
-nnoremap <silent> cj :cnext<bar>normal zz<cr>
-nnoremap <silent> cJ :cnfile<bar>normal zz<cr>
-nnoremap <silent> cK :cpfile<bar>normal zz<cr>
+nnoremap <silent> cp :cprev<bar>normal zz<cr>
+nnoremap <silent> cn :cnext<bar>normal zz<cr>
+nnoremap <silent> cN :cnfile<bar>normal zz<cr>
+nnoremap <silent> cP :cpfile<bar>normal zz<cr>
 nnoremap <silent> c^ :cfirst<bar>normal zz<cr>
 nnoremap <silent> c$ :clast<bar>normal zz<cr>
 
 " Switch results from location list
 " I've never used this mappings before, and now they are very useful
-nnoremap <silent> gk :lprev<bar>normal zz<cr>
-nnoremap <silent> gj :lnext<bar>normal zz<cr>
-nnoremap <silent> gK :lpfile<bar>normal zz<cr>
-nnoremap <silent> gJ :lnfile<bar>normal zz<cr>
+nnoremap <silent> gp :lprev<bar>normal zz<cr>
+nnoremap <silent> gn :lnext<bar>normal zz<cr>
+nnoremap <silent> gP :lpfile<bar>normal zz<cr>
+nnoremap <silent> gN :lnfile<bar>normal zz<cr>
 nnoremap <silent> g^ :lfirst<bar>normal zz<cr>
 nnoremap <silent> g$ :llast<bar>normal zz<cr>
 
