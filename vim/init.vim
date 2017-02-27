@@ -227,17 +227,11 @@ let g:plug_window = 'enew'
 " }}}
 
 " Python host prog {{{
-if filereadable(glob('~/.pyenv/versions/neovim3/bin/python'))
-    let g:python3_host_prog = glob('~/.pyenv/versions/neovim3/bin/python')
+if filereadable(glob('~/.virtualenvs/neovim2/bin/python'))
+    let g:python_host_prog = glob('~/.virtualenvs/neovim2/bin/python')
 endif
-if filereadable(glob('~/.pyenv/versions/neovim35/bin/python'))
-    let g:python3_host_prog = glob('~/.pyenv/versions/neovim35/bin/python')
-endif
-if filereadable(glob('~/.pyenv/versions/neovim36/bin/python'))
-    let g:python3_host_prog = glob('~/.pyenv/versions/neovim36/bin/python')
-endif
-if filereadable(glob('~/.pyenv/versions/neovim2/bin/python'))
-    let g:python_host_prog = glob('~/.pyenv/versions/neovim2/bin/python')
+if filereadable(glob('~/.virtualenvs/neovim35/bin/python'))
+    let g:python3_host_prog = glob('~/.virtualenvs/neovim35/bin/python')
 endif
 " }}}
 
