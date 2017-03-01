@@ -99,7 +99,6 @@ Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 
 " Helpful plugins {{{
 Plug 'szw/vim-g'
-Plug 'mhinz/vim-halo'
 Plug 'kana/vim-operator-user'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'mklabs/split-term.vim', {'on': 'Term'}
@@ -164,7 +163,6 @@ colorscheme base16-eighties
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " Get quiet messages in auto completion
-set nowrapscan
 set shortmess+=cI
 set nofoldenable
 set clipboard^=unnamedplus
@@ -276,7 +274,6 @@ nnoremap <leader>j <c-^>
 
 " Highlight current match
 function! HighlighCurrentMatch()
-    call halo#run({"hlgroup": "Search", "shape": "line", "intervals": [50]})
     call indexed_search#show_index(0)
 endfunction
 noremap <silent> n n:call HighlighCurrentMatch()<cr>
@@ -775,7 +772,10 @@ let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
-let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126'
+" D100 -- missing docstring in public module
+" D101 -- missing docstring in public class
+" D102 -- missing docstring in public method
+let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126,D100,D101,D102'
 " }}}
 
 " Gutentags settings {{{
