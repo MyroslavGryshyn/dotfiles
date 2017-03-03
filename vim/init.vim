@@ -105,7 +105,6 @@ Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
-Plug 'mhinz/vim-hugefile'
 Plug 'myint/indent-finder'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'szw/vim-maximizer', {'on': 'MaximizerToggle'}
@@ -161,6 +160,8 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
+set re=1
 
 " Get quiet messages in auto completion
 set shortmess+=cI
@@ -418,12 +419,11 @@ nnoremap ]b  :bnext<cr>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" Smart scrolling -- preserve cursor position for better readablility
-nnoremap <C-d> <C-d>M
-nnoremap <C-u> <C-u>M
+" TODO maybe I should change mapping for scrolling?
+nnoremap J 3<C-e>
+nnoremap K 3<C-y>
 
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
+nnoremap gj J
 
 " Moving across windows
 nnoremap <c-k> <c-w>k
@@ -524,7 +524,9 @@ let g:NERDTreeQuitOnOpen = 0
 let g:NERDTreeHighlightCursorline = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
 " automatically remove buffer after a file was deleted with context menu
-let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeHighlightCursorline = 0
+let NERDTreeMinimalUI = 1
+let NERDTreeSortOrder = []
 " }}}
 
 " Undotree settings {{{
@@ -587,7 +589,7 @@ let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
 nnoremap <silent> <leader>gg :call jedi#goto()<CR>
 nnoremap <silent> <leader>gu :call jedi#usages()<CR>
-nnoremap <silent> <S-K> :call jedi#show_documentation()<CR>
+nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
 
 " Vim test runner settings {{{
@@ -707,17 +709,6 @@ nnoremap <leader>gv :GV<cr>
 nnoremap <leader>gw :Gwrite<cr>
 " }}}
 
-" Change tmux window name {{{
-augroup vimrc
-    autocmd!
-    " Automatic rename of tmux window
-    if exists('$TMUX') && !exists('$NORENAME')
-        au BufEnter * if empty(&buftype) | call system('tmux rename-window '.expand('%:t:S')) | endif
-        au VimLeave * call system('tmux set-window automatic-rename on')
-    endif
-augroup END
-" }}}
-
 " Vim-commentary settings {{{
 autocmd FileType jinja setlocal commentstring=<!--\ %s-->
 " }}}
@@ -732,17 +723,13 @@ let g:grepper = {}
 let g:grepper.highlight = 1
 let g:grepper.tools = ['ag']
 let g:grepper.prompt = 0
-let g:grepper.stop = 1000
+let g:grepper.stop = 10000
 " Use location list
 let g:grepper.open = 0
 let g:grepper.quickfix = 0
 
 " Open quickfix window automatically
 autocmd User Grepper lopen
-" Search in hidden fields with ag
-runtime autoload/grepper.vim
-let g:grepper.ag.grepprg .= " --hidden"
-
 
 nnoremap <leader>gr :Grepper -query<space>
 nmap gr  <plug>(GrepperOperator)
@@ -775,6 +762,7 @@ nmap <silent> ]e <Plug>(ale_next_wrap)
 " D100 -- missing docstring in public module
 " D101 -- missing docstring in public class
 " D102 -- missing docstring in public method
+" D205 -- summary line between summary line and description in docstring
 let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126,D100,D101,D102'
 " }}}
 
@@ -807,4 +795,8 @@ let g:EasyMotion_verbose = 0
 " Vim-g settings {{{
 let g:vim_g_command = "G"
 let g:vim_g_f_command = "Gf"
+" }}}
+
+" Devicons settings {{{
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 " }}}
