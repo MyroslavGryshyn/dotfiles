@@ -26,6 +26,7 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
+Plug 'vim-scripts/vcscommand.vim'
 Plug 'tpope/vim-git'
 Plug 'chrisbra/vim-diff-enhanced', {'on': 'EnhancedDiff'}
 Plug 'tpope/vim-fugitive'
@@ -126,11 +127,11 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-obsession', {'on': 'Obsession'}
 " }}}
 
-" " Colorscheme {{{
+" Colorscheme {{{
 Plug 'yevhen-m/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" " }}}
+" }}}
 
 " FZF {{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -154,6 +155,9 @@ endif
 " }}}
 
 " Main settings {{{
+let $LANG = 'en'
+set langmenu=none
+
 let mapleader=","
 
 let base16colorspace=256  " Access colors present in 256 colorspace
@@ -266,6 +270,10 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
+"
+" Jump to tag and back
+nnoremap } g<c-]>
+nnoremap { <c-t>
 
 " Easily source scripts
 nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
@@ -349,18 +357,18 @@ nnoremap <silent> g$ :llast<bar>normal zz<cr>
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
 
 " Quit
-nnoremap <leader>q :q<cr>
-nnoremap <c-q> :q<CR>
+nnoremap <silent> <leader>q :q<cr>
+nnoremap <silent> <c-q> :q<CR>
 " Return to normal mode, save and exit,
 " very useful in case I have to edit cli command
-inoremap <c-q> <esc>:x<cr>
-nnoremap <leader>Q :qall<cr>
-nnoremap ZX :qall<cr>
+inoremap <silent> <c-q> <esc>:x<cr>
+nnoremap <silent> <leader>Q :qall<cr>
+nnoremap <silent> ZX :qall<cr>
 
 " Add binding for opening splits
 nnoremap <c-s> <c-w>
 
-nnoremap <leader>z :x<cr>
+nnoremap <silent> <leader>z :x<cr>
 
 vnoremap gy y`>
 " Make Y behave like other capitals
@@ -419,11 +427,11 @@ nnoremap ]b  :bnext<cr>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" TODO maybe I should change mapping for scrolling?
 nnoremap J 3<C-e>
 nnoremap K 3<C-y>
 
 nnoremap gj J
+vnoremap gj J
 
 " Moving across windows
 nnoremap <c-k> <c-w>k
@@ -484,18 +492,17 @@ let g:fzf_action = {
 
 " Use ? key to preview context of the selected match
 autocmd VimEnter * command! -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, '--hidden', fzf#vim#with_preview('up:60%:hidden', '?'), 0)
+  \ call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
 nnoremap <leader>gh :Ag<space>
 " }}}
 
 " Airline settings {{{
 
-" Disable fugitive cause it breaks airline when you work with  untracked files
-" let g:airline#extensions#branch#enabled = 0
-
 " I don't load neomake on startup, so I turn this off
-" let g:airline#extensions#neomake#enabled = 1
+let g:airline#extensions#neomake#enabled = 0
+let g:airline#extensions#branch#use_vcscommand = 1
+" let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
@@ -513,11 +520,17 @@ let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
-let g:airline_section_warning = '%{gutentags#statusline()}'
+
+" Change untracked file symbol
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.notexists = '∄'
 " }}}
 
 " Nerdtree settings {{{
-nnoremap <silent> - :NERDTreeFind<CR>
+nnoremap <silent> - :NERDTreeFind<CR>zz
 nnoremap <silent> _ :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeQuitOnOpen = 0
