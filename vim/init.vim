@@ -26,7 +26,6 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
-Plug 'vim-scripts/vcscommand.vim'
 Plug 'tpope/vim-git'
 Plug 'chrisbra/vim-diff-enhanced', {'on': 'EnhancedDiff'}
 Plug 'tpope/vim-fugitive'
@@ -501,8 +500,6 @@ nnoremap <leader>gh :Ag<space>
 
 " I don't load neomake on startup, so I turn this off
 let g:airline#extensions#neomake#enabled = 0
-let g:airline#extensions#branch#use_vcscommand = 1
-" let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
