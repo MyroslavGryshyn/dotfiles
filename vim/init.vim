@@ -637,7 +637,7 @@ nnoremap <leader>is :Isort<CR>
 
 " Maximizer plugin settings {{{
 let g:maximizer_set_default_mapping = 0
-nnoremap <c-z> :MaximizerToggle<CR>
+nnoremap <leader>m :MaximizerToggle<CR>
 " }}}
 
 " Clear ipdb breakpoints {{{
@@ -772,6 +772,7 @@ nmap <silent> ]e <Plug>(ale_next_wrap)
 " D100 -- missing docstring in public module
 " D101 -- missing docstring in public class
 " D102 -- missing docstring in public method
+" D103 -- missing docstring in public function
 " D205 -- summary line between summary line and description in docstring
 let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126,D100,D101,D102'
 " }}}
