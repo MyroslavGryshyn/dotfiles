@@ -128,3 +128,12 @@ endfunction
 
 nnoremap <silent> ]f :<C-U>edit <C-R>=fnamemodify(<SID>fnameescape(<SID>FileByOffset(v:count1)), ':.')<CR><CR>
 nnoremap <silent> [f :<C-U>edit <C-R>=fnamemodify(<SID>fnameescape(<SID>FileByOffset(-v:count1)), ':.')<CR><CR>
+
+nnoremap coa :call AleToggle()<cr>
+" ALE is disabled by default
+let s:ale_enabled = 0
+function! AleToggle() abort
+    let s:ale_enabled = !get(s:, 'ale_enabled')
+    echo "ALE " . (s:ale_enabled ? "enabled." : "disabled.")
+    execute "ALEToggle"
+endfunction
