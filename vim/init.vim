@@ -612,14 +612,11 @@ nnoremap <leader>rf :TestFile<CR>
 " }}}
 
 " Deoplete settings {{{
+let g:deoplete#auto_complete_delay = 150
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
-" trigger deoplete manually in insert mode
-inoremap <silent><expr> <C-n>
-            \ pumvisible() ? "\<C-n>" :
-            \ deoplete#mappings#manual_complete()
 " }}}
 
 " Autoformat settings {{{
@@ -703,10 +700,10 @@ au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 " Close deoplete popup or expand CR
-function! s:my_cr_function() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
+" function! s:my_cr_function() abort
+"   return deoplete#close_popup() . "\<CR>"
+" endfunction
+" imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
 " }}}
 
 " Fugitive settings {{{
