@@ -83,7 +83,8 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " }}}
 
 " Tags {{{
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
+Plug 'craigemery/vim-autotag'
 " }}}
 
 " Tmux {{{
