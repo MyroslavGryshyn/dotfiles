@@ -788,6 +788,10 @@ command! GutentagsToggle
             \ <bar>echom "Gutentags ".(g:gutentags_enabled ? "enabled." : "disabled.")
 " }}}
 
+" Vim-autotag settings {{{
+let g:autotagTagsFile="tags"
+" }}}
+
 " Indexed-search settings {{{
 let g:indexed_search_mappings = 0
 let g:indexed_search_colors = 0
