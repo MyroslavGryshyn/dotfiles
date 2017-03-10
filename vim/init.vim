@@ -49,7 +49,6 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 " }}}
 
 " Enhance vim searching {{{
-Plug 'henrik/vim-indexed-search'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-grepper'
 Plug 'thinca/vim-visualstar'
@@ -67,15 +66,11 @@ Plug 'sk1418/QFGrep'
 " }}}
 
 " Linting {{{
-Plug 'scrooloose/syntastic', {'on': ['SyntasticCheck', 'SyntasticToggleMode']}
-" I have to commnet this plugin, airline throws errors if I use vim-plug's
-" 'on'
-" Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 " }}}
 
 " Formatters {{{
-Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
+Plug 'Chiel92/vim-autoformat'
 " }}}
 
 " Snippets {{{
@@ -281,13 +276,6 @@ nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
 
-" Highlight current match
-function! HighlighCurrentMatch()
-    call indexed_search#show_index(0)
-endfunction
-noremap <silent> n n:call HighlighCurrentMatch()<cr>
-noremap <silent> N N:call HighlighCurrentMatch()<cr>
-
 " Center easily
 nnoremap <cr> zz
 
@@ -313,9 +301,6 @@ let abbr_file = fnamemodify($MYVIMRC, ':p:h')."/abbreviations.vim"
 nnoremap <leader>ea :execute("edit ".abbr_file)<cr>
 nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 " }}}
-
-" Always use very magic search mode
-nnoremap / /\v
 
 " Visually select the text that was last edited/pasted
 noremap gV `[v`]
@@ -427,8 +412,8 @@ nnoremap ]b  :bnext<cr>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-nnoremap J 3<C-e>
-nnoremap K 3<C-y>
+nnoremap J 2<C-e>
+nnoremap K 2<C-y>
 
 nnoremap gj J
 vnoremap gj J
@@ -477,6 +462,9 @@ nnoremap <silent> <leader>bv :BTags<CR>
 nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>ee :Commands<CR>
 
+nnoremap <silent> <c-g><c-l> :Commits<cr>
+nnoremap <silent> <c-g><c-b> :BCommits<cr>
+
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 
@@ -507,7 +495,6 @@ let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#syntastic#enabled = 0
 let g:airline_detect_iminsert=1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
@@ -544,52 +531,6 @@ let NERDTreeSortOrder = []
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 2
 nnoremap U :UndotreeToggle<CR>
-" }}}
-
-" Syntastic settings {{{
-" ignore line length, whitespace around operators and bad indentation
-let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E231,F403,F405,E126'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_error_symbol='●'
-let g:syntastic_warning_symbol='●'
-let g:syntastic_style_error_symbol='●'
-let g:syntastic_style_warning_symbol='●'
-" close loclist when there are no errors
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_auto_jump = 0
-let g:syntastic_enable_highlighting = 0
-let g:syntastic_loc_list_height = 5
-" don't check on open, because it is lagging with big files
-let g:syntastic_check_on_open=0
-" don't use active mode, because it's laggin with big files
-" you can always turn it on for the specified file
-let g:syntastic_mode_map = {
-            \ "mode": "passive",
-            \ "active_filetypes": [],
-            \ "passive_filetypes": [] }
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_aggregate_errors = 1
-" }}}
-
-" Neomake settings {{{
-let g:neomake_python_enabled_makers = ['flake8']
-" E501 -- line too long
-" E402 -- import not at top of file
-" E128 -- continuation line underindented
-" E225 -- missing whitespace around operator
-" E231 -- missing whitespace after ','
-" F403 -- import * used, unable to detect undefined names
-" F405 -- name may be undefined, or defined from * imports
-" E126 -- indentation error
-let g:neomake_highlight_columns = 0
-let g:neomake_highlight_lines = 0
-let g:neomake_python_flake8_args = ['--ignore=E501,E402,E128,E225,E231,F403,F405,E126']
-let g:neomake_verbose = 0
-" autocmd! BufWritePost *.py Neomake
-let g:neomake_warning_sign = {'text': '', 'texthl': 'SyntasticWarningSign'}
-let g:neomake_message_sign = {'text': '', 'texthl': 'SyntasticErrorSign'}
-let g:neomake_error_sign = {'text': '', 'texthl': 'SyntasticErrorSign'}
-let g:neomake_info_sign = {'text': '', 'texthl': 'SyntasticErrorSign'}
 " }}}
 
 " Jedi settings {{{
@@ -757,23 +698,19 @@ let g:qf_loclist_window_bottom = 0
 " }}}
 
 " ALE settings {{{
-let g:ale_enabled = 0
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_enter = 0
-let g:ale_sign_warning = 'W>'
 let g:ale_sign_error = 'E>'
+let g:ale_sign_warning = 'W>'
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 0
 " Use quickfix list
 let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
-" D100 -- missing docstring in public module
-" D101 -- missing docstring in public class
-" D102 -- missing docstring in public method
-" D103 -- missing docstring in public function
-" D205 -- summary line between summary line and description in docstring
-let g:ale_python_flake8_args = '--ignore=E501,E402,E128,E225,E231,F403,F405,E126,D100,D101,D102'
+nmap <leader>ff <Plug>(ale_lint)
+" Disable pylint, it's crazy
+let g:ale_linters = {'python': ['flake8']}
 " }}}
 
 " Gutentags settings {{{
@@ -789,14 +726,6 @@ command! GutentagsToggle
 
 " Vim-autotag settings {{{
 let g:autotagTagsFile="tags"
-" }}}
-
-" Indexed-search settings {{{
-let g:indexed_search_mappings = 0
-let g:indexed_search_colors = 0
-let g:indexed_search_shortmess = 1
-nmap / <Plug>(indexed-search-/)
-nmap ? <Plug>(indexed-search-?)
 " }}}
 
 " Easymotion settings {{{
