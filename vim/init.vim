@@ -27,7 +27,6 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Integration with git {{{
 Plug 'tpope/vim-git'
-Plug 'chrisbra/vim-diff-enhanced', {'on': 'EnhancedDiff'}
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'airblade/vim-gitgutter'
@@ -39,7 +38,6 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
-Plug 'Yggdroot/indentLine', {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
@@ -69,7 +67,7 @@ Plug 'sk1418/QFGrep'
 Plug 'w0rp/ale'
 " }}}
 
-" Formatters {{{
+" Formatting {{{
 Plug 'Chiel92/vim-autoformat'
 " }}}
 
@@ -78,22 +76,17 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " }}}
 
 " Tags {{{
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'craigemery/vim-autotag'
 " }}}
 
 " Tmux {{{
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'christoomey/vim-tmux-navigator', {'on': [
-            \'TmuxNavigateLeft', 'TmuxNavigateDown',
-            \'TmuxNavigateUp', 'TmuxNavigateRight',
-            \'TmuxNavigatePrevious'
-            \]}
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
 " }}}
 
 " Helpful plugins {{{
+Plug 'Yggdroot/indentLine', {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
 Plug 'szw/vim-g'
 Plug 'kana/vim-operator-user'
 Plug 'PeterRincker/vim-argumentative'
@@ -173,7 +166,6 @@ set autoread  " for vim-tmux-focus-events plugin
 set isfname-==
 set inccommand=nosplit
 set wrap
-" let &showbreak = '+++ '
 let &showbreak = '↪ '
 set background=dark
 set backspace=2
@@ -270,6 +262,9 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 nnoremap } g<c-]>
 nnoremap { <c-t>
 
+" Jump to tag smartly
+nnoremap <C-]> g<C-]>
+
 " Easily source scripts
 nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
 
@@ -286,10 +281,10 @@ autocmd CmdwinEnter * map <buffer> <cr> <cr>
 nnoremap B ^
 vnoremap B ^
 nnoremap E $
-" Need to press h not to select new-line char
+" Need to press h to diselect new-line char
 vnoremap E $h
 
-" Movement in insert mode
+" Sidewasy movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 
@@ -304,13 +299,6 @@ nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 
 " Visually select the text that was last edited/pasted
 noremap gV `[v`]
-
-" Replace in all buffer
-nnoremap <leader>rs :%s/\v
-
-" Delete to the black hole register
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
 
 " Copy current file's path to clipboard
 nnoremap cop :let @+=expand("%")<cr>
@@ -327,7 +315,9 @@ nnoremap <silent> cn :cnext<bar>normal zz<cr>
 nnoremap <silent> cN :cnfile<bar>normal zz<cr>
 nnoremap <silent> cP :cpfile<bar>normal zz<cr>
 nnoremap <silent> c^ :cfirst<bar>normal zz<cr>
+nnoremap <silent> cB :cfirst<bar>normal zz<cr>
 nnoremap <silent> c$ :clast<bar>normal zz<cr>
+nnoremap <silent> cE :clast<bar>normal zz<cr>
 
 " Switch results from location list
 " I've never used this mappings before, and now they are very useful
@@ -336,7 +326,9 @@ nnoremap <silent> gn :lnext<bar>normal zz<cr>
 nnoremap <silent> gP :lpfile<bar>normal zz<cr>
 nnoremap <silent> gN :lnfile<bar>normal zz<cr>
 nnoremap <silent> g^ :lfirst<bar>normal zz<cr>
+nnoremap <silent> gB :lfirst<bar>normal zz<cr>
 nnoremap <silent> g$ :llast<bar>normal zz<cr>
+nnoremap <silent> gE :llast<bar>normal zz<cr>
 
 " Clear highlighting
 nnoremap <silent> <space> :nohlsearch<cr>:diffupdate<cr>
@@ -368,9 +360,6 @@ cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
 " Use backslash to jump to previous char match
 nnoremap \\ ,
 
-" Jump to tag smartly
-nnoremap <C-]> g<C-]>
-
 " Use Q instead of q to start recording a macro
 nnoremap Q q
 
@@ -393,9 +382,10 @@ nnoremap [t :tabprev<cr>
 nnoremap [T :tabfirst<cr>
 nnoremap ]T :tablast<cr>
 
-" Open or close tabs
+" Close a tab or create a new tab
 nnoremap tc :tabclose<cr>
 nnoremap <c-w>t :tabnew<CR>
+nnoremap to :tabnew<CR>
 
 " Show prev or next changes
 nnoremap g;  g;zz
@@ -412,8 +402,8 @@ nnoremap ]b  :bnext<cr>
 " %% for current file dir path
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-nnoremap J 2<C-e>
-nnoremap K 2<C-y>
+nnoremap J 3<C-e>
+nnoremap K 3<C-y>
 
 nnoremap gj J
 vnoremap gj J
@@ -486,9 +476,6 @@ nnoremap <leader>gh :Ag<space>
 " }}}
 
 " Airline settings {{{
-
-" I don't load neomake on startup, so I turn this off
-let g:airline#extensions#neomake#enabled = 0
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
@@ -515,16 +502,14 @@ let g:airline_symbols.notexists = '∄'
 " }}}
 
 " Nerdtree settings {{{
-nnoremap <silent> - :NERDTreeFind<CR>zz
-nnoremap <silent> _ :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nn :NERDTreeFind<CR>zz
+nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeQuitOnOpen = 0
 let g:NERDTreeHighlightCursorline = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__']
-" automatically remove buffer after a file was deleted with context menu
-let NERDTreeHighlightCursorline = 0
-let NERDTreeMinimalUI = 1
-let NERDTreeSortOrder = []
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeSortOrder = []
 " }}}
 
 " Undotree settings {{{
@@ -540,7 +525,10 @@ let g:jedi#show_call_signatures = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
 nnoremap <silent> <leader>gg :call jedi#goto()<CR>
-nnoremap <silent> <leader>gu :call jedi#usages()<CR>
+" Go to tag and go back
+nnoremap <silent> gt :call jedi#goto()<CR>
+nnoremap <silent> gb <c-t>
+" Show docs
 nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
 
@@ -614,16 +602,6 @@ let g:qfenter_topen_map = ['<C-t>']
 let g:neopairs#enable = 1
 " }}}
 
-" Tmux navigator settings {{{
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-p> :TmuxNavigatePrevious<cr>
-" }}}
-
 " Remove colorcolumns in quickfix and location list windows {{{
 au FileType qf,GV setlocal colorcolumn=
 " }}}
@@ -639,12 +617,6 @@ au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
 let delimitMate_quotes = "\" ' `"
 au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-
-" Close deoplete popup or expand CR
-" function! s:my_cr_function() abort
-"   return deoplete#close_popup() . "\<CR>"
-" endfunction
-" imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
 " }}}
 
 " Fugitive settings {{{
@@ -693,6 +665,7 @@ let g:QFG_hi_prompt='ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
 let g:QFG_hi_info = 'ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
 let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
 " }}}
+
 " Vim-qf settings {{{
 let g:qf_loclist_window_bottom = 0
 " }}}
@@ -711,17 +684,6 @@ nmap <silent> ]e <Plug>(ale_next_wrap)
 nmap <leader>ff <Plug>(ale_lint)
 " Disable pylint, it's crazy
 let g:ale_linters = {'python': ['flake8']}
-" }}}
-
-" Gutentags settings {{{
-let g:gutentags_enabled = 1
-nnoremap cot :GutentagsToggle<cr>
-autocmd FileType GV GutentagsDisable
-command! GutentagsEnable :let g:gutentags_enabled=1<bar>echom "Gutentags enabled."
-command! GutentagsDisable :let g:gutentags_enabled=0<bar>echom "Gutentags disabled."
-command! GutentagsToggle
-            \ :let g:gutentags_enabled=!g:gutentags_enabled
-            \ <bar>echom "Gutentags ".(g:gutentags_enabled ? "enabled." : "disabled.")
 " }}}
 
 " Vim-autotag settings {{{
