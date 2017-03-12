@@ -53,10 +53,8 @@ Plug 'thinca/vim-visualstar'
 " }}}
 
 " Filesystem browsers {{{
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeFind', 'NERDTreeToggle']}
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/unite.vim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', {'on': ['NERDTreeFind', 'NERDTreeToggle']}
 " }}}
 
 " Quickfix list enhancement {{{
@@ -699,10 +697,6 @@ let g:EasyMotion_verbose = 0
 " Vim-g settings {{{
 let g:vim_g_command = "G"
 let g:vim_g_f_command = "Gf"
-" }}}
-
-" Devicons settings {{{
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 " }}}
 
 " VimFiler settings {{{
