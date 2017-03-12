@@ -54,6 +54,8 @@ Plug 'thinca/vim-visualstar'
 
 " Filesystem browsers {{{
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeFind', 'NERDTreeToggle']}
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/unite.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', {'on': ['NERDTreeFind', 'NERDTreeToggle']}
 " }}}
 
@@ -497,19 +499,6 @@ endif
 let g:airline_symbols.notexists = '∄'
 " }}}
 
-" Nerdtree settings {{{
-let g:NERDTreeDirArrowExpandable = '▷'
-let g:NERDTreeDirArrowCollapsible = '▼'
-nnoremap <silent> <leader>nn :NERDTreeFind<CR>zz
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
-let g:NERDTreeShowHidden=1
-let g:NERDTreeQuitOnOpen = 0
-let g:NERDTreeHighlightCursorline = 0
-let NERDTreeIgnore=['\.pyc$', '__pycache__']
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeSortOrder = []
-" }}}
-
 " Undotree settings {{{
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 2
@@ -714,4 +703,17 @@ let g:vim_g_f_command = "Gf"
 
 " Devicons settings {{{
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+" }}}
+
+" VimFiler settings {{{
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_tree_indentation = 1
+let g:vimfiler_tree_opened_icon = '▼'
+let g:vimfiler_tree_closed_icon = '▷'
+let g:vimfiler_file_icon = ' '
+let g:vimfiler_tree_leaf_icon = '┆'
+let g:vimfiler_expand_jump_to_first_child = 0
+let g:vimfiler_directory_display_top = 0
+let g:vimfiler_force_overwrite_statusline = 0
+nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
 " }}}
