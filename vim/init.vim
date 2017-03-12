@@ -257,10 +257,6 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
-"
-" Jump to tag and back
-nnoremap } g<c-]>
-nnoremap { <c-t>
 
 " Jump to tag smartly
 nnoremap <C-]> g<C-]>
@@ -585,6 +581,12 @@ nnoremap coi :IndentLinesToggle<cr>
 
 " Gitgutter settings {{{
 let g:gitgutter_sign_column_always = 1
+" Nice uniform gitgutter signs
+let g:gitgutter_sign_added = '▎'
+let g:gitgutter_sign_modified = '▎'
+let g:gitgutter_sign_removed = '▎'
+let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_sign_modified_removed = '▎'
 " }}}
 
 " vim-qf settings {{{
@@ -617,6 +619,12 @@ au FileType python,markdown let b:delimitMate_expand_inside_quotes = 1
 let delimitMate_quotes = "\" ' `"
 au FileType markdown let delimitMate_quotes = "\" ' `"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+
+" Close deoplete popup or expand CR
+function! s:my_cr_function() abort
+  return deoplete#close_popup() . "\<CR>"
+endfunction
+imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
 " }}}
 
 " Fugitive settings {{{
