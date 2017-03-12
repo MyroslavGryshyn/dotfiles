@@ -498,6 +498,8 @@ let g:airline_symbols.notexists = '∄'
 " }}}
 
 " Nerdtree settings {{{
+let g:NERDTreeDirArrowExpandable = '▷'
+let g:NERDTreeDirArrowCollapsible = '▼'
 nnoremap <silent> <leader>nn :NERDTreeFind<CR>zz
 nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
