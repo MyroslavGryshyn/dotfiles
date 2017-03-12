@@ -3,6 +3,7 @@
 	name = yevhen-m
 [core]
 	excludesfile = ~/dotfiles/gitignore_global
+	editor = nvim
 [push]
 	; Push only the current branch to the one that git pull will pull from
 	; (check that their names match)
