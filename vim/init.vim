@@ -143,6 +143,9 @@ endif
 " }}}
 
 " Main settings {{{
+
+set fillchars=vert:│,fold:─
+
 let $LANG = 'en'
 set langmenu=none
 
