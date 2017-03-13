@@ -1,18 +1,20 @@
 " Autoinstall vim-plug {{{
+" -------------------------------------------------------------
 if empty(glob("~/.config/nvim/autoload/plug.vim"))
     !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 " }}}
 
 " Plugins {{{
+" -------------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins {{{
-Plug 'chase/vim-ansible-yaml', {'for': 'ansible'}
-Plug 'cespare/vim-toml', {'for': 'toml'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
+Plug 'cespare/vim-toml', {'for': 'toml'}
+Plug 'chase/vim-ansible-yaml', {'for': 'ansible'}
 Plug 'elzr/vim-json', {'for': 'json'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'moskytw/nginx-contrib-vim', {'for': 'nginx'}
 " }}}
 
@@ -26,11 +28,11 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 " }}}
 
 " Integration with git {{{
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim', {'on': 'GV'}
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
+Plug 'junegunn/gv.vim', {'on': 'GV'}
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
 " }}}
 
 " Running tests from vim {{{
@@ -42,8 +44,8 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'fisadev/vim-isort', {'for': 'python'}
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
-Plug 'yevhen-m/python-syntax', {'for': 'python'}
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+Plug 'yevhen-m/python-syntax', {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -53,14 +55,14 @@ Plug 'thinca/vim-visualstar'
 " }}}
 
 " Filesystem browsers {{{
-Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
 " }}}
 
 " Quickfix list enhancement {{{
 Plug 'romainl/vim-qf'
-Plug 'yssl/QFEnter'
 Plug 'sk1418/QFGrep'
+Plug 'yssl/QFEnter'
 " }}}
 
 " Linting {{{
@@ -80,35 +82,35 @@ Plug 'craigemery/vim-autotag'
 " }}}
 
 " Tmux {{{
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
 Plug 'edkolev/tmuxline.vim', {'on': 'Tmuxline'}
+Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
+Plug 'tmux-plugins/vim-tmux-focus-events'
 " }}}
 
 " Helpful plugins {{{
-Plug 'Yggdroot/indentLine', {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
-Plug 'szw/vim-g'
-Plug 'kana/vim-operator-user'
+Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 Plug 'PeterRincker/vim-argumentative'
-Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
 Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
+Plug 'Yggdroot/indentLine', {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
+Plug 'kana/vim-operator-user'
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
+Plug 'mklabs/split-term.vim', {'on': 'Term'}
 Plug 'myint/indent-finder'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'szw/vim-g'
 Plug 'szw/vim-maximizer', {'on': 'MaximizerToggle'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-" Autoclose parens, quotes, etc.
 Plug 'Raimondi/delimitMate'
-Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 " }}}
 
 " Dispatch plugins {{{
-Plug 'tpope/vim-dispatch'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'aliev/vim-compiler-python'
 Plug 'radenling/vim-dispatch-neovim'
+Plug 'tpope/vim-dispatch'
 " }}}
 
 " Session management {{{
@@ -116,9 +118,9 @@ Plug 'tpope/vim-obsession', {'on': 'Obsession'}
 " }}}
 
 " Colorscheme {{{
-Plug 'yevhen-m/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'yevhen-m/base16-vim'
 " }}}
 
 " FZF {{{
@@ -131,23 +133,31 @@ call plug#end()
 " }}}
 
 " Source abbreviations {{{
+" -------------------------------------------------------------
 if filereadable(expand('~/.config/nvim/abbreviations.vim'))
   source ~/.config/nvim/abbreviations.vim
 endif
 " }}}
 
 " Source functions {{{
+" -------------------------------------------------------------
 if filereadable(expand('~/.config/nvim/functions.vim'))
     source ~/.config/nvim/functions.vim
 endif
 " }}}
 
 " Main settings {{{
-
+" -------------------------------------------------------------
+" UI elements {{{
 set fillchars=vert:│,fold:─
+set listchars=tab:\⋮\ ,extends:⟫,precedes:⟪,trail:·
+let &showbreak = '↪ '
+" }}}
 
+" Set language {{{
 let $LANG = 'en'
 set langmenu=none
+" }}}
 
 let mapleader=","
 
@@ -156,70 +166,65 @@ colorscheme base16-eighties
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
-set re=1
-
-" Get quiet messages in auto completion
-set shortmess+=cI
-set nofoldenable
-set clipboard^=unnamedplus
-set synmaxcol=500
-set hidden
 set autoread  " for vim-tmux-focus-events plugin
-" Enable complete filename after =
-set isfname-==
-set inccommand=nosplit
-set wrap
-let &showbreak = '↪ '
 set background=dark
 set backspace=2
+set clipboard^=unnamedplus  " use system clipboard
 set completeopt-=preview
 set gdefault
+set hidden
 set history=1000
 set ignorecase
-set smartcase
-set list
-set listchars=tab:▸▸,trail:·
-set updatetime=250
-" This order matters!
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-
-set nostartofline
-set splitbelow
-set splitright
-set noshowmode
-set noshowcmd
+set inccommand=nosplit
+set isfname-==  " remove = from filename pattern
+set list  " show tab characters
+set matchtime=2  " .2 seconds to show matching paren
+set mouse=a
 set noacd
-set nobackup
-set showmatch
-set matchtime=2
-set noswapfile
-set nrformats=  "treat all numbers as decimal, not octal"
+set nofoldenable
+set noshowcmd noshowmode
+set nostartofline
+set noswapfile nobackup
+set nrformats=  "treat all numbers as decimal, not octal
 set number
 set path+=**
-set shell=/bin/zsh
+set re=1
+set shell=/bin/bash
 set shiftwidth=4 " number of spaces per <<
+set shortmess+=cI  " silence vim messages
+set showmatch
+set smartcase
+set splitbelow splitright
+set synmaxcol=500
 set tabstop=4  " number of visible spaces per TAB
 set timeout           " for mappings
 set timeoutlen=1000   " default value
 set ttimeout          " for key codes
 set ttimeoutlen=10    " unnoticeable small value
 set undofile  " keep undo history for all file changes
-set wildmenu  " visual autocomplete for command menu
+set updatetime=250
 set wildignore+=*.pyc,*/__pycache__/*,*/venv/*,*/env/*
-set mouse=a
+set wildmenu  " visual autocomplete for command menu
+set wrap
 
-" Options for the project specific scripts
+" Alternative keymap (order matters!) {{{
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+" }}}
+
+" Enable project-specific vim-scripts {{{
 set exrc
 set secure
 " }}}
 
 " Vim-plug settings {{{
+" -------------------------------------------------------------
 let g:plug_window = 'enew'
 " }}}
 
-" Python host prog {{{
+" Python interfaces {{{
+" -------------------------------------------------------------
 if filereadable(glob('~/.virtualenvs/neovim2/bin/python'))
     let g:python_host_prog = glob('~/.virtualenvs/neovim2/bin/python')
 endif
@@ -229,10 +234,12 @@ endif
 " }}}
 
 " Open file on the last exit place {{{
+" -------------------------------------------------------------
 autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " }}}
 
 " Python autocommands (reset indentline, it does not work otherwise!!!) {{{
+" -------------------------------------------------------------
 augroup PythonBuffer
     autocmd!
     autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
@@ -241,6 +248,7 @@ augroup END
 " }}}
 
 " Trim whitespace on save {{{
+" -------------------------------------------------------------
 fun! TrimWhitespace()
     let l:save_cursor = getpos('.')
     %s/\s\+$//e
@@ -250,6 +258,7 @@ autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Trim empty lines at the end of file {{{
+" -------------------------------------------------------------
 function! TrimEndLines()
     let save_cursor = getpos(".")
     :silent! %s#\($\n\s*\)\+\%$##
@@ -260,7 +269,7 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
-
+" -------------------------------------------------------------
 " Jump to tag smartly
 nnoremap <C-]> g<C-]>
 
@@ -439,11 +448,13 @@ xnoremap $ g$
 " }}}
 
 " Ultisnips settings {{{
+" -------------------------------------------------------------
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 " }}}
 
 " FZF settings {{{
+" -------------------------------------------------------------
 nnoremap <silent> <C-g><C-j> :GFiles?<CR>
 nnoremap <silent> <C-g><C-g> <c-g>
 nnoremap <silent> <C-g><C-p> :GFiles<cr>
@@ -479,6 +490,7 @@ nnoremap <leader>gh :Ag<space>
 " }}}
 
 " Airline settings {{{
+" -------------------------------------------------------------
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
@@ -505,12 +517,14 @@ let g:airline_symbols.notexists = '∄'
 " }}}
 
 " Undotree settings {{{
+" -------------------------------------------------------------
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 2
 nnoremap U :UndotreeToggle<CR>
 " }}}
 
 " Jedi settings {{{
+" -------------------------------------------------------------
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = 0
@@ -525,6 +539,7 @@ nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
 
 " Vim test runner settings {{{
+" -------------------------------------------------------------
 let test#python#runner = 'djangotest'
 let test#strategy = "dispatch"
 
@@ -533,6 +548,7 @@ nnoremap <leader>rf :TestFile<CR>
 " }}}
 
 " Deoplete settings {{{
+" -------------------------------------------------------------
 let g:deoplete#auto_complete_delay = 150
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -541,6 +557,7 @@ let g:neoinclude#ctags_commands = 'tags'
 " }}}
 
 " Autoformat settings {{{
+" -------------------------------------------------------------
 noremap <leader>ss :Autoformat<CR>
 vnoremap <leader>ss :'<,'>Autoformat<CR>
 
@@ -550,25 +567,30 @@ let g:formatters_python = ['autopep8']
 " }}}
 
 " Isort plugin settings {{{
+" -------------------------------------------------------------
 let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
 " }}}
 
 " Maximizer plugin settings {{{
+" -------------------------------------------------------------
 let g:maximizer_set_default_mapping = 0
 nnoremap <leader>m :MaximizerToggle<CR>
 " }}}
 
 " Clear ipdb breakpoints {{{
+" -------------------------------------------------------------
 command! ClearPdb g/pdb/d
 " }}}
 
 " Python Compiler {{{
+" -------------------------------------------------------------
 let g:python_compiler_fixqflist = 1
 let g:python_compiler_highlight_errors = 0
 " }}}
 
 " IndentLine settings {{{
+" -------------------------------------------------------------
 let g:indentLine_color_term = 19
 let g:indentLine_fileType = ['python', 'vim']
 nnoremap coi :IndentLinesToggle<cr>
@@ -576,6 +598,7 @@ nnoremap coi :IndentLinesToggle<cr>
 " }}}
 
 " Gitgutter settings {{{
+" -------------------------------------------------------------
 let g:gitgutter_sign_column_always = 1
 " Nice uniform gitgutter signs
 let g:gitgutter_sign_added = '▎'
@@ -586,25 +609,30 @@ let g:gitgutter_sign_modified_removed = '▎'
 " }}}
 
 " vim-qf settings {{{
+" -------------------------------------------------------------
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
 " }}}
 
 " QFEnter plugin settings {{{
+" -------------------------------------------------------------
 let g:qfenter_vopen_map = ['<C-v>']
 let g:qfenter_hopen_map = ['<C-CR>', '<C-s>']
 let g:qfenter_topen_map = ['<C-t>']
 " }}}
 
 " Neopairs settings {{{
+" -------------------------------------------------------------
 let g:neopairs#enable = 1
 " }}}
 
 " Remove colorcolumns in quickfix and location list windows {{{
+" -------------------------------------------------------------
 au FileType qf,GV setlocal colorcolumn=
 " }}}
 
 " Delimitmate settings {{{
+" -------------------------------------------------------------
 imap <C-k> <Plug>delimitMateS-Tab
 let delimitMate_expand_cr = 1
 let delimitMate_excluded_regions = "Comment"
@@ -624,6 +652,7 @@ imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" 
 " }}}
 
 " Fugitive settings {{{
+" -------------------------------------------------------------
 nnoremap <leader>gd :Gdiff<cr>gg
 nmap <leader>gs :Gstatus<cr>gg<c-n>
 nnoremap <leader>gc :Gcommit<space>
@@ -635,15 +664,18 @@ nnoremap <leader>gw :Gwrite<cr>
 " }}}
 
 " Vim-commentary settings {{{
+" -------------------------------------------------------------
 autocmd FileType jinja setlocal commentstring=<!--\ %s-->
 " }}}
 
 " Vimagit settings {{{
+" -------------------------------------------------------------
 let g:magit_show_help=0
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 " }}}
 
 " Grepper settings {{{
+" -------------------------------------------------------------
 let g:grepper = {}
 let g:grepper.highlight = 1
 let g:grepper.tools = ['ag']
@@ -662,6 +694,7 @@ xmap gr  <plug>(GrepperOperator)
 " }}}
 
 " QFGrep settings {{{
+" -------------------------------------------------------------
 nmap \g <Plug>QFGrepG
 nmap \v <Plug>QFGrepV
 nmap \r <Plug>QFRestore
@@ -671,10 +704,12 @@ let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
 " }}}
 
 " Vim-qf settings {{{
+" -------------------------------------------------------------
 let g:qf_loclist_window_bottom = 0
 " }}}
 
 " ALE settings {{{
+" -------------------------------------------------------------
 let g:ale_sign_error = 'E>'
 let g:ale_sign_warning = 'W>'
 let g:ale_lint_on_save = 0
@@ -691,10 +726,12 @@ let g:ale_linters = {'python': ['flake8']}
 " }}}
 
 " Vim-autotag settings {{{
+" -------------------------------------------------------------
 let g:autotagTagsFile="tags"
 " }}}
 
 " Easymotion settings {{{
+" -------------------------------------------------------------
 nmap s <Plug>(easymotion-s2)
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
@@ -702,11 +739,13 @@ let g:EasyMotion_verbose = 0
 " }}}
 
 " Vim-g settings {{{
+" -------------------------------------------------------------
 let g:vim_g_command = "G"
 let g:vim_g_f_command = "Gf"
 " }}}
 
 " VimFiler settings {{{
+" -------------------------------------------------------------
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_tree_indentation = 1
 let g:vimfiler_tree_opened_icon = '▼'
