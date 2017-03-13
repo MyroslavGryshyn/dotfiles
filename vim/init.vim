@@ -261,6 +261,10 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 " Jump to tag smartly
 nnoremap <C-]> g<C-]>
 
+" Center screen
+nnoremap <c-o> <c-o>zz
+nnoremap <c-i> <c-i>zz
+
 " Easily source scripts
 nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
 
@@ -705,9 +709,14 @@ let g:vimfiler_tree_indentation = 1
 let g:vimfiler_tree_opened_icon = '▼'
 let g:vimfiler_tree_closed_icon = '▷'
 let g:vimfiler_file_icon = ' '
-let g:vimfiler_tree_leaf_icon = '┆'
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_file_icon = '-'
 let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_directory_display_top = 0
 let g:vimfiler_force_overwrite_statusline = 0
 nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
+let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^__pycache__$']
+" Edit files double clicking with mouse
+autocmd FileType vimfiler
+            \ nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 " }}}
