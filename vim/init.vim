@@ -88,6 +88,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " }}}
 
 " Helpful plugins {{{
+Plug 'junegunn/vim-easy-align'
 Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 Plug 'PeterRincker/vim-argumentative'
 Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
@@ -149,6 +150,7 @@ endif
 " Main settings {{{
 " -------------------------------------------------------------
 " UI elements {{{
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 set fillchars=vert:│,fold:─
 set listchars=tab:\⋮\ ,extends:⟫,precedes:⟪,trail:·
 let &showbreak = '↪ '
@@ -159,15 +161,16 @@ let $LANG = 'en'
 set langmenu=none
 " }}}
 
+" Colorscheme {{{
+set background=dark
+" Path to the shell script
+let g:base16_shell_script_path = glob("~/.config/base16-shell/scripts/base16-eighties.sh")
+colorscheme base16-eighties
+" }}}
+
 let mapleader=","
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-eighties
-
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-
 set autoread  " for vim-tmux-focus-events plugin
-set background=dark
 set backspace=2
 set clipboard^=unnamedplus  " use system clipboard
 set completeopt-=preview
@@ -756,9 +759,16 @@ let g:vimfiler_file_icon = '-'
 let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_directory_display_top = 0
 let g:vimfiler_force_overwrite_statusline = 0
+let g:webdevicons_enable_vimfiler = 0
 nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
 let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^__pycache__$']
 " Edit files double clicking with mouse
 autocmd FileType vimfiler
             \ nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
+" }}}
+
+" Vim-easy-align settings {{{
+" -------------------------------------------------------------
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 " }}}
