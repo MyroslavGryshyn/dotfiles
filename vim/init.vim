@@ -270,8 +270,8 @@ autocmd! BufWritePre *.py :call TrimEndLines()
 
 " Mappings {{{
 " -------------------------------------------------------------
-" Jump to tag smartly
-nnoremap <C-]> g<C-]>
+" Jump to tag smartly before setting a mark
+nnoremap <C-]> mMg<C-]>
 
 " Center screen
 nnoremap <c-o> <c-o>zz
@@ -530,10 +530,10 @@ let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
-nnoremap <silent> <leader>gg :call jedi#goto()<CR>
-" Go to tag and go back
-nnoremap <silent> gt :call jedi#goto()<CR>
-nnoremap <silent> gb <c-t>
+nnoremap <silent> <leader>gg mM:call jedi#goto()<CR>
+" Go to tag and go back (set mark as well)
+nnoremap <silent> gt mM:call jedi#goto()<CR>
+nnoremap <silent> gb <c-t>zz
 " Show docs
 nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
