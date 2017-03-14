@@ -236,18 +236,42 @@ if filereadable(glob('~/.virtualenvs/neovim35/bin/python'))
 endif
 " }}}
 
-" Open file on the last exit place {{{
+" Autocommands {{{
 " -------------------------------------------------------------
-autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-" }}}
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
 
-" Python autocommands (reset indentline, it does not work otherwise!!!) {{{
-" -------------------------------------------------------------
-augroup PythonBuffer
-    autocmd!
-    autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
-    autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
-augroup END
+  " Reset IndentLines, it does not work otherwise!
+  autocmd BufEnter,BufRead,BufNewFile *.py set filetype=python
+  autocmd BufEnter,BufRead,BufNewFile *.py :IndentLinesReset
+
+  " Open file on the last exit place
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+  " Trime whitespace and empty end lines on save
+  autocmd BufWritePre * :call TrimWhitespace()
+  autocmd BufWritePre *.py :call TrimEndLines()
+
+  " Turn off my 'center' mapping in cmdline window
+  autocmd CmdwinEnter * map <buffer> <cr> <cr>
+
+  " FZF -- use ? key to preview context of the selected match
+  autocmd VimEnter * command! -nargs=* Ag
+              \ call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview('up:60%:hidden', '?'), 0)
+
+  " Remove colorcolumns in quickfix and location list windows
+  autocmd FileType qf,GV setlocal colorcolumn=
+
+  " Set commentstring for jinja
+  autocmd FileType jinja setlocal commentstring=<!--\ %s-->
+
+  " Open quickfix window automatically when Grepper collects results
+  autocmd User Grepper lopen
+
+  " Edit files double clicking with mouse in vimfiler
+  autocmd FileType vimfiler
+              \ nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
+endif
 " }}}
 
 " Trim whitespace on save {{{
@@ -257,7 +281,6 @@ fun! TrimWhitespace()
     %s/\s\+$//e
     call setpos('.', l:save_cursor)
 endfun
-autocmd! BufWritePre * :call TrimWhitespace()
 " }}}
 
 " Trim empty lines at the end of file {{{
@@ -267,8 +290,6 @@ function! TrimEndLines()
     :silent! %s#\($\n\s*\)\+\%$##
     call setpos('.', save_cursor)
 endfunction
-
-autocmd! BufWritePre *.py :call TrimEndLines()
 " }}}
 
 " Mappings {{{
@@ -288,9 +309,6 @@ nnoremap <leader>j <c-^>
 
 " Center easily
 nnoremap <cr> zz
-
-" Turn off binding in cmdline window
-autocmd CmdwinEnter * map <buffer> <cr> <cr>
 
 " Move to beginning/end of line
 nnoremap B ^
@@ -485,10 +503,6 @@ let g:fzf_action = {
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit' }
 
-" Use ? key to preview context of the selected match
-autocmd VimEnter * command! -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview('up:60%:hidden', '?'), 0)
-
 nnoremap <leader>gh :Ag<space>
 " }}}
 
@@ -629,11 +643,6 @@ let g:qfenter_topen_map = ['<C-t>']
 let g:neopairs#enable = 1
 " }}}
 
-" Remove colorcolumns in quickfix and location list windows {{{
-" -------------------------------------------------------------
-au FileType qf,GV setlocal colorcolumn=
-" }}}
-
 " Delimitmate settings {{{
 " -------------------------------------------------------------
 imap <C-k> <Plug>delimitMateS-Tab
@@ -666,11 +675,6 @@ nnoremap <leader>gv :GV<cr>
 nnoremap <leader>gw :Gwrite<cr>
 " }}}
 
-" Vim-commentary settings {{{
-" -------------------------------------------------------------
-autocmd FileType jinja setlocal commentstring=<!--\ %s-->
-" }}}
-
 " Vimagit settings {{{
 " -------------------------------------------------------------
 let g:magit_show_help=0
@@ -687,9 +691,6 @@ let g:grepper.stop = 10000
 " Use location list
 let g:grepper.open = 0
 let g:grepper.quickfix = 0
-
-" Open quickfix window automatically
-autocmd User Grepper lopen
 
 nnoremap <leader>gr :Grepper -query<space>
 nmap gr  <plug>(GrepperOperator)
@@ -762,9 +763,6 @@ let g:vimfiler_force_overwrite_statusline = 0
 let g:webdevicons_enable_vimfiler = 0
 nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
 let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^__pycache__$']
-" Edit files double clicking with mouse
-autocmd FileType vimfiler
-            \ nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 " }}}
 
 " Vim-easy-align settings {{{
