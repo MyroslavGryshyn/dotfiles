@@ -271,6 +271,10 @@ if !exists("autocommands_loaded")
   " Edit files double clicking with mouse in vimfiler
   autocmd FileType vimfiler
               \ nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
+
+  " Highlight word under cursor and all its matches
+  autocmd CursorMoved * exe exists("HlUnderCursor") ? HlUnderCursor ?
+              \ printf('match MatchParen /\V\<%s\>/', escape(expand('<cword>'), '/\')) : 'match none' : ""
 endif
 " }}}
 
@@ -303,6 +307,9 @@ nnoremap <c-i> <c-i>zz
 
 " Easily source scripts
 nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
+
+" Turn on highlighting of word under cursor
+nnoremap <silent> z/ :execute "let HlUnderCursor=exists(\"HlUnderCursor\") ? HlUnderCursor * -1 + 1 : 1"<CR>
 
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
