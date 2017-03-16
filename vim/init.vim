@@ -309,7 +309,7 @@ nnoremap <c-i> <c-i>zz
 nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
 
 " Turn on highlighting of word under cursor
-nnoremap <silent> z/ :execute "let HlUnderCursor=exists(\"HlUnderCursor\") ? HlUnderCursor * -1 + 1 : 1"<CR>
+nnoremap <silent> z/ :execute "let HlUnderCursor=exists(\"HlUnderCursor\") ? HlUnderCursor * -1 + 1 : 1"<CR>l
 
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
