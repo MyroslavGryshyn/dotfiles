@@ -192,7 +192,7 @@ set nrformats=  "treat all numbers as decimal, not octal
 set number
 set path+=**
 set re=1
-set shell=/bin/bash
+set shell=/bin/zsh
 set shiftwidth=4 " number of spaces per <<
 set shortmess+=cI  " silence vim messages
 set showmatch
