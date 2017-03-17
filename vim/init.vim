@@ -297,13 +297,16 @@ endfunction
 
 " Mappings {{{
 " -------------------------------------------------------------
+" Sort visually selected lines
+vnoremap s :sort<cr><bar>:echo "Sorted."<cr>
+
 " Jump to tag smartly before setting a mark
 nnoremap <C-]> mMg<C-]>
 
 " Make these more convenient than default
+nnoremap zh *N
 nnoremap zn *
 nnoremap zp #
-nnoremap zh *N
 
 " Center screen
 nnoremap <c-o> <c-o>zz
@@ -682,7 +685,7 @@ nnoremap <leader>gw :Gwrite<cr>
 " Vimagit settings {{{
 " -------------------------------------------------------------
 let g:magit_show_help=0
-let g:magit_default_sections = ['info', 'commit', 'staged', 'unstaged', 'stash']
+let g:magit_default_sections = ['commit', 'staged', 'unstaged', 'stash']
 " }}}
 
 " Grepper settings {{{
