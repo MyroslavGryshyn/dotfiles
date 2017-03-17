@@ -88,6 +88,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " }}}
 
 " Helpful plugins {{{
+Plug 'itchyny/vim-cursorword'
 Plug 'junegunn/vim-easy-align'
 Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
 Plug 'PeterRincker/vim-argumentative'
