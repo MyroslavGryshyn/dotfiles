@@ -78,7 +78,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " }}}
 
 " Tags {{{
-Plug 'craigemery/vim-autotag'
+Plug 'ludovicchabant/vim-gutentags'
 " }}}
 
 " Tmux {{{
@@ -171,44 +171,45 @@ colorscheme base16-eighties
 
 let mapleader=","
 
-set autoread  " for vim-tmux-focus-events plugin
+set winheight=15           " minimum height for active window
+set autoread               " for vim-tmux-focus-events plugin
 set backspace=2
-set clipboard^=unnamedplus  " use system clipboard
+set clipboard^=unnamedplus " use system clipboard
 set completeopt-=preview
 set gdefault
 set hidden
 set history=1000
 set ignorecase
 set inccommand=nosplit
-set isfname-==  " remove = from filename pattern
-set list  " show tab characters
-set matchtime=2  " .2 seconds to show matching paren
+set isfname-==             " remove = from filename pattern
+set list                   " show tab characters
+set matchtime=2            " .2 seconds to show matching paren
 set mouse=a
 set noacd
 set nofoldenable
 set noshowcmd noshowmode
 set nostartofline
 set noswapfile nobackup
-set nrformats=  "treat all numbers as decimal, not octal
+set nrformats=             " treat all numbers as decimal, not octal
 set number
 set path+=**
 set re=1
 set shell=/bin/zsh
-set shiftwidth=4 " number of spaces per <<
-set shortmess+=cI  " silence vim messages
+set shiftwidth=4           " number of spaces per <<
+set shortmess+=cI          " silence vim messages
 set showmatch
 set smartcase
 set splitbelow splitright
 set synmaxcol=500
-set tabstop=4  " number of visible spaces per TAB
-set timeout           " for mappings
-set timeoutlen=1000   " default value
-set ttimeout          " for key codes
-set ttimeoutlen=10    " unnoticeable small value
-set undofile  " keep undo history for all file changes
+set tabstop=4              " number of visible spaces per TAB
+set timeout                " for mappings
+set timeoutlen=1000        " default value
+set ttimeout               " for key codes
+set ttimeoutlen=10         " unnoticeable small value
+set undofile               " keep undo history for all file changes
 set updatetime=250
 set wildignore+=*.pyc,*/__pycache__/*,*/venv/*,*/env/*
-set wildmenu  " visual autocomplete for command menu
+set wildmenu               " visual autocomplete for command menu
 set wrap
 
 " Alternative keymap (order matters!) {{{
@@ -298,6 +299,16 @@ endfunction
 
 " Mappings {{{
 " -------------------------------------------------------------
+" Use arrows to resize splits
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+
+" Use backspace key for matchit.vim
+nmap <BS> %
+xmap <BS> %
+
 " Sort visually selected lines
 vnoremap s :sort<cr><bar>:echo "Sorted."<cr>
 
@@ -346,7 +357,7 @@ nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 noremap gV `[v`]
 
 " Copy current file's path to clipboard
-nnoremap cop :let @+=expand("%")<cr>
+nnoremap <leader>y :let @+=expand("%:p")<CR>:echo 'Copied to clipboard.'<CR>
 
 " Paste current word in command mode
 cnoremap <c-k> <C-R>=expand("<cword>")<CR>
@@ -410,7 +421,7 @@ nnoremap Q q
 
 " Use q only to close plugin windows
 nnoremap q <Nop>
-nnoremap <silent> <leader><leader> :update<CR>
+nnoremap <silent> <leader><leader> :update<CR>:nohlsearch<cr>
 
 " Insert blank lines above or belowe the cursor
 nnoremap <silent> [<space> :pu! _<cr>:']+1<cr>
@@ -556,9 +567,11 @@ nnoremap U :UndotreeToggle<CR>
 " -------------------------------------------------------------
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_initialization = 0
-let g:jedi#show_call_signatures = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
+let g:jedi#show_call_signatures = 1
+let g:jedi#use_tag_stack = 0
+let g:jedi#use_splits_not_buffers = 'bottom'
 nnoremap <silent> <leader>gg mM:call jedi#goto()<CR>
 nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
@@ -737,9 +750,23 @@ nmap <leader>ff <Plug>(ale_lint)
 let g:ale_linters = {'python': ['flake8']}
 " }}}
 
-" Vim-autotag settings {{{
+" Gutentags settings {{{
 " -------------------------------------------------------------
-let g:autotagTagsFile="tags"
+let g:gutentags_enabled = 1
+" Update tags manually
+let g:gutentags_generate_on_write = 1
+let s:tags_dir = expand("~/.config/nvim/tags")
+if !isdirectory(s:tags_dir)
+    call mkdir(s:tags_dir, 'p')
+endif
+let g:gutentags_cache_dir = s:tags_dir
+nnoremap cot :GutentagsToggle<cr>
+autocmd FileType GV GutentagsDisable
+command! GutentagsEnable :let g:gutentags_enabled=1<bar>echom "Gutentags enabled."
+command! GutentagsDisable :let g:gutentags_enabled=0<bar>echom "Gutentags disabled."
+command! GutentagsToggle
+            \ :let g:gutentags_enabled=!g:gutentags_enabled
+            \ <bar>echom "Gutentags ".(g:gutentags_enabled ? "enabled." : "disabled.")
 " }}}
 
 " Easymotion settings {{{

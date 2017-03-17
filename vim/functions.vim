@@ -9,6 +9,9 @@ function! s:EchoFailure(message)
 endfunction
 
 let s:plug_snapshot_dir = expand('~/.config/nvim/plug-snapshots/')
+if !isdirectory(s:plug_snapshot_dir)
+    call mkdir(s:plug_snapshot_dir, 'p')
+endif
 " Path to the current snapshot
 let s:plug_snapshot_path = s:plug_snapshot_dir.s:CurrentDate()
 
