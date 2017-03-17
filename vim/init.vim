@@ -272,9 +272,8 @@ if !exists("autocommands_loaded")
   autocmd FileType vimfiler
               \ nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
-  " Highlight word under cursor and all its matches
-  autocmd CursorMoved * exe exists("HlUnderCursor") ? HlUnderCursor ?
-              \ printf('match MatchParen /\V\<%s\>/', escape(expand('<cword>'), '/\')) : 'match none' : ""
+  " Vimagit commit window -- insert right away
+  autocmd User VimagitEnterCommit startinsert
 endif
 " }}}
 
@@ -312,9 +311,6 @@ nnoremap <c-i> <c-i>zz
 
 " Easily source scripts
 nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
-
-" Turn on highlighting of word under cursor
-nnoremap <silent> z/ :execute "let HlUnderCursor=exists(\"HlUnderCursor\") ? HlUnderCursor * -1 + 1 : 1"<CR>l
 
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
@@ -686,7 +682,7 @@ nnoremap <leader>gw :Gwrite<cr>
 " Vimagit settings {{{
 " -------------------------------------------------------------
 let g:magit_show_help=0
-let g:magit_default_sections = ['commit', 'staged', 'unstaged']
+let g:magit_default_sections = ['info', 'commit', 'staged', 'unstaged', 'stash']
 " }}}
 
 " Grepper settings {{{

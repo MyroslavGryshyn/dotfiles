@@ -14,4 +14,5 @@ alias gp='git push origin HEAD'
 
 alias rm=trash
 alias vim="nvim"
+alias magit="vim -c MagitOnly"
 alias e="nvim"
