@@ -301,6 +301,11 @@ endfunction
 " Jump to tag smartly before setting a mark
 nnoremap <C-]> mMg<C-]>
 
+" Make these more convenient than default
+nnoremap zn *
+nnoremap zp #
+nnoremap zh *N
+
 " Center screen
 nnoremap <c-o> <c-o>zz
 nnoremap <c-i> <c-i>zz
