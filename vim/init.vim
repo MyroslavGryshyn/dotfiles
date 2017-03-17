@@ -494,8 +494,8 @@ nnoremap <silent> <C-g><C-p> :GFiles<cr>
 nnoremap <silent> <C-_> :BLines<CR>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>t :Tags<CR>
-nnoremap <silent> <leader>bb :Buffers<CR>
-nnoremap <silent> <leader>bv :BTags<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>v :BTags<CR>
 nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>ee :Commands<CR>
 
