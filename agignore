@@ -1,7 +1,7 @@
-tags
-env/
-venv/
-__pycache__/
 *.pyc
 .git/
+__pycache__/
+env/
 node_modules/
+tags
+venv/
