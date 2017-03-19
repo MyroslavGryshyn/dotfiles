@@ -314,7 +314,9 @@ nnoremap <C-]> mMg<C-]>
 " Make these more convenient than default
 nnoremap zh *N
 nnoremap zn *
+vmap zn *
 nnoremap zp #
+vmap zp #
 
 " Center screen
 nnoremap <c-o> <c-o>zz
