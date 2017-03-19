@@ -305,10 +305,6 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 
-" Use backspace key for matchit.vim
-nmap <BS> %
-xmap <BS> %
-
 " Sort visually selected lines
 vnoremap s :sort<cr><bar>:echo "Sorted."<cr>
 
@@ -329,6 +325,7 @@ nnoremap \s :source %<bar>AirlineRefresh<bar>echo "Sourced ".expand('%')."."<cr>
 
 " Switch to alternate buffer
 nnoremap <leader>j <c-^>
+nnoremap <leader>J <c-w>^
 
 " Center easily
 nnoremap <cr> zz
@@ -570,9 +567,8 @@ let g:jedi#auto_initialization = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#show_call_signatures = 1
-let g:jedi#use_tag_stack = 0
-let g:jedi#use_splits_not_buffers = 'bottom'
-nnoremap <silent> <leader>gg mM:call jedi#goto()<CR>
+let g:jedi#use_tag_stack = 1
+nnoremap <silent> <leader>gg :call jedi#goto()<CR>
 nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
 
@@ -796,7 +792,7 @@ let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_directory_display_top = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:webdevicons_enable_vimfiler = 0
-nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
+nnoremap <silent> <BS> :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
 let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^__pycache__$']
 " }}}
 
