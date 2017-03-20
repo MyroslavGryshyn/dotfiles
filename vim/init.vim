@@ -276,6 +276,10 @@ if !exists("autocommands_loaded")
 
   " Vimagit commit window -- insert right away
   autocmd User VimagitEnterCommit startinsert
+
+  " I'm used to switch splits with <c-l>, not <Tab>
+  autocmd FileType vimfiler map <buffer> <c-l> <Plug>(vimfiler_switch_to_other_window)
+  autocmd FileType vimfiler map <buffer> <Space> zz
 endif
 " }}}
 
@@ -299,6 +303,10 @@ endfunction
 
 " Mappings {{{
 " -------------------------------------------------------------
+" Use backspace key for matchit.vim
+nmap <BS> %
+xmap <BS> %
+
 " Use arrows to resize splits
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
@@ -743,7 +751,7 @@ let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
-nmap <leader>ff <Plug>(ale_lint)
+nmap <leader>d <Plug>(ale_lint)
 " Disable pylint, it's crazy
 let g:ale_linters = {'python': ['flake8']}
 " }}}
@@ -783,6 +791,10 @@ let g:vim_g_f_command = "Gf"
 
 " VimFiler settings {{{
 " -------------------------------------------------------------
+nnoremap <silent> <leader>f :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
+nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
+
+let g:vimfiler_quick_look_command = 'qlmanage -p'
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_tree_indentation = 1
 let g:vimfiler_tree_opened_icon = '▼'
@@ -794,8 +806,8 @@ let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_directory_display_top = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:webdevicons_enable_vimfiler = 0
-nnoremap <silent> <BS> :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
 let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^__pycache__$']
+let g:vimfiler_safe_mode_by_default = 0
 " }}}
 
 " Vim-easy-align settings {{{
