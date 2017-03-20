@@ -593,11 +593,25 @@ nnoremap <leader>rf :TestFile<CR>
 
 " Deoplete settings {{{
 " -------------------------------------------------------------
-let g:deoplete#auto_complete_delay = 150
+let g:deoplete#auto_complete_delay = 100
+let g:deoplete#auto_refresh_delay = 150
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let deoplete#tag#cache_limit_size = 50000000
+let g:deoplete#tag#cache_limit_size = 50000000
 let g:neoinclude#ctags_commands = 'tags'
+
+" Trigger complete manually
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <c-n>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ deoplete#mappings#manual_complete()
+" Close popup, delete char and the open popup again
+imap <expr><BS>
+            \ deoplete#smart_close_popup()."<Plug>delimitMateBS"
 " }}}
 
 " Autoformat settings {{{
