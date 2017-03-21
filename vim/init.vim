@@ -773,20 +773,13 @@ let g:ale_linters = {'python': ['flake8']}
 " Gutentags settings {{{
 " -------------------------------------------------------------
 let g:gutentags_enabled = 1
-" Update tags manually
 let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_missing = 1
 let s:tags_dir = expand("~/.config/nvim/tags")
 if !isdirectory(s:tags_dir)
     call mkdir(s:tags_dir, 'p')
 endif
 let g:gutentags_cache_dir = s:tags_dir
-nnoremap cot :GutentagsToggle<cr>
-autocmd FileType GV GutentagsDisable
-command! GutentagsEnable :let g:gutentags_enabled=1<bar>echom "Gutentags enabled."
-command! GutentagsDisable :let g:gutentags_enabled=0<bar>echom "Gutentags disabled."
-command! GutentagsToggle
-            \ :let g:gutentags_enabled=!g:gutentags_enabled
-            \ <bar>echom "Gutentags ".(g:gutentags_enabled ? "enabled." : "disabled.")
 " }}}
 
 " Easymotion settings {{{
