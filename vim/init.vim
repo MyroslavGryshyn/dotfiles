@@ -61,7 +61,6 @@ Plug 'Shougo/vimfiler.vim'
 
 " Quickfix list enhancement {{{
 Plug 'romainl/vim-qf'
-Plug 'sk1418/QFGrep'
 Plug 'yssl/QFEnter'
 " }}}
 
@@ -310,7 +309,7 @@ nnoremap <Right> :vertical resize -2<CR>
 vnoremap s :sort<cr><bar>:echo "Sorted."<cr>
 
 " Jump to tag smartly before setting a mark
-nnoremap <C-]> mMg<C-]>
+nnoremap <C-]> g<C-]>
 
 " Make these more convenient than default
 nnoremap zh *N
@@ -401,8 +400,6 @@ nnoremap <silent> ZX :qall<cr>
 " Add binding for opening splits
 nnoremap <c-s> <c-w>
 
-nnoremap <silent> <leader>z :x<cr>
-
 vnoremap gy y`>
 " Make Y behave like other capitals
 nnoremap Y y$
@@ -461,6 +458,7 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 nnoremap J 3<C-e>
 nnoremap K 3<C-y>
 
+" Remove newline on the current line
 nnoremap gj J
 vnoremap gj J
 
@@ -572,6 +570,7 @@ let g:jedi#auto_vim_configuration = 0
 let g:jedi#show_call_signatures = 1
 let g:jedi#use_tag_stack = 1
 nnoremap <silent> <leader>gg :call jedi#goto()<CR>
+" Change this to local mapping only for python, otherwise man
 nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " }}}
 
@@ -585,7 +584,7 @@ nnoremap <leader>rr :TestFile<CR>
 
 " Deoplete settings {{{
 " -------------------------------------------------------------
-let g:deoplete#auto_complete_delay = 100
+let g:deoplete#auto_complete_delay = 150
 let g:deoplete#auto_refresh_delay = 150
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -618,8 +617,9 @@ let g:formatters_python = ['autopep8']
 
 " Isort plugin settings {{{
 " -------------------------------------------------------------
-let g:vim_isort_map = '<leader>is'
 nnoremap <leader>is :Isort<CR>
+let g:vim_isort_map = '<leader>is'
+let g:vim_isort_python_version = 'python3'
 " }}}
 
 " Maximizer plugin settings {{{
@@ -631,12 +631,6 @@ nnoremap <leader>m :MaximizerToggle<CR>
 " Clear ipdb breakpoints {{{
 " -------------------------------------------------------------
 command! ClearPdb g/pdb/d
-" }}}
-
-" Python Compiler {{{
-" -------------------------------------------------------------
-let g:python_compiler_fixqflist = 1
-let g:python_compiler_highlight_errors = 0
 " }}}
 
 " IndentLine settings {{{
@@ -662,6 +656,7 @@ let g:gitgutter_sign_modified_removed = '▎'
 " -------------------------------------------------------------
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
+let g:qf_auto_resize = 0
 " }}}
 
 " QFEnter plugin settings {{{
@@ -669,11 +664,6 @@ let g:qf_auto_open_loclist = 0
 let g:qfenter_vopen_map = ['<C-v>']
 let g:qfenter_hopen_map = ['<C-CR>', '<C-s>']
 let g:qfenter_topen_map = ['<C-t>']
-" }}}
-
-" Neopairs settings {{{
-" -------------------------------------------------------------
-let g:neopairs#enable = 1
 " }}}
 
 " Delimitmate settings {{{
@@ -693,7 +683,8 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 function! s:my_cr_function() abort
   return deoplete#close_popup() . "\<CR>"
 endfunction
-imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ? "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
+imap <silent> <expr> <CR> delimitMate#WithinEmptyPair() ?
+            \ "<Plug>delimitMateCR" : "<C-r>=<SID>my_cr_function()<CR>"
 " }}}
 
 " Fugitive settings {{{
@@ -728,16 +719,6 @@ let g:grepper.quickfix = 0
 nnoremap <leader>gr :Grepper -query<space>
 nmap gr  <plug>(GrepperOperator)
 xmap gr  <plug>(GrepperOperator)
-" }}}
-
-" QFGrep settings {{{
-" -------------------------------------------------------------
-nmap \g <Plug>QFGrepG
-nmap \v <Plug>QFGrepV
-nmap \r <Plug>QFRestore
-let g:QFG_hi_prompt='ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
-let g:QFG_hi_info = 'ctermfg=7 ctermbg=0 guifg=#d3d0c8 guibg=#2d2d2d'
-let g:QFG_hi_error = 'ctermfg=15 ctermbg=9 guifg=White guibg=Red'
 " }}}
 
 " Vim-qf settings {{{

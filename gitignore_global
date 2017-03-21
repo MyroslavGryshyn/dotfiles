@@ -1,4 +1,5 @@
 .ignore
+.nvimrc
 .python-version
 Session.vim
 fugitive:/
