@@ -255,7 +255,7 @@ if !exists("autocommands_loaded")
               \ call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview('up:60%:hidden', '?'), 0)
 
   " Remove colorcolumns in quickfix and location list windows
-  autocmd FileType qf,GV setlocal colorcolumn=
+  autocmd FileType qf,GV setlocal colorcolumn= wrap
 
   " Set commentstring for jinja
   autocmd FileType jinja setlocal commentstring=<!--\ %s-->
@@ -578,10 +578,9 @@ nnoremap <silent> gk :call jedi#show_documentation()<CR>
 " Vim test runner settings {{{
 " -------------------------------------------------------------
 let test#python#runner = 'djangotest'
-let test#strategy = "dispatch"
-
-nnoremap <leader>rt :TestNearest<CR>
-nnoremap <leader>rf :TestFile<CR>
+" No need to use dispatch, results are shown in a new terminal window
+let test#strategy = 'neovim'
+nnoremap <leader>rr :TestFile<CR>
 " }}}
 
 " Deoplete settings {{{
