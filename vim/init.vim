@@ -108,13 +108,6 @@ Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
 " }}}
 
-" Dispatch plugins {{{
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'aliev/vim-compiler-python'
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'tpope/vim-dispatch'
-" }}}
-
 " Session management {{{
 Plug 'tpope/vim-obsession', {'on': 'Obsession'}
 " }}}
