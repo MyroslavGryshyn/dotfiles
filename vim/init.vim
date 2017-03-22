@@ -10,12 +10,13 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Syntax plugins {{{
-Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'jinja'}
-Plug 'cespare/vim-toml', {'for': 'toml'}
-Plug 'chase/vim-ansible-yaml', {'for': 'ansible'}
-Plug 'elzr/vim-json', {'for': 'json'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
-Plug 'moskytw/nginx-contrib-vim', {'for': 'nginx'}
+Plug 'Glench/Vim-Jinja2-Syntax',      {'for': 'jinja'}
+Plug 'cespare/vim-toml',              {'for': 'toml'}
+Plug 'chase/vim-ansible-yaml',        {'for': 'ansible'}
+Plug 'elzr/vim-json',                 {'for': 'json'}
+Plug 'jelera/vim-javascript-syntax',  {'for': 'javascript'}
+Plug 'moskytw/nginx-contrib-vim',     {'for': 'nginx'}
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 " }}}
 
 " Autocomplete engines {{{
@@ -40,12 +41,11 @@ Plug 'janko-m/vim-test', {'for': 'python'}
 " }}}
 
 " Python plugins {{{
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'fisadev/vim-isort', {'for': 'python'}
-Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
+Plug 'davidhalter/jedi-vim',            {'for': 'python' }
+Plug 'fisadev/vim-isort',               {'for': 'python'}
+Plug 'hynek/vim-python-pep8-indent',    {'for': 'python' }
 Plug 'michaeljsmith/vim-indent-object', {'for': 'python'}
-Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-Plug 'yevhen-m/python-syntax', {'for': 'python'}
+Plug 'yevhen-m/python-syntax',          {'for': 'python'}
 " }}}
 
 " Enhance vim searching {{{
@@ -55,7 +55,7 @@ Plug 'thinca/vim-visualstar'
 " }}}
 
 " Filesystem browsers {{{
-Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite.vim',
 Plug 'Shougo/vimfiler.vim'
 " }}}
 
@@ -65,11 +65,11 @@ Plug 'yssl/QFEnter'
 " }}}
 
 " Linting {{{
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', {'on': '<Plug>(ale_lint)'}
 " }}}
 
 " Formatting {{{
-Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 " }}}
 
 " Snippets {{{
@@ -87,24 +87,24 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " }}}
 
 " Helpful plugins {{{
-Plug 'itchyny/vim-cursorword'
-Plug 'junegunn/vim-easy-align'
-Plug 'AndrewRadev/bufferize.vim', { 'on': ['Bufferize'] }
+Plug 'AndrewRadev/bufferize.vim', {'on': ['Bufferize'] }
 Plug 'PeterRincker/vim-argumentative'
-Plug 'Shougo/junkfile.vim', {'on': 'JunkfileOpen'}
-Plug 'Valloric/MatchTagAlways', {'for': ['xml', 'html', 'htmldjango', 'jinja']}
-Plug 'Yggdroot/indentLine', {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/junkfile.vim',       {'on': 'JunkfileOpen'}
+Plug 'Valloric/MatchTagAlways',   {'for': ['xml', 'html', 'htmldjango', 'jinja']}
+Plug 'Yggdroot/indentLine',       {'for': ['vim', 'python'], 'on': ['IndentLinesToggle', 'IndentLinesReset']}
+Plug 'itchyny/vim-cursorword'
+Plug 'junegunn/vim-easy-align',   {'on': '<Plug>(EasyAlign)'}
 Plug 'kana/vim-operator-user'
-Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
-Plug 'mklabs/split-term.vim', {'on': 'Term'}
+Plug 'mbbill/undotree',           {'on': 'UndotreeToggle'}
+Plug 'mklabs/split-term.vim',     {'on': 'Term'}
 Plug 'myint/indent-finder'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'szw/vim-g'
-Plug 'szw/vim-maximizer', {'on': 'MaximizerToggle'}
+Plug 'szw/vim-maximizer',         {'on': 'MaximizerToggle'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
 " }}}
 
 " Session management {{{
@@ -272,6 +272,7 @@ if !exists("autocommands_loaded")
   " I'm used to switch splits with <c-l>, not <Tab>
   autocmd FileType vimfiler map <buffer> <c-l> <Plug>(vimfiler_switch_to_other_window)
   autocmd FileType vimfiler map <buffer> <Space> zz
+  autocmd BufEnter vimfiler :AirlineRefresh<cr>
 endif
 " }}}
 
@@ -307,9 +308,6 @@ nnoremap <Right> :vertical resize -2<CR>
 
 " Sort visually selected lines
 vnoremap s :sort<cr><bar>:echo "Sorted."<cr>
-
-" Jump to tag smartly before setting a mark
-nnoremap <C-]> g<C-]>
 
 " Make these more convenient than default
 nnoremap zh *N
@@ -356,10 +354,14 @@ nnoremap <leader>sa :execute("source ".abbr_file)<cr>
 noremap gV `[v`]
 
 " Copy current file's path to clipboard
-nnoremap <leader>y :let @+=expand("%:p")<CR>:echo 'Copied to clipboard.'<CR>
+function! PathToClipboard()
+    let @+=expand("%:p")
+    echo 'Copied to clipboard.'
+endfunction
+nnoremap <leader>y :call PathToClipboard()<cr>
 
 " Paste current word in command mode
-cnoremap <c-k> <C-R>=expand("<cword>")<CR>
+cnoremap <c-k> <C-R><C-W>
 
 " Close quickfix and location lists
 nnoremap <silent> <leader>c :cclose<bar>lclose<cr>
@@ -397,7 +399,7 @@ inoremap <silent> <c-q> <esc>:x<cr>
 nnoremap <silent> <leader>Q :qall<cr>
 nnoremap <silent> ZX :qall<cr>
 
-" Add binding for opening splits
+" Change binding for working with windows
 nnoremap <c-s> <c-w>
 
 vnoremap gy y`>
@@ -507,6 +509,9 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>v :BTags<CR>
 nnoremap <silent> <leader>hh :History<CR>
 nnoremap <silent> <leader>ee :Commands<CR>
+nnoremap <silent> <c-]>
+            \ :call fzf#vim#tags(expand('<cword>'),
+            \ {'options': '--exact --select-1 --exit-0'})<CR>
 
 nnoremap <silent> <c-g><c-l> :Commits<cr>
 nnoremap <silent> <c-g><c-b> :BCommits<cr>
@@ -738,7 +743,7 @@ let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
-nmap <leader>d <Plug>(ale_lint)
+nmap <leader>l <Plug>(ale_lint)
 " Disable pylint, it's crazy
 let g:ale_linters = {'python': ['flake8']}
 " }}}
@@ -771,8 +776,8 @@ let g:vim_g_f_command = "Gf"
 
 " VimFiler settings {{{
 " -------------------------------------------------------------
-nnoremap <silent> <leader>f :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
-nnoremap <silent> - :VimFilerExplorer -find<cr>:AirlineRefresh<cr>
+nnoremap <silent> <leader>f :VimFilerExplorer -find<cr>
+nnoremap <silent> - :VimFilerExplorer -find<cr>
 
 let g:vimfiler_quick_look_command = 'qlmanage -p'
 let g:vimfiler_as_default_explorer = 1
