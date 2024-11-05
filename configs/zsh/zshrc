@@ -274,5 +274,8 @@ alias vim=nvimvenv
 bindkey '^[|' zsh_gh_copilot_explain  # bind Alt+shift+\ to explain
 bindkey '^[\' zsh_gh_copilot_suggest  # bind Alt+\ to suggest
 
+bindkey '»' zsh_gh_copilot_explain  # bind Option+shift+\ to explain
+bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
+
 # Avoid .pyc
 export PYTHONDONTWRITEBYTECODE=1
