@@ -35,7 +35,7 @@ def setup_alacritty():
 
 
 def setup_tmux():
-    create_symlink("configs/tmux/tmux.conf", ".config/tmux/tmux.conf")
+    create_symlink("configs/tmux/tmux.conf", "~/.config/tmux/tmux.conf")
 
 def setup_zsh():
     create_symlink("configs/zsh/zshrc", "~/.zshrc")
