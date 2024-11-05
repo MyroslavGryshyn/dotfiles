@@ -1,5 +1,5 @@
 ### TODO:
 
-- [ ] Fix shell fonts
-- [ ] Fix powerline info
+- [x] Fix shell fonts
+- [x] Fix powerline info
 - [ ] Remove nvim project
