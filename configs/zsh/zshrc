@@ -5,8 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# You may need to manually set your language environment
-echo "Start"
+# Old echo mechanism to check if everything is ok
+# echo "Start"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -41,19 +41,19 @@ plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions zsh-github-copilot)
 
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 
-echo "START $ZSH/oh-my-zsh.sh"
+# echo "START $ZSH/oh-my-zsh.sh"
 source $ZSH/oh-my-zsh.sh
-echo "END oh-my-zsh loaded"
+# echo "END oh-my-zsh loaded"
 
-echo "START bash_aliases"
+# echo "START bash_aliases"
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-echo "END bash_aliases"
+# echo "END bash_aliases"
 
-echo "START pyenv"
+# echo "START pyenv"
 eval "$(pyenv init - --no-rehash)"
-echo "STOP pyenv"
+# echo "STOP pyenv"
 
 export PROJECT_HOME=$HOME/Dev
 export WORKON_HOME=$HOME/.virtualenvs
