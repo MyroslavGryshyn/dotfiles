@@ -2,4 +2,6 @@
 
 - [x] Fix shell fonts
 - [x] Fix powerline info
-- [ ] Remove nvim project
+- [x] Fix tmux config
+- [x] Change zsh theme
+- [x] Remove nvim project
