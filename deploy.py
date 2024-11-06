@@ -5,7 +5,7 @@ from pathlib import Path
 from subprocess import call
 
 from deploy.config import CONFIG
-from deploy.utils import add_line_to_file, create_symlink
+from deploy.utils import create_symlink
 
 
 def setup_neovim():
@@ -37,9 +37,11 @@ def setup_alacritty():
 def setup_tmux():
     create_symlink("configs/tmux/tmux.conf", "~/.config/tmux/tmux.conf")
 
+
 def setup_zsh():
     create_symlink("configs/zsh/zshrc", "~/.zshrc")
-
+    # Link for oh-my-zsh theme config
+    create_symlink("configs/zsh/p10k.zsh", "~/.p10k.zsh")
 
 
 if __name__ == "__main__":
