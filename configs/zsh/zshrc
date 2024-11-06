@@ -222,7 +222,6 @@ eval $(thefuck --alias)
 
 export XDG_CONFIG_HOME=$HOME/.config
 export TMUX_CONF=$XDG_CONFIG_HOME/tmux/tmux.conf  # default but here for visibility
-# export XDG_CONFIG_HOME=$HOME
 
 alias vim="nvim"
 alias vi="nvim"
