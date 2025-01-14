@@ -8,12 +8,43 @@ from deploy.config import CONFIG
 from deploy.utils import create_symlink
 
 
-def install_apps():
+def install_brew():
+    try:
+        run(["/bin/bash", "-c", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"], check=True)
+        print("Homebrew has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
+def install_neovim():
     try:
         run(["brew", "install", "neovim"], check=True)
         print("Neovim has been successfully installed.")
     except CalledProcessError as e:
         print(f"An error occurred: {e}")
+
+def install_tmux():
+    try:
+        run(["brew", "install", "tmux"], check=True)
+        print("Tmux has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
+def install_alacritty_font():
+    try:
+        run(["brew", "install", "--cask", "font-jetbrains-mono-nerd-font"], check=True)
+        print("Alacritty font has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
+def install_apps():
+    install_brew()
+    install_neovim()
+    install_tmux()
+    install_alacritty_font()
+
 
 
 def setup_neovim():
