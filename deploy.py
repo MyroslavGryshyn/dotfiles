@@ -23,6 +23,7 @@ def install_neovim():
     except CalledProcessError as e:
         print(f"An error occurred: {e}")
 
+
 def install_tmux():
     try:
         run(["brew", "install", "tmux"], check=True)
@@ -81,6 +82,14 @@ def install_pyenv():
         print(f"An error occurred: {e}")
 
 
+def install_fzf():
+    try:
+        run(["brew", "install", "fzf"], check=True)
+        print("fzf has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
 def install_apps():
     install_brew()
     install_neovim()
@@ -89,6 +98,7 @@ def install_apps():
     install_node()
     install_zsh_plugins()
     install_pyenv()
+    install_fzf()
 
 
 def setup_neovim():
