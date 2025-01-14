@@ -2,10 +2,18 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-from subprocess import call
+from subprocess import call, run, CalledProcessError
 
 from deploy.config import CONFIG
 from deploy.utils import create_symlink
+
+
+def install_apps():
+    try:
+        run(["brew", "install", "neovim"], check=True)
+        print("Neovim has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
 
 
 def setup_neovim():
@@ -45,6 +53,7 @@ def setup_zsh():
 
 
 if __name__ == "__main__":
+    install_apps()
     setup_neovim()
     setup_alacritty()
     setup_tmux()
