@@ -219,48 +219,48 @@ set25() {
     setalarm 25
 }
 
-# eval $(thefuck --alias)
-# 
-# export XDG_CONFIG_HOME=$HOME/.config
-# export TMUX_CONF=$XDG_CONFIG_HOME/tmux/tmux.conf  # default but here for visibility
-# 
-# alias vim="nvim"
-# alias vi="nvim"
-# 
-# export DJANGO_LOCAL=True
-# 
-# export CFLAGS="-I$(brew --prefix openssl)/include"
-# export LDFLAGS="-L$(brew --prefix openssl)/lib"
-# 
-# export PATH="/usr/local/opt/postgresql@14/bin:$PATH"
-# export PG_RESTORE=/usr/local/opt/postgresql@14/bin/pg_restore
-# 
-# # Adding poetry
-# export PATH="/Users/mhryshyn/.local/bin:$PATH"
-# 
-# function nvimvenv {
-#   if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
-#     source "$VIRTUAL_ENV/bin/activate"
-#     command nvim $@
-#     # deactivate
-#   else
-#     command nvim $@
-#   fi
-# }
-# 
-# alias vim=nvimvenv
-# 
-# bindkey '^[|' zsh_gh_copilot_explain  # bind Alt+shift+\ to explain
-# bindkey '^[\' zsh_gh_copilot_suggest  # bind Alt+\ to suggest
-# 
-# bindkey '»' zsh_gh_copilot_explain  # bind Option+shift+\ to explain
-# bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
-# 
-# # Avoid .pyc
-# export PYTHONDONTWRITEBYTECODE=1
-# 
-# # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval $(thefuck --alias)
+
+export XDG_CONFIG_HOME=$HOME/.config
+export TMUX_CONF=$XDG_CONFIG_HOME/tmux/tmux.conf  # default but here for visibility
+
+alias vim="nvim"
+alias vi="nvim"
+
+export DJANGO_LOCAL=True
+
+export CFLAGS="-I$(brew --prefix openssl)/include"
+export LDFLAGS="-L$(brew --prefix openssl)/lib"
+
+export PATH="/usr/local/opt/postgresql@14/bin:$PATH"
+export PG_RESTORE=/usr/local/opt/postgresql@14/bin/pg_restore
+
+# Adding poetry
+export PATH="/Users/mhryshyn/.local/bin:$PATH"
+
+function nvimvenv {
+  if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
+    source "$VIRTUAL_ENV/bin/activate"
+    command nvim $@
+    # deactivate
+  else
+    command nvim $@
+  fi
+}
+
+alias vim=nvimvenv
+
+bindkey '^[|' zsh_gh_copilot_explain  # bind Alt+shift+\ to explain
+bindkey '^[\' zsh_gh_copilot_suggest  # bind Alt+\ to suggest
+
+bindkey '»' zsh_gh_copilot_explain  # bind Option+shift+\ to explain
+bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
+
+# Avoid .pyc
+export PYTHONDONTWRITEBYTECODE=1
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
