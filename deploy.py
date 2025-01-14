@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+
 from pathlib import Path
 from subprocess import call, run, CalledProcessError
 
@@ -63,14 +65,14 @@ def install_zsh_plugins():
 
     try:
         run(
-                [
-                    "git",
-                    "clone",
-                    "https://github.com/loiccoyle/zsh-github-copilot",
-                    "~/.oh-my-zsh/custom/plugins/zsh-github-copilot"
-                ],
-                check=True
-            )
+            [
+                "git",
+                "clone",
+                "https://github.com/loiccoyle/zsh-github-copilot",
+                os.path.expanduser("~/.oh-my-zsh/custom/plugins/zsh-github-copilot")
+            ],
+            check=True
+        )
         print("zsh-syntax-highlighting has been successfully installed.")
     except CalledProcessError as e:
         print(f"An error occurred: {e}")
@@ -151,7 +153,7 @@ def setup_tmux():
 def setup_zsh():
     create_symlink("configs/zsh/zshrc", "~/.zshrc")
     create_symlink("configs/zsh/bash_aliases", "~/.bash_aliases")
-    create_symlink("configs/zsh/fzf.zsh", "~/.fzf.zsh")
+    create_symlink("configs/fzf/fzf.zsh", "~/.fzf.zsh")
     # Link for oh-my-zsh theme config
     create_symlink("configs/zsh/p10k.zsh", "~/.p10k.zsh")
 
