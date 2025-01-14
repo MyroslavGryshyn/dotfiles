@@ -47,12 +47,50 @@ def install_alacritty_font():
         print(f"An error occurred: {e}")
 
 
+def install_zsh_plugins():
+    try:
+        run(["brew", "install", "zsh-syntax-highlighting"], check=True)
+        print("zsh-syntax-highlighting has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+    try:
+        run(["brew", "install", "zsh-autosuggestions"], check=True)
+        print("zsh-syntax-highlighting has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+    try:
+        repo_url = "https://github.com/loiccoyle/zsh-github-copilot"
+        plugin_path = "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-github-copilot"
+        run(["git", "clone", repo_url, plugin_path], check=True)
+        print("zsh-syntax-highlighting has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+    try:
+        run(["brew", "install", "powerlevel10k"], check=True)
+        print("zsh-syntax-highlighting has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
+def install_pyenv():
+    try:
+        run(["brew", "install", "pyenv"], check=True)
+        print("pyenv has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
 def install_apps():
     install_brew()
     install_neovim()
     install_tmux()
     install_alacritty_font()
     install_node()
+    install_zsh_plugins()
+    install_pyenv()
 
 
 def setup_neovim():
