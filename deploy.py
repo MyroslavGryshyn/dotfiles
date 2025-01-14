@@ -142,6 +142,7 @@ def setup_tmux():
 
 def setup_zsh():
     create_symlink("configs/zsh/zshrc", "~/.zshrc")
+    create_symlink("configs/zsh/bash_aliases", "~/.bash_aliases")
     # Link for oh-my-zsh theme config
     create_symlink("configs/zsh/p10k.zsh", "~/.p10k.zsh")
 
