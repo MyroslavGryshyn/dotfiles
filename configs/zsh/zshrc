@@ -40,6 +40,7 @@ plugins=(vi-mode)
 
 # User configuration
 
+export PATH="$PATH:/opt/homebrew/bin/"
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 
 # echo "START $ZSH/oh-my-zsh.sh"
