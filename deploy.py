@@ -61,9 +61,7 @@ def install_zsh_plugins():
         print(f"An error occurred: {e}")
 
     try:
-        repo_url = "https://github.com/loiccoyle/zsh-github-copilot"
-        plugin_path = "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-github-copilot"
-        run(["git", "clone", repo_url, plugin_path], check=True)
+        run(["git", "clone", "https://github.com/loiccoyle/zsh-github-copilot $\{ZSH_CUSTOM:-~/.oh-my-zsh/custom\}/plugins/zsh-github-copilot"], check=True)
         print("zsh-syntax-highlighting has been successfully installed.")
     except CalledProcessError as e:
         print(f"An error occurred: {e}")
