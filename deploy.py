@@ -31,6 +31,14 @@ def install_tmux():
         print(f"An error occurred: {e}")
 
 
+def install_node():
+    try:
+        run(["brew", "install", "node"], check=True)
+        print("Node has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
 def install_alacritty_font():
     try:
         run(["brew", "install", "--cask", "font-jetbrains-mono-nerd-font"], check=True)
@@ -44,7 +52,7 @@ def install_apps():
     install_neovim()
     install_tmux()
     install_alacritty_font()
-
+    install_node()
 
 
 def setup_neovim():
