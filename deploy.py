@@ -90,6 +90,14 @@ def install_fzf():
         print(f"An error occurred: {e}")
 
 
+def install_thefuck():
+    try:
+        run(["brew", "install", "thefuck"], check=True)
+        print("thefuck has been successfully installed.")
+    except CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
 def install_apps():
     install_brew()
     install_neovim()
@@ -99,6 +107,7 @@ def install_apps():
     install_zsh_plugins()
     install_pyenv()
     install_fzf()
+    install_thefuck()
 
 
 def setup_neovim():
