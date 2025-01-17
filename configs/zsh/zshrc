@@ -4,7 +4,10 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# 
+
+ typeset -g POWERLEVEL10K_INSTANT_PROMPT=off
+
+
 # Old echo mechanism to check if everything is ok
 # echo "Start"
 export LC_ALL=en_US.UTF-8
@@ -35,8 +38,9 @@ export UPDATE_ZSH_DAYS=14
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
-# plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions zsh-github-copilot)
-plugins=(vi-mode)
+plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions zsh-github-copilot)
+# When plugins don't work from start
+# plugins=(vi-mode)
 
 # User configuration
 
