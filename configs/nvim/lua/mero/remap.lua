@@ -55,3 +55,5 @@ map("n", "<C-n>", ":tabnext<CR>")
 
 -- Flake8
 map("n", "<F8>", ":Flake<CR>")
+
+map("n", "<leader>e", ":e ~/.config/nvim/<CR>")
