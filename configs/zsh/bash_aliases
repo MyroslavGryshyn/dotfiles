@@ -51,3 +51,7 @@ alias pyman="source export_local_vars.sh; python beneighb/manage.py"
 alias pyrun='pyman runserver'
 alias pyshell='pyman shell_plus'
 
+alias pg_start='pg_ctl start -D ~/Dev/postgres'
+
+alias dotnet_test='workon Rekordo; cd backend/tests/; dotnet test; cd -'
+alias dotnet_run='workon Rekordo; cd backend/api/; dotnet build; dotnet run'
