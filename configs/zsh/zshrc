@@ -268,3 +268,5 @@ export PYTHONDONTWRITEBYTECODE=1
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source <(fzf --zsh)
+# Activate zsh-z plugin
+source ~/dotfiles/zsh-z.plugin.zsh
