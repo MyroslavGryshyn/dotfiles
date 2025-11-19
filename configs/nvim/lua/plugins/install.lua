@@ -80,9 +80,9 @@ return {
 			},
 			dependencies = { 'nvim-tree/nvim-web-devicons' }
 		},
-		{
-			"github/copilot.vim"
-		},
+		-- {
+		-- 	"github/copilot.vim"
+		-- },
         {
             "nvie/vim-flake8",
         },

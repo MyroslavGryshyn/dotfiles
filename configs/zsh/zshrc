@@ -64,7 +64,7 @@ eval "$(pyenv init - --no-rehash)"
 export PROJECT_HOME=$HOME/Dev
 export WORKON_HOME=$HOME/.virtualenvs
 export EDITOR=vim
-export VIRTUALENVWRAPPER_PYTHON=`which python3`
+export VIRTUALENVWRAPPER_PYTHON=$HOME/.virtualenvs/neovim/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
 source `which virtualenvwrapper.sh`
 

@@ -63,7 +63,6 @@ g.coc_global_extensions = {
    'coc-yaml',
    'coc-yank',
    'coc-lists',
-   'coc-jedi',
    'coc-eslint'
 }
 

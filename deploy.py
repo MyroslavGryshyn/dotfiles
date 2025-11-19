@@ -139,7 +139,10 @@ def setup_neovim():
     # Set up nvim related config files
     create_symlink("configs/nvim/init.lua", "~/.config/nvim/init.lua")
     create_symlink("configs/nvim/lua", "~/.config/nvim/lua")
+    create_symlink("configs/nvim/after", "~/.config/nvim/after")
     create_symlink("configs/editorconfig", "~/.editorconfig")
+    create_symlink("configs/nvim/coc-settings.json", "~/.config/nvim/coc-settings.json")
+    create_symlink("configs/nvim/lazy-lock.json", "~/.config/nvim/lazy-lock.json")
 
 
 def setup_alacritty():
