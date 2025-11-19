@@ -21,8 +21,13 @@ map({"n", "v"}, "gp", [["+P]])
 
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+-- Coc
+map("n", "<leader>h", "<Cmd>CocCommand document.toggleInlayHint<CR>", {
+  silent = true
+})
 -- Rename as in IDE
 map("n", "<leader>rr", "<Plug>(coc-rename)")
+
 
 map("n", "<leader>v", ":vsplit<CR>")
 
