@@ -1,4 +1,35 @@
 return {
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+    build = "make install_jsregexp", -- optional, but nice
+
+    config = function()
+      local ls = require("luasnip")
+
+      -- Load snippets from lua/snippets
+      require("luasnip.loaders.from_lua").load({
+        paths = vim.fn.stdpath("config") .. "/lua/snippets",
+      })
+
+      -- IMPORTANT: do NOT call ls.expand_or_jump() here.
+      -- Just create a keymap that will call it later.
+
+      -- <C-l> to expand/jump
+      vim.keymap.set({ "i", "s" }, "<C-l>", function()
+        if ls.expand_or_locally_jumpable() then
+          ls.expand_or_jump()
+        end
+      end, { silent = true })
+
+      -- Optional: <C-h> to jump backwards
+      vim.keymap.set({ "i", "s" }, "<C-h>", function()
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
+      end, { silent = true })
+    end,
+  },
 	{
 		"nvim-tree/nvim-tree.lua",
 	},
