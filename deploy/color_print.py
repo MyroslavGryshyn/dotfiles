@@ -28,3 +28,7 @@ class ColorPrint:
     @classmethod
     def yellow(cls, *args, **kwargs):
         cls.color_print(color=cls.YELLOW, *args, **kwargs)
+
+    @classmethod
+    def blue(cls, *args, **kwargs):
+        cls.color_print(color=cls.BLUE, *args, **kwargs)
