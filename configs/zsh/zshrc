@@ -269,4 +269,4 @@ export PYTHONDONTWRITEBYTECODE=1
 
 source <(fzf --zsh)
 # Activate zsh-z plugin
-source ~/dotfiles/zsh-z.plugin.zsh
+source ~/.zsh-z.plugin.zsh

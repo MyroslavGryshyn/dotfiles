@@ -159,6 +159,8 @@ def setup_zsh():
     create_symlink("configs/fzf/fzf.zsh", "~/.fzf.zsh")
     # Link for oh-my-zsh theme config
     create_symlink("configs/zsh/p10k.zsh", "~/.p10k.zsh")
+    # Link z plugin
+    create_symlink("configs/zsh/plugins/zsh-z.plugin.zsh", "~/.zsh-z.plugin.zsh")
 
 
 if __name__ == "__main__":
