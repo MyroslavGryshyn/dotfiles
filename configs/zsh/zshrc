@@ -38,7 +38,7 @@ export UPDATE_ZSH_DAYS=14
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions zsh-github-copilot)
+plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions zsh-github-copilot z)
 # When plugins don't work from start
 # plugins=(vi-mode)
 
@@ -263,5 +263,3 @@ export PYTHONDONTWRITEBYTECODE=1
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source <(fzf --zsh)
-# Activate zsh-z plugin
-source ~/.zsh-z.plugin.zsh
