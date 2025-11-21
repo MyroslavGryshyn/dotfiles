@@ -64,6 +64,18 @@ map("n", "<F8>", ":Flake<CR>")
 -- Open config dir
 map("n", "<leader>ev", ":e ~/dotfiles/configs/nvim<CR>")
 
+-- Harpoon
+local harpoon = require("harpoon")
+harpoon:setup()
+
+map("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: add file" })
+map("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: toggle menu" })
+
+map("n", "<C-h>", function() harpoon:list():select(1) end, { desc = "Harpoon: goto 1" })
+map("n", "<C-j>", function() harpoon:list():select(2) end, { desc = "Harpoon: goto 2" })
+map("n", "<C-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: goto 3" })
+map("n", "<C-l>", function() harpoon:list():select(4) end, { desc = "Harpoon: goto 4" })
+
 -- Claude Code integration
 local claude = require("mero.claude")
 map("n", "<leader>cc", claude.open_claude_terminal, { desc = "Open Claude Code terminal" })
