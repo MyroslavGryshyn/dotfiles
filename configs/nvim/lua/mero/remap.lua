@@ -22,7 +22,7 @@ map({"n", "v"}, "gp", [["+P]])
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Coc
-map("n", "<leader>h", "<Cmd>CocCommand document.toggleInlayHint<CR>", {
+map("n", "<leader>hn", "<Cmd>CocCommand document.toggleInlayHint<CR>", {
   silent = true
 })
 -- Rename as in IDE
@@ -41,7 +41,7 @@ map("n", "<leader>n", ":NvimTreeFindFile<CR>", { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<leader>n', ":lua require('mero.utils').toggleTree()<CR>", {noremap = true})
 
 map("n", "<C-g>", ":FzfLua files<CR>", { noremap = true, silent = true })
-map("n", "<leader>gs", ":FzfLua git_files<CR>", { noremap = true, silent = true })
+map("n", "<leader>gs", ":FzfLua git_status<CR>", { noremap = true, silent = true })
 map("n", "<leader>L", ":FzfLua lines<CR>", { noremap = true, silent = true })
 map("n", "<leader>l", ":FzfLua blines<CR>", { noremap = true, silent = true })
 map("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
@@ -71,10 +71,11 @@ harpoon:setup()
 map("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: add file" })
 map("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: toggle menu" })
 
-map("n", "<C-h>", function() harpoon:list():select(1) end, { desc = "Harpoon: goto 1" })
-map("n", "<C-j>", function() harpoon:list():select(2) end, { desc = "Harpoon: goto 2" })
-map("n", "<C-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: goto 3" })
-map("n", "<C-l>", function() harpoon:list():select(4) end, { desc = "Harpoon: goto 4" })
+-- TODO: Find a better mapping
+-- map("n", "<C-h>", function() harpoon:list():select(1) end, { desc = "Harpoon: goto 1" })
+-- map("n", "<C-j>", function() harpoon:list():select(2) end, { desc = "Harpoon: goto 2" })
+-- map("n", "<C-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: goto 3" })
+-- map("n", "<C-l>", function() harpoon:list():select(4) end, { desc = "Harpoon: goto 4" })
 
 -- Claude Code integration
 local claude = require("mero.claude")
