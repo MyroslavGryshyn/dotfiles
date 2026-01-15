@@ -34,6 +34,12 @@ vim.opt.shell = "/bin/zsh"
 
 vim.opt.splitright = true
 
+-- Folding with treesitter
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false  -- Start with folds open
+vim.opt.foldlevel = 99      -- High fold level so folds are open by default
+
 vim.g.python_host_prog="/Users/myroslavhryshyn/.virtualenvs/neovim/bin/python"
 
 -- TODO: Change when setting up tags
