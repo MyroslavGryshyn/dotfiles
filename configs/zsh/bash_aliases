@@ -75,7 +75,8 @@ alias dagster-logs='tail -f ~/.dagster/dagster.log 2>/dev/null || echo "No logs 
 alias dagster-ui='open http://127.0.0.1:3000'
 
 # Master Mind CLI
-mm() {
+unalias mm 2>/dev/null
+function mm {
     case "$1" in
         run|start)
             cd ~/Dev/MM && PYTHONPATH=$PWD DAGSTER_HOME=~/.dagster dagster dev
@@ -96,8 +97,16 @@ mm() {
             shift
             cd ~/Dev/MM && PYTHONPATH=$PWD python -m embeddings.search "$@"
             ;;
+        coach)
+            shift
+            cd ~/Dev/MM && PYTHONPATH=$PWD python -m coach.cli "$@"
+            ;;
+        ask)
+            shift
+            cd ~/Dev/MM && PYTHONPATH=$PWD python -m coach.cli "$@"
+            ;;
         *)
-            echo "Usage: mm {run|start|status|stop|logs|ui|search}"
+            echo "Usage: mm {run|start|status|stop|logs|ui|search|coach|ask}"
             ;;
     esac
 }
