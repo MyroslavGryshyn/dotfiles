@@ -128,6 +128,10 @@ return {
             "tpope/vim-commentary",
         },
         {
+            "kevinhwang91/nvim-ufo",
+            dependencies = { "kevinhwang91/promise-async" },
+        },
+        {
             "JMarkin/gentags.lua",
             cond = vim.fn.executable("ctags") == 1,
             dependencies = { "nvim-lua/plenary.nvim", },
