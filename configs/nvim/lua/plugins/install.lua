@@ -111,9 +111,6 @@ return {
 			},
 			dependencies = { 'nvim-tree/nvim-web-devicons' }
 		},
-		-- {
-		-- 	"github/copilot.vim"
-		-- },
         {
             "nvie/vim-flake8",
         },
@@ -130,6 +127,12 @@ return {
         {
             "kevinhwang91/nvim-ufo",
             dependencies = { "kevinhwang91/promise-async" },
+        },
+        {
+            "supermaven-inc/supermaven-nvim",
+            config = function()
+                require("supermaven-nvim").setup({})
+            end,
         },
         {
             "JMarkin/gentags.lua",

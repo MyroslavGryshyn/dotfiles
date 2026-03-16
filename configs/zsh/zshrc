@@ -38,7 +38,7 @@ export UPDATE_ZSH_DAYS=14
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions zsh-github-copilot z)
+plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions z)
 # When plugins don't work from start
 # plugins=(vi-mode)
 
@@ -263,3 +263,9 @@ export PYTHONDONTWRITEBYTECODE=1
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source <(fzf --zsh)
+alias python=python3
+
+# Crypto arbitrage monitor
+alias crypto-start="cd ~/Dev/crypto && pm2 start main.py --name crypto --interpreter python3"
+alias crypto-stop="pm2 stop crypto"
+alias crypto-logs="pm2 logs crypto"
