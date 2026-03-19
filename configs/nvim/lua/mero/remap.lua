@@ -36,9 +36,7 @@ map("n", "QA", ":qa<CR>")
 
 map("n", "<F9>", ":Black<CR>")
 
-map("n", "<leader>n", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>n', ":lua require('mero.utils').toggleTree()<CR>", {noremap = true})
+map("n", "<leader>n", function() require('mero.utils').toggleTree() end, { noremap = true, silent = true, desc = "Toggle file tree" })
 
 map("n", "<C-g>", ":FzfLua files<CR>", { noremap = true, silent = true })
 map("n", "<leader>gs", ":FzfLua git_status<CR>", { noremap = true, silent = true })

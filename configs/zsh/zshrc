@@ -28,7 +28,7 @@ export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 # Ruby version manager
 eval "$(rbenv init - zsh)"
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -41,7 +41,8 @@ export WORKON_HOME=$HOME/.virtualenvs
 export EDITOR=vim
 export VIRTUALENVWRAPPER_PYTHON=$HOME/.virtualenvs/neovim/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
-source `which virtualenvwrapper.sh`
+VENVWRAPPER="$(which virtualenvwrapper.sh 2>/dev/null)"
+[ -n "$VENVWRAPPER" ] && source "$VENVWRAPPER"
 
 export DJANGO_LIVE_TEST_SERVER_ADDRESS="localhost:9000"
 
@@ -210,7 +211,7 @@ export PATH="/usr/local/opt/postgresql@14/bin:$PATH"
 export PG_RESTORE=/usr/local/opt/postgresql@14/bin/pg_restore
 
 # Adding poetry
-export PATH="/Users/mhryshyn/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 function nvimvenv {
   if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
