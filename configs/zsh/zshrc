@@ -81,7 +81,7 @@ set -o vi
 [ -f ~/.key-binding.zsh ] && source ~/.key-binding.zsh
 
 _fzf_compgen_path() {
-  ag -g "" "$1"
+  fd --hidden --follow --exclude .git . "$1"
 }
 
 # Base16 Shell
@@ -219,9 +219,9 @@ set25() {
     setalarm 25
 }
 
-# Kamal deploy (931 Tea)
+# Kamal deploy
 # KAMAL_HOST loaded from .env.local
-export KAMAL_REGISTRY_PASSWORD="$(gh auth token)"
+command -v gh &>/dev/null && export KAMAL_REGISTRY_PASSWORD="$(gh auth token)"
 [ -f ~/dotfiles/.env.local ] && source ~/dotfiles/.env.local
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

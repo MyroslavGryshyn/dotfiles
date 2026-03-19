@@ -72,10 +72,8 @@ return {
 		},
 		{
 			"neoclide/coc.nvim",
-			requires = {
+			dependencies = {
 				"rafcamlet/coc-nvim-lua",
-				"clangd/coc-clangd",
-				"josa42/coc-go",
 				"iamcco/coc-spell-checker",
 			},
 			branch = "release",
@@ -125,7 +123,6 @@ return {
                 providers = {
                     claude = {
                         endpoint = "https://api.anthropic.com",
-                        model = "claude-sonnet-4-5-20250929",
                         timeout = 30000,
                         extra_request_body = {
                             temperature = 0.75,

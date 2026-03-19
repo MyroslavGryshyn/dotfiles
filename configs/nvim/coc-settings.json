@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/Users/myroslavhryshyn/.virtualenvs/backend/bin/python",
+  "python.pythonPath": "~/.virtualenvs/neovim/bin/python",
   "python.analysis.autoSearchPaths": true,
   "python.analysis.useLibraryCodeForTypes": false,
 

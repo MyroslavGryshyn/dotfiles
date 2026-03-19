@@ -14,24 +14,23 @@ def create_symlink(source, target):
     now = dt.now().strftime("%Y%m%d_%H%M")
     new_name = str(full_target) + "." + now + ".bak"
 
-    if full_target.exists():
-        if full_target.is_symlink():
+    if full_target.is_symlink():
+        if full_target.exists():
             ColorPrint.yellow(
                 pre_text="Symlink to ", color_text=target, post_text=" already exists"
             )
             return
         else:
-            ColorPrint.yellow(color_text=target, post_text=" already exists")
-
-            ColorPrint.yellow(color_text="Creating backup at ", post_text=new_name)
-            full_target.rename(new_name)
-    elif full_target.is_symlink():
-        ColorPrint.red(
-            pre_text="Symlink ",
-            color_text=full_target.as_posix(),
-            post_text=" is broken, unlinking... ",
-        )
-        full_target.unlink()
+            ColorPrint.red(
+                pre_text="Symlink ",
+                color_text=full_target.as_posix(),
+                post_text=" is broken, unlinking... ",
+            )
+            full_target.unlink()
+    elif full_target.exists():
+        ColorPrint.yellow(color_text=target, post_text=" already exists")
+        ColorPrint.yellow(color_text="Creating backup at ", post_text=new_name)
+        full_target.rename(new_name)
     else:
         create_directory(full_target.parent)
 
