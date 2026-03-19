@@ -44,8 +44,11 @@ plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions z)
 
 # User configuration
 
-export PATH="$PATH:/opt/homebrew/bin/"
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+
+# Ruby version manager
+eval "$(rbenv init - zsh)"
 
 # echo "START $ZSH/oh-my-zsh.sh"
 source $ZSH/oh-my-zsh.sh
@@ -258,6 +261,11 @@ bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
 
 # Avoid .pyc
 export PYTHONDONTWRITEBYTECODE=1
+
+# Kamal deploy (931 Tea)
+export KAMAL_HOST="164.92.215.15"
+export KAMAL_REGISTRY_PASSWORD="$(gh auth token)"
+[ -f ~/dotfiles/.env.local ] && source ~/dotfiles/.env.local
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

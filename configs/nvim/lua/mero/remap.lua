@@ -77,10 +77,3 @@ map("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) en
 -- map("n", "<C-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: goto 3" })
 -- map("n", "<C-l>", function() harpoon:list():select(4) end, { desc = "Harpoon: goto 4" })
 
--- Claude Code integration
-local claude = require("mero.claude")
-map("n", "<leader>cc", claude.open_claude_terminal, { desc = "Open Claude Code terminal" })
-map("v", "<leader>cc", claude.send_visual_to_claude, { desc = "Send selection to Claude Code" })
-map("n", "<leader>cf", claude.claude_fix_current_file, { desc = "Claude: fix current file" })
-map("n", "<leader>ce", claude.claude_explain_current_file, { desc = "Claude: explain current file" })
-map("n", "<leader>cr", claude.claude_refactor_current_file, { desc = "Claude: refactor current file" })

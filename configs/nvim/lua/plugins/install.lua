@@ -141,4 +141,43 @@ return {
             config = function() require("gentags").setup({}) end,
             event = "VeryLazy",
         },
+        {
+            "yetone/avante.nvim",
+            event = "VeryLazy",
+            version = false,
+            build = "make",
+            opts = {
+                provider = "claude",
+                providers = {
+                    claude = {
+                        endpoint = "https://api.anthropic.com",
+                        model = "claude-sonnet-4-5-20250929",
+                        timeout = 30000,
+                        extra_request_body = {
+                            temperature = 0.75,
+                            max_tokens = 64000,
+                        },
+                    },
+                },
+            },
+            dependencies = {
+                "nvim-lua/plenary.nvim",
+                "MunifTanjim/nui.nvim",
+                "nvim-tree/nvim-web-devicons",
+                "folke/snacks.nvim",
+                "ibhagwan/fzf-lua",
+                "HakonHarnes/img-clip.nvim",
+                "MeanderingProgrammer/render-markdown.nvim",
+            },
+        },
+        {
+            "coder/claudecode.nvim",
+            dependencies = { "folke/snacks.nvim" },
+            lazy = false,
+            config = true,
+            keys = {
+                { "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+                { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+            },
+        },
     }

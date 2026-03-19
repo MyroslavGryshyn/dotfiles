@@ -34,6 +34,11 @@
   # true, alacritty starts maximized.
   startup_mode = "Maximized"
 
+[bell]
+animation = "EaseOutExpo"
+duration = 100
+color = "#f6c177"
+
 [scrolling]
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
