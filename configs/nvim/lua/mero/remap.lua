@@ -1,7 +1,5 @@
 local map = vim.keymap.set
 
-vim.g.mapleader = " "
-
 map("i", "jj", "<Esc>", {})
 map("n", "<leader>li", ":Lazy install<CR>", {})
 map("n", "<leader>lu", ":Lazy update<CR>", {})
@@ -61,12 +59,4 @@ map("n", "<F8>", ":Flake<CR>")
 
 -- Open config dir
 map("n", "<leader>ev", ":e ~/dotfiles/configs/nvim<CR>")
-
--- Harpoon
-local harpoon = require("harpoon")
-harpoon:setup()
-
-map("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: add file" })
-map("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: toggle menu" })
-
 
