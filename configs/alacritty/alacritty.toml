@@ -5,10 +5,8 @@
 [window]
   opacity = 0.8
   blur = true
-  dimensions = { columns = 0, lines = 0 }
   decorations = "full"
   padding = { x = 2, y = 2 }
-  dynamic_padding = false
   startup_mode = "Maximized"
 
 [bell]

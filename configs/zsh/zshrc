@@ -5,62 +5,84 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
- typeset -g POWERLEVEL10K_INSTANT_PROMPT=off
+typeset -g POWERLEVEL10K_INSTANT_PROMPT=off
 
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-export UPDATE_ZSH_DAYS=14
-
-plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions z)
-
-# User configuration
+# === PATH ===
 
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export PATH="/usr/local/opt/postgresql@14/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
-# Ruby version manager
-eval "$(rbenv init - zsh)"
+# === Environment ===
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export ZSH=$HOME/.oh-my-zsh
+export XDG_CONFIG_HOME=$HOME/.config
+export TMUX_CONF=$XDG_CONFIG_HOME/tmux/tmux.conf
+export EDITOR=vim
+export PROJECT_HOME=$HOME/Dev
+export DJANGO_LOCAL=True
+export DJANGO_LIVE_TEST_SERVER_ADDRESS="localhost:9000"
+export PYTHONDONTWRITEBYTECODE=1
+export PG_RESTORE=/usr/local/opt/postgresql@14/bin/pg_restore
+export CFLAGS="-I$(brew --prefix openssl)/include"
+export LDFLAGS="-L$(brew --prefix openssl)/lib"
+export FZF_DEFAULT_OPTS='--height 50%'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+
+# === Oh My Zsh ===
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+export UPDATE_ZSH_DAYS=14
+plugins=(vi-mode zsh-syntax-highlighting zsh-autosuggestions z)
 source "$ZSH/oh-my-zsh.sh"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-eval "$(pyenv init - --no-rehash)"
+# === Virtualenv ===
 
-export PROJECT_HOME=$HOME/Dev
 export WORKON_HOME=$HOME/.virtualenvs
-export EDITOR=vim
 export VIRTUALENVWRAPPER_PYTHON=$HOME/.virtualenvs/neovim/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
 VENVWRAPPER="$(which virtualenvwrapper.sh 2>/dev/null)"
 [ -n "$VENVWRAPPER" ] && source "$VENVWRAPPER"
 
-export DJANGO_LIVE_TEST_SERVER_ADDRESS="localhost:9000"
+# === Tools ===
+
+eval "$(rbenv init - zsh)"
+eval "$(pyenv init - --no-rehash)"
+eval $(thefuck --alias)
+
+alias tmux="TERM=screen-256color-bce tmux"
+alias vi="nvim"
+alias python=python3
+
+function nvimvenv {
+  if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
+    source "$VIRTUAL_ENV/bin/activate"
+    command nvim $@
+  else
+    command nvim $@
+  fi
+}
+alias vim=nvimvenv
+
+# === Key Bindings ===
 
 bindkey -M viins 'jj' vi-cmd-mode
-
 bindkey ^O forward-word
-
 set -o vi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.key-binding.zsh ] && source ~/.key-binding.zsh
 
-export FZF_DEFAULT_OPTS='--height 50%'
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 _fzf_compgen_path() {
   ag -g "" "$1"
 }
-
-alias tmux="TERM=screen-256color-bce tmux"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-ocean.sh"
@@ -68,10 +90,13 @@ BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-ocean.sh"
 
 # Enable Ctrl-v to edit command line
 autoload -U edit-command-line
+zle -N edit-command-line
 bindkey '^v' edit-command-line
 
-# Emacs style
-zle -N edit-command-line
+bindkey '^[|' zsh_gh_copilot_explain  # bind Alt+shift+\ to explain
+bindkey '^[\' zsh_gh_copilot_suggest  # bind Alt+\ to suggest
+bindkey '»' zsh_gh_copilot_explain  # bind Option+shift+\ to explain
+bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
 
 # Git utils
 # ====================================================================================
@@ -190,49 +215,9 @@ setalarm() {
     say "Beep boop dzin"
 }
 
-
 set25() {
     setalarm 25
 }
-
-eval $(thefuck --alias)
-
-export XDG_CONFIG_HOME=$HOME/.config
-export TMUX_CONF=$XDG_CONFIG_HOME/tmux/tmux.conf  # default but here for visibility
-
-alias vi="nvim"
-
-export DJANGO_LOCAL=True
-
-export CFLAGS="-I$(brew --prefix openssl)/include"
-export LDFLAGS="-L$(brew --prefix openssl)/lib"
-
-export PATH="/usr/local/opt/postgresql@14/bin:$PATH"
-export PG_RESTORE=/usr/local/opt/postgresql@14/bin/pg_restore
-
-# Adding poetry
-export PATH="$HOME/.local/bin:$PATH"
-
-function nvimvenv {
-  if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
-    source "$VIRTUAL_ENV/bin/activate"
-    command nvim $@
-    # deactivate
-  else
-    command nvim $@
-  fi
-}
-
-alias vim=nvimvenv
-
-bindkey '^[|' zsh_gh_copilot_explain  # bind Alt+shift+\ to explain
-bindkey '^[\' zsh_gh_copilot_suggest  # bind Alt+\ to suggest
-
-bindkey '»' zsh_gh_copilot_explain  # bind Option+shift+\ to explain
-bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
-
-# Avoid .pyc
-export PYTHONDONTWRITEBYTECODE=1
 
 # Kamal deploy (931 Tea)
 # KAMAL_HOST loaded from .env.local
@@ -243,7 +228,6 @@ export KAMAL_REGISTRY_PASSWORD="$(gh auth token)"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source <(fzf --zsh)
-alias python=python3
 
 # Crypto arbitrage monitor
 alias crypto-start="cd ~/Dev/crypto && pm2 start main.py --name crypto --interpreter python3"
