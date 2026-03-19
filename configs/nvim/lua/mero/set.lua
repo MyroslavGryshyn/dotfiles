@@ -13,7 +13,6 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
--- TODO: Check if needs to be changed
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
@@ -42,5 +41,3 @@ vim.opt.foldlevel = 99      -- High fold level so folds are open by default
 
 vim.g.python_host_prog="/Users/myroslavhryshyn/.virtualenvs/neovim/bin/python"
 
--- TODO: Change when setting up tags
---vim.opt.tags = tags

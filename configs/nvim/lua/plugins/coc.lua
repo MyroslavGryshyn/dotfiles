@@ -63,7 +63,6 @@ g.coc_global_extensions = {
    'coc-yaml',
    'coc-yank',
    'coc-lists',
-   'coc-eslint'
 }
 
 function _G.check_back_space()
@@ -131,13 +130,6 @@ vim.cmd([[
     " Add `:OR` command for organize imports of the current buffer.
     command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 ]])
-
--- require('utils').define_augroups({_coc = {
---     {'filetype', 'typescript,json', 'setl', "formatexpr=CocAction('formatselected')"},
---     {'User', 'CocQuickfixChange', ':CocList', '--normal', 'quickfix'},
---     {  'user','cocjumpplaceholder','call',"CocActionAsync('showSignatureHelp')"},
--- }})
-
 
 register_mappings(mappings, { silent = true, noremap = true }) 
 return {} -- To disable warning

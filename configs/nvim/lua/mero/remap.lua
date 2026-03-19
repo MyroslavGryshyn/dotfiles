@@ -71,9 +71,4 @@ harpoon:setup()
 map("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: add file" })
 map("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: toggle menu" })
 
--- TODO: Find a better mapping
--- map("n", "<C-h>", function() harpoon:list():select(1) end, { desc = "Harpoon: goto 1" })
--- map("n", "<C-j>", function() harpoon:list():select(2) end, { desc = "Harpoon: goto 2" })
--- map("n", "<C-k>", function() harpoon:list():select(3) end, { desc = "Harpoon: goto 3" })
--- map("n", "<C-l>", function() harpoon:list():select(4) end, { desc = "Harpoon: goto 4" })
 

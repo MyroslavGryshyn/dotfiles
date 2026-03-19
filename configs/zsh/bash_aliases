@@ -41,15 +41,7 @@ lint-check() {
    python ./manage.py test server.tests.test_for_lint_errors
 }
 
-if [ -f ~/.vim/.fh_bash_aliases ]; then
-    . ~/.vim/.fh_bash_aliases
-fi
-
-
 alias ssh-bn="ssh bn"
-alias pyman=""
-alias pyrun=''
-alias pyshell='pyman shell_plus'
 
 alias pg_start='pg_ctl start -D ~/Dev/postgres'
 
@@ -65,14 +57,6 @@ alias coach-daily='tail -100 ~/Dev/MM/logs/daily.log'
 alias coach-weekly='tail -50 ~/Dev/MM/logs/weekly.log'
 alias coach-sync='cd ~/Dev/MM && python coach/sync_all.py'
 alias coach-run='coach-sync'
-
-# MM Dagster aliases
-alias dagster-run='cd ~/Dev/MM && PYTHONPATH=$PWD DAGSTER_HOME=~/.dagster dagster dev &'
-alias dagster-start='dagster-run'
-alias dagster-status='pgrep -fl dagster || echo "Dagster not running"'
-alias dagster-stop='pkill -f "dagster dev"'
-alias dagster-logs='tail -f ~/.dagster/dagster.log 2>/dev/null || echo "No logs yet"'
-alias dagster-ui='open http://127.0.0.1:3000'
 
 # Master Mind CLI
 unalias mm 2>/dev/null

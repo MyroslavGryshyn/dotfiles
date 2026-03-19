@@ -61,12 +61,6 @@ return {
             require("fzf-lua").setup({})
         end
     },
-    --    {
-        --        "ellisonleao/gruvbox.nvim",
-		--        lazy = false,
-		--        priority = 1000,
-		--        config = true,
-		--    },
 		{
 			"rose-pine/neovim",
 			name = "rose-pine",
