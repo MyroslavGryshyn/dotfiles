@@ -263,7 +263,7 @@ bindkey '«' zsh_gh_copilot_suggest  # bind Option+\ to suggest
 export PYTHONDONTWRITEBYTECODE=1
 
 # Kamal deploy (931 Tea)
-export KAMAL_HOST="164.92.215.15"
+# KAMAL_HOST loaded from .env.local
 export KAMAL_REGISTRY_PASSWORD="$(gh auth token)"
 [ -f ~/dotfiles/.env.local ] && source ~/dotfiles/.env.local
 

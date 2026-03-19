@@ -46,7 +46,7 @@ if [ -f ~/.vim/.fh_bash_aliases ]; then
 fi
 
 
-alias ssh-bn="ssh mero@64.226.120.252"
+alias ssh-bn="ssh bn"
 alias pyman=""
 alias pyrun=''
 alias pyshell='pyman shell_plus'
