@@ -8,7 +8,7 @@ import shutil
 import sys
 
 from pathlib import Path
-from subprocess import call, run, CalledProcessError, PIPE
+from subprocess import run, CalledProcessError, PIPE
 
 from deploy.color_print import ColorPrint
 from deploy.config import CONFIG
@@ -245,20 +245,29 @@ def setup_neovim():
     virtualenv_dir.parent.mkdir(parents=True, exist_ok=True)
 
     if not Path(virtualenv_dir).exists():
-        ColorPrint.blue("Creating Python virtual environment for Neovim...")
-        call(["python3", "-m", "venv", virtualenv_dir])
-        ColorPrint.blue("Installing Python packages...")
-        call(
-            [
-                Path(virtualenv_dir, "bin", "pip"),
-                "install",
-                "-r",
-                "./configs/deploy/requirements.txt",
-            ]
-        )
-        ColorPrint.green("Neovim virtual environment created successfully")
+        try:
+            ColorPrint.blue("Creating Python virtual environment for Neovim...")
+            run(["python3", "-m", "venv", str(virtualenv_dir)], check=True)
+            ColorPrint.blue("Installing Python packages...")
+            run(
+                [
+                    str(Path(virtualenv_dir, "bin", "pip")),
+                    "install",
+                    "-r",
+                    "./configs/deploy/requirements.txt",
+                ],
+                check=True,
+            )
+            ColorPrint.green("Neovim virtual environment created successfully")
+            tracker.add_success("Neovim venv")
+        except CalledProcessError as e:
+            error_msg = "Failed to create Neovim virtual environment"
+            ColorPrint.red(error_msg)
+            tracker.add_failure("Neovim venv", e)
+            logger.error(f"{error_msg}: {e}")
     else:
         ColorPrint.yellow("Neovim virtual environment already exists (skipping)")
+        tracker.add_skipped("Neovim venv")
 
     # Set up nvim related config files
     create_symlink("configs/nvim/init.lua", "~/.config/nvim/init.lua")
