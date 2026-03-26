@@ -46,7 +46,7 @@ fi
 # === Virtualenv ===
 
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=$HOME/.virtualenvs/neovim/bin/python
+export VIRTUALENVWRAPPER_PYTHON=$(command -v python3)
 export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
 VENVWRAPPER="$(which virtualenvwrapper.sh 2>/dev/null)"
 [ -n "$VENVWRAPPER" ] && source "$VENVWRAPPER"
