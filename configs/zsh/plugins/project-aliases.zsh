@@ -64,16 +64,27 @@ function crypto {
     local pid="$dir/logs/bot.pid"
     case "$1" in
         start)
-            cd "$dir" && nohup .venv/bin/python main.py > /dev/null 2>&1 & echo "Bot started (PID: $!)"
+            if [ -f "$pid" ] && kill -0 "$(cat "$pid")" 2>/dev/null; then
+                echo "Bot already running (PID: $(cat "$pid"))"
+                return 1
+            fi
+            cd "$dir" && nohup .venv/bin/python3.14 main.py > /dev/null 2>&1 & echo "Bot started (PID: $!)"
             ;;
         stop)
             [ -f "$pid" ] && kill "$(cat "$pid")" && echo "Bot stopped" || echo "No bot process found"
+            ;;
+        restart)
+            crypto stop
+            sleep 1
+            crypto start
             ;;
         logs)
             tail -f "$dir/logs/bot.log"
             ;;
         *)
-            echo "Usage: crypto {start|stop|logs}"
+            echo "Usage: crypto {start|stop|restart|logs}"
             ;;
     esac
 }
+_crypto() { compadd start stop restart logs; }
+compdef _crypto crypto
