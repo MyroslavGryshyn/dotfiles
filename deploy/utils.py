@@ -11,7 +11,7 @@ def create_symlink(source, target):
     full_target = Path(target).expanduser()
     full_source = Path(source).expanduser()
 
-    now = dt.now().strftime("%Y%m%d_%H%M")
+    now = dt.now().strftime("%Y%m%d_%H%M%S")
     new_name = str(full_target) + "." + now + ".bak"
 
     if full_target.is_symlink():
