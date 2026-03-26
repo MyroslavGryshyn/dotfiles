@@ -46,10 +46,13 @@ fi
 # === Virtualenv ===
 
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=$(command -v python3)
-export VIRTUALENVWRAPPER_VIRTUALENV=/opt/homebrew/bin/virtualenv
-VENVWRAPPER="$(which virtualenvwrapper.sh 2>/dev/null)"
-[ -n "$VENVWRAPPER" ] && source "$VENVWRAPPER"
+VENV_BASE="$HOME/.local/share/nvim/base_venv"
+if [ -x "$VENV_BASE/bin/python" ]; then
+    export VIRTUALENVWRAPPER_PYTHON="$VENV_BASE/bin/python"
+    export VIRTUALENVWRAPPER_VIRTUALENV="$VENV_BASE/bin/virtualenv"
+    VENVWRAPPER="$(which virtualenvwrapper.sh 2>/dev/null)"
+    [ -n "$VENVWRAPPER" ] && source "$VENVWRAPPER"
+fi
 
 # === Tools ===
 
