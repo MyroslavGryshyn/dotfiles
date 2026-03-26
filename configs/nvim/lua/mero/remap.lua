@@ -8,11 +8,20 @@ map("n", "-", ":nohl<CR>", {})
 map("n", "W", ":w<CR>", {})
 map("n", "Q", ":q<CR>", {})
 
--- Use ctrl-[hjkl] to select the active split!
-map("n", "<c-k>", ":wincmd k<CR>")
-map("n", "<c-j>", ":wincmd j<CR>")
-map("n", "<c-h>", ":wincmd h<CR>")
-map("n", "<c-l>", ":wincmd l<CR>")
+-- Smart pane switching: vim splits first, then tmux panes
+local function navigate(direction)
+  local win = vim.api.nvim_get_current_win()
+  vim.cmd("wincmd " .. direction)
+  if vim.api.nvim_get_current_win() == win then
+    local tmux_dir = ({ h = "L", j = "D", k = "U", l = "R" })[direction]
+    vim.fn.system("tmux select-pane -" .. tmux_dir)
+  end
+end
+
+map("n", "<c-k>", function() navigate("k") end)
+map("n", "<c-j>", function() navigate("j") end)
+map("n", "<c-h>", function() navigate("h") end)
+map("n", "<c-l>", function() navigate("l") end)
 
 map({"n", "v"}, "gy", [["+y]])
 map({"n", "v"}, "gp", [["+P]])

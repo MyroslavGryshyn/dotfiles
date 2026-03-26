@@ -75,8 +75,9 @@ end
 
 local mappings = {
 	i = { -- Insert mode
-        { "<TAB>", 'pumvisible() ? "<C-N>" : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true } },
-        { "<S-TAB>", 'pumvisible() ? "<C-P>" : "<C-H>"', { expr = true } },
+        { "<TAB>", 'coc#pum#visible() ? coc#pum#confirm() : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', { expr = true } },
+        { "<S-TAB>", 'coc#pum#visible() ? coc#pum#prev(1) : "<C-H>"', { expr = true } },
+        { "<CR>", 'coc#pum#visible() ? coc#pum#confirm() : "<CR>"', { expr = true } },
         { "<C-SPACE>", 'coc#refresh()', { expr = true } },
         {'<C-F>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<Right>"', { expr = true, silent = true, nowait = true }},
         {'<C-B>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<Left>"', { expr = true, silent = true, nowait = true }},
