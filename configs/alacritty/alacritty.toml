@@ -99,3 +99,14 @@ blue = "#9ccfd8"
 magenta = "#c4a7e7"
 cyan = "#ea9a97"
 white = "#e0def4"
+
+# Tmux session switching
+[[keyboard.bindings]]
+key = "N"
+mods = "Command|Shift"
+chars = "\u0001)"
+
+[[keyboard.bindings]]
+key = "P"
+mods = "Command|Shift"
+chars = "\u0001("
