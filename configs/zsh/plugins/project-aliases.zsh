@@ -58,7 +58,22 @@ function mm {
     esac
 }
 
-# Crypto arbitrage monitor
-alias crypto-start="cd ~/Dev/crypto && pm2 start main.py --name crypto --interpreter python3"
-alias crypto-stop="pm2 stop crypto"
-alias crypto-logs="pm2 logs crypto"
+# Crypto arbitrage bot
+function crypto {
+    local dir=~/Dev/crypto
+    local pid="$dir/logs/bot.pid"
+    case "$1" in
+        start)
+            cd "$dir" && nohup .venv/bin/python main.py > /dev/null 2>&1 & echo "Bot started (PID: $!)"
+            ;;
+        stop)
+            [ -f "$pid" ] && kill "$(cat "$pid")" && echo "Bot stopped" || echo "No bot process found"
+            ;;
+        logs)
+            tail -f "$dir/logs/bot.log"
+            ;;
+        *)
+            echo "Usage: crypto {start|stop|logs}"
+            ;;
+    esac
+}
