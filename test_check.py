@@ -246,6 +246,123 @@ class TestCheckAlacritty(unittest.TestCase):
         self.assertTrue(len(messages["errors"]) > 0)
 
 
+class TestCheckSymlinksWrongTarget(unittest.TestCase):
+    """check_symlinks() warns when symlink points to wrong target."""
+
+    @patch("check.Path")
+    def test_wrong_target_produces_warning(self, mock_path_cls):
+        mock_target = MagicMock()
+        mock_target.is_symlink.return_value = True
+        mock_target.exists.return_value = True
+        # readlink returns a path that does NOT end with the expected source
+        mock_target.resolve.return_value = Path("/wrong/path/some_file")
+        mock_path_cls.return_value.expanduser.return_value = mock_target
+        # Make BASE_DIR resolve work
+        mock_path_cls.side_effect = lambda x: (
+            mock_path_cls.return_value if not isinstance(x, Path) else x
+        )
+        mock_path_cls.return_value.expanduser.return_value = mock_target
+
+        passed, messages = check.check_symlinks()
+
+        self.assertTrue(passed)
+        self.assertTrue(len(messages["warnings"]) > 0)
+
+
+class TestCheckPythonVenv(unittest.TestCase):
+    """check_python_venv() verifies the nvim base_venv and pynvim."""
+
+    @patch("check.subprocess.run")
+    @patch("check.Path")
+    def test_valid_venv_with_pynvim_returns_pass(self, mock_path_cls, mock_run):
+        mock_path = MagicMock()
+        mock_path.exists.return_value = True
+        mock_path_cls.return_value.expanduser.return_value = mock_path
+        mock_run.return_value = MagicMock(returncode=0, stdout="pynvim\n")
+
+        passed, messages = check.check_python_venv()
+
+        self.assertTrue(passed)
+        self.assertEqual(len(messages["errors"]), 0)
+
+    @patch("check.Path")
+    def test_missing_venv_returns_fail(self, mock_path_cls):
+        mock_path = MagicMock()
+        mock_path.exists.return_value = False
+        mock_path_cls.return_value.expanduser.return_value = mock_path
+
+        passed, messages = check.check_python_venv()
+
+        self.assertFalse(passed)
+        self.assertTrue(len(messages["errors"]) > 0)
+
+    @patch("check.subprocess.run")
+    @patch("check.Path")
+    def test_missing_pynvim_returns_fail(self, mock_path_cls, mock_run):
+        mock_path = MagicMock()
+        mock_path.exists.return_value = True
+        mock_path_cls.return_value.expanduser.return_value = mock_path
+        mock_run.return_value = MagicMock(returncode=0, stdout="pip\nsetuptools\n")
+
+        passed, messages = check.check_python_venv()
+
+        self.assertFalse(passed)
+        self.assertTrue(len(messages["errors"]) > 0)
+
+
+class TestCheckTools(unittest.TestCase):
+    """check_tools() verifies required CLI tools are available."""
+
+    @patch("check.shutil.which")
+    def test_all_tools_present_returns_pass(self, mock_which):
+        mock_which.return_value = "/usr/local/bin/tool"
+
+        passed, messages = check.check_tools()
+
+        self.assertTrue(passed)
+        self.assertEqual(len(messages["errors"]), 0)
+
+    @patch("check.shutil.which")
+    def test_missing_tool_returns_warning(self, mock_which):
+        def side_effect(name):
+            if name == "fzf":
+                return None
+            return "/usr/local/bin/" + name
+        mock_which.side_effect = side_effect
+
+        passed, messages = check.check_tools()
+
+        self.assertTrue(passed)
+        self.assertTrue(len(messages["warnings"]) > 0)
+        self.assertTrue(any("fzf" in w for w in messages["warnings"]))
+
+
+class TestCheckZshPlugins(unittest.TestCase):
+    """check_zsh_plugins() verifies zsh plugin directories exist."""
+
+    @patch("check.Path")
+    def test_all_plugins_present_returns_pass(self, mock_path_cls):
+        mock_path = MagicMock()
+        mock_path.is_dir.return_value = True
+        mock_path_cls.return_value.expanduser.return_value = mock_path
+
+        passed, messages = check.check_zsh_plugins()
+
+        self.assertTrue(passed)
+        self.assertEqual(len(messages["errors"]), 0)
+
+    @patch("check.Path")
+    def test_missing_plugin_returns_fail(self, mock_path_cls):
+        mock_path = MagicMock()
+        mock_path.is_dir.return_value = False
+        mock_path_cls.return_value.expanduser.return_value = mock_path
+
+        passed, messages = check.check_zsh_plugins()
+
+        self.assertFalse(passed)
+        self.assertTrue(len(messages["errors"]) > 0)
+
+
 class TestParseArguments(unittest.TestCase):
     """CLI argument parsing."""
 

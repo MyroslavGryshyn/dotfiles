@@ -9,6 +9,7 @@ import tomllib
 from pathlib import Path
 
 from deploy.color_print import ColorPrint
+from deploy.config import BASE_DIR
 
 # Symlink mappings: target → source (mirrors deploy.py)
 EXPECTED_SYMLINKS = {
@@ -27,6 +28,14 @@ EXPECTED_SYMLINKS = {
     "~/.zsh-z.plugin.zsh": "configs/zsh/plugins/zsh-z.plugin.zsh",
 }
 
+REQUIRED_TOOLS = ["fzf", "fd", "pyenv", "rbenv", "node", "nvim", "tmux"]
+
+ZSH_PLUGINS = {
+    "zsh-syntax-highlighting": "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
+    "zsh-autosuggestions": "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions",
+    "powerlevel10k": "~/.oh-my-zsh/custom/themes/powerlevel10k",
+}
+
 VALID_COMPONENTS = ["zsh", "tmux", "nvim", "alacritty"]
 
 
@@ -39,15 +48,23 @@ def _make_messages(errors=None, warnings=None, info=None):
 
 
 def check_symlinks():
-    """Verify all expected symlinks exist and resolve."""
+    """Verify all expected symlinks exist, resolve, and point to correct target."""
     errors = []
+    warnings = []
     info = []
 
     for target, source in EXPECTED_SYMLINKS.items():
         path = Path(target).expanduser()
         if path.is_symlink():
             if path.exists():
-                info.append(f"  ✓ {target} → {source}")
+                resolved = path.resolve()
+                expected = (BASE_DIR / source).resolve()
+                if resolved != expected:
+                    warnings.append(
+                        f"  ! {target} → {resolved} (expected {expected})"
+                    )
+                else:
+                    info.append(f"  ✓ {target} → {source}")
             else:
                 errors.append(f"  ✗ {target} — broken symlink (target missing)")
         elif path.exists():
@@ -56,7 +73,7 @@ def check_symlinks():
             errors.append(f"  ✗ {target} — missing")
 
     passed = len(errors) == 0
-    return passed, _make_messages(errors=errors, info=info)
+    return passed, _make_messages(errors=errors, warnings=warnings, info=info)
 
 
 def check_zsh():
@@ -137,6 +154,61 @@ def check_nvim():
     return passed, _make_messages(errors=errors, warnings=warnings, info=info)
 
 
+def check_python_venv():
+    """Verify the nvim base_venv exists and has pynvim installed."""
+    venv_dir = Path("~/.local/share/nvim/base_venv").expanduser()
+    errors = []
+    info = []
+
+    if not venv_dir.exists():
+        errors.append("  ✗ base_venv not found at ~/.local/share/nvim/base_venv")
+        return False, _make_messages(errors=errors)
+
+    pip_bin = str(venv_dir / "bin" / "pip")
+    result = subprocess.run(
+        [pip_bin, "list", "--format=columns"],
+        capture_output=True,
+        text=True,
+    )
+    if "pynvim" not in result.stdout:
+        errors.append("  ✗ pynvim not installed in base_venv")
+    else:
+        info.append("  ✓ base_venv exists with pynvim")
+
+    passed = len(errors) == 0
+    return passed, _make_messages(errors=errors, info=info)
+
+
+def check_tools():
+    """Verify required CLI tools are available in PATH."""
+    warnings = []
+    info = []
+
+    for tool in REQUIRED_TOOLS:
+        if shutil.which(tool):
+            info.append(f"  ✓ {tool}")
+        else:
+            warnings.append(f"  ! {tool} not found in PATH")
+
+    return True, _make_messages(warnings=warnings, info=info)
+
+
+def check_zsh_plugins():
+    """Verify zsh plugin directories exist."""
+    errors = []
+    info = []
+
+    for name, path in ZSH_PLUGINS.items():
+        expanded = Path(path).expanduser()
+        if expanded.is_dir():
+            info.append(f"  ✓ {name}")
+        else:
+            errors.append(f"  ✗ {name} not found at {path}")
+
+    passed = len(errors) == 0
+    return passed, _make_messages(errors=errors, info=info)
+
+
 def check_alacritty():
     """Validate alacritty.toml with tomllib."""
     config_path = Path("~/.config/alacritty/alacritty.toml").expanduser()
@@ -203,14 +275,21 @@ def main():
     total_errors = 0
     total_warnings = 0
 
-    # Symlinks always checked
-    ColorPrint.bold("\n=== Checking Symlinks ===")
-    passed, messages = check_symlinks()
-    _print_messages(messages, args.verbose)
-    if not passed:
-        all_passed = False
-    total_errors += len(messages["errors"])
-    total_warnings += len(messages["warnings"])
+    # Always-run checks
+    always_checks = [
+        ("Symlinks", check_symlinks),
+        ("Python Venv", check_python_venv),
+        ("CLI Tools", check_tools),
+        ("Zsh Plugins", check_zsh_plugins),
+    ]
+    for label, fn in always_checks:
+        ColorPrint.bold(f"\n=== Checking {label} ===")
+        passed, messages = fn()
+        _print_messages(messages, args.verbose)
+        if not passed:
+            all_passed = False
+        total_errors += len(messages["errors"])
+        total_warnings += len(messages["warnings"])
 
     # Per-tool checks
     for component in components:
