@@ -721,7 +721,7 @@ zshz() {
 
   if [[ $1 == '--' ]]; then
     shift
-  elif [[ -n ${(M)@:#-*} && -z $compstate ]]; then
+  elif [[ -n ${(M)@:#-*} ]] && (( ! ${+compstate} )); then
     print "Improper option(s) given."
     _zshz_usage
     return 1
