@@ -36,3 +36,10 @@ alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance
 alias open_changed="vim -p \$(git status --porcelain | awk '{print $2}')"
 
 alias gl="git log --oneline --graph"
+
+# Crypto arbitrage bot
+_CRYPTO_DIR="/Users/myroslavhryshyn/Dev/crypto"
+_CRYPTO_PID="$_CRYPTO_DIR/logs/bot.pid"
+alias run_crypto_prod='cd $_CRYPTO_DIR && nohup .venv/bin/python3.14 main.py > /dev/null 2>&1 & echo "Bot started (PID: $!)"'
+alias log_crypto_prod='tail -f $_CRYPTO_DIR/logs/bot.log'
+alias kill_crypto_bot='[ -f $_CRYPTO_PID ] && kill $(cat $_CRYPTO_PID) && echo "Bot stopped" || echo "No bot process found"'
