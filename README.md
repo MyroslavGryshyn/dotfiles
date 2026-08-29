@@ -8,7 +8,7 @@ This repository contains configuration files for:
 
 - **Shell**: Zsh with Oh My Zsh, Powerlevel10k theme
 - **Editor**: Neovim (Lua-based configuration with lazy.nvim)
-- **Terminal**: Alacritty terminal emulator
+- **Terminal**: kitty terminal emulator
 - **Multiplexer**: tmux
 - **Window Manager**: yabai + skhd (macOS tiling window manager)
 - **Tools**: fzf, pyenv, thefuck, ctags, sqlfluff
@@ -27,7 +27,7 @@ This repository contains configuration files for:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone https://github.com/MyroslavGryshyn/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # Run the deployment script
@@ -49,13 +49,14 @@ The `deploy.py` script will:
    - zsh-syntax-highlighting
    - zsh-autosuggestions
    - powerlevel10k
+   - kitty (terminal emulator)
    - JetBrains Mono Nerd Font (for terminal icons)
 3. **Install Zsh plugins**:
    - zsh-github-copilot (cloned to `~/.oh-my-zsh/custom/plugins/`)
 4. **Create Python virtual environment** for Neovim LSP support at `~/.local/share/nvim/base_venv`
 5. **Symlink configuration files** to their appropriate locations:
    - Neovim configs → `~/.config/nvim/`
-   - Alacritty config → `~/.config/alacritty/`
+   - kitty config → `~/.config/kitty/`
    - tmux config → `~/.config/tmux/`
    - Zsh configs → `~/.zshrc`, `~/.bash_aliases`, `~/.p10k.zsh`
    - fzf config → `~/.fzf.zsh`
@@ -75,12 +76,7 @@ Some tools require manual installation or configuration:
    chsh -s $(which zsh)
    ```
 
-3. **Install Alacritty**:
-   ```bash
-   brew install --cask alacritty
-   ```
-
-4. **Install yabai and skhd** (optional, for window management):
+3. **Install yabai and skhd** (optional, for window management):
    ```bash
    brew install koekeishiya/formulae/yabai
    brew install koekeishiya/formulae/skhd
@@ -88,7 +84,7 @@ Some tools require manual installation or configuration:
    brew services start skhd
    ```
 
-5. **Configure Powerlevel10k theme**:
+4. **Configure Powerlevel10k theme**:
    - Restart your terminal
    - The p10k configuration wizard will run automatically
    - Or manually run: `p10k configure`
@@ -98,7 +94,7 @@ Some tools require manual installation or configuration:
 ```
 dotfiles/
 ├── configs/                    # All configuration files
-│   ├── alacritty/             # Terminal emulator
+│   ├── kitty/                 # Terminal emulator
 │   ├── ctags/                 # Code indexing
 │   ├── deploy/                # Deployment configs (virtualenv requirements)
 │   ├── fzf/                   # Fuzzy finder
@@ -143,9 +139,9 @@ dotfiles/
 - Config: `configs/tmux/tmux.conf`
 - Prefix key: Check config file for current binding
 
-### Alacritty
+### kitty
 
-- Config: `configs/alacritty/alacritty.toml`
+- Config: `configs/kitty/kitty.conf`
 - Font, colors, and window settings
 
 ## Backup Strategy
@@ -162,7 +158,7 @@ To remove symlinks and restore backups:
 ```bash
 # Manually remove symlinks
 rm ~/.zshrc ~/.bash_aliases ~/.p10k.zsh ~/.fzf.zsh
-rm -rf ~/.config/nvim ~/.config/alacritty ~/.config/tmux
+rm -rf ~/.config/nvim ~/.config/kitty ~/.config/tmux
 
 # Restore backups (find them with timestamp suffix)
 # Example:

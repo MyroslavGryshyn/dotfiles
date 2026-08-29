@@ -184,6 +184,84 @@ def install_brew(force=False):
         return False
 
 
+def brew_prefix(package_name):
+    """Get the Homebrew install prefix for a formula, or None if unavailable."""
+    try:
+        result = run(["brew", "--prefix", package_name], capture_output=True, text=True, check=True)
+        return result.stdout.strip()
+    except CalledProcessError as e:
+        error_msg = f"Could not resolve brew prefix for {package_name}"
+        ColorPrint.yellow(f"{error_msg} (skipping oh-my-zsh link)")
+        logger.warning(f"{error_msg}: {e}")
+        return None
+
+
+def link_omz_plugin(formula):
+    """Symlink a brew-installed zsh plugin into oh-my-zsh's custom plugins dir.
+
+    Homebrew installs e.g. `share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh`,
+    but oh-my-zsh's `plugins=(...)` autoloader looks for
+    `$ZSH_CUSTOM/plugins/<name>/<name>.plugin.zsh` — without this link the
+    plugin is silently skipped with a "not found" warning at shell startup.
+    """
+    prefix = brew_prefix(formula)
+    if not prefix:
+        return
+
+    source_file = Path(prefix, "share", formula, f"{formula}.zsh")
+    if not source_file.exists():
+        ColorPrint.yellow(f"{formula}: expected file not found at {source_file}, skipping link")
+        logger.warning(f"link_omz_plugin({formula}): missing {source_file}")
+        return
+
+    plugin_dir = Path("~/.oh-my-zsh/custom/plugins", formula).expanduser()
+    link = plugin_dir / f"{formula}.plugin.zsh"
+    if link.exists() or link.is_symlink():
+        return
+
+    try:
+        plugin_dir.mkdir(parents=True, exist_ok=True)
+        link.symlink_to(source_file)
+        ColorPrint.green(f"Linked {formula} into oh-my-zsh custom plugins")
+        logger.info(f"Linked oh-my-zsh plugin {formula} -> {source_file}")
+    except OSError as e:
+        error_msg = f"Failed to link {formula} into oh-my-zsh custom plugins"
+        ColorPrint.red(error_msg)
+        logger.error(f"{error_msg}: {e}")
+
+
+def link_omz_theme(formula, share_dir):
+    """Symlink a brew-installed oh-my-zsh theme into oh-my-zsh's custom themes dir.
+
+    Same issue as link_omz_plugin: `ZSH_THEME="powerlevel10k/powerlevel10k"`
+    resolves to `$ZSH_CUSTOM/themes/powerlevel10k/...`, which brew never
+    populates on its own.
+    """
+    prefix = brew_prefix(formula)
+    if not prefix:
+        return
+
+    source_dir = Path(prefix, "share", share_dir)
+    if not source_dir.is_dir():
+        ColorPrint.yellow(f"{formula}: expected directory not found at {source_dir}, skipping link")
+        logger.warning(f"link_omz_theme({formula}): missing {source_dir}")
+        return
+
+    target = Path("~/.oh-my-zsh/custom/themes", share_dir).expanduser()
+    if target.exists() or target.is_symlink():
+        return
+
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.symlink_to(source_dir)
+        ColorPrint.green(f"Linked {formula} into oh-my-zsh custom themes")
+        logger.info(f"Linked oh-my-zsh theme {formula} -> {source_dir}")
+    except OSError as e:
+        error_msg = f"Failed to link {formula} into oh-my-zsh custom themes"
+        ColorPrint.red(error_msg)
+        logger.error(f"{error_msg}: {e}")
+
+
 def install_zsh_plugins(force=False):
     """Install zsh plugins."""
     success = True
@@ -193,12 +271,14 @@ def install_zsh_plugins(force=False):
         display_name="zsh-syntax-highlighting",
         force=force
     )
+    link_omz_plugin("zsh-syntax-highlighting")
 
     success &= install_package(
         "zsh-autosuggestions",
         display_name="zsh-autosuggestions",
         force=force
     )
+    link_omz_plugin("zsh-autosuggestions")
 
     success &= install_git_repo(
         "https://github.com/loiccoyle/zsh-github-copilot",
@@ -212,28 +292,63 @@ def install_zsh_plugins(force=False):
         display_name="powerlevel10k",
         force=force
     )
+    link_omz_theme("powerlevel10k", "powerlevel10k")
 
     return success
 
 
-def install_apps(force=False):
-    """Install all applications."""
-    ColorPrint.bold("\n=== Installing Applications ===\n")
-
-    install_brew(force)
+def install_nvim_apps(force=False):
+    """Install applications needed for the Neovim component."""
     install_package("neovim", display_name="Neovim", force=force)
-    install_package("tmux", display_name="Tmux", force=force)
+    install_package("node", display_name="Node.js", force=force)
+    install_package("pyenv", display_name="pyenv", force=force)
+
+
+def install_kitty_apps(force=False):
+    """Install applications needed for the kitty component."""
+    install_package(
+        "kitty",
+        brew_args=["install", "--cask", "kitty"],
+        display_name="kitty",
+        force=force
+    )
     install_package(
         "font-jetbrains-mono-nerd-font",
         brew_args=["install", "--cask", "font-jetbrains-mono-nerd-font"],
         display_name="JetBrains Mono Nerd Font",
         force=force
     )
-    install_package("node", display_name="Node.js", force=force)
+
+
+def install_tmux_apps(force=False):
+    """Install applications needed for the tmux component."""
+    install_package("tmux", display_name="Tmux", force=force)
+
+
+def install_zsh_apps(force=False):
+    """Install applications needed for the zsh component."""
     install_zsh_plugins(force)
-    install_package("pyenv", display_name="pyenv", force=force)
     install_package("fzf", display_name="fzf", force=force)
+    install_package("fd", display_name="fd", force=force)
     install_package("thefuck", display_name="thefuck", force=force)
+
+
+INSTALL_FUNCTIONS = {
+    'nvim': install_nvim_apps,
+    'kitty': install_kitty_apps,
+    'tmux': install_tmux_apps,
+    'zsh': install_zsh_apps,
+}
+
+
+def install_apps(components, force=False):
+    """Install Homebrew plus the applications needed for the given components."""
+    ColorPrint.bold("\n=== Installing Applications ===\n")
+
+    install_brew(force)
+    for component in components:
+        if component in INSTALL_FUNCTIONS:
+            INSTALL_FUNCTIONS[component](force=force)
 
 
 def setup_neovim():
@@ -278,10 +393,10 @@ def setup_neovim():
     create_symlink("configs/nvim/lazy-lock.json", "~/.config/nvim/lazy-lock.json")
 
 
-def setup_alacritty():
-    """Set up Alacritty terminal configuration."""
-    ColorPrint.bold("\n=== Setting up Alacritty ===\n")
-    create_symlink("configs/alacritty/alacritty.toml", "~/.config/alacritty/alacritty.toml")
+def setup_kitty():
+    """Set up kitty terminal configuration."""
+    ColorPrint.bold("\n=== Setting up kitty ===\n")
+    create_symlink("configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
 
 
 def setup_tmux():
@@ -313,6 +428,7 @@ Examples:
   %(prog)s --skip-install           # Only create symlinks, skip installations
   %(prog)s --only nvim              # Only set up Neovim
   %(prog)s --only tmux,zsh          # Only set up Tmux and Zsh
+  %(prog)s --only kitty             # Only set up kitty
   %(prog)s --force                  # Force reinstall even if already installed
         """
     )
@@ -326,7 +442,7 @@ Examples:
     parser.add_argument(
         '--only',
         type=str,
-        help='Only set up specific tools (comma-separated: nvim,tmux,zsh,alacritty)'
+        help='Only set up specific tools (comma-separated: nvim,tmux,zsh,kitty)'
     )
 
     parser.add_argument(
@@ -353,26 +469,26 @@ def main():
         logger.info("Starting dry run")
 
     # Determine which components to set up
-    components = ['nvim', 'alacritty', 'tmux', 'zsh']
+    components = ['nvim', 'kitty', 'tmux', 'zsh']
     if args.only:
         components = [c.strip() for c in args.only.split(',')]
-        invalid = [c for c in components if c not in ['nvim', 'alacritty', 'tmux', 'zsh']]
+        invalid = [c for c in components if c not in ['nvim', 'kitty', 'tmux', 'zsh']]
         if invalid:
             ColorPrint.red(f"Invalid components: {', '.join(invalid)}")
-            ColorPrint.yellow("Valid components: nvim, alacritty, tmux, zsh")
+            ColorPrint.yellow("Valid components: nvim, kitty, tmux, zsh")
             sys.exit(1)
 
     # Install applications
     if not args.skip_install:
         if not args.dry_run:
-            install_apps(force=args.force)
+            install_apps(components, force=args.force)
         else:
             ColorPrint.yellow("[DRY RUN] Would install applications")
 
     # Set up configurations
     setup_functions = {
         'nvim': setup_neovim,
-        'alacritty': setup_alacritty,
+        'kitty': setup_kitty,
         'tmux': setup_tmux,
         'zsh': setup_zsh
     }

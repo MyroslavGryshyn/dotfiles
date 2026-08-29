@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Dotfiles health check — validate configs for zsh, tmux, nvim, alacritty."""
+"""Dotfiles health check — validate configs for zsh, tmux, nvim, kitty."""
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
-import tomllib
 from pathlib import Path
 
 from deploy.color_print import ColorPrint
@@ -19,7 +19,7 @@ EXPECTED_SYMLINKS = {
     "~/.editorconfig": "configs/editorconfig",
     "~/.config/nvim/coc-settings.json": "configs/nvim/coc-settings.json",
     "~/.config/nvim/lazy-lock.json": "configs/nvim/lazy-lock.json",
-    "~/.config/alacritty/alacritty.toml": "configs/alacritty/alacritty.toml",
+    "~/.config/kitty/kitty.conf": "configs/kitty/kitty.conf",
     "~/.config/tmux/tmux.conf": "configs/tmux/tmux.conf",
     "~/.zshrc": "configs/zsh/zshrc",
     "~/.bash_aliases": "configs/zsh/bash_aliases",
@@ -36,7 +36,7 @@ ZSH_PLUGINS = {
     "powerlevel10k": "~/.oh-my-zsh/custom/themes/powerlevel10k",
 }
 
-VALID_COMPONENTS = ["zsh", "tmux", "nvim", "alacritty"]
+VALID_COMPONENTS = ["zsh", "tmux", "nvim", "kitty"]
 
 
 def _make_messages(errors=None, warnings=None, info=None):
@@ -209,21 +209,34 @@ def check_zsh_plugins():
     return passed, _make_messages(errors=errors, info=info)
 
 
-def check_alacritty():
-    """Validate alacritty.toml with tomllib."""
-    config_path = Path("~/.config/alacritty/alacritty.toml").expanduser()
+_KITTY_LINE_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_.]*\s+\S")
+
+
+def check_kitty():
+    """Sanity-check kitty.conf structure (key/value lines, no stray garbage).
+
+    kitty.conf isn't TOML/JSON, and this kitty version has no headless
+    config-lint flag, so this is a best-effort structural check rather than
+    a real parse: every non-comment, non-blank line should look like
+    `directive value...`.
+    """
+    config_path = Path("~/.config/kitty/kitty.conf").expanduser()
 
     if not config_path.exists():
-        return True, _make_messages(
-            warnings=["alacritty.toml not found, skipping"]
-        )
+        return True, _make_messages(warnings=["kitty.conf not found, skipping"])
 
-    try:
-        with open(config_path, "rb") as f:
-            tomllib.load(f)
-        return True, _make_messages(info=["  ✓ alacritty.toml valid TOML"])
-    except tomllib.TOMLDecodeError as e:
-        return False, _make_messages(errors=[f"  ✗ alacritty.toml: {e}"])
+    errors = []
+    lines = config_path.read_text().splitlines()
+    for lineno, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if not _KITTY_LINE_RE.match(stripped):
+            errors.append(f"  ✗ kitty.conf:{lineno}: malformed line: {stripped!r}")
+
+    if errors:
+        return False, _make_messages(errors=errors)
+    return True, _make_messages(info=["  ✓ kitty.conf structurally valid"])
 
 
 def parse_arguments():
@@ -241,7 +254,7 @@ Examples:
     parser.add_argument(
         "--only",
         type=str,
-        help="Only check specific tools (comma-separated: zsh,tmux,nvim,alacritty)",
+        help="Only check specific tools (comma-separated: zsh,tmux,nvim,kitty)",
     )
     parser.add_argument(
         "--verbose",
@@ -268,7 +281,7 @@ def main():
         "zsh": ("Zsh", check_zsh),
         "tmux": ("Tmux", check_tmux),
         "nvim": ("Neovim", check_nvim),
-        "alacritty": ("Alacritty", check_alacritty),
+        "kitty": ("kitty", check_kitty),
     }
 
     all_passed = True
