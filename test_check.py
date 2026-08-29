@@ -198,21 +198,18 @@ class TestCheckNvim(unittest.TestCase):
         self.assertTrue(len(messages["warnings"]) > 0)
 
 
-class TestCheckAlacritty(unittest.TestCase):
-    """check_alacritty() validates TOML config with tomllib."""
+class TestCheckKitty(unittest.TestCase):
+    """check_kitty() sanity-checks kitty.conf structure."""
 
-    @patch(
-        "builtins.open",
-        unittest.mock.mock_open(read_data=b'[window]\ndecorations = "full"\n'),
-    )
     @patch("check.Path")
-    def test_valid_toml_returns_pass(self, mock_path_cls):
+    def test_valid_config_returns_pass(self, mock_path_cls):
         mock_path = MagicMock()
         mock_path.expanduser.return_value = mock_path
         mock_path.exists.return_value = True
+        mock_path.read_text.return_value = "font_size 16.0\n# a comment\n\nmap cmd+shift+n send_text all \\x01)\n"
         mock_path_cls.return_value = mock_path
 
-        passed, messages = check.check_alacritty()
+        passed, messages = check.check_kitty()
 
         self.assertTrue(passed)
         self.assertEqual(len(messages["errors"]), 0)
@@ -224,23 +221,21 @@ class TestCheckAlacritty(unittest.TestCase):
         mock_path.exists.return_value = False
         mock_path_cls.return_value = mock_path
 
-        passed, messages = check.check_alacritty()
+        passed, messages = check.check_kitty()
 
         self.assertTrue(passed)
         self.assertTrue(len(messages["warnings"]) > 0)
 
-    @patch(
-        "builtins.open",
-        unittest.mock.mock_open(read_data=b"[window\nbroken toml"),
-    )
     @patch("check.Path")
-    def test_invalid_toml_returns_fail(self, mock_path_cls):
+    def test_malformed_line_returns_fail(self, mock_path_cls):
         mock_path = MagicMock()
         mock_path.expanduser.return_value = mock_path
         mock_path.exists.return_value = True
+        # a directive with no value is malformed
+        mock_path.read_text.return_value = "font_size\n"
         mock_path_cls.return_value = mock_path
 
-        passed, messages = check.check_alacritty()
+        passed, messages = check.check_kitty()
 
         self.assertFalse(passed)
         self.assertTrue(len(messages["errors"]) > 0)
@@ -386,18 +381,21 @@ class TestParseArguments(unittest.TestCase):
 class TestMain(unittest.TestCase):
     """main() orchestrates all checks and exits with correct code."""
 
-    @patch("check.check_alacritty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_kitty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_nvim", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_tmux", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_zsh", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_symlinks", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_zsh_plugins", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_tools", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_python_venv", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     def test_all_pass_exits_zero(self, *_mocks):
         with patch("sys.argv", ["check.py"]):
             with self.assertRaises(SystemExit) as ctx:
                 check.main()
         self.assertEqual(ctx.exception.code, 0)
 
-    @patch("check.check_alacritty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_kitty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_nvim", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_tmux", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_zsh", return_value=(False, {"errors": ["syntax error"], "warnings": [], "info": []}))
@@ -408,7 +406,7 @@ class TestMain(unittest.TestCase):
                 check.main()
         self.assertEqual(ctx.exception.code, 1)
 
-    @patch("check.check_alacritty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_kitty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_nvim", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_tmux", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_zsh", return_value=(True, {"errors": [], "warnings": [], "info": []}))
@@ -424,7 +422,7 @@ class TestMain(unittest.TestCase):
         # symlinks always run
         mock_sym.assert_called_once()
 
-    @patch("check.check_alacritty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
+    @patch("check.check_kitty", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_nvim", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_tmux", return_value=(True, {"errors": [], "warnings": [], "info": []}))
     @patch("check.check_zsh", return_value=(True, {"errors": [], "warnings": [], "info": []}))

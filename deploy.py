@@ -216,24 +216,57 @@ def install_zsh_plugins(force=False):
     return success
 
 
-def install_apps(force=False):
-    """Install all applications."""
-    ColorPrint.bold("\n=== Installing Applications ===\n")
-
-    install_brew(force)
+def install_nvim_apps(force=False):
+    """Install applications needed for the Neovim component."""
     install_package("neovim", display_name="Neovim", force=force)
-    install_package("tmux", display_name="Tmux", force=force)
+    install_package("node", display_name="Node.js", force=force)
+    install_package("pyenv", display_name="pyenv", force=force)
+
+
+def install_kitty_apps(force=False):
+    """Install applications needed for the kitty component."""
+    install_package(
+        "kitty",
+        brew_args=["install", "--cask", "kitty"],
+        display_name="kitty",
+        force=force
+    )
     install_package(
         "font-jetbrains-mono-nerd-font",
         brew_args=["install", "--cask", "font-jetbrains-mono-nerd-font"],
         display_name="JetBrains Mono Nerd Font",
         force=force
     )
-    install_package("node", display_name="Node.js", force=force)
+
+
+def install_tmux_apps(force=False):
+    """Install applications needed for the tmux component."""
+    install_package("tmux", display_name="Tmux", force=force)
+
+
+def install_zsh_apps(force=False):
+    """Install applications needed for the zsh component."""
     install_zsh_plugins(force)
-    install_package("pyenv", display_name="pyenv", force=force)
     install_package("fzf", display_name="fzf", force=force)
     install_package("thefuck", display_name="thefuck", force=force)
+
+
+INSTALL_FUNCTIONS = {
+    'nvim': install_nvim_apps,
+    'kitty': install_kitty_apps,
+    'tmux': install_tmux_apps,
+    'zsh': install_zsh_apps,
+}
+
+
+def install_apps(components, force=False):
+    """Install Homebrew plus the applications needed for the given components."""
+    ColorPrint.bold("\n=== Installing Applications ===\n")
+
+    install_brew(force)
+    for component in components:
+        if component in INSTALL_FUNCTIONS:
+            INSTALL_FUNCTIONS[component](force=force)
 
 
 def setup_neovim():
@@ -278,10 +311,10 @@ def setup_neovim():
     create_symlink("configs/nvim/lazy-lock.json", "~/.config/nvim/lazy-lock.json")
 
 
-def setup_alacritty():
-    """Set up Alacritty terminal configuration."""
-    ColorPrint.bold("\n=== Setting up Alacritty ===\n")
-    create_symlink("configs/alacritty/alacritty.toml", "~/.config/alacritty/alacritty.toml")
+def setup_kitty():
+    """Set up kitty terminal configuration."""
+    ColorPrint.bold("\n=== Setting up kitty ===\n")
+    create_symlink("configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
 
 
 def setup_tmux():
@@ -313,6 +346,7 @@ Examples:
   %(prog)s --skip-install           # Only create symlinks, skip installations
   %(prog)s --only nvim              # Only set up Neovim
   %(prog)s --only tmux,zsh          # Only set up Tmux and Zsh
+  %(prog)s --only kitty             # Only set up kitty
   %(prog)s --force                  # Force reinstall even if already installed
         """
     )
@@ -326,7 +360,7 @@ Examples:
     parser.add_argument(
         '--only',
         type=str,
-        help='Only set up specific tools (comma-separated: nvim,tmux,zsh,alacritty)'
+        help='Only set up specific tools (comma-separated: nvim,tmux,zsh,kitty)'
     )
 
     parser.add_argument(
@@ -353,26 +387,26 @@ def main():
         logger.info("Starting dry run")
 
     # Determine which components to set up
-    components = ['nvim', 'alacritty', 'tmux', 'zsh']
+    components = ['nvim', 'kitty', 'tmux', 'zsh']
     if args.only:
         components = [c.strip() for c in args.only.split(',')]
-        invalid = [c for c in components if c not in ['nvim', 'alacritty', 'tmux', 'zsh']]
+        invalid = [c for c in components if c not in ['nvim', 'kitty', 'tmux', 'zsh']]
         if invalid:
             ColorPrint.red(f"Invalid components: {', '.join(invalid)}")
-            ColorPrint.yellow("Valid components: nvim, alacritty, tmux, zsh")
+            ColorPrint.yellow("Valid components: nvim, kitty, tmux, zsh")
             sys.exit(1)
 
     # Install applications
     if not args.skip_install:
         if not args.dry_run:
-            install_apps(force=args.force)
+            install_apps(components, force=args.force)
         else:
             ColorPrint.yellow("[DRY RUN] Would install applications")
 
     # Set up configurations
     setup_functions = {
         'nvim': setup_neovim,
-        'alacritty': setup_alacritty,
+        'kitty': setup_kitty,
         'tmux': setup_tmux,
         'zsh': setup_zsh
     }

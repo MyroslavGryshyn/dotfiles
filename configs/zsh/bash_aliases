@@ -38,7 +38,7 @@ alias open_changed="vim -p \$(git status --porcelain | awk '{print $2}')"
 alias gl="git log --oneline --graph"
 
 # Crypto arbitrage bot
-_CRYPTO_DIR="/Users/myroslavhryshyn/Dev/crypto"
+_CRYPTO_DIR="$HOME/Dev/crypto"
 _CRYPTO_PID="$_CRYPTO_DIR/logs/bot.pid"
 alias run_crypto_prod='[ -f $_CRYPTO_PID ] && kill -0 $(cat $_CRYPTO_PID) 2>/dev/null && echo "Bot already running (PID: $(cat $_CRYPTO_PID))" || { cd $_CRYPTO_DIR && nohup .venv/bin/python3.14 main.py > /dev/null 2>&1 & echo "Bot started (PID: $!)"; }'
 alias log_crypto_prod='tail -f $_CRYPTO_DIR/logs/bot.log'
