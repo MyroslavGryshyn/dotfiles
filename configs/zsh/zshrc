@@ -50,13 +50,13 @@ VENV_BASE="$HOME/.local/share/nvim/base_venv"
 if [ -x "$VENV_BASE/bin/python" ]; then
     export VIRTUALENVWRAPPER_PYTHON="$VENV_BASE/bin/python"
     export VIRTUALENVWRAPPER_VIRTUALENV="$VENV_BASE/bin/virtualenv"
-    VENVWRAPPER="$(which virtualenvwrapper.sh 2>/dev/null)"
+    VENVWRAPPER="$(command -v virtualenvwrapper.sh 2>/dev/null)"
     [ -n "$VENVWRAPPER" ] && source "$VENVWRAPPER"
 fi
 
 # === Tools ===
 
-eval "$(rbenv init - zsh)"
+command -v rbenv &>/dev/null && eval "$(rbenv init - zsh)"
 eval "$(pyenv init - --no-rehash)"
 eval $(thefuck --alias)
 

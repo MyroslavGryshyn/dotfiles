@@ -1,8 +1,12 @@
+import logging
 from datetime import datetime as dt
 from pathlib import Path
 
 from deploy.color_print import ColorPrint
 from deploy.config import BASE_DIR
+
+# Propagates to the root logger's handlers (file + stream) configured in deploy.py.
+logger = logging.getLogger(__name__)
 
 
 def create_symlink(source, target):
@@ -14,28 +18,35 @@ def create_symlink(source, target):
     now = dt.now().strftime("%Y%m%d_%H%M%S")
     new_name = str(full_target) + "." + now + ".bak"
 
-    if full_target.is_symlink():
-        if full_target.exists():
-            ColorPrint.yellow(
-                pre_text="Symlink to ", color_text=target, post_text=" already exists"
-            )
-            return
+    try:
+        if full_target.is_symlink():
+            if full_target.exists():
+                ColorPrint.yellow(
+                    pre_text="Symlink to ", color_text=target, post_text=" already exists"
+                )
+                return
+            else:
+                ColorPrint.red(
+                    pre_text="Symlink ",
+                    color_text=full_target.as_posix(),
+                    post_text=" is broken, unlinking... ",
+                )
+                full_target.unlink()
+        elif full_target.exists():
+            ColorPrint.yellow(color_text=target, post_text=" already exists")
+            ColorPrint.yellow(color_text="Creating backup at ", post_text=new_name)
+            full_target.rename(new_name)
         else:
-            ColorPrint.red(
-                pre_text="Symlink ",
-                color_text=full_target.as_posix(),
-                post_text=" is broken, unlinking... ",
-            )
-            full_target.unlink()
-    elif full_target.exists():
-        ColorPrint.yellow(color_text=target, post_text=" already exists")
-        ColorPrint.yellow(color_text="Creating backup at ", post_text=new_name)
-        full_target.rename(new_name)
-    else:
-        create_directory(full_target.parent)
+            create_directory(full_target.parent)
 
-    ColorPrint.green(color_text="Creating symlink to ", post_text=str(full_target))
-    full_target.symlink_to(full_source)
+        ColorPrint.green(color_text="Creating symlink to ", post_text=str(full_target))
+        full_target.symlink_to(full_source)
+        logger.info(f"Created symlink {full_target} -> {full_source}")
+    except OSError as e:
+        error_msg = f"Failed to create symlink {full_target} -> {full_source}"
+        ColorPrint.red(error_msg)
+        logger.error(f"{error_msg}: {e}")
+        raise
 
 
 def create_directory(target):
@@ -46,7 +57,13 @@ def create_directory(target):
             color_text=target.as_posix(),
             post_text=" does not exist, creating...",
         )
-        target.mkdir(parents=True)
+        try:
+            target.mkdir(parents=True)
+        except OSError as e:
+            error_msg = f"Failed to create directory {target}"
+            ColorPrint.red(error_msg)
+            logger.error(f"{error_msg}: {e}")
+            raise
 
 
 def append_to_file(text, file):

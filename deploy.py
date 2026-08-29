@@ -184,6 +184,84 @@ def install_brew(force=False):
         return False
 
 
+def brew_prefix(package_name):
+    """Get the Homebrew install prefix for a formula, or None if unavailable."""
+    try:
+        result = run(["brew", "--prefix", package_name], capture_output=True, text=True, check=True)
+        return result.stdout.strip()
+    except CalledProcessError as e:
+        error_msg = f"Could not resolve brew prefix for {package_name}"
+        ColorPrint.yellow(f"{error_msg} (skipping oh-my-zsh link)")
+        logger.warning(f"{error_msg}: {e}")
+        return None
+
+
+def link_omz_plugin(formula):
+    """Symlink a brew-installed zsh plugin into oh-my-zsh's custom plugins dir.
+
+    Homebrew installs e.g. `share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh`,
+    but oh-my-zsh's `plugins=(...)` autoloader looks for
+    `$ZSH_CUSTOM/plugins/<name>/<name>.plugin.zsh` — without this link the
+    plugin is silently skipped with a "not found" warning at shell startup.
+    """
+    prefix = brew_prefix(formula)
+    if not prefix:
+        return
+
+    source_file = Path(prefix, "share", formula, f"{formula}.zsh")
+    if not source_file.exists():
+        ColorPrint.yellow(f"{formula}: expected file not found at {source_file}, skipping link")
+        logger.warning(f"link_omz_plugin({formula}): missing {source_file}")
+        return
+
+    plugin_dir = Path("~/.oh-my-zsh/custom/plugins", formula).expanduser()
+    link = plugin_dir / f"{formula}.plugin.zsh"
+    if link.exists() or link.is_symlink():
+        return
+
+    try:
+        plugin_dir.mkdir(parents=True, exist_ok=True)
+        link.symlink_to(source_file)
+        ColorPrint.green(f"Linked {formula} into oh-my-zsh custom plugins")
+        logger.info(f"Linked oh-my-zsh plugin {formula} -> {source_file}")
+    except OSError as e:
+        error_msg = f"Failed to link {formula} into oh-my-zsh custom plugins"
+        ColorPrint.red(error_msg)
+        logger.error(f"{error_msg}: {e}")
+
+
+def link_omz_theme(formula, share_dir):
+    """Symlink a brew-installed oh-my-zsh theme into oh-my-zsh's custom themes dir.
+
+    Same issue as link_omz_plugin: `ZSH_THEME="powerlevel10k/powerlevel10k"`
+    resolves to `$ZSH_CUSTOM/themes/powerlevel10k/...`, which brew never
+    populates on its own.
+    """
+    prefix = brew_prefix(formula)
+    if not prefix:
+        return
+
+    source_dir = Path(prefix, "share", share_dir)
+    if not source_dir.is_dir():
+        ColorPrint.yellow(f"{formula}: expected directory not found at {source_dir}, skipping link")
+        logger.warning(f"link_omz_theme({formula}): missing {source_dir}")
+        return
+
+    target = Path("~/.oh-my-zsh/custom/themes", share_dir).expanduser()
+    if target.exists() or target.is_symlink():
+        return
+
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.symlink_to(source_dir)
+        ColorPrint.green(f"Linked {formula} into oh-my-zsh custom themes")
+        logger.info(f"Linked oh-my-zsh theme {formula} -> {source_dir}")
+    except OSError as e:
+        error_msg = f"Failed to link {formula} into oh-my-zsh custom themes"
+        ColorPrint.red(error_msg)
+        logger.error(f"{error_msg}: {e}")
+
+
 def install_zsh_plugins(force=False):
     """Install zsh plugins."""
     success = True
@@ -193,12 +271,14 @@ def install_zsh_plugins(force=False):
         display_name="zsh-syntax-highlighting",
         force=force
     )
+    link_omz_plugin("zsh-syntax-highlighting")
 
     success &= install_package(
         "zsh-autosuggestions",
         display_name="zsh-autosuggestions",
         force=force
     )
+    link_omz_plugin("zsh-autosuggestions")
 
     success &= install_git_repo(
         "https://github.com/loiccoyle/zsh-github-copilot",
@@ -212,6 +292,7 @@ def install_zsh_plugins(force=False):
         display_name="powerlevel10k",
         force=force
     )
+    link_omz_theme("powerlevel10k", "powerlevel10k")
 
     return success
 
@@ -248,6 +329,7 @@ def install_zsh_apps(force=False):
     """Install applications needed for the zsh component."""
     install_zsh_plugins(force)
     install_package("fzf", display_name="fzf", force=force)
+    install_package("fd", display_name="fd", force=force)
     install_package("thefuck", display_name="thefuck", force=force)
 
 
