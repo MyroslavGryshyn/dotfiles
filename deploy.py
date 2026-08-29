@@ -6,9 +6,10 @@ import logging
 import os
 import shutil
 import sys
+import time
 
 from pathlib import Path
-from subprocess import run, CalledProcessError, PIPE
+from subprocess import run, CalledProcessError, TimeoutExpired, PIPE
 
 from deploy.color_print import ColorPrint
 from deploy.config import CONFIG
@@ -399,10 +400,76 @@ def setup_kitty():
     create_symlink("configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
 
 
+def install_tmux_plugins():
+    """Clone TPM and install every `@plugin` listed in tmux.conf.
+
+    tmux.conf's own bootstrap line (`run -b '.../tpm/tpm'`) is enough when a
+    real, interactive tmux session starts it for the first time -- but here,
+    running non-interactively from deploy.py, there is no session yet. TPM's
+    own CLI installer (`tpm/bin/install_plugins`) expects tmux's config to
+    already be fully processed -- including that same `run -b` line, which
+    is what sets the TMUX_PLUGIN_MANAGER_PATH env var the installer reads --
+    but a bare `tmux start-server` (all the installer does on its own) never
+    triggers a `run -b` command; that requires an actual session. So: spin
+    up a short-lived detached session on a private socket to load the config
+    for real, then invoke the installer directly against that session.
+    """
+    tpm_dir = Path("~/.config/tmux/plugins/tpm").expanduser()
+    if not tpm_dir.is_dir():
+        if not install_git_repo(
+            "https://github.com/tmux-plugins/tpm",
+            "~/.config/tmux/plugins/tpm",
+            "tmux-plugin-manager",
+        ):
+            return
+
+    if not command_exists("tmux"):
+        return
+
+    socket_name = "dotfiles-deploy"
+    try:
+        run(["tmux", "-L", socket_name, "kill-server"], capture_output=True)
+        run(
+            ["tmux", "-L", socket_name, "new-session", "-d", "-x", "80", "-y", "24"],
+            check=True, capture_output=True, timeout=15,
+        )
+        socket_path = run(
+            ["tmux", "-L", socket_name, "display-message", "-p", "#{socket_path}"],
+            check=True, capture_output=True, text=True, timeout=15,
+        ).stdout.strip()
+        time.sleep(1)  # let tmux.conf's `run -b tpm` line finish loading TPM
+
+        env = os.environ.copy()
+        env["TMUX"] = f"{socket_path},0,0"
+
+        ColorPrint.blue("Installing tmux plugins via TPM...")
+        result = run(
+            [str(tpm_dir / "bin" / "install_plugins")],
+            env=env, capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode == 0:
+            ColorPrint.green("tmux plugins installed")
+            tracker.add_success("tmux plugins")
+            logger.info(f"tmux plugin install output:\n{result.stdout}")
+        else:
+            error_msg = "Failed to install tmux plugins"
+            ColorPrint.red(error_msg)
+            tracker.add_failure("tmux plugins", (result.stderr or result.stdout).strip())
+            logger.error(f"{error_msg}: stdout={result.stdout} stderr={result.stderr}")
+    except (CalledProcessError, TimeoutExpired, OSError) as e:
+        error_msg = "Failed to install tmux plugins"
+        ColorPrint.red(error_msg)
+        tracker.add_failure("tmux plugins", e)
+        logger.error(f"{error_msg}: {e}")
+    finally:
+        run(["tmux", "-L", socket_name, "kill-server"], capture_output=True)
+
+
 def setup_tmux():
     """Set up Tmux configuration."""
     ColorPrint.bold("\n=== Setting up Tmux ===\n")
     create_symlink("configs/tmux/tmux.conf", "~/.config/tmux/tmux.conf")
+    install_tmux_plugins()
 
 
 def setup_zsh():
