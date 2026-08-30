@@ -35,9 +35,14 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			require("nvim-treesitter.install").update({ with_sync = true })()
-		end,
+		-- `main` is the maintained branch now (the old `master` API is
+		-- frozen). It dropped the `nvim-treesitter.configs` module in
+		-- favor of core `vim.treesitter.*` APIs -- see after/plugin/treesitter.lua.
+		branch = "main",
+		-- The plugin doesn't support lazy-loading; load it eagerly and
+		-- let `:TSUpdate` (re)compile/update parsers on install/update.
+		lazy = false,
+		build = ":TSUpdate",
 	},
     {
         "ibhagwan/fzf-lua",
