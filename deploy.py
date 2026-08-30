@@ -319,6 +319,11 @@ def install_kitty_apps(force=False):
         display_name="JetBrains Mono Nerd Font",
         force=force
     )
+    install_package(
+        "pngpaste",
+        display_name="pngpaste",
+        force=force
+    )
 
 
 def install_tmux_apps(force=False):

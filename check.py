@@ -28,7 +28,7 @@ EXPECTED_SYMLINKS = {
     "~/.zsh-z.plugin.zsh": "configs/zsh/plugins/zsh-z.plugin.zsh",
 }
 
-REQUIRED_TOOLS = ["fzf", "fd", "pyenv", "rbenv", "node", "nvim", "tmux"]
+REQUIRED_TOOLS = ["fzf", "fd", "pyenv", "rbenv", "node", "nvim", "tmux", "pngpaste"]
 
 ZSH_PLUGINS = {
     "zsh-syntax-highlighting": "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting",
