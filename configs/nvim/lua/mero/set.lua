@@ -33,9 +33,10 @@ vim.opt.shell = "/bin/zsh"
 
 vim.opt.splitright = true
 
--- Folding with treesitter
+-- Folding with treesitter (core API; nvim-treesitter's `main` branch
+-- dropped the old `nvim_treesitter#foldexpr()` vimscript helper)
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = false  -- Start with folds open
 vim.opt.foldlevel = 99      -- High fold level so folds are open by default
 
