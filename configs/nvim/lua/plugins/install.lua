@@ -101,12 +101,6 @@ return {
             dependencies = { "kevinhwang91/promise-async" },
         },
         {
-            "supermaven-inc/supermaven-nvim",
-            config = function()
-                require("supermaven-nvim").setup({})
-            end,
-        },
-        {
             "JMarkin/gentags.lua",
             cond = vim.fn.executable("ctags") == 1,
             dependencies = { "nvim-lua/plenary.nvim", },
