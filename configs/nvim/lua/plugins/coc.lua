@@ -31,6 +31,7 @@ g.coc_global_extensions = {
    'coc-json',
    'coc-lua',
    'coc-prettier',
+   'coc-pyright',
    'coc-react-refactor',
    'coc-sh',
    'coc-snippets',
