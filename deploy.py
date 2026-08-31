@@ -489,6 +489,12 @@ def setup_zsh():
     create_symlink("configs/zsh/plugins/zsh-z.plugin.zsh", "~/.zsh-z.plugin.zsh")
 
 
+def setup_claude():
+    """Set up Claude Code's global (cross-project) CLAUDE.md."""
+    ColorPrint.bold("\n=== Setting up Claude Code ===\n")
+    create_symlink("configs/claude/CLAUDE.md", "~/.claude/CLAUDE.md")
+
+
 def parse_arguments():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -501,6 +507,7 @@ Examples:
   %(prog)s --only nvim              # Only set up Neovim
   %(prog)s --only tmux,zsh          # Only set up Tmux and Zsh
   %(prog)s --only kitty             # Only set up kitty
+  %(prog)s --only claude            # Only symlink ~/.claude/CLAUDE.md
   %(prog)s --force                  # Force reinstall even if already installed
         """
     )
@@ -514,7 +521,7 @@ Examples:
     parser.add_argument(
         '--only',
         type=str,
-        help='Only set up specific tools (comma-separated: nvim,tmux,zsh,kitty)'
+        help='Only set up specific tools (comma-separated: nvim,tmux,zsh,kitty,claude)'
     )
 
     parser.add_argument(
@@ -541,13 +548,13 @@ def main():
         logger.info("Starting dry run")
 
     # Determine which components to set up
-    components = ['nvim', 'kitty', 'tmux', 'zsh']
+    components = ['nvim', 'kitty', 'tmux', 'zsh', 'claude']
     if args.only:
         components = [c.strip() for c in args.only.split(',')]
-        invalid = [c for c in components if c not in ['nvim', 'kitty', 'tmux', 'zsh']]
+        invalid = [c for c in components if c not in ['nvim', 'kitty', 'tmux', 'zsh', 'claude']]
         if invalid:
             ColorPrint.red(f"Invalid components: {', '.join(invalid)}")
-            ColorPrint.yellow("Valid components: nvim, kitty, tmux, zsh")
+            ColorPrint.yellow("Valid components: nvim, kitty, tmux, zsh, claude")
             sys.exit(1)
 
     # Install applications
@@ -562,7 +569,8 @@ def main():
         'nvim': setup_neovim,
         'kitty': setup_kitty,
         'tmux': setup_tmux,
-        'zsh': setup_zsh
+        'zsh': setup_zsh,
+        'claude': setup_claude
     }
 
     for component in components:
