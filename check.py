@@ -26,6 +26,7 @@ EXPECTED_SYMLINKS = {
     "~/.fzf.zsh": "configs/fzf/fzf.zsh",
     "~/.p10k.zsh": "configs/zsh/p10k.zsh",
     "~/.zsh-z.plugin.zsh": "configs/zsh/plugins/zsh-z.plugin.zsh",
+    "~/.claude/CLAUDE.md": "configs/claude/CLAUDE.md",
 }
 
 REQUIRED_TOOLS = ["fzf", "fd", "pyenv", "rbenv", "node", "nvim", "tmux", "pngpaste"]
