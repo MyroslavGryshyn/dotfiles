@@ -403,6 +403,7 @@ def setup_kitty():
     """Set up kitty terminal configuration."""
     ColorPrint.bold("\n=== Setting up kitty ===\n")
     create_symlink("configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
+    create_symlink("configs/kitty/smart_paste.py", "~/.config/kitty/smart_paste.py")
 
 
 def install_tmux_plugins():

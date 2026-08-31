@@ -20,6 +20,7 @@ EXPECTED_SYMLINKS = {
     "~/.config/nvim/coc-settings.json": "configs/nvim/coc-settings.json",
     "~/.config/nvim/lazy-lock.json": "configs/nvim/lazy-lock.json",
     "~/.config/kitty/kitty.conf": "configs/kitty/kitty.conf",
+    "~/.config/kitty/smart_paste.py": "configs/kitty/smart_paste.py",
     "~/.config/tmux/tmux.conf": "configs/tmux/tmux.conf",
     "~/.zshrc": "configs/zsh/zshrc",
     "~/.bash_aliases": "configs/zsh/bash_aliases",
